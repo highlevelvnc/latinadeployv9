@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "reservations": "Reservations",
+    "contact": "Contact",
+    "reserve": "Book a Table"
+  },
+  "hero": {
+    "subtitle": "Gastronomy & Live Music",
+    "title": "World Cuts,",
+    "titleHighlight": "Latin Soul",
+    "description": "Premium meats carefully selected, prepared with technique and passion. In the heart of Cascais, we offer a unique gastronomic experience where meat excellence meets the vibrant energy of live music.",
+    "cta": "Book a Table",
+    "ctaSecondary": "View Menu"
+  },
+  "highlights": {
+    "badge": "Specialties",
+    "title": "Premium Meats from Around the World",
+    "description": "Each cut is a journey. We select the finest meats from different origins, aged and prepared with technical precision to enhance unique flavors.",
+    "items": [
+      {
+        "title": "Japanese Wagyu A5",
+        "description": "Exceptional marbling, silky texture and intense flavor. A sublime experience for true connoisseurs."
+      },
+      {
+        "title": "Argentinian Black Angus",
+        "description": "Raised on free-range pampas, this cut offers incomparable succulence and authentic robust flavor."
+      },
+      {
+        "title": "Aged Tomahawk",
+        "description": "Impressive presentation, 45-day aging. A visual and gustatory spectacle at the table."
+      },
+      {
+        "title": "Brazilian Picanha",
+        "description": "The South American classic at its finest. Juicy, flavorful and prepared with traditional technique."
+      }
+    ],
+    "cta": "Explore Full Menu"
+  },
+  "liveMusic": {
+    "badge": "Latina Nights",
+    "title": "Live Music,",
+    "titleHighlight": "Latin Energy",
+    "description": "Every week, we transform dinner into a memorable experience. Immersive sounds, intimate atmosphere and the unique vibe of Cascais at night.",
+    "schedule": "Fridays and Saturdays, 9:00 PM",
+    "cta": "Book for Music Night"
+  },
+  "testimonials": {
+    "badge": "Experiences",
+    "title": "What Our Guests Say",
+    "googleReviews": "Over 1000 Google reviews",
+    "seeAllReviews": "See all reviews",
+    "items": [
+      {
+        "name": "Michael Thompson",
+        "text": "Hands down the best Tomahawk I've had in Portugal. The atmosphere is sophisticated without being pretentious, and the live music creates the perfect vibe. We'll definitely be back."
+      },
+      {
+        "name": "Emma Richardson",
+        "text": "We loved the experience! The Picanha was cooked to perfection and the service was attentive and professional. The evening atmosphere with live music is truly special."
+      },
+      {
+        "name": "David Santos",
+        "text": "Exceptional meat quality. You can tell the careful selection and preparation technique. Highly recommend for special occasions in Cascais."
+      },
+      {
+        "name": "Laura Martinez",
+        "text": "Welcoming atmosphere, interesting wine list and, of course, fantastic meats. The team knows their products well and helped us choose. Excellent find!"
+      }
+    ]
+  },
+  "reservation": {
+    "badge": "Reservation",
+    "title": "Secure Your Table",
+    "description": "Book in advance to guarantee the best experience. Our team is ready to welcome you.",
+    "info": {
+      "schedule": "Reservation hours: 12:30 PM – 11:00 PM",
+      "minGuests": "From 1 person",
+      "allDays": "Every day"
+    },
+    "form": {
+      "name": "Full name",
+      "phone": "Phone number",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Number of guests",
+      "observations": "Special requests (optional)",
+      "submit": "Confirm Reservation",
+      "submitting": "Submitting...",
+      "whatsapp": "Or book via WhatsApp",
+      "callNow": "Call Now"
+    },
+    "validation": {
+      "required": "Required field",
+      "invalidTime": "Time must be between 12:30 PM and 11:00 PM",
+      "minGuests": "Minimum 1 person",
+      "invalidDate": "Invalid date",
+      "pastDate": "Cannot book for past dates"
+    },
+    "success": {
+      "title": "Reservation Received!",
+      "message": "Thank you! Your reservation has been registered. We'll contact you shortly to confirm.",
+      "close": "Close"
+    },
+    "whatsappMessage": "Hi! I'd like to book a table at Latina Grill Cascais for {date} at {time}, for {guests} people. Name: {name}."
+  },
+  "contact": {
+    "title": "Visit Us in Cascais",
+    "address": {
+      "label": "Address",
+      "street": "Estrada Da Malveira da Serra, 261",
+      "city": "2750-782 Cascais, Portugal",
+      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "directions": "Get Directions",
+      "openMaps": "Open in Google Maps"
+    },
+    "hours": {
+      "label": "Opening Hours",
+      "subtitle": "Every Day",
+      "lunch": "12:30 PM – 4:00 PM",
+      "dinner": "6:30 PM – 11:00 PM",
+      "continuous": "Continuous service",
+      "reservationsTime": "Reservations: 12:30 PM – 11:00 PM"
+    },
+    "phone": {
+      "label": "Phone",
+      "number": "+351 968 707 515",
+      "callText": "Call Now",
+      "networkInfo": "Call to Portuguese mobile network"
+    },
+    "social": {
+      "label": "Social Media",
+      "follow": "Follow us on Instagram"
+    },
+    "payment": {
+      "label": "Payment Options",
+      "methods": {
+        "amex": "American Express",
+        "mastercard": "Mastercard",
+        "visa": "Visa",
+        "debit": "Debit card"
+      }
+    },
+    "amenities": {
+      "label": "Our Services",
+      "items": {
+        "accessibility": "Accessibility",
+        "airConditioning": "Air conditioning",
+        "delivery": "Delivery",
+        "outdoorSeating": "Outdoor seating",
+        "parking": "Parking",
+        "privateEvents": "Private events",
+        "takeaway": "Takeaway",
+        "weddings": "Wedding parties",
+        "wifi": "Free Wi-Fi",
+        "petFriendly": "Pet friendly"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Premium Meats · Live Music · Cascais",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  },
+  "meta": {
+    "home": {
+      "title": "Latina Grill Cascais - Premium Steakhouse & Live Music Restaurant",
+      "description": "Premium steakhouse in Cascais. World-selected meats, live music and sophisticated atmosphere. Book your table today."
+    },
+    "menu": {
+      "title": "Menu - Premium Meats from the World | Latina Grill Cascais",
+      "description": "Discover our premium cuts: Japanese Wagyu, Argentinian Black Angus, Tomahawk and Picanha. Steakhouse in Cascais."
+    },
+    "reservations": {
+      "title": "Reservations - Latina Grill Cascais | Restaurant in Cascais",
+      "description": "Book your table at Latina Grill. Premium gastronomic experience with world meats and live music in Cascais."
+    },
+    "contact": {
+      "title": "Contact & Location - Latina Grill Cascais",
+      "description": "Visit us in Cascais. Address, hours and contact details for Latina Grill - Your premium steakhouse."
+    }
+  }
+}

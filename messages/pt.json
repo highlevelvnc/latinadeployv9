@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "home": "Início",
+    "menu": "Menu",
+    "reservations": "Reservas",
+    "contact": "Contacto",
+    "reserve": "Reservar Mesa"
+  },
+  "hero": {
+    "subtitle": "Gastronomia & Live Music",
+    "title": "Cortes do Mundo,",
+    "titleHighlight": "Alma Latina",
+    "description": "Carnes premium selecionadas, preparadas com técnica e paixão. No coração de Cascais, oferecemos uma experiência gastronómica única onde a excelência da carne encontra a energia vibrante da música ao vivo.",
+    "cta": "Reservar Mesa",
+    "ctaSecondary": "Ver Menu"
+  },
+  "highlights": {
+    "badge": "Especialidades",
+    "title": "Carnes Premium do Mundo",
+    "description": "Cada corte é uma viagem. Selecionamos as melhores carnes de diferentes origens, maturadas e preparadas com rigor técnico para realçar sabores únicos.",
+    "items": [
+      {
+        "title": "Wagyu Japonês A5",
+        "description": "Marmoreado excecional, textura sedosa e sabor intenso. Uma experiência sublime para verdadeiros apreciadores."
+      },
+      {
+        "title": "Black Angus Argentino",
+        "description": "Criado em pampas livres, este corte oferece suculência incomparável e sabor robusto autêntico."
+      },
+      {
+        "title": "Tomahawk Maturado",
+        "description": "Apresentação impressionante, maturação de 45 dias. Um espetáculo visual e gustativo à mesa."
+      },
+      {
+        "title": "Picanha Brasileira",
+        "description": "O clássico sul-americano no seu melhor. Suculenta, saborosa e preparada com técnica tradicional."
+      }
+    ],
+    "cta": "Explorar Menu Completo"
+  },
+  "liveMusic": {
+    "badge": "Noites Latina",
+    "title": "Música ao Vivo,",
+    "titleHighlight": "Energia Latina",
+    "description": "Todas as semanas, transformamos o jantar numa experiência memorável. Sons envolventes, ambiente intimista e a vibração única de Cascais à noite.",
+    "schedule": "Sextas e Sábados, 21h00",
+    "cta": "Reservar para Noite Musical"
+  },
+  "testimonials": {
+    "badge": "Experiências",
+    "title": "O Que Dizem os Nossos Clientes",
+    "googleReviews": "Mais de 1000 avaliações no Google",
+    "seeAllReviews": "Ver todas as avaliações",
+    "items": [
+      {
+        "name": "Miguel Cardoso",
+        "text": "Sem dúvida o melhor Tomahawk que provei em Portugal. O ambiente é sofisticado sem ser pretensioso, e a música ao vivo cria um clima perfeito. Voltaremos certamente."
+      },
+      {
+        "name": "Sofia Marques",
+        "text": "Adorámos a experiência! A Picanha estava no ponto perfeito e o serviço foi atencioso e profissional. O ambiente à noite com música ao vivo é mesmo especial."
+      },
+      {
+        "name": "Ricardo Tavares",
+        "text": "Qualidade excecional das carnes. Nota-se a seleção cuidada e a técnica de preparação. Recomendo vivamente para ocasiões especiais em Cascais."
+      },
+      {
+        "name": "Ana Oliveira",
+        "text": "Ambiente acolhedor, carta de vinhos interessante e, claro, carnes fantásticas. A equipa conhece bem os produtos e ajudou-nos a escolher. Excelente descoberta!"
+      }
+    ]
+  },
+  "reservation": {
+    "badge": "Reserva",
+    "title": "Garanta a Sua Mesa",
+    "description": "Reserve com antecedência para garantir a melhor experiência. A nossa equipa está pronta para recebê-lo.",
+    "info": {
+      "schedule": "Horário de reservas: 12:30 – 23:00",
+      "minGuests": "A partir de 1 pessoa",
+      "allDays": "Todos os dias"
+    },
+    "form": {
+      "name": "Nome completo",
+      "phone": "Telemóvel",
+      "date": "Data",
+      "time": "Hora",
+      "guests": "Nº de pessoas",
+      "observations": "Observações (opcional)",
+      "submit": "Confirmar Reserva",
+      "submitting": "A enviar...",
+      "whatsapp": "Ou reserve via WhatsApp",
+      "callNow": "Ligar agora"
+    },
+    "validation": {
+      "required": "Campo obrigatório",
+      "invalidTime": "Hora deve estar entre 12:30 e 23:00",
+      "minGuests": "Mínimo 1 pessoa",
+      "invalidDate": "Data inválida",
+      "pastDate": "Não pode reservar para datas passadas"
+    },
+    "success": {
+      "title": "Reserva Recebida!",
+      "message": "Obrigado! A sua reserva foi registada. Entraremos em contacto brevemente para confirmar.",
+      "close": "Fechar"
+    },
+    "whatsappMessage": "Olá! Gostaria de reservar uma mesa no Latina Grill Cascais para {date} às {time}, para {guests} pessoas. Nome: {name}."
+  },
+  "contact": {
+    "title": "Visite-nos em Cascais",
+    "address": {
+      "label": "Morada",
+      "street": "Estrada Da Malveira da Serra, 261",
+      "city": "2750-782 Cascais, Portugal",
+      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "directions": "Como chegar",
+      "openMaps": "Abrir no Google Maps"
+    },
+    "hours": {
+      "label": "Horário de Funcionamento",
+      "subtitle": "Todos os Dias",
+      "lunch": "12:30 – 16:00",
+      "dinner": "18:30 – 23:00",
+      "continuous": "Serviço contínuo",
+      "reservationsTime": "Reservas: 12:30 – 23:00"
+    },
+    "phone": {
+      "label": "Telefone",
+      "number": "+351 968 707 515",
+      "callText": "Ligar agora",
+      "networkInfo": "Chamada para a rede móvel nacional"
+    },
+    "social": {
+      "label": "Redes Sociais",
+      "follow": "Siga-nos no Instagram"
+    },
+    "payment": {
+      "label": "Opções de Pagamento",
+      "methods": {
+        "amex": "American Express",
+        "mastercard": "Mastercard",
+        "visa": "Visa",
+        "debit": "Cartão de débito"
+      }
+    },
+    "amenities": {
+      "label": "Os Nossos Serviços",
+      "items": {
+        "accessibility": "Acessibilidade",
+        "airConditioning": "Ar condicionado",
+        "delivery": "Entrega",
+        "outdoorSeating": "Mesas exteriores",
+        "parking": "Estacionamento",
+        "privateEvents": "Eventos privados",
+        "takeaway": "Takeaway",
+        "weddings": "Festas de casamento",
+        "wifi": "Wi-Fi gratuito",
+        "petFriendly": "Permite animais de estimação"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Carnes Premium · Música ao Vivo · Cascais",
+    "rights": "Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos e Condições"
+  },
+  "meta": {
+    "home": {
+      "title": "Latina Grill Cascais - Restaurante de Carnes Premium & Música ao Vivo",
+      "description": "Steakhouse premium em Cascais. Carnes selecionadas do mundo, música ao vivo e ambiente sofisticado. Reserve a sua mesa hoje."
+    },
+    "menu": {
+      "title": "Menu - Carnes Premium do Mundo | Latina Grill Cascais",
+      "description": "Descubra os nossos cortes premium: Wagyu Japonês, Black Angus Argentino, Tomahawk e Picanha. Steakhouse em Cascais."
+    },
+    "reservations": {
+      "title": "Reservas - Latina Grill Cascais | Restaurante em Cascais",
+      "description": "Reserve a sua mesa no Latina Grill. Experiência gastronómica premium com carnes do mundo e música ao vivo em Cascais."
+    },
+    "contact": {
+      "title": "Contacto e Localização - Latina Grill Cascais",
+      "description": "Visite-nos em Cascais. Morada, horários e contactos do Latina Grill - O seu restaurante de carnes premium."
+    }
+  }
+}
