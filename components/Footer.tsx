@@ -3,12 +3,41 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, MapPin, Phone, Mail } from 'lucide-react';
+import { Instagram, MapPin, Phone, Mail, FileText } from 'lucide-react';
+
+const navLinks = {
+  pt: [
+    { label: 'Início',   href: '' },
+    { label: 'Menu',     href: '/menu' },
+    { label: 'Reservas', href: '/reservations' },
+    { label: 'Contacto', href: '/contact' },
+  ],
+  en: [
+    { label: 'Home',         href: '' },
+    { label: 'Menu',         href: '/menu' },
+    { label: 'Reservations', href: '/reservations' },
+    { label: 'Contact',      href: '/contact' },
+  ],
+  fr: [
+    { label: 'Accueil',      href: '' },
+    { label: 'Menu',         href: '/menu' },
+    { label: 'Réservations', href: '/reservations' },
+    { label: 'Contact',      href: '/contact' },
+  ],
+};
+
+const headings = {
+  links:   { pt: 'Links',         en: 'Links',        fr: 'Liens' },
+  contact: { pt: 'Contacto',      en: 'Contact',      fr: 'Contact' },
+  social:  { pt: 'Redes Sociais', en: 'Social Media', fr: 'Réseaux Sociaux' },
+  menuPdf: { pt: 'Menu PDF',      en: 'Menu PDF',     fr: 'Menu PDF' },
+};
 
 export default function Footer() {
   const t = useTranslations('footer');
   const locale = useLocale();
   const currentYear = new Date().getFullYear();
+  const links = navLinks[locale as keyof typeof navLinks] || navLinks.pt;
 
   return (
     <footer className="bg-dark-light border-t border-light/5 pt-16 pb-8">
@@ -42,28 +71,29 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="text-light font-semibold mb-4 text-sm uppercase tracking-wider">
-              Links
+              {headings.links[locale as keyof typeof headings.links] || headings.links.pt}
             </h3>
             <ul className="space-y-3">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={`/${locale}${link.href}`}
+                    className="text-light/60 hover:text-light transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link href={`/${locale}`} className="text-light/60 hover:text-light transition-colors text-sm">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/menu`} className="text-light/60 hover:text-light transition-colors text-sm">
-                  Menu
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/reservations`} className="text-light/60 hover:text-light transition-colors text-sm">
-                  Reservas
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/contact`} className="text-light/60 hover:text-light transition-colors text-sm">
-                  Contacto
-                </Link>
+                <a
+                  href="/latina-grill-menu.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-light/60 hover:text-light transition-colors text-sm"
+                >
+                  <FileText className="w-3.5 h-3.5 text-light/40" />
+                  {headings.menuPdf[locale as keyof typeof headings.menuPdf] || headings.menuPdf.pt}
+                </a>
               </li>
             </ul>
           </div>
@@ -71,7 +101,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-light font-semibold mb-4 text-sm uppercase tracking-wider">
-              Contacto
+              {headings.contact[locale as keyof typeof headings.contact] || headings.contact.pt}
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-light/60 text-sm">
@@ -101,7 +131,7 @@ export default function Footer() {
           {/* Social */}
           <div>
             <h3 className="text-light font-semibold mb-4 text-sm uppercase tracking-wider">
-              Redes Sociais
+              {headings.social[locale as keyof typeof headings.social] || headings.social.pt}
             </h3>
             <div className="space-y-3">
               <a

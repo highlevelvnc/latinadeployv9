@@ -58,7 +58,7 @@ export default function Testimonials() {
             </span>
           </div>
 
-          <h2 className="text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl">
+          <h2 className="font-serif text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl">
             {t('title')}
           </h2>
 

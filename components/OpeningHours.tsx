@@ -2,32 +2,66 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useLocale } from 'next-intl';
 import { Clock3, CalendarDays, UtensilsCrossed } from 'lucide-react';
+
+const content = {
+  pt: {
+    badge: 'Horário de Funcionamento',
+    title: 'Abertos todos os dias,',
+    titleAccent: 'ao almoço e ao jantar',
+    description:
+      'Do meio-dia à noite, o Latina Grill está disponível para recebê-lo. Recomendamos reserva antecipada, especialmente ao fim de semana.',
+    infoA: { label: 'Almoço e Jantar', desc: 'Serviço contínuo. Cozinha aberta todos os dias.' },
+    infoB: { label: 'Reservas Recomendadas', desc: 'Principalmente em sextas, sábados e datas especiais.' },
+    lunchLabel: 'Almoço',
+    dinnerLabel: 'Jantar',
+    schedule: [
+      { group: 'Segunda a Quinta', lunch: '12:30 – 15:30', dinner: '19:00 – 23:00', note: 'Almoço e jantar' },
+      { group: 'Sexta e Sábado',   lunch: '12:30 – 16:00', dinner: '19:00 – 00:00', note: 'Horário alargado' },
+      { group: 'Domingo',          lunch: '12:30 – 16:00', dinner: '19:00 – 22:30', note: 'Ideal para almoço em família' },
+    ],
+  },
+  en: {
+    badge: 'Opening Hours',
+    title: 'Open every day,',
+    titleAccent: 'lunch and dinner',
+    description:
+      'From midday to night, Latina Grill is ready to welcome you. Advance booking recommended, especially on weekends.',
+    infoA: { label: 'Lunch & Dinner', desc: 'Continuous service. Kitchen open every day.' },
+    infoB: { label: 'Reservations Recommended', desc: 'Especially on Fridays, Saturdays and special dates.' },
+    lunchLabel: 'Lunch',
+    dinnerLabel: 'Dinner',
+    schedule: [
+      { group: 'Monday – Thursday', lunch: '12:30 – 3:30 PM', dinner: '7:00 – 11:00 PM',  note: 'Lunch and dinner' },
+      { group: 'Friday & Saturday', lunch: '12:30 – 4:00 PM', dinner: '7:00 PM – midnight', note: 'Extended hours' },
+      { group: 'Sunday',            lunch: '12:30 – 4:00 PM', dinner: '7:00 – 10:30 PM',   note: 'Perfect for a family lunch' },
+    ],
+  },
+  fr: {
+    badge: "Heures d'Ouverture",
+    title: 'Ouvert tous les jours,',
+    titleAccent: 'déjeuner et dîner',
+    description:
+      "De midi jusqu'au soir, le Latina Grill est prêt à vous accueillir. Réservation conseillée, surtout le week-end.",
+    infoA: { label: 'Déjeuner & Dîner', desc: 'Service continu. Cuisine ouverte tous les jours.' },
+    infoB: { label: 'Réservations Conseillées', desc: 'Surtout les vendredis, samedis et dates spéciales.' },
+    lunchLabel: 'Déjeuner',
+    dinnerLabel: 'Dîner',
+    schedule: [
+      { group: 'Lundi – Jeudi',       lunch: '12h30 – 15h30', dinner: '19h00 – 23h00', note: 'Déjeuner et dîner' },
+      { group: 'Vendredi & Samedi',   lunch: '12h30 – 16h00', dinner: '19h00 – 00h00', note: 'Horaires étendus' },
+      { group: 'Dimanche',            lunch: '12h30 – 16h00', dinner: '19h00 – 22h30', note: 'Idéal pour un déjeuner en famille' },
+    ],
+  },
+};
 
 export default function OpeningHours() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const schedule = [
-    {
-      group: 'Segunda a Quinta',
-      lunch: '12:00 – 15:00',
-      dinner: '19:00 – 23:00',
-      note: 'Almoço e jantar'
-    },
-    {
-      group: 'Sexta e Sábado',
-      lunch: '12:00 – 16:00',
-      dinner: '19:00 – 00:00',
-      note: 'Horário estendido'
-    },
-    {
-      group: 'Domingo',
-      lunch: '12:00 – 16:00',
-      dinner: '19:00 – 22:30',
-      note: 'Ideal para almoço em família'
-    }
-  ];
+  const locale = useLocale();
+  const t = content[locale as keyof typeof content] || content.pt;
+  const { schedule } = t;
 
   return (
     <section
@@ -60,18 +94,17 @@ export default function OpeningHours() {
                 <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-red-600/25 bg-red-600/10 px-4 py-2">
                   <Clock3 className="h-4 w-4 text-red-500" />
                   <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-red-400 md:text-xs">
-                    Horário de Funcionamento
+                    {t.badge}
                   </span>
                 </div>
 
                 <h2 className="text-3xl leading-tight text-white md:text-4xl lg:text-5xl font-semibold">
-                  Horários organizados de forma
-                  <span className="block text-red-500">clara, elegante e rápida</span>
+                  {t.title}
+                  <span className="block text-red-500">{t.titleAccent}</span>
                 </h2>
 
                 <p className="mt-5 max-w-md text-sm leading-relaxed text-white/65 md:text-base">
-                  Reformulámos esta seção para facilitar a consulta e transmitir
-                  uma experiência mais premium, com melhor leitura no desktop e no mobile.
+                  {t.description}
                 </p>
 
                 <div className="mt-8 space-y-4">
@@ -80,12 +113,8 @@ export default function OpeningHours() {
                       <UtensilsCrossed className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-white">
-                        Almoço e jantar
-                      </p>
-                      <p className="mt-1 text-sm text-white/60">
-                        Horários pensados para tornar a escolha mais intuitiva.
-                      </p>
+                      <p className="text-sm font-medium text-white">{t.infoA.label}</p>
+                      <p className="mt-1 text-sm text-white/55">{t.infoA.desc}</p>
                     </div>
                   </div>
 
@@ -94,12 +123,8 @@ export default function OpeningHours() {
                       <CalendarDays className="h-5 w-5 text-red-500" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-white">
-                        Reservas recomendadas
-                      </p>
-                      <p className="mt-1 text-sm text-white/60">
-                        Principalmente em sextas, sábados e datas especiais.
-                      </p>
+                      <p className="text-sm font-medium text-white">{t.infoB.label}</p>
+                      <p className="mt-1 text-sm text-white/55">{t.infoB.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -136,7 +161,7 @@ export default function OpeningHours() {
                       <div className="grid gap-3 md:min-w-[250px]">
                         <div className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
                           <p className="text-[11px] uppercase tracking-[0.22em] text-red-400">
-                            Almoço
+                            {t.lunchLabel}
                           </p>
                           <p className="mt-1 text-sm font-medium text-white md:text-base">
                             {item.lunch}
@@ -145,7 +170,7 @@ export default function OpeningHours() {
 
                         <div className="rounded-2xl border border-white/10 bg-black/30 px-4 py-3">
                           <p className="text-[11px] uppercase tracking-[0.22em] text-red-400">
-                            Jantar
+                            {t.dinnerLabel}
                           </p>
                           <p className="mt-1 text-sm font-medium text-white md:text-base">
                             {item.dinner}
