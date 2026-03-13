@@ -251,7 +251,7 @@ export default function PremiumMeatGallery() {
   return (
     <section
       ref={ref}
-      className="relative overflow-visible bg-[#0f0b0b] pt-36 pb-20 sm:pt-40 sm:pb-24 lg:pt-36 lg:pb-32"
+      className="relative overflow-visible bg-[#0f0b0b] pt-40 pb-20 sm:pt-44 sm:pb-24 lg:pt-36 lg:pb-32"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#171111_45%,#0f0b0b_100%)]" />
 
@@ -281,20 +281,21 @@ export default function PremiumMeatGallery() {
         transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         className="
           pointer-events-none absolute z-30
-          left-1/2 top-[22px] -translate-x-1/2
-          sm:top-[12px]
-          lg:left-auto lg:right-[4%] lg:top-[6px] lg:translate-x-0
-          xl:right-[7%] xl:top-[-2px]
+          left-1/2 top-[-82px] -translate-x-1/2
+          sm:top-[-98px]
+          md:top-[-118px]
+          lg:left-auto lg:right-[8%] lg:top-[-8px] lg:translate-x-0
+          xl:right-[10%] xl:top-[-12px]
         "
       >
         <div
           className="
             relative
-            h-[220px] w-[220px]
-            sm:h-[250px] sm:w-[250px]
-            md:h-[290px] md:w-[290px]
-            lg:h-[420px] lg:w-[420px]
-            xl:h-[500px] xl:w-[500px]
+            h-[280px] w-[280px]
+            sm:h-[320px] sm:w-[320px]
+            md:h-[360px] md:w-[360px]
+            lg:h-[470px] lg:w-[470px]
+            xl:h-[560px] xl:w-[560px]
           "
         >
           <Image
@@ -312,13 +313,13 @@ export default function PremiumMeatGallery() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75 }}
-          className="mb-14 max-w-5xl pt-[150px] sm:pt-[175px] md:pt-[205px] lg:mb-16 lg:max-w-[62%] lg:pt-10 xl:max-w-[58%]"
+          className="mb-14 max-w-5xl pt-[180px] sm:pt-[210px] md:pt-[230px] lg:mb-16 lg:max-w-[64%] lg:pt-10 xl:max-w-[60%]"
         >
           <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
             {t.overline}
           </p>
 
-          <h2 className="mb-6 max-w-5xl font-serif text-[2.7rem] font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
+          <h2 className="mb-6 max-w-5xl font-serif text-[2.8rem] font-bold leading-[0.94] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
             {t.title}
           </h2>
 
