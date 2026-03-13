@@ -251,9 +251,8 @@ export default function PremiumMeatGallery() {
   return (
     <section
       ref={ref}
-      className="relative overflow-visible bg-[#0f0b0b] pt-32 pb-24 lg:pt-44 lg:pb-32"
+      className="relative overflow-visible bg-[#0f0b0b] pt-24 pb-20 sm:pt-28 sm:pb-24 lg:pt-44 lg:pb-32"
     >
-      {/* layered premium background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#171111_45%,#0f0b0b_100%)]" />
 
       <motion.div
@@ -276,14 +275,29 @@ export default function PremiumMeatGallery() {
         />
       </div>
 
-      {/* hero floating ribeye */}
       <motion.div
         initial={{ opacity: 0, y: 100, scale: 0.92 }}
         animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute right-[-5%] top-[-35px] z-30 lg:top-[-110px]"
+        className="
+          pointer-events-none absolute z-30
+          right-[-14px] top-[-95px]
+          sm:right-[-8px] sm:top-[-110px]
+          md:right-[-10px] md:top-[-120px]
+          lg:right-[-90px] lg:top-[20px]
+          xl:right-[-120px] xl:top-[10px]
+        "
       >
-        <div className="relative h-[300px] w-[300px] md:h-[430px] md:w-[430px] lg:h-[620px] lg:w-[620px]">
+        <div
+          className="
+            relative
+            h-[180px] w-[180px]
+            sm:h-[220px] sm:w-[220px]
+            md:h-[280px] md:w-[280px]
+            lg:h-[420px] lg:w-[420px]
+            xl:h-[500px] xl:w-[500px]
+          "
+        >
           <Image
             src="/ribeyindex.png"
             alt="Ribeye na grelha"
@@ -299,23 +313,22 @@ export default function PremiumMeatGallery() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75 }}
-          className="mb-14 max-w-5xl lg:mb-16"
+          className="mb-14 max-w-5xl pt-12 pr-20 sm:pr-24 sm:pt-14 md:pr-32 lg:mb-16 lg:pr-[340px] lg:pt-0 xl:pr-[420px]"
         >
           <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
             {t.overline}
           </p>
 
-          <h2 className="mb-6 max-w-5xl font-serif text-4xl font-bold leading-[0.95] tracking-tight text-white md:text-6xl xl:text-7xl">
+          <h2 className="mb-6 max-w-5xl font-serif text-[2.5rem] font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
             {t.title}
           </h2>
 
-          <p className="max-w-3xl text-lg font-light leading-relaxed text-white/60 md:text-xl">
+          <p className="max-w-3xl text-base font-light leading-relaxed text-white/60 sm:text-lg md:text-xl">
             {t.subtitle}
           </p>
         </motion.div>
 
         <div className="mb-12 grid items-start gap-8 lg:gap-10 xl:grid-cols-[0.38fr_0.62fr] lg:mb-14">
-          {/* left column */}
           <motion.div
             initial={{ opacity: 0, x: -26 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -364,14 +377,13 @@ export default function PremiumMeatGallery() {
             </motion.div>
           </motion.div>
 
-          {/* right gallery block */}
           <motion.div
             initial={{ opacity: 0, x: 26 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.75, delay: 0.12 }}
             className="relative"
           >
-            <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.025))] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm md:p-5 lg:p-6">
+            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.025))] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm md:rounded-[32px] md:p-5 lg:p-6">
               <div className="mb-5 flex items-end justify-between gap-4">
                 <div>
                   <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-red-400/60">
@@ -390,13 +402,12 @@ export default function PremiumMeatGallery() {
               </div>
 
               <div className="grid gap-4 lg:grid-cols-[1.08fr_0.92fr] lg:gap-5">
-                {/* main image */}
                 <motion.div
                   key={activeImage.src}
                   initial={{ opacity: 0, scale: 0.985 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.45 }}
-                  className="group relative min-h-[430px] overflow-hidden rounded-[26px] border border-white/10 lg:min-h-[620px]"
+                  className="group relative min-h-[320px] overflow-hidden rounded-[22px] border border-white/10 sm:min-h-[390px] md:rounded-[26px] lg:min-h-[620px]"
                 >
                   <Image
                     src={activeImage.src}
@@ -427,7 +438,6 @@ export default function PremiumMeatGallery() {
                   </div>
                 </motion.div>
 
-                {/* thumbs */}
                 <div className="grid grid-cols-2 gap-4">
                   {t.images.map((img, index) => {
                     const active = index === activeIndex;
@@ -436,7 +446,7 @@ export default function PremiumMeatGallery() {
                       <button
                         key={img.src}
                         onClick={() => setActiveIndex(index)}
-                        className={`group relative h-[170px] overflow-hidden rounded-[22px] border text-left transition-all duration-300 md:h-[210px] ${
+                        className={`group relative h-[150px] overflow-hidden rounded-[20px] border text-left transition-all duration-300 sm:h-[170px] md:h-[210px] md:rounded-[22px] ${
                           active
                             ? 'border-red-500 shadow-[0_16px_35px_rgba(120,0,0,0.24)]'
                             : 'border-white/10 hover:border-red-500/35'
