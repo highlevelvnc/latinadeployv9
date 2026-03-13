@@ -51,7 +51,6 @@ export default function RestaurantExperience() {
     { src: '/restaurantelocal1.jpeg', span: '' },
     { src: '/restaurantelocal2.jpeg', span: '' },
     { src: '/restaurantelocal3.jpeg', span: '' },
-    { src: '/restaurantelocal4.jpeg', span: '' },
     { src: '/restaurantelocal5.jpeg', span: 'md:col-span-2' },
     { src: '/restaurantelocal6.jpeg', span: '' },
     { src: '/restaurantelocal7.jpeg', span: '' }
