@@ -151,12 +151,12 @@ export default function MenuHighlights() {
       ]
     },
     fr: {
-      badge: ‘Sélection Exclusive’,
-      title: ‘Une expérience pensée pour impressionner’,
+      badge: 'Sélection Exclusive',
+      title: 'Une expérience pensée pour impressionner',
       subtitle:
-        ‘Coupes nobles, feu, truffe et vin dans une mise en scène plus sophistiquée, cohérente avec l’univers premium du Latina Grill.’,
-      cta: ‘Explorer le Menu’,
-      ctaPdf: ‘Télécharger le Menu PDF’,
+        'Coupes nobles, feu, truffe et vin dans une mise en scène plus sophistiquée, cohérente avec l’univers premium du Latina Grill.',
+      cta: 'Explorer le Menu',
+      ctaPdf: 'Télécharger le Menu PDF',
       hero: {
         eyebrow: 'Signature Cut',
         title: 'Tomahawk au feu avec une présence spectaculaire',
@@ -230,7 +230,6 @@ export default function MenuHighlights() {
       ref={ref}
       className="relative overflow-hidden bg-black py-24 lg:py-36"
     >
-      {/* Background ambience */}
       <motion.div style={{ y }} className="pointer-events-none absolute inset-0 opacity-20">
         <div className="absolute left-[8%] top-[14%] h-72 w-72 rounded-full bg-red-700/20 blur-[130px]" />
         <div className="absolute right-[8%] top-[28%] h-72 w-72 rounded-full bg-white/10 blur-[140px]" />
@@ -249,7 +248,6 @@ export default function MenuHighlights() {
       </div>
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -272,7 +270,6 @@ export default function MenuHighlights() {
           </p>
         </motion.div>
 
-        {/* Hero block */}
         <motion.div
           initial={{ opacity: 0, y: 36 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -308,7 +305,6 @@ export default function MenuHighlights() {
           </div>
         </motion.div>
 
-        {/* Featured cards */}
         <div className="mb-20 grid gap-6 lg:grid-cols-3">
           {t.featured.map((item, index) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
@@ -352,7 +348,6 @@ export default function MenuHighlights() {
           })}
         </div>
 
-        {/* Gallery */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -372,8 +367,7 @@ export default function MenuHighlights() {
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12">
             {t.gallery.map((item, index) => {
-              const large =
-                index === 0 || index === 3;
+              const large = index === 0 || index === 3;
               const medium = index === 1 || index === 4;
 
               return (
@@ -413,12 +407,11 @@ export default function MenuHighlights() {
           </div>
         </motion.div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.55 }}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link
             href={`/${locale}/menu`}
@@ -434,7 +427,7 @@ export default function MenuHighlights() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-white/70 transition-all duration-500 hover:border-white/30 hover:bg-white/[0.07] hover:text-white"
           >
-            <FileText className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+            <FileText className="h-4 w-4 text-white/40 transition-colors group-hover:text-white/70" />
             <span>{t.ctaPdf}</span>
           </a>
         </motion.div>
