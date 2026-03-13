@@ -36,8 +36,8 @@ export default function PremiumMeatGallery() {
     offset: ['start end', 'end start']
   });
 
-  const glowY = useTransform(scrollYProgress, [0, 1], [70, -70]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [35, -35]);
+  const glowY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const orbY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const content: Record<
     LocaleKey,
@@ -243,25 +243,22 @@ export default function PremiumMeatGallery() {
   };
 
   const t = content[locale] || content.pt;
-  const activeImage = useMemo(
-    () => t.images[activeIndex] || t.images[0],
-    [activeIndex, t.images]
-  );
+  const activeImage = useMemo(() => t.images[activeIndex] || t.images[0], [activeIndex, t.images]);
 
   return (
     <section
       ref={ref}
-      className="relative overflow-visible bg-[#0f0b0b] pt-36 pb-20 sm:pt-40 sm:pb-24 lg:pt-36 lg:pb-32"
+      className="relative overflow-visible bg-[#0e0a0a] pt-20 pb-20 sm:pt-24 sm:pb-24 lg:pt-32 lg:pb-32"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#171111_45%,#0f0b0b_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#161010_45%,#0e0a0a_100%)]" />
 
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute left-[7%] top-[12%] h-[340px] w-[340px] rounded-full bg-red-700/12 blur-[130px]"
+        className="pointer-events-none absolute left-[4%] top-[8%] h-[320px] w-[320px] rounded-full bg-red-700/12 blur-[120px]"
       />
       <motion.div
-        style={{ y: imageY }}
-        className="pointer-events-none absolute bottom-[8%] right-[10%] h-[300px] w-[300px] rounded-full bg-white/5 blur-[150px]"
+        style={{ y: orbY }}
+        className="pointer-events-none absolute right-[6%] top-[12%] h-[220px] w-[220px] rounded-full bg-white/[0.035] blur-[110px]"
       />
 
       <div className="pointer-events-none absolute inset-0 opacity-[0.028]">
@@ -275,119 +272,115 @@ export default function PremiumMeatGallery() {
         />
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 100, scale: 0.92 }}
-        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-        transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-        className="
-          pointer-events-none absolute z-30
-          left-1/2 top-[22px] -translate-x-1/2
-          sm:top-[12px]
-          lg:left-auto lg:right-[4%] lg:top-[6px] lg:translate-x-0
-          xl:right-[7%] xl:top-[-2px]
-        "
-      >
-        <div
-          className="
-            relative
-            h-[220px] w-[220px]
-            sm:h-[250px] sm:w-[250px]
-            md:h-[290px] md:w-[290px]
-            lg:h-[420px] lg:w-[420px]
-            xl:h-[500px] xl:w-[500px]
-          "
-        >
-          <Image
-  src="/ribeyindex.png"
-  alt="Ribeye na grelha"
-  fill
-  priority
-  className="
-    object-contain
-    -translate-x-[70px] sm:-translate-x-[60px] md:-translate-x-[40px]
-    lg:translate-x-0
-    drop-shadow-[0_45px_90px_rgba(0,0,0,0.72)]
-  "
-/>
-        </div>
-      </motion.div>
-
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.75 }}
-          className="mb-14 max-w-5xl pt-[150px] sm:pt-[175px] md:pt-[205px] lg:mb-16 lg:max-w-[62%] lg:pt-10 xl:max-w-[58%]"
-        >
-          <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
-            {t.overline}
-          </p>
-
-          <h2 className="mb-6 max-w-5xl font-serif text-[2.7rem] font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
-            {t.title}
-          </h2>
-
-          <p className="max-w-3xl text-base font-light leading-relaxed text-white/60 sm:text-lg md:text-xl">
-            {t.subtitle}
-          </p>
-        </motion.div>
-
-        <div className="mb-12 grid items-start gap-8 lg:gap-10 xl:grid-cols-[0.38fr_0.62fr] lg:mb-14">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,0.44fr)] lg:gap-12 xl:gap-16">
           <motion.div
-            initial={{ opacity: 0, x: -26 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.75, delay: 0.08 }}
-            className="space-y-4"
+            initial={{ opacity: 0, y: 28 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.75 }}
+            className="order-2 lg:order-1"
           >
-            {t.features.map((feature, index) => {
-              const Icon = feature.icon;
+            <div className="mx-auto mb-8 flex min-h-[230px] w-full max-w-[420px] items-center justify-center sm:min-h-[260px] sm:max-w-[500px] lg:hidden">
+              <motion.div
+                initial={{ opacity: 0, y: 80, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 1.05, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="pointer-events-none relative h-[280px] w-[280px] sm:h-[330px] sm:w-[330px]"
+              >
+                <div className="absolute inset-0 rounded-full bg-red-600/10 blur-[80px]" />
+                <Image
+                  src="/ribeyindex.png"
+                  alt="Ribeye na grelha"
+                  fill
+                  priority
+                  className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.82)]"
+                />
+              </motion.div>
+            </div>
 
-              return (
-                <motion.div
-                  key={feature.label}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.12 + index * 0.08 }}
-                  className="group rounded-[26px] border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-red-500/25 hover:bg-white/[0.05] hover:shadow-[0_18px_40px_rgba(0,0,0,0.22)] lg:p-6"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black/30 transition-all duration-300 group-hover:border-red-500/25 group-hover:bg-red-500/10">
-                      <Icon className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-red-400" />
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
+              {t.overline}
+            </p>
+
+            <h2 className="max-w-4xl font-serif text-[2.9rem] font-bold leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
+              {t.title}
+            </h2>
+
+            <p className="mt-7 max-w-3xl text-base font-light leading-relaxed text-white/62 sm:text-lg md:text-xl">
+              {t.subtitle}
+            </p>
+
+            <div className="mt-10 space-y-4 lg:mt-12">
+              {t.features.map((feature, index) => {
+                const Icon = feature.icon;
+
+                return (
+                  <motion.div
+                    key={feature.label}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.12 + index * 0.08 }}
+                    className="group rounded-[26px] border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-red-500/25 hover:bg-white/[0.05] hover:shadow-[0_18px_40px_rgba(0,0,0,0.22)] lg:p-6"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black/30 transition-all duration-300 group-hover:border-red-500/25 group-hover:bg-red-500/10">
+                        <Icon className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-red-400" />
+                      </div>
+
+                      <div>
+                        <h3 className="mb-2 font-serif text-lg font-bold text-white md:text-xl">
+                          {feature.label}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-white/58 md:text-base">
+                          {feature.desc}
+                        </p>
+                      </div>
                     </div>
+                  </motion.div>
+                );
+              })}
 
-                    <div>
-                      <h3 className="mb-2 font-serif text-lg font-bold text-white md:text-xl">
-                        {feature.label}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-white/58 md:text-base">
-                        {feature.desc}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.35 }}
-              className="rounded-[26px] border border-red-500/15 bg-gradient-to-br from-red-500/[0.08] via-white/[0.03] to-transparent p-5 backdrop-blur-sm lg:p-6"
-            >
-              <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-red-400/75">
-                {t.processLabel}
-              </p>
-              <p className="leading-relaxed text-white/80">{t.processText}</p>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.55, delay: 0.35 }}
+                className="rounded-[26px] border border-red-500/15 bg-gradient-to-br from-red-500/[0.08] via-white/[0.03] to-transparent p-5 backdrop-blur-sm lg:p-6"
+              >
+                <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-red-400/75">
+                  {t.processLabel}
+                </p>
+                <p className="leading-relaxed text-white/80">{t.processText}</p>
+              </motion.div>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, x: 26 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.75, delay: 0.12 }}
-            className="relative"
+            className="order-1 relative lg:order-2"
           >
-            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.025))] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm md:rounded-[32px] md:p-5 lg:p-6">
+            <div className="relative hidden min-h-[540px] lg:block">
+              <motion.div
+                initial={{ opacity: 0, y: 90, scale: 0.92 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                className="pointer-events-none absolute right-[4%] top-[-58px] z-30 xl:right-[8%]"
+              >
+                <div className="relative h-[520px] w-[520px] xl:h-[610px] xl:w-[610px]">
+                  <div className="absolute inset-0 rounded-full bg-red-700/10 blur-[120px]" />
+                  <Image
+                    src="/ribeyindex.png"
+                    alt="Ribeye na grelha"
+                    fill
+                    priority
+                    className="object-contain object-center drop-shadow-[0_55px_110px_rgba(0,0,0,0.82)]"
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.025))] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm md:rounded-[32px] md:p-5 lg:mt-[320px] lg:p-6 xl:mt-[360px]">
               <div className="mb-5 flex items-end justify-between gap-4">
                 <div>
                   <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-red-400/60">
