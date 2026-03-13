@@ -75,8 +75,9 @@ export default function EventsSection() {
           transition={{ duration: 0.9 }}
           className="text-center max-w-4xl mx-auto mb-20"
         >
-          <div className="inline-block border border-red/30 px-6 py-2 mb-10">
-            <span className="text-xs text-red uppercase tracking-[0.5em] font-medium">
+          <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5">
+            <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
               {t.badge}
             </span>
           </div>
@@ -105,7 +106,7 @@ export default function EventsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.3 }}
-          className="grid md:grid-cols-3 gap-8 mb-20 max-w-5xl mx-auto"
+          className="grid md:grid-cols-3 gap-5 mb-20 max-w-5xl mx-auto"
         >
           {t.features.map((feature, index) => {
             const Icon = feature.icon;
@@ -114,16 +115,23 @@ export default function EventsSection() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -6 }}
                 transition={{
-                  initial: { duration: 0.6, delay: 0.4 + index * 0.15 },
-                  hover: { duration: 0.3 }
+                  default: { duration: 0.6, delay: 0.4 + index * 0.12 },
+                  y: { duration: 0.3 }
                 }}
-                className="border border-white/10 p-8 text-center hover:border-red/50 transition-all duration-500 group"
+                className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.04] p-8 text-center transition-all duration-500 hover:border-red-500/40 hover:bg-white/[0.07] hover:shadow-[0_16px_45px_rgba(0,0,0,0.4)] group"
               >
-                <Icon className="w-12 h-12 text-white mx-auto mb-6 group-hover:text-red transition-colors duration-500" />
-                <h4 className="text-white font-bold text-lg mb-3 uppercase tracking-wider">{feature.label}</h4>
-                <p className="text-white/50 text-sm">{feature.desc}</p>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-red-600/[0.07] via-transparent to-transparent pointer-events-none" />
+                <div className="relative">
+                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] group-hover:border-red-500/30 group-hover:bg-red-600/10 transition-all duration-500">
+                    <Icon className="w-6 h-6 text-white/65 group-hover:text-red-400 transition-colors duration-500" />
+                  </div>
+                  <h4 className="text-white font-semibold text-[15px] mb-2.5 uppercase tracking-[0.14em] leading-snug">
+                    {feature.label}
+                  </h4>
+                  <p className="text-white/45 text-sm leading-relaxed">{feature.desc}</p>
+                </div>
               </motion.div>
             );
           })}
@@ -131,20 +139,20 @@ export default function EventsSection() {
 
         {/* Images */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.9, delay: 0.7 }}
-          className="grid md:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto"
+          transition={{ duration: 0.9, delay: 0.6 }}
+          className="grid md:grid-cols-3 gap-4 mb-16 max-w-6xl mx-auto"
         >
           {['/aniversario1.jpeg', '/clientes.jpeg', '/clientes1.jpeg'].map((img, index) => (
-            <div key={index} className="relative h-[320px] overflow-hidden group">
+            <div key={index} className="relative h-[300px] overflow-hidden rounded-[20px] group border border-white/8">
               <Image
                 src={img}
                 alt={`Evento ${index + 1}`}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-1000 grayscale hover:grayscale-0"
+                className="object-cover group-hover:scale-[1.05] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-black/45 group-hover:bg-black/18 transition-colors duration-500" />
             </div>
           ))}
         </motion.div>
@@ -153,15 +161,14 @@ export default function EventsSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 1 }}
+          transition={{ duration: 0.9, delay: 0.9 }}
           className="text-center"
         >
           <Link
             href={`/${locale}/contact`}
-            className="group inline-block border-2 border-red hover:bg-red text-white px-16 py-6 text-sm font-bold uppercase tracking-[0.3em] transition-all duration-500 hover:shadow-2xl hover:shadow-red/60 relative overflow-hidden"
+            className="group inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-12 py-5 text-sm font-semibold uppercase tracking-[0.28em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_45px_rgba(180,20,20,0.38)]"
           >
-            <span className="relative z-10">{t.cta}</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-red/0 via-white/10 to-red/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+            {t.cta}
           </Link>
         </motion.div>
       </div>
