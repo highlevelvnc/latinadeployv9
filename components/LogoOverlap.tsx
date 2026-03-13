@@ -36,7 +36,7 @@ export default function LogoOverlap() {
   return (
     <section
       ref={ref}
-      className="relative z-20 -mt-24 pb-24 lg:-mt-32 lg:pb-32"
+      className="relative z-20 -mt-8 pt-10 pb-20 sm:-mt-10 sm:pt-12 sm:pb-24 lg:-mt-20 lg:pt-0 lg:pb-32"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
@@ -45,43 +45,37 @@ export default function LogoOverlap() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative mx-auto max-w-6xl"
         >
-          {/* LOGO SOBREPOSTA */}
-          <div className="absolute left-1/2 top-0 z-30 -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute left-1/2 top-0 z-30 -translate-x-1/2 -translate-y-[42%] sm:-translate-y-[46%] lg:-translate-y-1/2">
             <motion.div
               initial={{ opacity: 0, scale: 0.88, y: 16 }}
               animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.15, ease: 'easeOut' }}
               className="relative"
             >
-              {/* Glow traseiro */}
-              <div className="absolute inset-0 rounded-full bg-red-600/25 blur-3xl scale-125" />
-              <div className="absolute inset-0 rounded-full border border-white/10 scale-[1.18]" />
+              <div className="absolute inset-0 scale-125 rounded-full bg-red-600/25 blur-3xl" />
+              <div className="absolute inset-0 scale-[1.16] rounded-full border border-white/10" />
 
-              {/* Moldura premium */}
-              <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/15 bg-black/90 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-md md:h-32 md:w-32 lg:h-40 lg:w-40">
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/15 bg-black/90 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-md sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40">
                 <div className="absolute inset-[6px] rounded-full border border-red-500/20" />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.06] to-transparent" />
                 <Image
                   src="/logo.png"
                   alt="Latina Grill"
                   fill
-                  className="object-contain p-5 drop-shadow-[0_0_30px_rgba(220,38,38,0.45)]"
+                  className="object-contain p-4 sm:p-5 drop-shadow-[0_0_30px_rgba(220,38,38,0.45)]"
                   priority
                 />
               </div>
             </motion.div>
           </div>
 
-          {/* CARD PRINCIPAL */}
-          <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-black/90 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-            {/* fundo decorativo */}
+          <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-black/90 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[30px]">
             <div className="pointer-events-none absolute inset-0">
               <div className="absolute left-0 top-0 h-60 w-60 rounded-full bg-red-700/10 blur-[120px]" />
               <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-red-600/10 blur-[140px]" />
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
             </div>
 
-            {/* grid pattern sutil */}
             <div
               className="pointer-events-none absolute inset-0 opacity-[0.03]"
               style={{
@@ -91,40 +85,38 @@ export default function LogoOverlap() {
               }}
             />
 
-            {/* conteúdo */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative px-6 pb-12 pt-20 text-center md:px-10 md:pb-14 md:pt-24 lg:px-16 lg:pb-20 lg:pt-28"
+              className="relative px-5 pb-10 pt-16 text-center sm:px-6 sm:pb-12 sm:pt-18 md:px-10 md:pb-14 md:pt-24 lg:px-16 lg:pb-20 lg:pt-28"
             >
-              <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2">
-                <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400 md:text-xs">
+              <div className="mb-5 inline-flex max-w-full items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2">
+                <span className="h-2 w-2 shrink-0 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-red-400 sm:text-[11px] md:text-xs">
                   {t.eyebrow}
                 </span>
               </div>
 
-              <h2 className="mx-auto max-w-5xl text-3xl font-bold leading-[1.08] text-white md:text-5xl lg:text-6xl">
+              <h2 className="mx-auto max-w-5xl text-3xl font-bold leading-[1.08] text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 {t.title}
               </h2>
 
-              <div className="mx-auto my-8 flex items-center justify-center gap-4">
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-500 md:w-16" />
+              <div className="mx-auto my-7 flex items-center justify-center gap-4">
+                <div className="h-px w-10 bg-gradient-to-r from-transparent to-red-500 sm:w-12 md:w-16" />
                 <div className="h-2.5 w-2.5 rotate-45 bg-red-500" />
-                <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-500 md:w-16" />
+                <div className="h-px w-10 bg-gradient-to-l from-transparent to-red-500 sm:w-12 md:w-16" />
               </div>
 
-              <p className="mx-auto max-w-3xl text-sm leading-relaxed text-white/68 md:text-lg md:leading-relaxed">
+              <p className="mx-auto max-w-3xl text-base leading-relaxed text-white/72 sm:text-[17px] md:text-lg">
                 {t.description}
               </p>
             </motion.div>
 
-            {/* cantos decorativos */}
-            <div className="absolute left-0 top-0 h-16 w-16 border-l border-t border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute bottom-0 right-0 h-16 w-16 border-b border-r border-red-500/20 md:h-20 md:w-20" />
+            <div className="absolute left-0 top-0 h-14 w-14 border-l border-t border-red-500/20 md:h-20 md:w-20" />
+            <div className="absolute right-0 top-0 h-14 w-14 border-r border-t border-red-500/20 md:h-20 md:w-20" />
+            <div className="absolute bottom-0 left-0 h-14 w-14 border-b border-l border-red-500/20 md:h-20 md:w-20" />
+            <div className="absolute bottom-0 right-0 h-14 w-14 border-b border-r border-red-500/20 md:h-20 md:w-20" />
           </div>
         </motion.div>
       </div>

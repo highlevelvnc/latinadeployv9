@@ -251,7 +251,7 @@ export default function PremiumMeatGallery() {
   return (
     <section
       ref={ref}
-      className="relative overflow-visible bg-[#0f0b0b] pt-24 pb-20 sm:pt-28 sm:pb-24 lg:pt-44 lg:pb-32"
+      className="relative overflow-visible bg-[#0f0b0b] pt-36 pb-20 sm:pt-40 sm:pb-24 lg:pt-36 lg:pb-32"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#171111_45%,#0f0b0b_100%)]" />
 
@@ -281,19 +281,18 @@ export default function PremiumMeatGallery() {
         transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         className="
           pointer-events-none absolute z-30
-          right-[-14px] top-[-95px]
-          sm:right-[-8px] sm:top-[-110px]
-          md:right-[-10px] md:top-[-120px]
-          lg:right-[-90px] lg:top-[20px]
-          xl:right-[-120px] xl:top-[10px]
+          left-1/2 top-[22px] -translate-x-1/2
+          sm:top-[12px]
+          lg:left-auto lg:right-[4%] lg:top-[6px] lg:translate-x-0
+          xl:right-[7%] xl:top-[-2px]
         "
       >
         <div
           className="
             relative
-            h-[180px] w-[180px]
-            sm:h-[220px] sm:w-[220px]
-            md:h-[280px] md:w-[280px]
+            h-[220px] w-[220px]
+            sm:h-[250px] sm:w-[250px]
+            md:h-[290px] md:w-[290px]
             lg:h-[420px] lg:w-[420px]
             xl:h-[500px] xl:w-[500px]
           "
@@ -313,13 +312,13 @@ export default function PremiumMeatGallery() {
           initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75 }}
-          className="mb-14 max-w-5xl pt-12 pr-20 sm:pr-24 sm:pt-14 md:pr-32 lg:mb-16 lg:pr-[340px] lg:pt-0 xl:pr-[420px]"
+          className="mb-14 max-w-5xl pt-[150px] sm:pt-[175px] md:pt-[205px] lg:mb-16 lg:max-w-[62%] lg:pt-10 xl:max-w-[58%]"
         >
           <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
             {t.overline}
           </p>
 
-          <h2 className="mb-6 max-w-5xl font-serif text-[2.5rem] font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
+          <h2 className="mb-6 max-w-5xl font-serif text-[2.7rem] font-bold leading-[0.95] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
             {t.title}
           </h2>
 
