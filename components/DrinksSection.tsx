@@ -60,34 +60,40 @@ export default function DrinksSection() {
             transition={{ duration: 0.9 }}
             className="lg:col-span-2"
           >
-            <div className="inline-block border border-black/20 px-6 py-2 mb-8">
-              <span className="text-xs text-black uppercase tracking-[0.4em] font-medium">
+            <div className="inline-flex items-center gap-3 border border-black/15 px-5 py-2 mb-10">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+              <span className="text-[11px] text-black/55 uppercase tracking-[0.42em] font-semibold">
                 {t.badge}
               </span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-black mb-8 leading-[1.1] tracking-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-black mb-6 leading-[1.05] tracking-tight">
               {t.title}
             </h2>
 
-            <p className="text-lg text-black/60 leading-relaxed font-light mb-10 tracking-wide">
+            <div className="w-16 h-px bg-red-600 mb-8" />
+
+            <p className="text-base text-black/55 leading-relaxed font-light mb-12 tracking-wide max-w-sm">
               {t.description}
             </p>
 
-            {/* Drinks List */}
-            <div className="space-y-4">
+            {/* Drinks List — editorial numbered style */}
+            <div className="border-t border-black/8">
               {t.drinks.map((drink, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="flex items-center gap-4 group"
+                  transition={{ duration: 0.5, delay: 0.55 + index * 0.1 }}
+                  className="flex items-center gap-5 py-4 border-b border-black/8 group cursor-default"
                 >
-                  <div className="w-8 h-px bg-red group-hover:w-12 transition-all duration-300" />
-                  <span className="text-black/70 font-medium text-lg group-hover:text-black transition-colors">
+                  <span className="text-[11px] font-bold text-red-500/60 tabular-nums tracking-widest w-6 flex-shrink-0">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="text-black/60 font-medium text-[17px] tracking-wide group-hover:text-black transition-colors duration-300 flex-1">
                     {drink.name}
                   </span>
+                  <div className="w-0 h-px bg-red-600 group-hover:w-6 transition-all duration-500 flex-shrink-0" />
                 </motion.div>
               ))}
             </div>
@@ -95,20 +101,21 @@ export default function DrinksSection() {
 
           {/* Images Grid */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-5">
               {/* Tall Main Image */}
               <div className="row-span-2 relative h-[600px] overflow-hidden group">
                 <Image
                   src="/drinkmartini.jpeg"
                   alt="Martini Premium"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
 
               {/* Top Right */}
@@ -117,8 +124,9 @@ export default function DrinksSection() {
                   src="/moscowmule.jpeg"
                   alt="Moscow Mule"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
 
               {/* Bottom Right */}
@@ -127,8 +135,9 @@ export default function DrinksSection() {
                   src="/drinkblackberry.jpeg"
                   alt="Blackberry"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
             </div>
           </motion.div>

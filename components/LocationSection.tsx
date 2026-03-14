@@ -104,8 +104,9 @@ export default function LocationSection() {
             transition={{ duration: 1 }}
             className="order-2 lg:order-1"
           >
-            <div className="inline-block border border-black/20 px-6 py-2 mb-10">
-              <span className="text-xs text-black uppercase tracking-[0.5em] font-medium">
+            <div className="inline-flex items-center gap-3 border border-black/15 px-5 py-2 mb-10">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
+              <span className="text-[11px] text-black/55 uppercase tracking-[0.45em] font-semibold">
                 {t.badge}
               </span>
             </div>
