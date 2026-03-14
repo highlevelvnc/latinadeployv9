@@ -66,8 +66,9 @@ export default function RestaurantExperience() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1 }}
           >
-            <div className="inline-block border border-black/20 px-6 py-2 mb-10">
-              <span className="text-xs text-black uppercase tracking-[0.5em] font-medium">
+            <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-black/20 bg-black/[0.04] px-5 py-2.5">
+              <span className="h-2 w-2 rounded-full bg-black/50" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-black/70">
                 {t.badge}
               </span>
             </div>
@@ -91,10 +92,9 @@ export default function RestaurantExperience() {
 
             <Link
               href={`/${locale}/reservations`}
-              className="group inline-block border-2 border-black hover:bg-black text-black hover:text-white px-12 py-5 text-sm font-bold uppercase tracking-[0.3em] transition-all duration-500 relative overflow-hidden"
+              className="group inline-flex items-center gap-3 rounded-full border border-black/35 bg-black/[0.04] px-12 py-5 text-sm font-bold uppercase tracking-[0.3em] text-black transition-all duration-500 hover:border-black hover:bg-black hover:text-white hover:shadow-[0_16px_45px_rgba(0,0,0,0.15)]"
             >
-              <span className="relative z-10">{t.cta}</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-black/0 via-red/20 to-black/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              {t.cta}
             </Link>
           </motion.div>
 
@@ -104,7 +104,7 @@ export default function RestaurantExperience() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.3 }}
-            className="relative h-[500px] lg:h-[600px] overflow-hidden group"
+            className="relative h-[500px] lg:h-[600px] overflow-hidden group rounded-[24px]"
           >
             <Image
               src="/restaurantelocal.jpeg"
@@ -112,8 +112,7 @@ export default function RestaurantExperience() {
               fill
               className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
             />
-            <div className="absolute -inset-4 border-2 border-black/10 pointer-events-none" />
-            <div className="absolute top-8 right-8 w-24 h-24 border-t-2 border-r-2 border-red" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[24px]" />
           </motion.div>
         </div>
 
@@ -134,19 +133,15 @@ export default function RestaurantExperience() {
                   initial: { duration: 0.7, delay: 0.7 + index * 0.1 },
                   hover: { duration: 0.4 }
                 }}
-                className={`${img.span} relative overflow-hidden group cursor-pointer`}
+                className={`${img.span} relative overflow-hidden group cursor-pointer rounded-2xl`}
               >
                 <Image
                   src={img.src}
                   alt={`Restaurante ${index + 2}`}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-1000 grayscale group-hover:grayscale-0"
+                  className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* Animated corners */}
-                <div className="absolute top-3 right-3 w-12 h-12 border-t border-r border-white/0 group-hover:border-white/80 transition-all duration-500" />
-                <div className="absolute bottom-3 left-3 w-12 h-12 border-b border-l border-white/0 group-hover:border-red/80 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               </motion.div>
             ))}
           </div>

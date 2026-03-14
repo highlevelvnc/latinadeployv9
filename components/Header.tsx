@@ -10,17 +10,14 @@ import LanguageSelector from './LanguageSelector';
 
 const nav = {
   pt: [
-    { label: 'Menu', href: '/menu' },
     { label: 'Reservas', href: '/reservations' },
     { label: 'Contacto', href: '/contact' },
   ],
   en: [
-    { label: 'Menu', href: '/menu' },
     { label: 'Reservations', href: '/reservations' },
     { label: 'Contact', href: '/contact' },
   ],
   fr: [
-    { label: 'Menu', href: '/menu' },
     { label: 'Réservations', href: '/reservations' },
     { label: 'Contact', href: '/contact' },
   ],

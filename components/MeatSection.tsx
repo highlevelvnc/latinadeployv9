@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
-import Link from 'next/link';
+import { FileText } from 'lucide-react';
 
 export default function MeatSection() {
   const ref = useRef(null);
@@ -18,7 +18,7 @@ export default function MeatSection() {
       title: 'Do Grill ao Prato',
       subtitle: 'Seleção Rigorosa',
       description: 'Trabalhamos apenas com os melhores cortes de carne do mundo. Cada peça é maturada com precisão, temperada com respeito e grelhada sobre brasas ardentes.',
-      cta: 'Explorar Menu',
+      cta: 'Ver Menu PDF',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japão' },
         { label: 'Black Angus', desc: 'Argentina' },
@@ -31,7 +31,7 @@ export default function MeatSection() {
       title: 'From Grill to Plate',
       subtitle: 'Rigorous Selection',
       description: 'We work only with the finest cuts of meat in the world. Each piece is aged with precision, seasoned with respect and grilled over hot coals.',
-      cta: 'Explore Menu',
+      cta: 'View Menu PDF',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japan' },
         { label: 'Black Angus', desc: 'Argentina' },
@@ -44,7 +44,7 @@ export default function MeatSection() {
       title: 'Du Grill à l\'Assiette',
       subtitle: 'Sélection Rigoureuse',
       description: 'Nous travaillons uniquement avec les meilleurs morceaux de viande au monde. Chaque pièce est affinée avec précision, assaisonnée avec respect et grillée.',
-      cta: 'Explorer Menu',
+      cta: 'Voir le Menu',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japon' },
         { label: 'Black Angus', desc: 'Argentine' },
@@ -94,8 +94,9 @@ export default function MeatSection() {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="inline-block border border-red/30 px-6 py-2 mb-8">
-              <span className="text-xs text-red uppercase tracking-[0.4em] font-medium">
+            <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5">
+              <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
                 {t.badge}
               </span>
             </div>
@@ -118,22 +119,26 @@ export default function MeatSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className="border border-white/10 p-6 hover:border-red/50 transition-colors duration-500 group"
+                  className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.04] p-6 text-center transition-all duration-500 hover:border-red-500/40 hover:bg-white/[0.07] hover:shadow-[0_16px_45px_rgba(0,0,0,0.4)] hover:-translate-y-1 group"
                 >
-                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-red transition-colors">
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-red-600/[0.07] via-transparent to-transparent pointer-events-none" />
+                  <h4 className="relative text-lg font-semibold text-white mb-1 group-hover:text-red-400 transition-colors">
                     {item.label}
                   </h4>
-                  <p className="text-sm text-white/50 uppercase tracking-wider">{item.desc}</p>
+                  <p className="relative text-sm text-white/50 uppercase tracking-wider">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
 
-            <Link
-              href={`/${locale}/menu`}
-              className="inline-block border-2 border-red hover:bg-red text-white px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] transition-all duration-500"
+            <a
+              href="/latina-grill-menu.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-10 py-4 text-sm font-semibold uppercase tracking-[0.3em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_45px_rgba(180,20,20,0.38)]"
             >
+              <FileText className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
               {t.cta}
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

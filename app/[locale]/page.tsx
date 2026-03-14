@@ -17,6 +17,7 @@ import ReservationCTA from '@/components/ReservationCTA';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import Preloader from '@/components/Preloader';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
 
 type Props = {
   params: { locale: string };
@@ -62,6 +63,7 @@ export default function HomePage({ params: { locale } }: Props) {
 
   return (
     <>
+      <ScrollProgressBar />
       <Preloader />
       <Header />
       
