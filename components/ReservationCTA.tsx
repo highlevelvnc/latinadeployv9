@@ -149,14 +149,19 @@ export default function ReservationCTA() {
               </motion.div>
 
               {/* phone number */}
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.7, delay: 0.55 }}
-                className="mt-6 text-sm text-white/45"
+                className="mt-6"
               >
-                {t.phoneNumber}
-              </motion.p>
+                <a
+                  href={`tel:${t.phoneNumber.replace(/\s/g, '')}`}
+                  className="text-sm text-white/70 transition-colors duration-300 hover:text-white"
+                >
+                  {t.phoneNumber}
+                </a>
+              </motion.div>
 
               {/* note */}
               <motion.div

@@ -17,9 +17,9 @@ const content = {
     lunchLabel: 'Almoço',
     dinnerLabel: 'Jantar',
     schedule: [
-      { group: 'Segunda a Quinta', lunch: '12:30 – 15:30', dinner: '19:00 – 23:00', note: 'Almoço e jantar' },
-      { group: 'Sexta e Sábado',   lunch: '12:30 – 16:00', dinner: '19:00 – 00:00', note: 'Horário alargado' },
-      { group: 'Domingo',          lunch: '12:30 – 16:00', dinner: '19:00 – 22:30', note: 'Ideal para almoço em família' },
+      { group: 'Segunda a Quinta', lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: 'Almoço e jantar' },
+      { group: 'Sexta e Sábado',   lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: 'Horário alargado' },
+      { group: 'Domingo',          lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: 'Ideal para almoço em família' },
     ],
   },
   en: {
@@ -33,9 +33,9 @@ const content = {
     lunchLabel: 'Lunch',
     dinnerLabel: 'Dinner',
     schedule: [
-      { group: 'Monday – Thursday', lunch: '12:30 – 3:30 PM', dinner: '7:00 – 11:00 PM',  note: 'Lunch and dinner' },
-      { group: 'Friday & Saturday', lunch: '12:30 – 4:00 PM', dinner: '7:00 PM – midnight', note: 'Extended hours' },
-      { group: 'Sunday',            lunch: '12:30 – 4:00 PM', dinner: '7:00 – 10:30 PM',   note: 'Perfect for a family lunch' },
+      { group: 'Monday – Thursday', lunch: '12:30 – 3:30 PM', dinner: '6:30 – 11:00 PM',  note: 'Lunch and dinner' },
+      { group: 'Friday & Saturday', lunch: '12:30 – 4:00 PM', dinner: '6:30 PM – midnight', note: 'Extended hours' },
+      { group: 'Sunday',            lunch: '12:30 – 4:00 PM', dinner: '6:30 – 10:30 PM',   note: 'Perfect for a family lunch' },
     ],
   },
   fr: {
@@ -49,9 +49,9 @@ const content = {
     lunchLabel: 'Déjeuner',
     dinnerLabel: 'Dîner',
     schedule: [
-      { group: 'Lundi – Jeudi',       lunch: '12h30 – 15h30', dinner: '19h00 – 23h00', note: 'Déjeuner et dîner' },
-      { group: 'Vendredi & Samedi',   lunch: '12h30 – 16h00', dinner: '19h00 – 00h00', note: 'Horaires étendus' },
-      { group: 'Dimanche',            lunch: '12h30 – 16h00', dinner: '19h00 – 22h30', note: 'Idéal pour un déjeuner en famille' },
+      { group: 'Lundi – Jeudi',       lunch: '12h30 – 15h30', dinner: '18h30 – 23h00', note: 'Déjeuner et dîner' },
+      { group: 'Vendredi & Samedi',   lunch: '12h30 – 16h00', dinner: '18h30 – 00h00', note: 'Horaires étendus' },
+      { group: 'Dimanche',            lunch: '12h30 – 16h00', dinner: '18h30 – 22h30', note: 'Idéal pour un déjeuner en famille' },
     ],
   },
 };
@@ -98,7 +98,7 @@ export default function OpeningHours() {
                   </span>
                 </div>
 
-                <h2 className="text-3xl leading-tight text-white md:text-4xl lg:text-5xl font-semibold">
+                <h2 className="text-3xl leading-tight text-white md:text-4xl lg:text-5xl font-serif font-bold">
                   {t.title}
                   <span className="block text-red-500">{t.titleAccent}</span>
                 </h2>

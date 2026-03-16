@@ -110,7 +110,7 @@ export default function RestaurantExperience() {
               src="/restaurantelocal.jpeg"
               alt="Interior Latina Grill"
               fill
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+              className="object-cover transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[24px]" />
           </motion.div>
@@ -139,7 +139,7 @@ export default function RestaurantExperience() {
                   src={img.src}
                   alt={`Restaurante ${index + 2}`}
                   fill
-                  className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
+                  className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               </motion.div>

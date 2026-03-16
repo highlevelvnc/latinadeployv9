@@ -44,6 +44,8 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
       </div>
 
+      <h1 className="sr-only">Latina Grill Cascais — Restaurante de Carnes Premium em Cascais</h1>
+
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

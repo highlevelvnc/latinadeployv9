@@ -163,7 +163,7 @@ export default function LocationSection() {
                 src="/restaurantelocal.jpeg"
                 alt="Latina Grill Cascais"
                 fill
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                className="object-cover transition-transform duration-700"
               />
               
               {/* Frame decorativo */}

@@ -4,7 +4,6 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
-import Link from 'next/link';
 import { ArrowRight, Flame, Wine, Sparkles, FileText } from 'lucide-react';
 
 export default function MenuHighlights() {
@@ -58,6 +57,8 @@ export default function MenuHighlights() {
         }
       ],
       galleryTitle: 'Destaques da casa',
+      galleryLabel: 'Galeria',
+      signatureBadge: 'Destaque',
       gallery: [
         {
           title: 'Tomahawk Premium',
@@ -123,6 +124,8 @@ export default function MenuHighlights() {
         }
       ],
       galleryTitle: 'House highlights',
+      galleryLabel: 'Gallery',
+      signatureBadge: 'Signature',
       gallery: [
         {
           title: 'Tomahawk Premium',
@@ -188,6 +191,8 @@ export default function MenuHighlights() {
         }
       ],
       galleryTitle: 'Moments signature',
+      galleryLabel: 'Galerie',
+      signatureBadge: 'Signature',
       gallery: [
         {
           title: 'Tomahawk Premium',
@@ -357,7 +362,7 @@ export default function MenuHighlights() {
           <div className="mb-8 flex items-end justify-between gap-6">
             <div>
               <span className="text-[11px] uppercase tracking-[0.32em] text-red-400">
-                Gallery
+                {t.galleryLabel}
               </span>
               <h3 className="mt-3 font-serif text-3xl font-bold text-white md:text-4xl">
                 {t.galleryTitle}
@@ -392,7 +397,7 @@ export default function MenuHighlights() {
                       <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 backdrop-blur-sm">
                         <span className="h-2 w-2 rounded-full bg-red-500" />
                         <span className="text-xs uppercase tracking-[0.2em] text-white/80">
-                          Signature
+                          {t.signatureBadge}
                         </span>
                       </div>
 
@@ -413,13 +418,15 @@ export default function MenuHighlights() {
           transition={{ duration: 0.8, delay: 0.55 }}
           className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <Link
-            href={`/${locale}/menu`}
+          <a
+            href="/latina-grill-menu.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 rounded-full border border-red-500/30 bg-red-500/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_12px_35px_rgba(180,20,20,0.35)]"
           >
             <span>{t.cta}</span>
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
+          </a>
 
           <a
             href="/latina-grill-menu.pdf"

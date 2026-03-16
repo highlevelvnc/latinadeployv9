@@ -19,6 +19,8 @@ export default function MeatSection() {
       subtitle: 'Seleção Rigorosa',
       description: 'Trabalhamos apenas com os melhores cortes de carne do mundo. Cada peça é maturada com precisão, temperada com respeito e grelhada sobre brasas ardentes.',
       cta: 'Ver Menu PDF',
+      overlayTitle: 'Tomahawk Premium',
+      overlaySubtitle: 'Maturação 45 dias',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japão' },
         { label: 'Black Angus', desc: 'Argentina' },
@@ -32,6 +34,8 @@ export default function MeatSection() {
       subtitle: 'Rigorous Selection',
       description: 'We work only with the finest cuts of meat in the world. Each piece is aged with precision, seasoned with respect and grilled over hot coals.',
       cta: 'View Menu PDF',
+      overlayTitle: 'Tomahawk Premium',
+      overlaySubtitle: '45-day aging',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japan' },
         { label: 'Black Angus', desc: 'Argentina' },
@@ -45,6 +49,8 @@ export default function MeatSection() {
       subtitle: 'Sélection Rigoureuse',
       description: 'Nous travaillons uniquement avec les meilleurs morceaux de viande au monde. Chaque pièce est affinée avec précision, assaisonnée avec respect et grillée.',
       cta: 'Voir le Menu',
+      overlayTitle: 'Tomahawk Premium',
+      overlaySubtitle: 'Affinage 45 jours',
       highlights: [
         { label: 'Wagyu A5', desc: 'Japon' },
         { label: 'Black Angus', desc: 'Argentine' },
@@ -80,9 +86,9 @@ export default function MeatSection() {
               <div className="absolute bottom-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-white/10 p-8">
                 <div className="flex items-baseline gap-3 mb-2">
                   <div className="w-2 h-2 bg-red mt-2" />
-                  <h4 className="text-2xl font-serif font-bold text-white">Tomahawk Premium</h4>
+                  <h4 className="text-2xl font-serif font-bold text-white">{t.overlayTitle}</h4>
                 </div>
-                <p className="text-white/60 text-sm uppercase tracking-[0.2em]">Maturação 45 dias</p>
+                <p className="text-white/60 text-sm uppercase tracking-[0.2em]">{t.overlaySubtitle}</p>
               </div>
             </div>
           </motion.div>
