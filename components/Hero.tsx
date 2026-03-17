@@ -1,9 +1,30 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 export default function Hero() {
+  // Refs for programmatic play — iOS Safari requires .play() call even
+  // when autoPlay, muted and playsInline are all set as attributes.
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const tryPlay = (el: HTMLVideoElement | null) => {
+      if (!el) return;
+      // Belt-and-suspenders: set muted via property (in addition to attribute)
+      // Safari on iOS sometimes ignores the HTML attribute alone.
+      el.muted = true;
+      el.play().catch(() => {
+        // Silently swallow — autoplay policy may block on some browsers,
+        // but muted + playsInline should always succeed on iOS.
+      });
+    };
+    tryPlay(mobileVideoRef.current);
+    tryPlay(desktopVideoRef.current);
+  }, []);
+
   const scrollToContent = () => {
     window.scrollTo({
       top: window.innerHeight,
@@ -14,31 +35,33 @@ export default function Hero() {
   return (
     <section className="relative flex h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        {/* Mobile */}
+        {/* Mobile background video
+            — src directly on <video> (no <source> child) for maximum iOS compat
+            — no key prop: prevents React from remounting on re-render
+            — playsInline: prevents iOS from opening fullscreen player
+            — muted: required for autoplay policy on all browsers            */}
         <video
-          key="mobile-video"
+          ref={mobileVideoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          src="/heromobile.mp4"
           className="h-full w-full object-cover md:hidden"
-        >
-          <source src="/heromobile.mp4" type="video/mp4" />
-        </video>
+        />
 
-        {/* Desktop */}
+        {/* Desktop background video */}
         <video
-          key="desktop-video"
+          ref={desktopVideoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          src="/header.mp4"
           className="hidden h-full w-full object-cover md:block"
-        >
-          <source src="/header.mp4" type="video/mp4" />
-        </video>
+        />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/50" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
