@@ -50,7 +50,7 @@ export default function ReservationCTA() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-[#050505] py-24 lg:py-32"
+      className="relative overflow-hidden bg-[#050505] py-16 lg:py-32"
     >
       {/* Subtle food image background — very low opacity for texture */}
       <div className="pointer-events-none absolute inset-0">
@@ -92,14 +92,14 @@ export default function ReservationCTA() {
           <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
             <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.05] via-transparent to-white/[0.02]" />
 
-            <div className="relative px-6 py-12 text-center md:px-10 md:py-14 lg:px-16 lg:py-20">
+            <div className="relative px-5 py-10 text-center md:px-10 md:py-14 lg:px-16 lg:py-20">
 
               {/* Badge — with animated availability dot */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="mb-8 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5"
+                className="mb-5 md:mb-8 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5"
               >
                 <span className="relative flex h-2 w-2">
                   <motion.span
@@ -119,7 +119,7 @@ export default function ReservationCTA() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                className="mx-auto max-w-4xl font-serif text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl"
+                className="mx-auto max-w-4xl font-serif text-[1.75rem] font-bold leading-[1.14] text-white md:text-5xl md:leading-[1.05] lg:text-6xl"
               >
                 {t.title}
               </motion.h2>
@@ -129,11 +129,9 @@ export default function ReservationCTA() {
                 initial={{ opacity: 0, scaleX: 0.7 }}
                 animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
                 transition={{ duration: 0.7, delay: 0.25 }}
-                className="mx-auto my-8 flex items-center justify-center gap-4"
+                className="mx-auto my-5 md:my-8 flex items-center justify-center"
               >
-                <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-500 md:w-16" />
-                <div className="h-2.5 w-2.5 rotate-45 bg-red-500" />
-                <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-500 md:w-16" />
+                <div className="h-0.5 w-10 rounded-full bg-red-500/55" />
               </motion.div>
 
               {/* subtitle */}
@@ -155,7 +153,7 @@ export default function ReservationCTA() {
               >
                 <Link
                   href={`/${locale}/reservations`}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-red-400 hover:bg-red-500 hover:shadow-[0_20px_55px_rgba(180,20,20,0.55)] sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-red-400 hover:bg-red-500 hover:shadow-[0_20px_55px_rgba(180,20,20,0.55)] active:translate-y-0 active:shadow-none sm:w-auto"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>{t.cta}</span>
@@ -171,12 +169,12 @@ export default function ReservationCTA() {
                 </a>
               </motion.div>
 
-              {/* phone number */}
+              {/* phone number — hidden on mobile (button above already covers it), visible sm+ */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.7, delay: 0.55 }}
-                className="mt-6"
+                className="mt-6 hidden sm:block"
               >
                 <a
                   href={`tel:${t.phoneNumber.replace(/\s/g, '')}`}
@@ -199,11 +197,11 @@ export default function ReservationCTA() {
               </motion.div>
             </div>
 
-            {/* corner accents */}
-            <div className="absolute left-0 top-0 h-16 w-16 border-l border-t border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute right-0 top-0 h-16 w-16 border-r border-t border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute bottom-0 left-0 h-16 w-16 border-b border-l border-red-500/20 md:h-20 md:w-20" />
-            <div className="absolute bottom-0 right-0 h-16 w-16 border-b border-r border-red-500/20 md:h-20 md:w-20" />
+            {/* corner accents — desktop only (rounded-[32px] card breaks them on mobile) */}
+            <div className="absolute left-0 top-0 hidden h-20 w-20 border-l border-t border-red-500/20 md:block" />
+            <div className="absolute right-0 top-0 hidden h-20 w-20 border-r border-t border-red-500/20 md:block" />
+            <div className="absolute bottom-0 left-0 hidden h-20 w-20 border-b border-l border-red-500/20 md:block" />
+            <div className="absolute bottom-0 right-0 hidden h-20 w-20 border-b border-r border-red-500/20 md:block" />
           </div>
         </motion.div>
       </div>

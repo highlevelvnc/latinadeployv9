@@ -66,14 +66,14 @@ export default function PremiumGallery() {
   }, [lightboxIndex, closeLightbox, showPrev, showNext]);
 
   return (
-    <section ref={ref} className="relative py-32 bg-white overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-24 lg:py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <a
             href="https://www.instagram.com/latina.grill/"
@@ -94,7 +94,7 @@ export default function PremiumGallery() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.9 }}
-          className="grid grid-cols-2 md:grid-cols-4 auto-rows-[280px] gap-4 md:gap-5"
+          className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] md:auto-rows-[280px] gap-3 md:gap-5"
         >
           {images.map((image, index) => (
             <motion.div
@@ -102,7 +102,7 @@ export default function PremiumGallery() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.7, delay: index * 0.08 }}
-              className={`relative overflow-hidden group rounded-2xl cursor-pointer ${image.span}`}
+              className={`relative overflow-hidden group rounded-2xl cursor-pointer active:opacity-90 transition-opacity duration-150 ${image.span}`}
               onClick={() => setLightboxIndex(index)}
             >
               <Image

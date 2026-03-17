@@ -76,7 +76,7 @@ export default function Testimonials() {
     setActiveSlide((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-[#050505] py-24 lg:py-32">
+    <section ref={ref} className="relative overflow-hidden bg-[#050505] py-16 lg:py-32">
       {/* Ambient background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-red-700/10 blur-[120px]" />
@@ -102,21 +102,18 @@ export default function Testimonials() {
           transition={{ duration: 0.8 }}
           className="mx-auto mb-14 max-w-4xl text-center"
         >
-          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5">
-            <Quote className="h-4 w-4 text-red-400" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
-              {t('badge')}
-            </span>
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <div className="h-px w-8 bg-red-500/25" />
+            <Quote className="h-3.5 w-3.5 text-red-400/55" />
+            <div className="h-px w-8 bg-red-500/25" />
           </div>
 
           <h2 className="font-serif text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl">
             {t('title')}
           </h2>
 
-          <div className="mx-auto my-7 flex items-center justify-center gap-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-500 md:w-16" />
-            <div className="h-2.5 w-2.5 rotate-45 bg-red-500" />
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-500 md:w-16" />
+          <div className="mx-auto my-7 flex items-center justify-center">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-red-500/40 to-transparent md:w-24" />
           </div>
 
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -179,7 +176,7 @@ export default function Testimonials() {
           <div className="mt-8 flex items-center justify-center gap-5">
             <button
               onClick={handlePrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
               aria-label="Testemunho anterior"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -205,7 +202,7 @@ export default function Testimonials() {
 
             <button
               onClick={handleNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
               aria-label="Próximo testemunho"
             >
               <ChevronRight className="h-5 w-5" />

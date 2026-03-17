@@ -112,7 +112,7 @@ export default function RestaurantExperience() {
   return (
     <section
       ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
+      className="relative py-16 lg:py-32 overflow-hidden"
       style={{
         background:
           'linear-gradient(155deg, #0e0c0a 0%, #0c0b09 45%, #100d0b 100%)',
@@ -150,14 +150,13 @@ export default function RestaurantExperience() {
             </div>
 
             {/* H2 */}
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.05] tracking-tight">
+            <h2 className="text-[2rem] md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.08] md:leading-[1.05] tracking-tight">
               {t.title}
             </h2>
 
             {/* Divider */}
             <div className="flex items-center gap-3 mb-8">
               <div className="w-14 h-px bg-gradient-to-r from-red-500/80 to-transparent" />
-              <div className="w-2 h-2 rotate-45 bg-red-500/70" />
             </div>
 
             {/* Description */}
@@ -208,7 +207,7 @@ export default function RestaurantExperience() {
           initial={{ opacity: 0, y: 18 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="border-t border-b border-white/8 py-8 mb-14 lg:mb-16"
+          className="border-t border-b border-white/8 py-7 mb-10 lg:mb-16"
         >
           <div className="grid grid-cols-3 divide-x divide-white/8">
             {t.stats.map((stat, index) => (
@@ -219,10 +218,10 @@ export default function RestaurantExperience() {
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.08 }}
                 className="flex flex-col items-center text-center px-4 py-2"
               >
-                <span className="font-serif text-xl md:text-3xl font-bold text-white mb-1.5 leading-none tracking-tight">
+                <span className="font-serif text-base md:text-3xl font-bold text-white mb-1.5 leading-tight tracking-tight">
                   {stat.value}
                 </span>
-                <span className="text-[9px] md:text-[11px] uppercase tracking-[0.25em] text-white/35 leading-relaxed">
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.25em] text-white/35 leading-relaxed">
                   {stat.label}
                 </span>
               </motion.div>
@@ -254,12 +253,12 @@ export default function RestaurantExperience() {
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
               />
 
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              {/* Gradient: always visible on mobile (subtle), hover-reveal on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-100 transition-opacity duration-500 pointer-events-none md:opacity-0 md:group-hover:opacity-100" />
 
-              {/* Label — slides up on hover */}
-              <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pointer-events-none">
-                <span className="block translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-350 ease-out text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
+              {/* Label: always visible on mobile, slides in on hover for desktop */}
+              <div className="absolute bottom-0 left-0 right-0 px-3 pb-3 pointer-events-none">
+                <span className="block text-[10px] font-medium uppercase tracking-[0.22em] text-white/55 transition-all duration-300 ease-out md:translate-y-2 md:text-[11px] md:font-semibold md:tracking-[0.28em] md:text-white/80 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
                   {item.label}
                 </span>
               </div>

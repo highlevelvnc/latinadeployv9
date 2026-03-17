@@ -121,7 +121,7 @@ export default function EventsSection() {
     setActive((prev) => (prev + 1) % events.length);
 
   return (
-    <section ref={ref} className="relative py-24 lg:py-32 bg-black overflow-hidden">
+    <section ref={ref} className="relative py-16 lg:py-32 bg-black overflow-hidden">
       {/* Subtle ambient light */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-1/3 h-[400px] w-[400px] rounded-full bg-red-900/8 blur-[120px]" />
@@ -137,14 +137,9 @@ export default function EventsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-10 lg:mb-20"
         >
-          <div className="inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5 mb-6">
-            <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
-              {t.badge}
-            </span>
-          </div>
+          <p className="mb-4 text-[10px] uppercase tracking-[0.52em] text-white/30">{t.badge}</p>
 
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
             {t.overallTitle}
@@ -265,7 +260,7 @@ export default function EventsSection() {
             <div className="flex items-center gap-4 mb-10">
               <button
                 onClick={handlePrev}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white active:scale-95"
                 aria-label="Evento anterior"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -291,7 +286,7 @@ export default function EventsSection() {
 
               <button
                 onClick={handleNext}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white active:scale-95"
                 aria-label="Próximo evento"
               >
                 <ChevronRight className="h-5 w-5" />

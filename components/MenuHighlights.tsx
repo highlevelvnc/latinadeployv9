@@ -360,7 +360,7 @@ function WineRow({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="cursor-pointer border-b border-white/[0.055] last:border-b-0"
+      className="cursor-pointer border-b border-white/[0.055] last:border-b-0 active:bg-white/[0.03] transition-colors duration-150"
     >
       {/* Main row */}
       <div
@@ -700,7 +700,7 @@ export default function MenuHighlights() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden py-28 lg:py-36"
+      className="relative overflow-hidden py-16 lg:py-36"
       style={{ background: 'linear-gradient(160deg, #060405 0%, #050405 55%, #080607 100%)' }}
     >
       {/* Ambient glows — static, no scroll */}
