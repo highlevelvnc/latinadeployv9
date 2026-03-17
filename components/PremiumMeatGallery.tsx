@@ -2,9 +2,9 @@
 
 import { useMemo, useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useLocale } from 'next-intl';
-import { Thermometer, Award, Clock, ArrowUpRight } from 'lucide-react';
+import { Thermometer, Award, Clock } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 type LocaleKey = 'pt' | 'en' | 'fr';
@@ -27,17 +27,10 @@ export default function PremiumMeatGallery() {
   const locale = useLocale() as LocaleKey;
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Reset gallery when locale switches
   useEffect(() => {
     setActiveIndex(0);
   }, [locale]);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start']
-  });
-
-  const glowY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const orbY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const content: Record<
     LocaleKey,
@@ -45,12 +38,10 @@ export default function PremiumMeatGallery() {
       overline: string;
       title: string;
       subtitle: string;
-      features: Feature[];
-      galleryTitle: string;
-      gallerySubtitle: string;
-      processLabel: string;
       processText: string;
       spotlightLabel: string;
+      gallerySubtitle: string;
+      features: Feature[];
       images: GalleryImage[];
     }
   > = {
@@ -58,425 +49,321 @@ export default function PremiumMeatGallery() {
       overline: 'Dry-Aged · Fire · Precision',
       title: 'Carne, fogo e tempo no ponto certo',
       subtitle:
-        'Uma leitura mais visual do que define a casa: maturação controlada, cortes com presença, fogo bem executado e uma apresentação pensada para marcar a experiência.',
-      processLabel: 'Processo',
+        'Maturação controlada, cortes com presença e fogo bem executado. Uma apresentação pensada para marcar a experiência.',
       processText:
-        'Aqui, o cuidado não aparece como discurso. Aparece no corte, no ponto, na textura e na forma como cada peça chega à mesa.',
+        'O cuidado não aparece como discurso. Aparece no corte, no ponto, na textura e na forma como cada peça chega à mesa.',
       spotlightLabel: 'Spotlight',
+      gallerySubtitle: 'Do frio à brasa',
       features: [
         {
           icon: Thermometer,
           label: 'Maturação precisa',
-          desc: 'Temperatura, tempo e consistência tratados com rigor em cada etapa.'
+          desc: 'Temperatura, tempo e consistência tratados com rigor em cada etapa.',
         },
         {
           icon: Award,
           label: 'Cortes com critério',
-          desc: 'Escolha orientada por origem, textura, marmoreado e presença no prato.'
+          desc: 'Seleção orientada por origem, textura, marmoreado e presença no prato.',
         },
         {
           icon: Clock,
           label: 'Tempo respeitado',
-          desc: 'Do repouso ao serviço, cada detalhe é trabalhado sem pressa e sem excesso.'
-        }
+          desc: 'Do repouso ao serviço, cada detalhe trabalhado sem pressa nem excesso.',
+        },
       ],
-      galleryTitle: 'Do frio à brasa',
-      gallerySubtitle:
-        'Um percurso visual entre seleção, fogo, corte e apresentação.',
       images: [
-        {
-          src: '/frigorifigo.jpeg',
-          title: 'Cold Room Selection',
-          subtitle: 'Origem, maturação e controlo'
-        },
-        {
-          src: '/bandejalatinatomahawk.jpeg',
-          title: 'Latina Signature Board',
-          subtitle: 'Presença monumental à mesa'
-        },
-        {
-          src: '/tomahawkchamas.jpeg',
-          title: 'Fire Finish',
-          subtitle: 'Fogo, intensidade e espetáculo'
-        },
-        {
-          src: '/carne3.jpeg',
-          title: 'Wagyu Detail',
-          subtitle: 'Textura e marmoreado'
-        },
-        {
-          src: '/costela.jpeg',
-          title: 'Slow Depth',
-          subtitle: 'Profundidade de sabor'
-        },
-        {
-          src: '/frigorifico1.jpeg',
-          title: 'Curated Chamber',
-          subtitle: 'Precisão antes da grelha'
-        }
-      ]
+        { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: 'Origem, maturação e controlo' },
+        { src: '/bandejalatinatomahawk.jpeg', title: 'Latina Signature Board', subtitle: 'Presença monumental à mesa' },
+        { src: '/tomahawkchamas.jpeg', title: 'Fire Finish', subtitle: 'Fogo, intensidade e espetáculo' },
+        { src: '/carne3.jpeg', title: 'Wagyu Detail', subtitle: 'Textura e marmoreado' },
+        { src: '/costela.jpeg', title: 'Slow Depth', subtitle: 'Profundidade de sabor' },
+        { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: 'Precisão antes da grelha' },
+      ],
     },
     en: {
       overline: 'Dry-Aged · Fire · Precision',
       title: 'Meat, fire and time at the right point',
       subtitle:
-        'A more visual reading of what defines the house: controlled aging, cuts with presence, well-executed fire and presentation designed to leave a mark.',
-      processLabel: 'Process',
+        'Controlled aging, cuts with presence and well-executed fire. A presentation designed to leave a lasting mark.',
       processText:
-        'Here, care doesn’t appear as a speech. It appears in the cut, the doneness, the texture and the way each piece reaches the table.',
+        "Care doesn't appear as a speech. It appears in the cut, the doneness, the texture and the way each piece reaches the table.",
       spotlightLabel: 'Spotlight',
+      gallerySubtitle: 'From cold room to fire',
       features: [
         {
           icon: Thermometer,
           label: 'Precise aging',
-          desc: 'Temperature, timing and consistency treated with rigor at every stage.'
+          desc: 'Temperature, timing and consistency handled with rigor at every stage.',
         },
         {
           icon: Award,
           label: 'Cuts with criteria',
-          desc: 'Selection guided by origin, texture, marbling and plate presence.'
+          desc: 'Selection guided by origin, texture, marbling and plate presence.',
         },
         {
           icon: Clock,
           label: 'Time respected',
-          desc: 'From resting to service, every detail is handled without rush or excess.'
-        }
+          desc: 'From resting to service, every detail handled without rush or excess.',
+        },
       ],
-      galleryTitle: 'From cold room to fire',
-      gallerySubtitle:
-        'A visual path through selection, fire, cut and presentation.',
       images: [
-        {
-          src: '/frigorifigo.jpeg',
-          title: 'Cold Room Selection',
-          subtitle: 'Origin, aging and control'
-        },
-        {
-          src: '/bandejalatinatomahawk.jpeg',
-          title: 'Latina Signature Board',
-          subtitle: 'Monumental table presence'
-        },
-        {
-          src: '/tomahawkchamas.jpeg',
-          title: 'Fire Finish',
-          subtitle: 'Fire, intensity and spectacle'
-        },
-        {
-          src: '/carne3.jpeg',
-          title: 'Wagyu Detail',
-          subtitle: 'Texture and marbling'
-        },
-        {
-          src: '/costela.jpeg',
-          title: 'Slow Depth',
-          subtitle: 'Depth of flavor'
-        },
-        {
-          src: '/frigorifico1.jpeg',
-          title: 'Curated Chamber',
-          subtitle: 'Precision before the grill'
-        }
-      ]
+        { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: 'Origin, aging and control' },
+        { src: '/bandejalatinatomahawk.jpeg', title: 'Latina Signature Board', subtitle: 'Monumental table presence' },
+        { src: '/tomahawkchamas.jpeg', title: 'Fire Finish', subtitle: 'Fire, intensity and spectacle' },
+        { src: '/carne3.jpeg', title: 'Wagyu Detail', subtitle: 'Texture and marbling' },
+        { src: '/costela.jpeg', title: 'Slow Depth', subtitle: 'Depth of flavor' },
+        { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: 'Precision before the grill' },
+      ],
     },
     fr: {
       overline: 'Dry-Aged · Fire · Precision',
       title: 'Viande, feu et temps au bon point',
       subtitle:
-        'Une lecture plus visuelle de ce qui définit la maison : affinage contrôlé, coupes avec présence, feu maîtrisé et présentation pensée pour marquer l’expérience.',
-      processLabel: 'Processus',
+        'Affinage contrôlé, coupes avec présence et feu maîtrisé. Une présentation pensée pour marquer l\'expérience.',
       processText:
-        'Ici, le soin ne s’exprime pas par un discours. Il se voit dans la coupe, la cuisson, la texture et la manière dont chaque pièce arrive à table.',
+        'Le soin ne s\'exprime pas par un discours. Il se voit dans la coupe, la cuisson, la texture et la manière dont chaque pièce arrive à table.',
       spotlightLabel: 'Spotlight',
+      gallerySubtitle: 'Du froid à la braise',
       features: [
         {
           icon: Thermometer,
           label: 'Affinage précis',
-          desc: 'Température, temps et régularité travaillés avec rigueur à chaque étape.'
+          desc: 'Température, temps et régularité travaillés avec rigueur à chaque étape.',
         },
         {
           icon: Award,
-          label: 'Coupes choisies avec exigence',
-          desc: 'Sélection guidée par l’origine, la texture, le persillage et la présence visuelle.'
+          label: 'Coupes exigeantes',
+          desc: 'Sélection guidée par l\'origine, la texture, le persillage et la présence visuelle.',
         },
         {
           icon: Clock,
           label: 'Temps respecté',
-          desc: 'Du repos au service, chaque détail est travaillé sans précipitation ni excès.'
-        }
+          desc: 'Du repos au service, chaque détail sans précipitation ni excès.',
+        },
       ],
-      galleryTitle: 'Du froid à la braise',
-      gallerySubtitle:
-        'Un parcours visuel entre sélection, feu, coupe et présentation.',
       images: [
-        {
-          src: '/frigorifigo.jpeg',
-          title: 'Cold Room Selection',
-          subtitle: 'Origine, affinage et contrôle'
-        },
-        {
-          src: '/bandejalatinatomahawk.jpeg',
-          title: 'Latina Signature Board',
-          subtitle: 'Présence monumentale à table'
-        },
-        {
-          src: '/tomahawkchamas.jpeg',
-          title: 'Fire Finish',
-          subtitle: 'Feu, intensité et spectacle'
-        },
-        {
-          src: '/carne3.jpeg',
-          title: 'Wagyu Detail',
-          subtitle: 'Texture et persillage'
-        },
-        {
-          src: '/costela.jpeg',
-          title: 'Slow Depth',
-          subtitle: 'Profondeur de saveur'
-        },
-        {
-          src: '/frigorifico1.jpeg',
-          title: 'Curated Chamber',
-          subtitle: 'Précision avant le grill'
-        }
-      ]
-    }
+        { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: 'Origine, affinage et contrôle' },
+        { src: '/bandejalatinatomahawk.jpeg', title: 'Latina Signature Board', subtitle: 'Présence monumentale à table' },
+        { src: '/tomahawkchamas.jpeg', title: 'Fire Finish', subtitle: 'Feu, intensité et spectacle' },
+        { src: '/carne3.jpeg', title: 'Wagyu Detail', subtitle: 'Texture et persillage' },
+        { src: '/costela.jpeg', title: 'Slow Depth', subtitle: 'Profondeur de saveur' },
+        { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: 'Précision avant le grill' },
+      ],
+    },
   };
 
   const t = content[locale] || content.pt;
-  const activeImage = useMemo(() => t.images[activeIndex] || t.images[0], [activeIndex, t.images]);
+  const activeImage = useMemo(
+    () => t.images[activeIndex] || t.images[0],
+    [activeIndex, t.images]
+  );
 
   return (
     <section
       ref={ref}
-      className="relative overflow-visible bg-[#0e0a0a] pt-20 pb-20 sm:pt-24 sm:pb-24 lg:pt-32 lg:pb-32"
+      className="relative overflow-hidden py-24 lg:py-32"
+      style={{
+        background:
+          'radial-gradient(circle at 8% 12%, rgba(120,15,15,0.16) 0%, transparent 38%), radial-gradient(circle at 92% 88%, rgba(255,255,255,0.03) 0%, transparent 30%), linear-gradient(180deg, #110d0d 0%, #161010 50%, #0e0a0a 100%)',
+      }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(120,15,15,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.04),transparent_28%),linear-gradient(180deg,#110d0d_0%,#161010_45%,#0e0a0a_100%)]" />
+      {/* Single ambient glow — static, not scroll-driven */}
+      <div className="pointer-events-none absolute left-[3%] top-[6%] h-[300px] w-[300px] rounded-full bg-red-800/10 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-[5%] right-[4%] h-[200px] w-[200px] rounded-full bg-white/[0.025] blur-[100px]" />
 
-      <motion.div
-        style={{ y: glowY }}
-        className="pointer-events-none absolute left-[4%] top-[8%] h-[320px] w-[320px] rounded-full bg-red-700/12 blur-[120px]"
+      {/* Subtle grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.022]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
+          backgroundSize: '72px 72px',
+        }}
       />
-      <motion.div
-        style={{ y: orbY }}
-        className="pointer-events-none absolute right-[6%] top-[12%] h-[220px] w-[220px] rounded-full bg-white/[0.035] blur-[110px]"
-      />
-
-      <div className="pointer-events-none absolute inset-0 opacity-[0.028]">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
-            backgroundSize: '72px 72px'
-          }}
-        />
-      </div>
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.56fr)_minmax(0,0.44fr)] lg:gap-12 xl:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-[0.42fr_0.58fr] lg:gap-14 xl:gap-20">
+
+          {/* ══════════════════════════════════════
+              LEFT — Text + compact features + pull quote
+          ══════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.75 }}
             className="order-2 lg:order-1"
           >
-            <div className="mx-auto mb-8 flex min-h-[230px] w-full max-w-[420px] items-center justify-center sm:min-h-[260px] sm:max-w-[500px] lg:hidden">
-              <motion.div
-                initial={{ opacity: 0, y: 80, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 1.05, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="pointer-events-none relative h-[280px] w-[280px] sm:h-[330px] sm:w-[330px]"
-              >
-                <div className="absolute inset-0 rounded-full bg-red-600/10 blur-[80px]" />
-                <Image
-                  src="/ribeyindex.png"
-                  alt="Ribeye na grelha"
-                  fill
-                  priority
-                  className="object-contain object-center drop-shadow-[0_40px_80px_rgba(0,0,0,0.82)]"
-                />
-              </motion.div>
-            </div>
-
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/75">
+            {/* Overline */}
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-red-400/70">
               {t.overline}
             </p>
 
-            <h2 className="max-w-4xl font-serif text-[2.9rem] font-bold leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
+            {/* H2 */}
+            <h2 className="font-serif text-[2.7rem] font-bold leading-[0.93] tracking-tight text-white sm:text-5xl md:text-6xl xl:text-7xl">
               {t.title}
             </h2>
 
-            <p className="mt-7 max-w-3xl text-base font-light leading-relaxed text-white/62 sm:text-lg md:text-xl">
+            {/* Divider */}
+            <div className="mt-6 mb-7 flex items-center gap-3">
+              <div className="h-px w-12 bg-gradient-to-r from-red-500/65 to-transparent" />
+              <div className="h-1.5 w-1.5 rotate-45 bg-red-500/55" />
+            </div>
+
+            {/* Subtitle — shorter, tighter */}
+            <p className="max-w-[300px] text-[15px] font-normal leading-relaxed text-white/55 xl:max-w-[320px]">
               {t.subtitle}
             </p>
 
-            <div className="mt-10 space-y-4 lg:mt-12">
-              {t.features.map((feature, index) => {
+            {/* ── Compact feature list — lines, not cards ── */}
+            <div className="mt-9">
+              {t.features.map((feature, i) => {
                 const Icon = feature.icon;
-
                 return (
                   <motion.div
                     key={feature.label}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.12 + index * 0.08 }}
-                    className="group rounded-[26px] border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1 hover:border-red-500/25 hover:bg-white/[0.05] hover:shadow-[0_18px_40px_rgba(0,0,0,0.22)] lg:p-6"
+                    initial={{ opacity: 0, x: -14 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.15 + i * 0.09 }}
+                    className="group flex items-start gap-4 border-t border-white/8 py-4 first:border-t-0 first:pt-0"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black/30 transition-all duration-300 group-hover:border-red-500/25 group-hover:bg-red-500/10">
-                        <Icon className="h-5 w-5 text-white transition-colors duration-300 group-hover:text-red-400" />
-                      </div>
+                    {/* Small icon container */}
+                    <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/8 bg-white/[0.04] transition-all duration-300 group-hover:border-red-500/22 group-hover:bg-red-500/[0.08]">
+                      <Icon className="h-3.5 w-3.5 text-white/42 transition-colors duration-300 group-hover:text-red-400" />
+                    </div>
 
-                      <div>
-                        <h3 className="mb-2 font-serif text-lg font-bold text-white md:text-xl">
-                          {feature.label}
-                        </h3>
-                        <p className="text-sm leading-relaxed text-white/58 md:text-base">
-                          {feature.desc}
-                        </p>
-                      </div>
+                    {/* Text */}
+                    <div>
+                      <p className="mb-0.5 text-[13px] font-semibold leading-tight text-white/82">
+                        {feature.label}
+                      </p>
+                      <p className="text-[12px] leading-relaxed text-white/38">
+                        {feature.desc}
+                      </p>
                     </div>
                   </motion.div>
                 );
               })}
-
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.35 }}
-                className="rounded-[26px] border border-red-500/15 bg-gradient-to-br from-red-500/[0.08] via-white/[0.03] to-transparent p-5 backdrop-blur-sm lg:p-6"
-              >
-                <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-red-400/75">
-                  {t.processLabel}
-                </p>
-                <p className="leading-relaxed text-white/80">{t.processText}</p>
-              </motion.div>
             </div>
+
+            {/* ── Pull quote — replaces the heavy "process card" ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.44 }}
+              className="mt-8 border-l-2 border-red-500/22 pl-5"
+            >
+              <p className="text-[13px] font-light italic leading-relaxed text-white/44">
+                {t.processText}
+              </p>
+            </motion.div>
           </motion.div>
 
+          {/* ══════════════════════════════════════
+              RIGHT — Dominant image + thumbnail strip
+          ══════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, x: 26 }}
+            initial={{ opacity: 0, x: 22 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.75, delay: 0.12 }}
-            className="order-1 relative lg:order-2"
+            transition={{ duration: 0.75, delay: 0.1 }}
+            className="order-1 lg:order-2"
           >
-            <div className="relative hidden min-h-[540px] lg:block">
-              <motion.div
-                initial={{ opacity: 0, y: 90, scale: 0.92 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 1.05, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="pointer-events-none absolute right-[4%] top-[-58px] z-30 xl:right-[8%]"
-              >
-                <div className="relative h-[520px] w-[520px] xl:h-[610px] xl:w-[610px]">
-                  <div className="absolute inset-0 rounded-full bg-red-700/10 blur-[120px]" />
-                  <Image
-                    src="/ribeyindex.png"
-                    alt="Ribeye na grelha"
-                    fill
-                    priority
-                    className="object-contain object-center drop-shadow-[0_55px_110px_rgba(0,0,0,0.82)]"
-                  />
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.025))] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.34)] backdrop-blur-sm md:rounded-[32px] md:p-5 lg:mt-[320px] lg:p-6 xl:mt-[360px]">
-              <div className="mb-5 flex items-end justify-between gap-4">
-                <div>
-                  <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-red-400/60">
-                    {t.gallerySubtitle}
-                  </p>
-                  <h3 className="font-serif text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-4xl">
-                    {t.galleryTitle}
-                  </h3>
-                </div>
-
-                <div className="hidden items-center gap-2 text-xs uppercase tracking-[0.28em] text-white/35 md:flex">
-                  <span>{String(activeIndex + 1).padStart(2, '0')}</span>
-                  <div className="h-px w-10 bg-white/15" />
-                  <span>{String(t.images.length).padStart(2, '0')}</span>
-                </div>
-              </div>
-
-              <div className="grid gap-4 lg:grid-cols-[1.08fr_0.92fr] lg:gap-5">
+            {/* ── Main spotlight image ── */}
+            <div className="relative mb-3 overflow-hidden rounded-2xl lg:rounded-3xl group">
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={activeImage.src}
-                  initial={{ opacity: 0, scale: 0.985 }}
+                  initial={{ opacity: 0, scale: 1.025 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.45 }}
-                  className="group relative min-h-[320px] overflow-hidden rounded-[22px] border border-white/10 sm:min-h-[390px] md:rounded-[26px] lg:min-h-[620px]"
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: 'easeOut' }}
+                  className="relative h-[320px] sm:h-[420px] lg:h-[480px] xl:h-[540px]"
                 >
                   <Image
                     src={activeImage.src}
                     alt={activeImage.title}
                     fill
-                    className="object-cover transition-all duration-[1400ms] group-hover:scale-[1.04]"
+                    priority
+                    className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]"
+                    sizes="(max-width: 1024px) 100vw, 58vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent" />
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.10),transparent_30%)]" />
 
-                  <div className="absolute left-5 top-5 h-16 w-16 border-l border-t border-white/30 transition-colors duration-500 group-hover:border-red-400/70 md:h-20 md:w-20" />
-                  <div className="absolute bottom-5 right-5 h-16 w-16 border-b border-r border-white/30 transition-colors duration-500 group-hover:border-red-400/70 md:h-20 md:w-20" />
+                  {/* Depth gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent pointer-events-none" />
 
-                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
-                    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-2 backdrop-blur-sm">
-                      <ArrowUpRight className="h-3.5 w-3.5 text-red-400" />
-                      <span className="text-[10px] uppercase tracking-[0.28em] text-white/85">
-                        {t.spotlightLabel}
-                      </span>
-                    </div>
+                  {/* Subtle corner accents */}
+                  <div className="absolute left-4 top-4 h-8 w-8 border-l border-t border-white/20 pointer-events-none" />
+                  <div className="absolute right-4 top-4 h-8 w-8 border-r border-t border-white/20 pointer-events-none" />
 
-                    <h4 className="mb-2 font-serif text-2xl font-bold tracking-tight text-white md:text-4xl">
+                  {/* Ring */}
+                  <div className="absolute inset-0 rounded-2xl lg:rounded-3xl ring-1 ring-white/7 pointer-events-none" />
+
+                  {/* Caption at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                    <p className="mb-1.5 text-[9px] uppercase tracking-[0.32em] text-white/42">
+                      {t.spotlightLabel}
+                    </p>
+                    <h4 className="mb-1 font-serif text-xl font-bold leading-tight tracking-tight text-white md:text-2xl lg:text-[1.55rem]">
                       {activeImage.title}
                     </h4>
-                    <p className="text-sm leading-relaxed text-white/75 md:text-base">
+                    <p className="text-[12px] text-white/60 md:text-sm">
                       {activeImage.subtitle}
                     </p>
                   </div>
                 </motion.div>
+              </AnimatePresence>
+            </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  {t.images.map((img, index) => {
-                    const active = index === activeIndex;
+            {/* ── Thumbnail strip ── */}
+            <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
+              {t.images.map((img, index) => {
+                const isActive = index === activeIndex;
+                return (
+                  <button
+                    key={img.src}
+                    onClick={() => setActiveIndex(index)}
+                    className={`relative h-[68px] overflow-hidden rounded-xl border transition-all duration-300 md:h-[80px] ${
+                      isActive
+                        ? 'border-red-500 shadow-[0_0_12px_rgba(180,20,20,0.22)]'
+                        : 'border-white/10 opacity-65 hover:border-white/20 hover:opacity-90'
+                    }`}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.title}
+                      fill
+                      className={`object-cover transition-all duration-500 ${
+                        isActive ? 'scale-[1.04]' : 'grayscale-[0.25] hover:grayscale-0'
+                      }`}
+                      sizes="(max-width: 768px) 33vw, 10vw"
+                    />
+                    {/* Overlay */}
+                    <div
+                      className={`absolute inset-0 transition-colors duration-300 ${
+                        isActive ? 'bg-transparent' : 'bg-black/28 hover:bg-black/10'
+                      }`}
+                    />
+                    {/* Active indicator */}
+                    {isActive && (
+                      <div className="absolute bottom-1.5 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-red-500" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
-                    return (
-                      <button
-                        key={img.src}
-                        onClick={() => setActiveIndex(index)}
-                        className={`group relative h-[150px] overflow-hidden rounded-[20px] border text-left transition-all duration-300 sm:h-[170px] md:h-[210px] md:rounded-[22px] ${
-                          active
-                            ? 'border-red-500 shadow-[0_16px_35px_rgba(120,0,0,0.24)]'
-                            : 'border-white/10 hover:border-red-500/35'
-                        }`}
-                      >
-                        <Image
-                          src={img.src}
-                          alt={img.title}
-                          fill
-                          className={`object-cover transition-all duration-[1000ms] ${
-                            active
-                              ? 'scale-[1.03]'
-                              : 'grayscale-[0.18] group-hover:grayscale-0 group-hover:scale-[1.06]'
-                          }`}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-
-                        <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
-                          <p className="mb-1 text-sm font-medium leading-tight text-white md:text-base">
-                            {img.title}
-                          </p>
-                          <p className="text-[11px] uppercase tracking-[0.2em] text-white/62 md:text-xs">
-                            {img.subtitle}
-                          </p>
-                        </div>
-
-                        {active && (
-                          <div className="absolute right-3 top-3 h-2.5 w-2.5 rotate-45 bg-red-500" />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Caption + counter row */}
+            <div className="mt-3 flex items-center justify-between">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-white/26">
+                {t.gallerySubtitle}
+              </p>
+              <div className="flex items-center gap-2 text-[10px] tracking-widest text-white/26">
+                <span className="tabular-nums">
+                  {String(activeIndex + 1).padStart(2, '0')}
+                </span>
+                <div className="h-px w-7 bg-white/12" />
+                <span className="tabular-nums">
+                  {String(t.images.length).padStart(2, '0')}
+                </span>
               </div>
             </div>
           </motion.div>

@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Instagram } from 'lucide-react';
+import { Instagram, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
 const content = {
@@ -30,6 +30,7 @@ export default function PremiumGallery() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
   const locale = useLocale();
   const t = content[locale as keyof typeof content] || content.pt;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const images = [
     { src: '/tomahawklinda.jpeg', span: 'col-span-2 row-span-2', alt: 'Tomahawk' },
@@ -41,6 +42,28 @@ export default function PremiumGallery() {
     { src: '/bandejalatina1.jpeg', span: 'col-span-1', alt: 'Bandeja' },
     { src: '/sobremesatrufa.jpeg', span: 'col-span-1', alt: 'Trufa' },
   ];
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+  const showPrev = useCallback(() =>
+    setLightboxIndex((prev) => (prev === null ? null : prev === 0 ? images.length - 1 : prev - 1)),
+    [images.length]
+  );
+  const showNext = useCallback(() =>
+    setLightboxIndex((prev) => (prev === null ? null : prev === images.length - 1 ? 0 : prev + 1)),
+    [images.length]
+  );
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxIndex, closeLightbox, showPrev, showNext]);
 
   return (
     <section ref={ref} className="relative py-32 bg-white overflow-hidden">
@@ -79,7 +102,8 @@ export default function PremiumGallery() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.7, delay: index * 0.08 }}
-              className={`relative overflow-hidden group rounded-2xl ${image.span}`}
+              className={`relative overflow-hidden group rounded-2xl cursor-pointer ${image.span}`}
+              onClick={() => setLightboxIndex(index)}
             >
               <Image
                 src={image.src}
@@ -87,8 +111,12 @@ export default function PremiumGallery() {
                 fill
                 className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
               />
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500 rounded-2xl" />
+              {/* Hover overlay with expand hint */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 rounded-2xl flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-medium uppercase tracking-widest bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm">
+                  Ver
+                </span>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -111,6 +139,74 @@ export default function PremiumGallery() {
           </a>
         </motion.div>
       </div>
+
+      {/* ── Fullscreen Lightbox ── */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+            onClick={closeLightbox}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-5 right-5 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white"
+              aria-label="Fechar"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Prev button */}
+            <button
+              onClick={(e) => { e.stopPropagation(); showPrev(); }}
+              className="absolute left-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:left-8"
+              aria-label="Imagem anterior"
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </button>
+
+            {/* Next button */}
+            <button
+              onClick={(e) => { e.stopPropagation(); showNext(); }}
+              className="absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:right-8"
+              aria-label="Próxima imagem"
+            >
+              <ChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Image */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={lightboxIndex}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.22 }}
+                className="relative w-full h-full max-w-5xl max-h-[88vh] mx-12 md:mx-24"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={images[lightboxIndex].src}
+                  alt={images[lightboxIndex].alt}
+                  fill
+                  className="object-contain"
+                  quality={95}
+                  sizes="(max-width: 768px) 100vw, 80vw"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Counter */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs text-white/45 tracking-widest tabular-nums">
+              {lightboxIndex + 1} / {images.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

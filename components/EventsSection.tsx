@@ -1,176 +1,315 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
-import { Users, Calendar, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const AUTO_PLAY_INTERVAL = 5000;
+
+// Images that rotate through the stack (3 images = 3 events)
+const stackImages = ['/aniversario.jpeg', '/clientes.jpeg', '/aniversario1.jpeg'];
+
+// Stack visual configs: front → middle → back
+const stackConfigs = [
+  { rotate: 0,  y: 0,  x: 0,   scale: 1,    opacity: 1,    z: 30 },
+  { rotate: -3, y: 18, x: -10, scale: 0.93,  opacity: 0.55, z: 20 },
+  { rotate:  4, y: 30, x:  12, scale: 0.87,  opacity: 0.28, z: 10 },
+];
 
 export default function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
   const locale = useLocale();
+  const [active, setActive] = useState(0);
 
   const content = {
     pt: {
       badge: 'Eventos Privados',
-      title: 'Celebrações Memoráveis',
-      subtitle: 'Do corporativo ao familiar, transformamos momentos em memórias',
-      description: 'Oferecemos espaço exclusivo para até 150 pessoas. Cada evento é tratado com a mesma obsessão pela excelência que aplicamos aos nossos pratos. Menu personalizado, ambiente sofisticado e serviço impecável.',
+      overallTitle: 'Celebrações Memoráveis',
       cta: 'Planeie o Seu Evento',
-      features: [
-        { icon: Users, label: 'Até 150 Convidados', desc: 'Espaço flexível e privado' },
-        { icon: Calendar, label: 'Eventos Corporativos', desc: 'Jantares e conferências' },
-        { icon: Heart, label: 'Celebrações Especiais', desc: 'Aniversários e casamentos' }
-      ]
+      events: [
+        {
+          label: 'Aniversários & Casamentos',
+          title: 'Celebrações que Ficam na Memória',
+          description:
+            'Dias únicos merecem espaços únicos. Criamos o ambiente perfeito para aniversários e casamentos com menu exclusivo, decoração personalizada e serviço de excelência para cada momento especial.',
+        },
+        {
+          label: 'Eventos Corporativos',
+          title: 'Jantares de Empresa & Conferências',
+          description:
+            'Do jantar executivo à conferência empresarial, oferecemos espaço privado para até 150 pessoas com serviço impecável, tecnologia e menus adaptados a cada ocasião profissional.',
+        },
+        {
+          label: 'Celebrações Especiais',
+          title: 'Momentos que Merecem o Melhor',
+          description:
+            'Seja qual for a ocasião, garantimos uma experiência marcada pela qualidade dos cortes premium, pela sofisticação do ambiente e pela atenção meticulosa a cada detalhe.',
+        },
+      ],
     },
     en: {
       badge: 'Private Events',
-      title: 'Memorable Celebrations',
-      subtitle: 'From corporate to family, we transform moments into memories',
-      description: 'We offer exclusive space for up to 150 people. Each event is treated with the same obsession for excellence we apply to our dishes. Custom menu, sophisticated ambiance and impeccable service.',
+      overallTitle: 'Memorable Celebrations',
       cta: 'Plan Your Event',
-      features: [
-        { icon: Users, label: 'Up to 150 Guests', desc: 'Flexible private space' },
-        { icon: Calendar, label: 'Corporate Events', desc: 'Dinners and conferences' },
-        { icon: Heart, label: 'Special Celebrations', desc: 'Birthdays and weddings' }
-      ]
+      events: [
+        {
+          label: 'Birthdays & Weddings',
+          title: 'Celebrations That Stay in Memory',
+          description:
+            'Unique days deserve unique spaces. We create the perfect atmosphere for birthdays and weddings with an exclusive menu, personalised decoration and exceptional service for every special moment.',
+        },
+        {
+          label: 'Corporate Events',
+          title: 'Company Dinners & Conferences',
+          description:
+            'From executive dinner to business conference, we offer private space for up to 150 people with impeccable service, technology and menus tailored to each professional occasion.',
+        },
+        {
+          label: 'Special Celebrations',
+          title: 'Moments That Deserve the Best',
+          description:
+            'Whatever the occasion, we guarantee an experience defined by the quality of premium cuts, the sophistication of the atmosphere and meticulous attention to every detail.',
+        },
+      ],
     },
     fr: {
       badge: 'Événements Privés',
-      title: 'Célébrations Mémorables',
-      subtitle: 'Du corporatif au familial, nous transformons les moments en souvenirs',
-      description: 'Nous offrons un espace exclusif pour jusqu\'à 150 personnes. Chaque événement est traité avec la même obsession de l\'excellence que nous appliquons à nos plats. Menu personnalisé, ambiance sophistiquée et service impeccable.',
+      overallTitle: 'Célébrations Mémorables',
       cta: 'Planifiez Votre Événement',
-      features: [
-        { icon: Users, label: 'Jusqu\'à 150 Invités', desc: 'Espace flexible et privé' },
-        { icon: Calendar, label: 'Événements d\'Entreprise', desc: 'Dîners et conférences' },
-        { icon: Heart, label: 'Célébrations Spéciales', desc: 'Anniversaires et mariages' }
-      ]
-    }
+      events: [
+        {
+          label: 'Anniversaires & Mariages',
+          title: 'Des Célébrations qui Restent en Mémoire',
+          description:
+            'Les jours uniques méritent des espaces uniques. Nous créons l\'atmosphère parfaite pour les anniversaires et les mariages avec un menu exclusif et un service personnalisé.',
+        },
+        {
+          label: 'Événements d\'Entreprise',
+          title: 'Dîners d\'Entreprise & Conférences',
+          description:
+            'Du dîner exécutif à la conférence d\'entreprise, nous offrons un espace privé pour jusqu\'à 150 personnes avec technologie et service d\'excellence.',
+        },
+        {
+          label: 'Célébrations Spéciales',
+          title: 'Des Moments qui Méritent le Meilleur',
+          description:
+            'Quelle que soit l\'occasion, nous garantissons une expérience marquée par la qualité des coupes premium et l\'attention méticuleuse portée à chaque détail.',
+        },
+      ],
+    },
   };
 
   const t = content[locale as keyof typeof content] || content.pt;
+  const events = t.events;
+
+  // AutoPlay — only when visible
+  useEffect(() => {
+    if (!isInView) return;
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % events.length);
+    }, AUTO_PLAY_INTERVAL);
+    return () => clearInterval(timer);
+  }, [isInView, events.length]);
+
+  const handlePrev = () =>
+    setActive((prev) => (prev === 0 ? events.length - 1 : prev - 1));
+  const handleNext = () =>
+    setActive((prev) => (prev + 1) % events.length);
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-black overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/aniversario.jpeg"
-          alt="Eventos"
-          fill
-          className="object-cover opacity-15 grayscale"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
+    <section ref={ref} className="relative py-24 lg:py-32 bg-black overflow-hidden">
+      {/* Subtle ambient light */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-0 top-1/3 h-[400px] w-[400px] rounded-full bg-red-900/8 blur-[120px]" />
+        <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-red-900/5 blur-[100px]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        {/* Header */}
+
+        {/* Top label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9 }}
-          className="text-center max-w-4xl mx-auto mb-20"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16 lg:mb-20"
         >
-          <div className="mb-10 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5">
-            <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+          <div className="inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5 mb-6">
+            <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
               {t.badge}
             </span>
           </div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-8 leading-[1.1] tracking-tight">
-            {t.title}
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+            {t.overallTitle}
           </h2>
-
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="w-16 h-px bg-gradient-to-r from-transparent to-red" />
-            <div className="w-2 h-2 bg-red rotate-45" />
-            <div className="w-16 h-px bg-gradient-to-l from-transparent to-red" />
-          </div>
-
-          <p className="text-xl text-white/60 font-light mb-10 leading-relaxed">
-            {t.subtitle}
-          </p>
-
-          <p className="text-lg text-white/50 leading-relaxed max-w-2xl mx-auto">
-            {t.description}
-          </p>
         </motion.div>
 
-        {/* Features */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.3 }}
-          className="grid md:grid-cols-3 gap-5 mb-20 max-w-5xl mx-auto"
-        >
-          {t.features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                whileHover={{ y: -6 }}
-                transition={{
-                  default: { duration: 0.6, delay: 0.4 + index * 0.12 },
-                  y: { duration: 0.3 }
-                }}
-                className="relative overflow-hidden rounded-[22px] border border-white/10 bg-white/[0.04] p-8 text-center transition-all duration-500 hover:border-red-500/40 hover:bg-white/[0.07] hover:shadow-[0_16px_45px_rgba(0,0,0,0.4)] group"
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b from-red-600/[0.07] via-transparent to-transparent pointer-events-none" />
-                <div className="relative">
-                  <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] group-hover:border-red-500/30 group-hover:bg-red-600/10 transition-all duration-500">
-                    <Icon className="w-6 h-6 text-white/65 group-hover:text-red-400 transition-colors duration-500" />
-                  </div>
-                  <h4 className="text-white font-semibold text-[15px] mb-2.5 uppercase tracking-[0.14em] leading-snug">
-                    {feature.label}
-                  </h4>
-                  <p className="text-white/45 text-sm leading-relaxed">{feature.desc}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+        {/* Two-column editorial layout */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center max-w-6xl mx-auto">
 
-        {/* Images */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.9, delay: 0.6 }}
-          className="grid md:grid-cols-3 gap-4 mb-16 max-w-6xl mx-auto"
-        >
-          {['/aniversario1.jpeg', '/clientes.jpeg', '/clientes1.jpeg'].map((img, index) => (
-            <div key={index} className="relative h-[300px] overflow-hidden rounded-[20px] group border border-white/8">
-              <Image
-                src={img}
-                alt={`Evento ${index + 1}`}
-                fill
-                className="object-cover group-hover:scale-[1.05] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
-              />
-              <div className="absolute inset-0 bg-black/45 group-hover:bg-black/18 transition-colors duration-500" />
-            </div>
-          ))}
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.9 }}
-          className="text-center"
-        >
-          <Link
-            href={`/${locale}/contact`}
-            className="group inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-12 py-5 text-sm font-semibold uppercase tracking-[0.28em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_45px_rgba(180,20,20,0.38)]"
+          {/* ── Left: Image Stack ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="relative flex items-center justify-center order-2 lg:order-1"
+            style={{ height: '420px' }}
           >
-            {t.cta}
-          </Link>
-        </motion.div>
+            {stackImages.map((img, i) => {
+              const pos = (i - active + stackImages.length) % stackImages.length;
+              const cfg = stackConfigs[pos];
+
+              return (
+                <motion.div
+                  key={img}
+                  animate={{
+                    rotate: cfg.rotate,
+                    y: cfg.y,
+                    x: cfg.x,
+                    scale: cfg.scale,
+                    opacity: cfg.opacity,
+                    zIndex: cfg.z,
+                  }}
+                  transition={{ duration: 0.65, ease: 'easeOut' }}
+                  className="absolute"
+                  style={{ width: '100%', maxWidth: '430px' }}
+                >
+                  <div
+                    className="relative overflow-hidden rounded-xl"
+                    style={{
+                      height: '340px',
+                      boxShadow:
+                        pos === 0
+                          ? '0 25px 60px rgba(0,0,0,0.65)'
+                          : pos === 1
+                          ? '0 12px 35px rgba(0,0,0,0.4)'
+                          : '0 6px 20px rgba(0,0,0,0.25)',
+                    }}
+                  >
+                    <Image
+                      src={img}
+                      alt="Evento Latina Grill"
+                      fill
+                      className={`object-cover transition-all duration-700 ${
+                        pos === 0 ? '' : 'grayscale'
+                      }`}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+
+                    {/* Dark overlay on background images */}
+                    {pos !== 0 && (
+                      <div className="absolute inset-0 bg-black/30" />
+                    )}
+
+                    {/* Subtle corner accent on front image */}
+                    {pos === 0 && (
+                      <>
+                        <div className="absolute top-5 left-5 w-10 h-10 border-t border-l border-red-500/35 pointer-events-none" />
+                        <div className="absolute bottom-5 right-5 w-10 h-10 border-b border-r border-red-500/35 pointer-events-none" />
+                      </>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* ── Right: Event Content ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="flex flex-col order-1 lg:order-2"
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                {/* Event type label */}
+                <div className="inline-block border border-white/12 rounded-full px-4 py-1.5 mb-5">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/45">
+                    {events[active].label}
+                  </span>
+                </div>
+
+                {/* Event title */}
+                <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-5 leading-[1.15]">
+                  {events[active].title}
+                </h3>
+
+                {/* Divider */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-px w-10 bg-red-500/60" />
+                  <div className="h-1.5 w-1.5 rotate-45 bg-red-500/60" />
+                </div>
+
+                {/* Description */}
+                <p className="text-base lg:text-[17px] text-white/58 leading-relaxed font-light mb-10">
+                  {events[active].description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation controls */}
+            <div className="flex items-center gap-4 mb-10">
+              <button
+                onClick={handlePrev}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white"
+                aria-label="Evento anterior"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {events.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActive(index)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      index === active
+                        ? 'w-7 bg-red-500'
+                        : 'w-1.5 bg-white/22 hover:bg-white/38'
+                    }`}
+                    aria-label={`Evento ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={handleNext}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white"
+                aria-label="Próximo evento"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+
+              <span className="text-[11px] text-white/28 tabular-nums tracking-wider ml-1">
+                {String(active + 1).padStart(2, '0')} / {String(events.length).padStart(2, '0')}
+              </span>
+            </div>
+
+            {/* CTA */}
+            <div>
+              <Link
+                href={`/${locale}/contact`}
+                className="inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_40px_rgba(180,20,20,0.35)]"
+              >
+                {t.cta}
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

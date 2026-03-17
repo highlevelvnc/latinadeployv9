@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Calendar, ArrowRight } from 'lucide-react';
 
 export default function ReservationCTA() {
@@ -51,13 +52,27 @@ export default function ReservationCTA() {
       ref={ref}
       className="relative overflow-hidden bg-[#050505] py-24 lg:py-32"
     >
-      {/* Ambient background */}
+      {/* Subtle food image background — very low opacity for texture */}
+      <div className="pointer-events-none absolute inset-0">
+        <Image
+          src="/tomahawklinda.jpeg"
+          alt=""
+          fill
+          className="object-cover object-center"
+          style={{ opacity: 0.07 }}
+          quality={60}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-[#050505]/88" />
+      </div>
+
+      {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-700/10 blur-[140px]" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-600/40 to-transparent" />
       </div>
 
-      {/* subtle grid */}
+      {/* Subtle grid texture */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.025]"
         style={{
@@ -75,17 +90,25 @@ export default function ReservationCTA() {
           className="mx-auto max-w-5xl"
         >
           <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.04] via-transparent to-white/[0.02]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.05] via-transparent to-white/[0.02]" />
 
             <div className="relative px-6 py-12 text-center md:px-10 md:py-14 lg:px-16 lg:py-20">
-              {/* badge */}
+
+              {/* Badge — with animated availability dot */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="mb-8 inline-flex items-center gap-3 rounded-full border border-red-500/20 bg-red-500/10 px-5 py-2.5"
               >
-                <span className="h-2 w-2 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+                <span className="relative flex h-2 w-2">
+                  <motion.span
+                    animate={{ scale: [1, 1.9, 1], opacity: [0.7, 0.1, 0.7] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    className="absolute inline-flex h-full w-full rounded-full bg-red-400"
+                  />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
+                </span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
                   {t.badge}
                 </span>
@@ -96,7 +119,7 @@ export default function ReservationCTA() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                className="mx-auto max-w-4xl text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl"
+                className="mx-auto max-w-4xl font-serif text-4xl font-bold leading-[1.05] text-white md:text-5xl lg:text-6xl"
               >
                 {t.title}
               </motion.h2>
@@ -132,7 +155,7 @@ export default function ReservationCTA() {
               >
                 <Link
                   href={`/${locale}/reservations`}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-red-500 hover:bg-red-500 hover:shadow-[0_16px_40px_rgba(180,20,20,0.35)] sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-red-400 hover:bg-red-500 hover:shadow-[0_20px_55px_rgba(180,20,20,0.55)] sm:w-auto"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>{t.cta}</span>
@@ -170,7 +193,7 @@ export default function ReservationCTA() {
                 transition={{ duration: 0.7, delay: 0.6 }}
                 className="mx-auto mt-8 max-w-2xl rounded-2xl border border-white/10 bg-black/20 px-5 py-4"
               >
-                <p className="text-sm leading-relaxed text-white/58">
+                <p className="text-sm leading-relaxed text-white/55">
                   {t.note}
                 </p>
               </motion.div>
