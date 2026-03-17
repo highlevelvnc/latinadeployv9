@@ -338,38 +338,57 @@ function WineRow({
   locale,
   t,
   isHovered,
+  isActive,
   onEnter,
   onLeave,
+  onToggle,
 }: {
   wine: Wine;
   locale: Locale;
   t: UIStrings;
   isHovered: boolean;
+  isActive: boolean;
   onEnter: () => void;
   onLeave: () => void;
+  onToggle: () => void;
 }) {
+  // Desktop: expand on hover. Mobile: expand on tap (toggle).
+  const isExpanded = isHovered || isActive;
+
   return (
     <div
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
-      className="border-b border-white/[0.055] last:border-b-0"
+      onClick={onToggle}
+      className="cursor-pointer border-b border-white/[0.055] last:border-b-0"
     >
       {/* Main row */}
       <div
         className={`grid grid-cols-[34px_1fr_auto] items-baseline gap-x-3 rounded-sm px-2 py-3 transition-colors duration-200 ${
-          isHovered ? 'bg-white/[0.03]' : ''
+          isExpanded ? 'bg-white/[0.03]' : ''
         }`}
       >
         <span className="font-mono tabular-nums text-[11px] text-red-400/60">{wine.year}</span>
         <span className="text-[13.5px] font-medium leading-snug text-white/82">{wine.name}</span>
-        <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.22em] text-white/28">
-          {wine.region}
-        </span>
+        {/* Region + rotating + indicator (mobile only) */}
+        <div className="flex items-center gap-1.5">
+          <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.22em] text-white/28">
+            {wine.region}
+          </span>
+          <motion.span
+            animate={{ rotate: isActive ? 45 : 0 }}
+            transition={{ duration: 0.18 }}
+            className="md:hidden select-none text-[12px] font-light leading-none text-white/22"
+            aria-hidden
+          >
+            +
+          </motion.span>
+        </div>
       </div>
 
-      {/* Hover reveal: notes + pairing, slides in below the row */}
+      {/* Detail reveal: slides in below the row on hover (desktop) or tap (mobile) */}
       <AnimatePresence>
-        {isHovered && (
+        {isExpanded && (
           <motion.div
             key="wine-detail"
             initial={{ height: 0, opacity: 0 }}
@@ -409,6 +428,10 @@ function WineRow({
 
 function CartaTab({ locale, t }: { locale: Locale; t: UIStrings }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  // Mobile toggle: tap once to open, tap again (or tap another) to close
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const handleToggle = (id: string) =>
+    setActiveId((prev) => (prev === id ? null : id));
 
   // Group wines by category (order: tinto, branco, espumante, rose)
   const categoryOrder: WineCategory[] = ['tinto', 'branco', 'espumante', 'rose'];
@@ -500,8 +523,10 @@ function CartaTab({ locale, t }: { locale: Locale; t: UIStrings }) {
                     locale={locale}
                     t={t}
                     isHovered={hoveredId === wine.id}
+                    isActive={activeId === wine.id}
                     onEnter={() => setHoveredId(wine.id)}
                     onLeave={() => setHoveredId(null)}
+                    onToggle={() => handleToggle(wine.id)}
                   />
                 ))}
               </div>

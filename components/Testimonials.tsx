@@ -185,18 +185,21 @@ export default function Testimonials() {
               <ChevronLeft className="h-5 w-5" />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               {testimonials.map((_, index) => (
+                // h-8 w-8 = 32px hit area; visual dot stays 6px × 6px (or 24px active)
                 <button
                   key={index}
                   onClick={() => setActiveSlide(index)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  className="flex h-8 w-8 flex-shrink-0 items-center justify-center"
+                  aria-label={`Testemunho ${index + 1}`}
+                >
+                  <span className={`block h-1.5 rounded-full transition-all duration-300 ${
                     index === activeSlide
                       ? 'w-6 bg-red-500'
                       : 'w-1.5 bg-white/25 hover:bg-white/40'
-                  }`}
-                  aria-label={`Testemunho ${index + 1}`}
-                />
+                  }`} />
+                </button>
               ))}
             </div>
 

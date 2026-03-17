@@ -159,7 +159,7 @@ export default function EventsSection() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="relative flex items-center justify-center order-2 lg:order-1"
+            className="relative flex items-center justify-center order-1"
             style={{ height: '420px' }}
           >
             {stackImages.map((img, i) => {
@@ -226,7 +226,7 @@ export default function EventsSection() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="flex flex-col order-1 lg:order-2"
+            className="flex flex-col order-2"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -271,18 +271,21 @@ export default function EventsSection() {
                 <ChevronLeft className="h-5 w-5" />
               </button>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
                 {events.map((_, index) => (
+                  // h-8 w-8 = 32px hit area; visual dot stays 6px × 6px (or 28px active)
                   <button
                     key={index}
                     onClick={() => setActive(index)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center"
+                    aria-label={`Evento ${index + 1}`}
+                  >
+                    <span className={`block h-1.5 rounded-full transition-all duration-300 ${
                       index === active
                         ? 'w-7 bg-red-500'
                         : 'w-1.5 bg-white/22 hover:bg-white/38'
-                    }`}
-                    aria-label={`Evento ${index + 1}`}
-                  />
+                    }`} />
+                  </button>
                 ))}
               </div>
 

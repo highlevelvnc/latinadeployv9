@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Instagram, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Instagram, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { useLocale } from 'next-intl';
 
 const content = {
@@ -109,13 +109,18 @@ export default function PremiumGallery() {
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out grayscale group-hover:grayscale-0"
+                className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out md:grayscale md:group-hover:grayscale-0"
               />
-              {/* Hover overlay with expand hint */}
+              {/* Hover overlay — desktop only (touch never activates hover) */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 rounded-2xl flex items-center justify-center">
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-xs font-medium uppercase tracking-widest bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm">
                   Ver
                 </span>
+              </div>
+
+              {/* Mobile tap indicator — persistent, subtle, communicates interactivity */}
+              <div className="md:hidden absolute bottom-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-black/50 border border-white/18 backdrop-blur-sm pointer-events-none">
+                <ZoomIn className="h-3.5 w-3.5 text-white/55" />
               </div>
             </motion.div>
           ))}
