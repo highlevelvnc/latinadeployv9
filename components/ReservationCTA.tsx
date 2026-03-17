@@ -2,50 +2,24 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useLocale } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Calendar, ArrowRight } from 'lucide-react';
+import {
+  buttonVariants,
+  buttonSecondaryVariants,
+  INVIEW_MARGIN,
+} from '@/lib/animations';
+
+const MotionLink = motion(Link);
 
 export default function ReservationCTA() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-10%' });
+  const isInView = useInView(ref, { once: true, margin: INVIEW_MARGIN });
+  const t = useTranslations('reservationCta');
   const locale = useLocale();
-
-  const content = {
-    pt: {
-      badge: 'Reservas',
-      title: 'Reserve a sua mesa e viva o Latina Grill no seu melhor',
-      subtitle:
-        'Garanta o seu lugar para uma experiência marcada por cortes premium, ambiente sofisticado e uma apresentação memorável.',
-      cta: 'Fazer Reserva',
-      phone: 'Ligar Agora',
-      phoneNumber: '+351 968 707 515',
-      note: 'Recomendamos reserva antecipada para sextas, sábados e datas especiais.'
-    },
-    en: {
-      badge: 'Reservations',
-      title: 'Book your table and experience Latina Grill at its finest',
-      subtitle:
-        'Secure your place for an experience defined by premium cuts, sophisticated atmosphere and memorable presentation.',
-      cta: 'Make Reservation',
-      phone: 'Call Now',
-      phoneNumber: '+351 968 707 515',
-      note: 'We recommend booking in advance for Fridays, Saturdays and special dates.'
-    },
-    fr: {
-      badge: 'Réservations',
-      title: 'Réservez votre table et vivez le Latina Grill à son meilleur',
-      subtitle:
-        'Assurez votre place pour une expérience marquée par des coupes premium, une ambiance sophistiquée et une présentation mémorable.',
-      cta: 'Faire une Réservation',
-      phone: 'Appeler',
-      phoneNumber: '+351 968 707 515',
-      note: 'Nous recommandons une réservation anticipée pour les vendredis, samedis et dates spéciales.'
-    }
-  };
-
-  const t = content[locale as keyof typeof content] || content.pt;
+  const phoneNumber = '+351 968 707 515';
 
   return (
     <section
@@ -110,7 +84,7 @@ export default function ReservationCTA() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
                 </span>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-red-400">
-                  {t.badge}
+                  {t('badge')}
                 </span>
               </motion.div>
 
@@ -121,7 +95,7 @@ export default function ReservationCTA() {
                 transition={{ duration: 0.7, delay: 0.15 }}
                 className="mx-auto max-w-4xl font-serif text-[1.75rem] font-bold leading-[1.14] text-white md:text-5xl md:leading-[1.05] lg:text-6xl"
               >
-                {t.title}
+                {t('title')}
               </motion.h2>
 
               {/* divider */}
@@ -141,7 +115,7 @@ export default function ReservationCTA() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="mx-auto max-w-3xl text-base leading-relaxed text-white/65 md:text-xl"
               >
-                {t.subtitle}
+                {t('subtitle')}
               </motion.p>
 
               {/* actions */}
@@ -151,22 +125,32 @@ export default function ReservationCTA() {
                 transition={{ duration: 0.75, delay: 0.4 }}
                 className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
               >
-                <Link
+                {/* Primary — Reserve (spring micro-interaction) */}
+                <MotionLink
                   href={`/${locale}/reservations`}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-red-400 hover:bg-red-500 hover:shadow-[0_20px_55px_rgba(180,20,20,0.55)] active:translate-y-0 active:shadow-none sm:w-auto"
+                  variants={buttonVariants}
+                  initial="idle"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-red-500/30 bg-red-600 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white shadow-[0_8px_32px_rgba(180,20,20,0.35)] transition-[background-color,border-color,box-shadow] duration-300 hover:border-red-400 hover:bg-red-500 hover:shadow-[0_16px_50px_rgba(180,20,20,0.55)] sm:w-auto"
                 >
                   <Calendar className="h-4 w-4" />
-                  <span>{t.cta}</span>
+                  <span>{t('cta')}</span>
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+                </MotionLink>
 
-                <a
-                  href={`tel:${t.phoneNumber.replace(/\s/g, '')}`}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-white/15 bg-white/[0.03] px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:translate-y-[-2px] hover:border-white/30 hover:bg-white/[0.06] sm:w-auto"
+                {/* Secondary — Call (outline, spring) */}
+                <motion.a
+                  href={`tel:${phoneNumber.replace(/\s/g, '')}`}
+                  variants={buttonSecondaryVariants}
+                  initial="idle"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-white/15 bg-white/[0.03] px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-[background-color,border-color] duration-300 hover:border-white/30 hover:bg-white/[0.07] sm:w-auto"
                 >
                   <Phone className="h-4 w-4 text-red-400 transition-colors duration-300 group-hover:text-red-300" />
-                  <span>{t.phone}</span>
-                </a>
+                  <span>{t('phone')}</span>
+                </motion.a>
               </motion.div>
 
               {/* phone number — hidden on mobile (button above already covers it), visible sm+ */}
@@ -177,10 +161,10 @@ export default function ReservationCTA() {
                 className="mt-6 hidden sm:block"
               >
                 <a
-                  href={`tel:${t.phoneNumber.replace(/\s/g, '')}`}
+                  href={`tel:${phoneNumber.replace(/\s/g, '')}`}
                   className="text-sm text-white/70 transition-colors duration-300 hover:text-white"
                 >
-                  {t.phoneNumber}
+                  {phoneNumber}
                 </a>
               </motion.div>
 
@@ -192,7 +176,7 @@ export default function ReservationCTA() {
                 className="mx-auto mt-8 max-w-2xl rounded-2xl border border-white/10 bg-black/20 px-5 py-4"
               >
                 <p className="text-sm leading-relaxed text-white/55">
-                  {t.note}
+                  {t('note')}
                 </p>
               </motion.div>
             </div>

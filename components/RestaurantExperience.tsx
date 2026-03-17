@@ -183,7 +183,7 @@ export default function RestaurantExperience() {
             className="relative h-[420px] lg:h-[540px] overflow-hidden rounded-3xl group"
           >
             <Image
-              src="/restaurantelocal.jpeg"
+              src="/restaurantelocal4.jpeg"
               alt="Interior Latina Grill Cascais"
               fill
               className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"

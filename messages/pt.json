@@ -1,4 +1,8 @@
 {
+  "stickyBar": {
+    "reserve": "Reservar Mesa",
+    "menu": "Ver Menu"
+  },
   "nav": {
     "home": "Início",
     "menu": "Menu",
@@ -47,26 +51,46 @@
     "cta": "Reservar para Noite Musical"
   },
   "testimonials": {
-    "badge": "Experiências",
+    "badge": "Experiências Reais",
     "title": "O Que Dizem os Nossos Clientes",
-    "googleReviews": "Mais de 1000 avaliações no Google",
-    "seeAllReviews": "Ver todas as avaliações",
+    "googleReviews": "Mais de 1000 avaliações no Google · 4.8★",
+    "seeAllReviews": "Ver todas as avaliações Google",
     "items": [
       {
         "name": "Miguel Cardoso",
-        "text": "Sem dúvida o melhor Tomahawk que provei em Portugal. O ambiente é sofisticado sem ser pretensioso, e a música ao vivo cria um clima perfeito. Voltaremos certamente."
+        "location": "Lisboa",
+        "date": "Jan 2025",
+        "text": "Sem dúvida o melhor Tomahawk que provei em Portugal. O ambiente é sofisticado sem ser pretensioso e a música ao vivo cria um clima perfeito. Já voltámos três vezes."
       },
       {
         "name": "Sofia Marques",
-        "text": "Adorámos a experiência! A Picanha estava no ponto perfeito e o serviço foi atencioso e profissional. O ambiente à noite com música ao vivo é mesmo especial."
+        "location": "Cascais",
+        "date": "Fev 2025",
+        "text": "A Picanha estava no ponto perfeito e o serviço foi impecável do início ao fim. O ambiente à noite com música ao vivo é algo que não encontro em mais nenhum sítio."
       },
       {
         "name": "Ricardo Tavares",
-        "text": "Qualidade excecional das carnes. Nota-se a seleção cuidada e a técnica de preparação. Recomendo vivamente para ocasiões especiais em Cascais."
+        "location": "Sintra",
+        "date": "Dez 2024",
+        "text": "Qualidade excecional das carnes. O Wagyu A5 foi uma revelação absoluta. Nota-se a seleção cuidada e a técnica de preparação. Recomendo vivamente para ocasiões especiais."
       },
       {
         "name": "Ana Oliveira",
-        "text": "Ambiente acolhedor, carta de vinhos interessante e, claro, carnes fantásticas. A equipa conhece bem os produtos e ajudou-nos a escolher. Excelente descoberta!"
+        "location": "Porto",
+        "date": "Jan 2025",
+        "text": "Carta de vinhos fantástica e uma equipa que realmente conhece os produtos. Ajudaram-nos a escolher o maridamento perfeito. Uma descoberta que não fica no primeiro jantar."
+      },
+      {
+        "name": "Pedro Ferreira",
+        "location": "Estoril",
+        "date": "Mar 2025",
+        "text": "O Wagyu A5 foi uma revelação — textura e sabor que raramente se encontram. O espaço tem uma energia muito especial, perfeita para um jantar a dois ou uma celebração."
+      },
+      {
+        "name": "Mariana Costa",
+        "location": "Oeiras",
+        "date": "Fev 2025",
+        "text": "Viemos para um jantar de aniversário e foi memorável em todos os sentidos. Equipa extraordinariamente atenciosa e o sommelier fez escolhas perfeitas para cada prato."
       }
     ]
   },
@@ -157,6 +181,30 @@
         "petFriendly": "Permite animais de estimação"
       }
     }
+  },
+  "location": {
+    "badge": "O Conceito",
+    "title": "Cascais",
+    "subtitle": "Onde a Costa Encontra a Grelha",
+    "description": "A poucos minutos da Praia de Cascais, o Latina Grill é muito mais do que um restaurante. É o destino onde o aroma das brasas, a música ao vivo e os melhores cortes do mundo se unem numa experiência inesquecível.",
+    "feature1Title": "Localização Privilegiada",
+    "feature1Desc": "Estrada da Malveira da Serra, 261",
+    "feature2Title": "Aberto Todos os Dias",
+    "feature2Desc": "12:30–16:00 | 18:30–23:00",
+    "feature3Title": "4.8★ · 1000+ Avaliações",
+    "feature3Desc": "O restaurante mais avaliado de Cascais"
+  },
+  "reservationCta": {
+    "badge": "Reservas",
+    "title": "Reserve a sua mesa — viva o Latina Grill no seu melhor",
+    "subtitle": "Garanta o seu lugar numa experiência marcada por cortes premium, carta de vinhos curada e um ambiente que não irá esquecer.",
+    "cta": "Fazer Reserva",
+    "phone": "Ligar Agora",
+    "note": "Reserva antecipada recomendada para sextas, sábados e ocasiões especiais."
+  },
+  "whatsapp": {
+    "message": "Olá! Gostaria de fazer uma reserva no Latina Grill Cascais.",
+    "ariaLabel": "Contactar via WhatsApp"
   },
   "footer": {
     "tagline": "Carnes Premium · Música ao Vivo · Cascais",

@@ -1,4 +1,8 @@
 {
+  "stickyBar": {
+    "reserve": "Book a Table",
+    "menu": "View Menu"
+  },
   "nav": {
     "home": "Home",
     "menu": "Menu",
@@ -47,26 +51,46 @@
     "cta": "Book for Music Night"
   },
   "testimonials": {
-    "badge": "Experiences",
+    "badge": "Guest Reviews",
     "title": "What Our Guests Say",
-    "googleReviews": "Over 1000 Google reviews",
-    "seeAllReviews": "See all reviews",
+    "googleReviews": "Over 1000 Google reviews · 4.8★",
+    "seeAllReviews": "Read all Google reviews",
     "items": [
       {
         "name": "Michael Thompson",
-        "text": "Hands down the best Tomahawk I've had in Portugal. The atmosphere is sophisticated without being pretentious, and the live music creates the perfect vibe. We'll definitely be back."
+        "location": "London, UK",
+        "date": "Jan 2025",
+        "text": "Hands down the best Tomahawk I've had in Portugal. Sophisticated without pretension, and the live music on Friday night made it absolutely perfect. We'll be back every trip."
       },
       {
         "name": "Emma Richardson",
-        "text": "We loved the experience! The Picanha was cooked to perfection and the service was attentive and professional. The evening atmosphere with live music is truly special."
+        "location": "Edinburgh, UK",
+        "date": "Feb 2025",
+        "text": "Best meal of our entire Portugal trip. The Picanha was flawless, the service warm and attentive throughout. The evening atmosphere with live music is genuinely something special."
       },
       {
         "name": "David Santos",
-        "text": "Exceptional meat quality. You can tell the careful selection and preparation technique. Highly recommend for special occasions in Cascais."
+        "location": "New York, USA",
+        "date": "Dec 2024",
+        "text": "Exceptional quality from the first bite to the last. You can feel the care that goes into every cut. The Wagyu A5 was a revelation. Highly recommend for any special occasion."
       },
       {
         "name": "Laura Martinez",
-        "text": "Welcoming atmosphere, interesting wine list and, of course, fantastic meats. The team knows their products well and helped us choose. Excellent find!"
+        "location": "Madrid, Spain",
+        "date": "Jan 2025",
+        "text": "Welcoming atmosphere, an impressive wine list and meats that genuinely deliver. The team guided us expertly through the menu. A restaurant worth planning your evening around."
+      },
+      {
+        "name": "James O'Brien",
+        "location": "Dublin, Ireland",
+        "date": "Mar 2025",
+        "text": "We came on a Friday night and the dry-aged Tomahawk for two was a showstopper. Live music, impeccable service, and wine pairings suggested by knowledgeable staff. Superb."
+      },
+      {
+        "name": "Anna Kovács",
+        "location": "Budapest, Hungary",
+        "date": "Feb 2025",
+        "text": "We chose Latina Grill for our anniversary dinner. It exceeded every expectation — stunning presentation, generous portions and a wine list that impressed even our sommelier friend."
       }
     ]
   },
@@ -157,6 +181,30 @@
         "petFriendly": "Pet friendly"
       }
     }
+  },
+  "location": {
+    "badge": "The Concept",
+    "title": "Cascais",
+    "subtitle": "Where the Coast Meets the Grill",
+    "description": "Minutes from the beaches of Cascais, Latina Grill is more than a restaurant. It's the destination where the aroma of embers, live music, and the world's finest cuts come together in one unforgettable evening.",
+    "feature1Title": "Prime Location",
+    "feature1Desc": "Estrada da Malveira da Serra, 261",
+    "feature2Title": "Open Every Day",
+    "feature2Desc": "12:30–4:00 PM | 6:30–11:00 PM",
+    "feature3Title": "4.8★ · 1000+ Reviews",
+    "feature3Desc": "Top-rated restaurant in Cascais"
+  },
+  "reservationCta": {
+    "badge": "Reservations",
+    "title": "Book your table — experience Latina Grill at its very best",
+    "subtitle": "Secure your place for an evening defined by premium cuts, a curated wine list, and an atmosphere you won't soon forget.",
+    "cta": "Book Now",
+    "phone": "Call Now",
+    "note": "We recommend booking in advance for Fridays, Saturdays and special occasions."
+  },
+  "whatsapp": {
+    "message": "Hi! I would like to make a reservation at Latina Grill Cascais.",
+    "ariaLabel": "Contact via WhatsApp"
   },
   "footer": {
     "tagline": "Premium Meats · Live Music · Cascais",

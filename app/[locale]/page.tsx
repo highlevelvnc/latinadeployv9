@@ -16,6 +16,7 @@ import Testimonials from '@/components/Testimonials';
 import ReservationCTA from '@/components/ReservationCTA';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import StickyReservationBar from '@/components/StickyReservationBar';
 import Preloader from '@/components/Preloader';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 
@@ -69,48 +70,51 @@ export default function HomePage({ params: { locale } }: Props) {
       <Header />
       
       <main className="overflow-hidden">
-        {/* 1. Hero Vídeo LIMPO */}
+        {/* 1. Hero Vídeo LIMPO — NÃO ALTERAR */}
         <Hero />
-        
-        {/* 2. Localização Cascais */}
+
+        {/* 2. Localização / Contexto — trust imediato */}
         <LocationSection />
-        
-        {/* 3. Logo 3D Girando */}
-        <LogoOverlap />
-        
-        {/* 4. Premium Meat Gallery - Frigorífico + Bandejas */}
-        <PremiumMeatGallery />
-        
-        {/* 5. Menu Completo */}
-        <MenuHighlights />
-        
-        {/* 6. Experiência Restaurante - 8 Fotos */}
+
+        {/* 3. Experiência / Ambiente — buy-in emocional precoce */}
         <RestaurantExperience />
-        
-        {/* 7. Carnes Premium Focus */}
+
+        {/* 4. Logo 3D — transição de marca */}
+        <LogoOverlap />
+
+        {/* 5. Premium Meat Gallery — produto hero */}
+        <PremiumMeatGallery />
+
+        {/* 6. Carnes Premium Focus — criação de desejo */}
         <MeatSection />
-        
-        {/* 8. Drinks & Cocktails */}
+
+        {/* 7. Menu Completo — converte intenção */}
+        <MenuHighlights />
+
+        {/* 8. Drinks & Cocktails — upsell */}
         <DrinksSection />
-        
-        {/* 9. Eventos Privados */}
-        <EventsSection />
-        
-        {/* 10. Galeria Geral */}
-        <PremiumGallery />
-        
-        {/* 11. Horários */}
-        <OpeningHours />
-        
-        {/* 12. Testimonials */}
+
+        {/* 9. Prova Social — antes do CTA final */}
         <Testimonials />
-        
+
+        {/* 10. Eventos Privados — conversão secundária */}
+        <EventsSection />
+
+        {/* 11. Galeria Geral — FOMO / Instagram */}
+        <PremiumGallery />
+
+        {/* 12. Horários — remove fricção prática */}
+        <OpeningHours />
+
         {/* 13. CTA Final */}
-        <ReservationCTA />
+        <div id="reservation-cta">
+          <ReservationCTA />
+        </div>
       </main>
       
       <Footer />
       <WhatsAppFloat />
+      <StickyReservationBar />
 
       {/* Schema.org JSON-LD */}
       <script

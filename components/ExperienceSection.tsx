@@ -94,7 +94,7 @@ export default function ExperienceSection() {
               {/* Two smaller */}
               <div className="relative h-[250px] overflow-hidden group">
                 <Image
-                  src="/restaurantelocal.jpeg"
+                  src="/mesavazia.jpeg"
                   alt="Interior"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"

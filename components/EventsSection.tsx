@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { buttonVariants, INVIEW_MARGIN } from '@/lib/animations';
+
+const MotionLink = motion(Link);
 
 const AUTO_PLAY_INTERVAL = 5000;
 
@@ -21,7 +24,7 @@ const stackConfigs = [
 
 export default function EventsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-10%' });
+  const isInView = useInView(ref, { once: true, margin: INVIEW_MARGIN });
   const locale = useLocale();
   const [active, setActive] = useState(0);
 
@@ -297,14 +300,18 @@ export default function EventsSection() {
               </span>
             </div>
 
-            {/* CTA */}
+            {/* CTA — spring micro-interaction */}
             <div>
-              <Link
+              <MotionLink
                 href={`/${locale}/contact`}
-                className="inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_40px_rgba(180,20,20,0.35)]"
+                variants={buttonVariants}
+                initial="idle"
+                whileHover="hover"
+                whileTap="tap"
+                className="inline-flex items-center gap-3 rounded-full border border-red-500/35 bg-red-600/10 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-white transition-[background-color,border-color,box-shadow] duration-400 hover:border-red-500 hover:bg-red-600 hover:shadow-[0_16px_40px_rgba(180,20,20,0.35)]"
               >
                 {t.cta}
-              </Link>
+              </MotionLink>
             </div>
           </motion.div>
         </div>

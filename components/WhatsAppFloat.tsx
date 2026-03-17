@@ -1,23 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 export default function WhatsAppFloat() {
-  const locale = useLocale();
-
-  const messages = {
-    pt: 'Olá! Gostaria de fazer uma reserva no Latina Grill Cascais.',
-    en: 'Hi! I would like to make a reservation at Latina Grill Cascais.',
-    fr: 'Bonjour ! Je voudrais faire une réservation au Latina Grill Cascais.',
-  };
-
-  const message = messages[locale as keyof typeof messages] || messages.pt;
-  const whatsappNumber = '351968707515'; // Número correto
+  const t = useTranslations('whatsapp');
+  const whatsappNumber = '351968707515';
 
   return (
     <motion.a
-      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`}
+      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(t('message'))}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}
@@ -26,7 +18,7 @@ export default function WhatsAppFloat() {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       className="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20BA5A] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 lg:bottom-8 lg:right-8"
-      aria-label="Contact via WhatsApp"
+      aria-label={t('ariaLabel')}
     >
       <svg
         className="w-7 h-7"
