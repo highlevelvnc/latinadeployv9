@@ -20,10 +20,19 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
     alternates: {
       canonical: `https://latinagrill.pt/${locale}/reservations`,
       languages: {
-        'pt-PT': 'https://latinagrill.pt/pt/reservas',
+        'pt-PT': 'https://latinagrill.pt/pt/reservations',
         'en': 'https://latinagrill.pt/en/reservations',
-        'fr': 'https://latinagrill.pt/fr/reservation',
+        'fr': 'https://latinagrill.pt/fr/reservations',
+        'x-default': 'https://latinagrill.pt/pt/reservations',
       },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `https://latinagrill.pt/${locale}/reservations`,
+      siteName: 'Latina Grill Cascais',
+      locale: locale === 'pt' ? 'pt_PT' : locale,
+      type: 'website',
     },
   };
 }

@@ -37,6 +37,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
         'pt-PT': 'https://latinagrill.pt/pt',
         'en': 'https://latinagrill.pt/en',
         'fr': 'https://latinagrill.pt/fr',
+        'x-default': 'https://latinagrill.pt/pt',
       },
     },
     openGraph: {
@@ -119,11 +120,14 @@ export default function HomePage({ params: { locale } }: Props) {
             '@context': 'https://schema.org',
             '@type': 'Restaurant',
             name: 'Latina Grill Cascais',
-            image: '/logo.png',
+            description: 'Steakhouse premium em Cascais com cortes do mundo, grelha aberta, carta de vinhos e música ao vivo às sextas e sábados.',
+            image: 'https://latinagrill.pt/logo.png',
             url: 'https://latinagrill.pt',
             telephone: '+351968707515',
             priceRange: '€€€',
             servesCuisine: ['Steakhouse', 'Latin American', 'Portuguese', 'Grilled Meats'],
+            menu: 'https://latinagrill.pt/latina-grill-menu.pdf',
+            hasMap: 'https://www.google.com/maps/search/?api=1&query=Estrada+Da+Malveira+da+Serra+261+2750-782+Cascais',
             address: {
               '@type': 'PostalAddress',
               streetAddress: 'Estrada Da Malveira da Serra, 261',

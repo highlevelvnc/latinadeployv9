@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             'pt-PT': `${baseUrl}/pt${route}`,
             'en': `${baseUrl}/en${route}`,
             'fr': `${baseUrl}/fr${route}`,
+            'x-default': `${baseUrl}/pt${route}`,
           },
         },
       });

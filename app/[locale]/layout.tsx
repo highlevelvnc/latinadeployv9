@@ -2,8 +2,13 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Playfair_Display, Inter } from 'next/font/google';
+import type { Metadata } from 'next';
 import { locales } from '@/i18n';
 import './globals.css';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://latinagrill.pt'),
+};
 
 const playfair = Playfair_Display({
   subsets: ['latin'],

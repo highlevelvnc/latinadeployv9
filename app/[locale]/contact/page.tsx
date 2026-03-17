@@ -22,10 +22,19 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
     alternates: {
       canonical: `https://latinagrill.pt/${locale}/contact`,
       languages: {
-        'pt-PT': 'https://latinagrill.pt/pt/contacto',
+        'pt-PT': 'https://latinagrill.pt/pt/contact',
         'en': 'https://latinagrill.pt/en/contact',
         'fr': 'https://latinagrill.pt/fr/contact',
+        'x-default': 'https://latinagrill.pt/pt/contact',
       },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `https://latinagrill.pt/${locale}/contact`,
+      siteName: 'Latina Grill Cascais',
+      locale: locale === 'pt' ? 'pt_PT' : locale,
+      type: 'website',
     },
   };
 }
