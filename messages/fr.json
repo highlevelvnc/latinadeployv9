@@ -182,6 +182,21 @@
       }
     }
   },
+  "meats": {
+    "tag": "Viandes Maturées",
+    "title": "Signature de la Maison",
+    "subtitle": "Sélection d'exception.\nMaturation maîtrisée.\nBraise à point.",
+    "description": "Nous sélectionnons des pièces d'exception issues des meilleures origines, maturées avec précision et grillées à la braise pour révéler toute leur intensité. Du Wagyu au Tomahawk, chaque coupe est retenue pour sa qualité, sa texture et sa profondeur de goût. Plus qu'un repas — un moment gravé dans les mémoires.",
+    "cta": "Découvrir la Carte",
+    "overlayTitle": "Tomahawk Premium",
+    "overlaySubtitle": "Affinage 45 jours",
+    "cards": [
+      { "name": "Chuleton Rubia Gallega Gold", "descriptor": "Galice · Maturation Lente" },
+      { "name": "Chuleton Wagyu", "descriptor": "Persillage · Braise Douce" },
+      { "name": "Tomahawk Wagyu Australie", "descriptor": "45 Jours · Pièce Maîtresse" },
+      { "name": "T-Bone Sélectionné", "descriptor": "Double Coupe · Texture Fine" }
+    ]
+  },
   "location": {
     "badge": "Le Concept",
     "title": "Cascais",

@@ -182,6 +182,21 @@
       }
     }
   },
+  "meats": {
+    "tag": "Dry-Aged Cuts",
+    "title": "House Signature",
+    "subtitle": "Exceptional cuts.\nPrecise ageing.\nOpen-flame mastery.",
+    "description": "We source exceptional cuts from distinguished origins, carefully dry-aged and finished over open flame to reveal their fullest character. From Wagyu to Tomahawk, every piece is chosen for its quality, texture, and depth of flavour. More than a meal — a ritual worth remembering.",
+    "cta": "Explore Our Menu",
+    "overlayTitle": "Tomahawk Premium",
+    "overlaySubtitle": "45-Day Dry-Aged",
+    "cards": [
+      { "name": "Rubia Gallega Gold Chuleton", "descriptor": "Galicia · Extended Dry-Ageing" },
+      { "name": "Wagyu Chuleton", "descriptor": "Intense Marbling · Slow Fire" },
+      { "name": "Australian Wagyu Tomahawk", "descriptor": "45-Day Aged · Statement Cut" },
+      { "name": "Selected T-Bone", "descriptor": "Dual Cut · Benchmark Texture" }
+    ]
+  },
   "location": {
     "badge": "The Concept",
     "title": "Cascais",

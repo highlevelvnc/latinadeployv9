@@ -182,6 +182,21 @@
       }
     }
   },
+  "meats": {
+    "tag": "Carnes Maturadas",
+    "title": "Assinatura da Casa",
+    "subtitle": "Cortes selecionados.\nTempo respeitado.\nBrasa no ponto.",
+    "description": "Selecionamos cortes de excelência de origens internacionais, maturados com precisão e preparados na brasa para realçar o seu caráter único. Do Wagyu ao Tomahawk, cada peça é escolhida pela sua qualidade, textura e profundidade de sabor. Mais do que uma refeição — uma experiência que fica na memória.",
+    "cta": "Consultar a Carta",
+    "overlayTitle": "Tomahawk Premium",
+    "overlaySubtitle": "Maturação 45 dias",
+    "cards": [
+      { "name": "Chuleton Rubia Gallega Gold", "descriptor": "Galiza · Maturação Lenta" },
+      { "name": "Chuleton Wagyu", "descriptor": "Marmoreado · Brasa Lenta" },
+      { "name": "Tomahawk Wagyu Austrália", "descriptor": "45 Dias · Corte Monumental" },
+      { "name": "T-Bone Selecionado", "descriptor": "Duplo Corte · Textura Firme" }
+    ]
+  },
   "location": {
     "badge": "O Conceito",
     "title": "Cascais",
