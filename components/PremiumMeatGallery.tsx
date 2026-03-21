@@ -73,8 +73,8 @@ export default function PremiumMeatGallery() {
       ],
       images: [
         { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: 'Origem, maturação e controlo' },
-        { src: '/bandejalatinatomahawk.jpeg', title: 'Latina Signature Board', subtitle: 'Presença monumental à mesa' },
-        { src: '/tomahawkchamas.jpeg', title: 'Fire Finish', subtitle: 'Fogo, intensidade e espetáculo' },
+        { src: '/ribeygrelha1.jpeg', title: 'Latina Signature Board', subtitle: 'Presença monumental à mesa' },
+        { src: '/ribeygrelha.jpeg', title: 'Fire Finish', subtitle: 'Fogo, intensidade e espetáculo' },
         { src: '/carne3.jpeg', title: 'Wagyu Detail', subtitle: 'Textura e marmoreado' },
         { src: '/costela.jpeg', title: 'Slow Depth', subtitle: 'Profundidade de sabor' },
         { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: 'Precisão antes da grelha' },
