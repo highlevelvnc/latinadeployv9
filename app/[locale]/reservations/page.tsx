@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import PhoneFloat from '@/components/PhoneFloat';
 import ReservationForm from '@/components/ReservationForm';
 import { Calendar } from 'lucide-react';
 
@@ -82,7 +82,7 @@ function ReservationsPage({ params: { locale } }: Props) {
         </div>
       </main>
       <Footer />
-      <WhatsAppFloat />
+      <PhoneFloat />
     </>
   );
 }

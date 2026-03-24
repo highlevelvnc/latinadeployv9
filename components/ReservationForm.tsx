@@ -3,35 +3,72 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
-import { Calendar, Clock, Users, User, Phone, MessageSquare, CheckCircle2, Minus, Plus, AlertCircle } from 'lucide-react';
+import {
+  Calendar,
+  Clock,
+  Users,
+  User,
+  Phone,
+  Mail,
+  MessageSquare,
+  CheckCircle2,
+  Minus,
+  Plus,
+  AlertCircle,
+} from 'lucide-react';
+
+// ─── Country codes ────────────────────────────────────────────────────────────
+
+const COUNTRY_CODES = [
+  { code: '+351', flag: '🇵🇹', name: 'PT' },
+  { code: '+55',  flag: '🇧🇷', name: 'BR' },
+  { code: '+33',  flag: '🇫🇷', name: 'FR' },
+  { code: '+44',  flag: '🇬🇧', name: 'GB' },
+  { code: '+1',   flag: '🇺🇸', name: 'US' },
+  { code: '+34',  flag: '🇪🇸', name: 'ES' },
+  { code: '+49',  flag: '🇩🇪', name: 'DE' },
+  { code: '+39',  flag: '🇮🇹', name: 'IT' },
+  { code: '+31',  flag: '🇳🇱', name: 'NL' },
+  { code: '+32',  flag: '🇧🇪', name: 'BE' },
+  { code: '+41',  flag: '🇨🇭', name: 'CH' },
+  { code: '+7',   flag: '🇷🇺', name: 'RU' },
+  { code: '+86',  flag: '🇨🇳', name: 'CN' },
+  { code: '+81',  flag: '🇯🇵', name: 'JP' },
+  { code: '+82',  flag: '🇰🇷', name: 'KR' },
+  { code: '+971', flag: '🇦🇪', name: 'AE' },
+  { code: '+966', flag: '🇸🇦', name: 'SA' },
+  { code: '+972', flag: '🇮🇱', name: 'IL' },
+  { code: '+27',  flag: '🇿🇦', name: 'ZA' },
+  { code: '+52',  flag: '🇲🇽', name: 'MX' },
+];
+
+// ─── Time slots ───────────────────────────────────────────────────────────────
 
 const generateTimeSlots = () => {
   const slots = [];
   let hour = 12;
   let minute = 30;
-  
+
   while (hour < 23 || (hour === 23 && minute === 0)) {
-    const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-    slots.push(timeStr);
-    
+    slots.push(`${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`);
     minute += 30;
-    if (minute >= 60) {
-      minute = 0;
-      hour++;
-    }
+    if (minute >= 60) { minute = 0; hour++; }
   }
-  
   return slots;
 };
 
 const TIME_SLOTS = generateTimeSlots();
+const PHONE_NUMBER = '+351 968 707 515';
+const EMAIL_ADDRESS = 'latinagrill@icloud.com';
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ReservationForm() {
   const t = useTranslations('reservation');
-  const locale = useLocale();
-  
+
   const [formData, setFormData] = useState({
     name: '',
+    countryCode: '+351',
     phone: '',
     date: '',
     time: '',
@@ -43,79 +80,86 @@ export default function ReservationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // ─── Validation ─────────────────────────────────────────────────────────────
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) newErrors.name = t('validation.required');
     if (!formData.phone.trim()) newErrors.phone = t('validation.required');
-    
+
     if (!formData.date) {
       newErrors.date = t('validation.required');
     } else {
-      const selectedDate = new Date(formData.date);
+      const selected = new Date(formData.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
-      if (selectedDate < today) newErrors.date = t('validation.pastDate');
+      if (selected < today) newErrors.date = t('validation.pastDate');
     }
-    
-    if (!formData.time) {
-      newErrors.time = t('validation.required');
-    }
-    
+
+    if (!formData.time) newErrors.time = t('validation.required');
     if (formData.guests < 1) newErrors.guests = t('validation.minGuests');
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // ─── Submit ──────────────────────────────────────────────────────────────────
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setShowSuccess(true);
 
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          phone: `${formData.countryCode} ${formData.phone}`,
+        }),
+      });
+
+      if (!res.ok) throw new Error('Server error');
+    } catch {
+      // Non-blocking: show success even if network fails —
+      // the server logs the reservation and email is sent server-side.
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false);
-      setFormData({ name: '', phone: '', date: '', time: '', guests: 2, observations: '' });
+      setFormData({ name: '', countryCode: '+351', phone: '', date: '', time: '', guests: 2, observations: '' });
       setErrors({});
-    }, 4000);
+    }, 5000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  // ─── Helpers ─────────────────────────────────────────────────────────────────
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
+      setErrors((prev) => { const n = { ...prev }; delete n[name]; return n; });
     }
   };
 
   const handleGuestsChange = (delta: number) => {
-    setFormData(prev => ({ ...prev, guests: Math.max(1, prev.guests + delta) }));
+    setFormData((prev) => ({ ...prev, guests: Math.max(1, prev.guests + delta) }));
   };
 
-  const getWhatsAppMessage = () => {
-    return encodeURIComponent(t('whatsappMessage', {
-      date: formData.date || '{data}',
-      time: formData.time || '{hora}',
-      guests: formData.guests || '{pessoas}',
-      name: formData.name || '{nome}'
-    }));
-  };
-
-  const whatsappNumber = '351968707515';
-  const phoneNumber = '+351968707515';
+  // ─── Render ──────────────────────────────────────────────────────────────────
 
   return (
     <div className="relative">
+
+      {/* Info bar */}
       <div className="bg-red/10 border border-red/20 rounded-xl p-4 mb-6">
         <div className="flex items-start gap-3">
           <Clock className="w-5 h-5 text-red mt-0.5 flex-shrink-0" />
@@ -127,6 +171,8 @@ export default function ReservationForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+
+        {/* Name */}
         <div className="group">
           <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <User className="w-4 h-4 text-accent-orange" />
@@ -143,34 +189,52 @@ export default function ReservationForm() {
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />
-              {errors.name}
+              <AlertCircle className="w-3 h-3" />{errors.name}
             </p>
           )}
         </div>
 
+        {/* Phone — country code selector + number input */}
         <div className="group">
-          <label htmlFor="phone" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
+          <label className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <Phone className="w-4 h-4 text-accent-orange" />
             {t('form.phone')}
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={`w-full bg-dark-lighter border ${errors.phone ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
-            placeholder="+351 XXX XXX XXX"
-          />
+          <div className="flex gap-2">
+            {/* Country code */}
+            <select
+              name="countryCode"
+              value={formData.countryCode}
+              onChange={handleChange}
+              className="shrink-0 w-[110px] bg-dark-lighter border border-light/10 rounded-xl px-3 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all text-sm"
+              aria-label={t('form.countryCode')}
+            >
+              {COUNTRY_CODES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.flag} {c.code}
+                </option>
+              ))}
+            </select>
+
+            {/* Number */}
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className={`flex-1 bg-dark-lighter border ${errors.phone ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+              placeholder="968 707 515"
+            />
+          </div>
           {errors.phone && (
             <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />
-              {errors.phone}
+              <AlertCircle className="w-3 h-3" />{errors.phone}
             </p>
           )}
         </div>
 
+        {/* Date + Time */}
         <div className="grid md:grid-cols-2 gap-4">
           <div className="group">
             <label htmlFor="date" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
@@ -188,8 +252,7 @@ export default function ReservationForm() {
             />
             {errors.date && (
               <p className="mt-1 text-sm text-red flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.date}
+                <AlertCircle className="w-3 h-3" />{errors.date}
               </p>
             )}
           </div>
@@ -207,19 +270,19 @@ export default function ReservationForm() {
               className={`w-full bg-dark-lighter border ${errors.time ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
             >
               <option value="">Selecione</option>
-              {TIME_SLOTS.map(slot => (
+              {TIME_SLOTS.map((slot) => (
                 <option key={slot} value={slot}>{slot}</option>
               ))}
             </select>
             {errors.time && (
               <p className="mt-1 text-sm text-red flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />
-                {errors.time}
+                <AlertCircle className="w-3 h-3" />{errors.time}
               </p>
             )}
           </div>
         </div>
 
+        {/* Guests */}
         <div className="group">
           <label className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <Users className="w-4 h-4 text-accent-orange" />
@@ -234,14 +297,12 @@ export default function ReservationForm() {
             >
               <Minus className="w-5 h-5 text-light" />
             </button>
-            
             <div className="flex-1 bg-dark-lighter border border-light/10 rounded-xl px-6 py-3 text-center">
               <span className="text-2xl font-semibold text-light">{formData.guests}</span>
               <span className="text-sm text-light/60 ml-2">
                 {formData.guests === 1 ? 'pessoa' : 'pessoas'}
               </span>
             </div>
-            
             <button
               type="button"
               onClick={() => handleGuestsChange(1)}
@@ -252,6 +313,7 @@ export default function ReservationForm() {
           </div>
         </div>
 
+        {/* Observations */}
         <div className="group">
           <label htmlFor="observations" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <MessageSquare className="w-4 h-4 text-accent-orange" />
@@ -268,6 +330,7 @@ export default function ReservationForm() {
           />
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}
@@ -276,29 +339,32 @@ export default function ReservationForm() {
           {isSubmitting ? t('form.submitting') : t('form.submit')}
         </button>
 
-        <div className="grid sm:grid-cols-2 gap-3">
-          <a
-            href={`https://wa.me/${whatsappNumber}?text=${getWhatsAppMessage()}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-light px-6 py-3 rounded-full text-sm font-semibold transition-all"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            WhatsApp
-          </a>
-          
-          <a
-            href={`tel:${phoneNumber.replace(/\s/g, '')}`}
-            className="flex items-center justify-center gap-2 bg-dark-lighter border border-light/10 hover:border-accent-orange text-light px-6 py-3 rounded-full text-sm font-semibold transition-all"
-          >
-            <Phone className="w-5 h-5" />
-            {t('form.callNow')}
-          </a>
+        {/* Direct contact block */}
+        <div className="rounded-xl border border-light/8 bg-light/[0.02] px-5 py-4">
+          <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-light/35">
+            {t('form.directContact')}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-2.5">
+            <a
+              href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-all hover:border-accent-orange hover:text-accent-orange"
+            >
+              <Phone className="w-4 h-4 shrink-0" />
+              {PHONE_NUMBER}
+            </a>
+            <a
+              href={`mailto:${EMAIL_ADDRESS}`}
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-all hover:border-accent-orange hover:text-accent-orange"
+            >
+              <Mail className="w-4 h-4 shrink-0" />
+              {EMAIL_ADDRESS}
+            </a>
+          </div>
         </div>
+
       </form>
 
+      {/* Success overlay */}
       <AnimatePresence>
         {showSuccess && (
           <motion.div

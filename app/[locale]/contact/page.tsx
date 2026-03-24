@@ -2,7 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import PhoneFloat from '@/components/PhoneFloat';
 import OpeningHours from '@/components/OpeningHours';
 import PaymentMethods from '@/components/PaymentMethods';
 import Amenities from '@/components/Amenities';
@@ -192,7 +192,7 @@ async function ContactPage({ params: { locale } }: Props) {
         <Amenities />
       </main>
       <Footer />
-      <WhatsAppFloat />
+      <PhoneFloat />
     </>
   );
 }

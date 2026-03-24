@@ -25,6 +25,7 @@ type Wine = {
   notes: LS;
   pairing: LS;
   image?: string; // Optional — provide when photo is available in /public
+  isHouseLabel?: boolean; // Featured wine — shown prominently in Selecção da Casa
 };
 
 type Pairing = {
@@ -45,66 +46,27 @@ type Pairing = {
 
 const WINES: Wine[] = [
 
-  // ── FRANCE ──────────────────────────────────────────────────────────────────
+  // ── VINHO DA CASA — featured in Selecção da Casa ─────────────────────────
 
   {
-    id: 'petrus-2021',
-    name: 'Château Petrus',
+    id: 'mythologyc-furya',
+    name: 'Mythologyc — Furya',
     year: 2021,
-    region: 'Pomerol',
-    country: 'FR',
+    region: 'Douro',
+    country: 'PT',
     category: 'tinto',
+    isHouseLabel: true,
     notes: {
-      pt: 'Merlot puro de Pomerol. Textura de veludo, taninos sedosos. Ameixa negra, trufas, cacau e minerais de argila. Concentração excepcional com precisão mineral única.',
-      en: 'Pure Pomerol Merlot. Velvet texture, silky tannins. Black plum, truffle, cocoa and iron-rich clay minerals. Exceptional concentration with unrivalled mineral precision.',
-      fr: "Merlot pur de Pomerol. Texture veloutée, tanins soyeux. Prune noire, truffe, cacao et minéraux d'argile. Concentration exceptionnelle, précision minérale sans égale.",
+      pt: 'O vinho da casa do Latina Grill. Touriga Nacional e Tinta Roriz do coração do Douro. Fruta negra madura, violeta, especiaria e mineralidade xistosa. Corpo generoso com final longo e elegante — nascido para a grelha.',
+      en: 'The Latina Grill house wine. Touriga Nacional and Tinta Roriz from the heart of the Douro. Ripe dark fruit, violet, spice and schist minerality. Generous body with a long, elegant finish — born for the grill.',
+      fr: "Le vin maison du Latina Grill. Touriga Nacional et Tinta Roriz du cœur du Douro. Fruits noirs mûrs, violette, épices et minéralité schisteuse. Corps généreux, finale longue et élégante — né pour le grill.",
     },
     pairing: {
-      pt: 'Tomahawk premium, Wagyu e cortes de maturação prolongada.',
-      en: 'Premium Tomahawk, Wagyu and long dry-aged cuts.',
-      fr: 'Tomahawk premium, Wagyu et pièces à maturation prolongée.',
+      pt: 'Vinho da casa — harmoniza com toda a grelha: tomahawk, costela, picanha e cortes premium.',
+      en: 'House wine — pairs with the full grill: tomahawk, rib, picanha and premium cuts.',
+      fr: "Vin maison — s'accorde avec tout le grill: tomahawk, côte, picanha et coupes premium.",
     },
-    image: '/vinhopetrvs.jpeg',
-  },
-
-  {
-    id: 'leoville-barton-2018',
-    name: 'Ch. Léoville-Barton',
-    year: 2018,
-    region: 'Saint-Julien',
-    country: 'FR',
-    category: 'tinto',
-    notes: {
-      pt: 'Grand Cru Classé de grande elegância. Cassis, cedro, lápis e tabaco. Taninos firmes e bem integrados, persistência notável e potencial de guarda excecional.',
-      en: 'Grand Cru Classé of great elegance. Cassis, cedar, graphite and tobacco. Firm, well-integrated tannins with remarkable length and outstanding ageing potential.',
-      fr: "Grand Cru Classé d'une grande élégance. Cassis, cèdre, graphite et tabac. Tanins fermes et bien intégrés, finale remarquable, grand potentiel de garde.",
-    },
-    pairing: {
-      pt: 'Ribeye, Tomahawk Signature e cortes nobres com presença no prato.',
-      en: 'Ribeye, Tomahawk Signature and noble cuts with strong plate presence.',
-      fr: 'Ribeye, Tomahawk Signature et coupes nobles avec présence en assiette.',
-    },
-    image: '/wine-leovillon.jpeg',
-  },
-
-  {
-    id: 'pichon-baron-2018',
-    name: 'Ch. Pichon Baron',
-    year: 2018,
-    region: 'Pauillac',
-    country: 'FR',
-    category: 'tinto',
-    notes: {
-      pt: 'Pauillac de poder e precisão. Groselha negra, grafite, especiaria e tabaco. Estrutura clássica com taninos de longa vida. Uma das grandes referências do Médoc.',
-      en: 'Pauillac of power and precision. Blackcurrant, graphite, spice and tobacco leaf. Classic structure with long-lived tannins. One of the Médoc\'s great references.',
-      fr: 'Pauillac de puissance et de précision. Cassis, graphite, épices et feuille de tabac. Structure classique, tanins de grande garde. Une des grandes références du Médoc.',
-    },
-    pairing: {
-      pt: 'Tomahawk na brasa, carnes de maturação premium e costeletas de vaca velha.',
-      en: 'Grilled Tomahawk, premium aged meats and old-cow chops.',
-      fr: 'Tomahawk grillé, viandes de maturation premium et côtelettes de vieille vache.',
-    },
-    image: '/wine-pichon.jpeg',
+    image: '/mythologyc.jpg',
   },
 
   // ── PORTUGAL ─────────────────────────────────────────────────────────────────
@@ -167,6 +129,70 @@ const WINES: Wine[] = [
       fr: 'Côte mijotée, coupes de caractère et grillades aux marinades aromatiques.',
     },
     image: '/wine-mouchao.jpeg',
+  },
+
+  // ── FRANCE ──────────────────────────────────────────────────────────────────
+
+  {
+    id: 'leoville-barton-2018',
+    name: 'Ch. Léoville-Barton',
+    year: 2018,
+    region: 'Saint-Julien',
+    country: 'FR',
+    category: 'tinto',
+    notes: {
+      pt: 'Grand Cru Classé de grande elegância. Cassis, cedro, lápis e tabaco. Taninos firmes e bem integrados, persistência notável e potencial de guarda excecional.',
+      en: 'Grand Cru Classé of great elegance. Cassis, cedar, graphite and tobacco. Firm, well-integrated tannins with remarkable length and outstanding ageing potential.',
+      fr: "Grand Cru Classé d'une grande élégance. Cassis, cèdre, graphite et tabac. Tanins fermes et bien intégrés, finale remarquable, grand potentiel de garde.",
+    },
+    pairing: {
+      pt: 'Ribeye, Tomahawk Signature e cortes nobres com presença no prato.',
+      en: 'Ribeye, Tomahawk Signature and noble cuts with strong plate presence.',
+      fr: 'Ribeye, Tomahawk Signature et coupes nobles avec présence en assiette.',
+    },
+    image: '/wine-leovillon.jpeg',
+  },
+
+  {
+    id: 'pichon-baron-2018',
+    name: 'Ch. Pichon Baron',
+    year: 2018,
+    region: 'Pauillac',
+    country: 'FR',
+    category: 'tinto',
+    notes: {
+      pt: 'Pauillac de poder e precisão. Groselha negra, grafite, especiaria e tabaco. Estrutura clássica com taninos de longa vida. Uma das grandes referências do Médoc.',
+      en: 'Pauillac of power and precision. Blackcurrant, graphite, spice and tobacco leaf. Classic structure with long-lived tannins. One of the Médoc\'s great references.',
+      fr: 'Pauillac de puissance et de précision. Cassis, graphite, épices et feuille de tabac. Structure classique, tanins de grande garde. Une des grandes références du Médoc.',
+    },
+    pairing: {
+      pt: 'Tomahawk na brasa, carnes de maturação premium e costeletas de vaca velha.',
+      en: 'Grilled Tomahawk, premium aged meats and old-cow chops.',
+      fr: 'Tomahawk grillé, viandes de maturation premium et côtelettes de vieille vache.',
+    },
+    image: '/wine-pichon.jpeg',
+  },
+
+  // ── GRANDE RESERVA — referência mundial ─────────────────────────────────────
+
+  {
+    id: 'petrus-2021',
+    name: 'Château Petrus',
+    year: 2021,
+    region: 'Pomerol',
+    country: 'FR',
+    category: 'tinto',
+    notes: {
+      pt: 'Merlot puro de Pomerol. Textura de veludo, taninos sedosos. Ameixa negra, trufas, cacau e minerais de argila. Concentração excepcional com precisão mineral única.',
+      en: 'Pure Pomerol Merlot. Velvet texture, silky tannins. Black plum, truffle, cocoa and iron-rich clay minerals. Exceptional concentration with unrivalled mineral precision.',
+      fr: "Merlot pur de Pomerol. Texture veloutée, tanins soyeux. Prune noire, truffe, cacao et minéraux d'argile. Concentration exceptionnelle, précision minérale sans égale.",
+    },
+    pairing: {
+      pt: 'Tomahawk premium, Wagyu e cortes de maturação prolongada.',
+      en: 'Premium Tomahawk, Wagyu and long dry-aged cuts.',
+      fr: 'Tomahawk premium, Wagyu et pièces à maturation prolongée.',
+    },
+    image: '/vinhopetrvs.jpeg',
   },
 
   // ── Para adicionar novos vinhos: copie o bloco acima, preencha e descomente ──
@@ -445,9 +471,10 @@ function CartaTab({ locale, t }: { locale: Locale; t: UIStrings }) {
   }, []);
 
   const hoveredWine = WINES.find((w) => w.id === hoveredId) ?? null;
-  const fallbackImage = WINES.find((w) => w.image)?.image ?? '/vinhopetrvs.jpeg';
+  const houseWine = WINES.find((w) => w.isHouseLabel) ?? WINES[0];
+  const fallbackImage = houseWine?.image ?? WINES.find((w) => w.image)?.image ?? '/vinhopetrvs.jpeg';
   const activeImage = hoveredWine?.image ?? fallbackImage;
-  const activeCaption = hoveredWine ?? WINES[0];
+  const activeCaption = hoveredWine ?? houseWine;
 
   return (
     <div className="grid gap-10 md:grid-cols-[0.44fr_0.56fr] md:gap-12">
@@ -623,8 +650,20 @@ function HarmonizacoesTab({ locale, t }: { locale: Locale; t: UIStrings }) {
 //  Narrative editorial format: large image + story text
 // ═══════════════════════════════════════════════════════════════════════════════
 
+const HOUSE_LABEL_BADGE: Record<Locale, string> = {
+  pt: 'Vinho da Casa',
+  en: 'House Wine',
+  fr: 'Vin de la Maison',
+};
+
+const HOUSE_LABEL_INTRO: Record<Locale, string> = {
+  pt: 'O vinho escolhido pela nossa equipa para acompanhar cada momento no Latina Grill.',
+  en: 'The wine chosen by our team to accompany every moment at Latina Grill.',
+  fr: 'Le vin choisi par notre équipe pour accompagner chaque moment au Latina Grill.',
+};
+
 function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
-  const featured = WINES[0];
+  const featured = WINES.find((w) => w.isHouseLabel) ?? WINES[0];
   if (!featured) return null;
 
   return (
@@ -642,9 +681,19 @@ function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent" />
 
+        {/* House label gold badge */}
+        {featured.isHouseLabel && (
+          <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-950/60 px-3 py-1.5 backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400/80" />
+            <span className="text-[9px] font-semibold uppercase tracking-[0.4em] text-amber-300/90">
+              {HOUSE_LABEL_BADGE[locale]}
+            </span>
+          </div>
+        )}
+
         {/* Wine identity overlay */}
         <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-          <p className="mb-3 text-[9px] uppercase tracking-[0.5em] text-red-400/55">
+          <p className="mb-3 text-[9px] uppercase tracking-[0.5em] text-amber-400/60">
             {t.selecaoSubtitle}
           </p>
           <h3 className="font-serif text-2xl font-bold leading-tight text-white md:text-3xl">
@@ -658,9 +707,18 @@ function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
 
       {/* Right: editorial narrative */}
       <div className="flex flex-col justify-center py-2">
+        {/* House label intro */}
+        {featured.isHouseLabel && (
+          <div className="mb-7 rounded-xl border border-amber-400/10 bg-amber-950/20 px-4 py-3.5">
+            <p className="text-[11px] leading-relaxed text-amber-200/50">
+              {HOUSE_LABEL_INTRO[locale]}
+            </p>
+          </div>
+        )}
+
         {/* Sensory notes */}
         <div className="mb-7">
-          <p className="mb-3 text-[9px] uppercase tracking-[0.48em] text-red-400/48">
+          <p className="mb-3 text-[9px] uppercase tracking-[0.48em] text-amber-400/48">
             {t.labelNotes}
           </p>
           <p className="text-[13.5px] leading-[1.75] text-white/50">{featured.notes[locale]}</p>
@@ -668,14 +726,14 @@ function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
 
         {/* Pairing */}
         <div className="mb-8 border-t border-white/[0.06] pt-6">
-          <p className="mb-3 text-[9px] uppercase tracking-[0.48em] text-red-400/48">
+          <p className="mb-3 text-[9px] uppercase tracking-[0.48em] text-amber-400/48">
             {t.labelPairing}
           </p>
           <p className="text-[13.5px] leading-[1.75] text-white/55">{featured.pairing[locale]}</p>
         </div>
 
         {/* Sommelier stamp */}
-        <div className="border-l border-red-500/12 pl-4">
+        <div className="border-l border-amber-400/12 pl-4">
           <p className="text-[12px] italic leading-relaxed text-white/28">
             {t.selecaoWineNote}
           </p>
@@ -692,7 +750,9 @@ function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
 export default function MenuHighlights() {
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: '-8%' });
-  const locale = useLocale() as Locale;
+  // Normalise locale: wine data only exists in pt/en/fr; ru and zh fall back to English
+  const rawLocale = useLocale();
+  const locale: Locale = rawLocale === 'pt' ? 'pt' : rawLocale === 'fr' ? 'fr' : 'en';
   const t = UI[locale] ?? UI.pt;
 
   const [activeTab, setActiveTab] = useState<TabId>('carta');

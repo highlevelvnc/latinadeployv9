@@ -3,8 +3,11 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
+  const t = useTranslations('hero');
+
   // Refs for programmatic play — iOS Safari requires .play() call even
   // when autoPlay, muted and playsInline are all set as attributes.
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
@@ -68,6 +71,26 @@ export default function Hero() {
       </div>
 
       <h1 className="sr-only">Latina Grill Cascais — Restaurante de Carnes Premium em Cascais</h1>
+
+      {/* Music schedule overlay — bottom left, fades in after video settles */}
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.2, delay: 2.2 }}
+        className="absolute bottom-10 left-5 z-10 md:left-14"
+      >
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2.5">
+            <div className="h-px w-5 shrink-0 bg-red-500/65" />
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-red-400/90">
+              {t('music.liveMusic')}
+            </p>
+          </div>
+          <p className="pl-[30px] text-[10px] uppercase tracking-[0.26em] text-white/38">
+            {t('music.ambientMusic')}
+          </p>
+        </div>
+      </motion.div>
 
       <motion.button
         initial={{ opacity: 0 }}

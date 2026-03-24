@@ -27,12 +27,12 @@ export default function RestaurantExperience() {
       badge: 'O Espaço',
       title: 'Ambiente que Respira Autenticidade',
       description:
-        'Do design rústico-sofisticado às mesas estrategicamente posicionadas para visualizar a grelha aberta, cada elemento foi pensado para elevar a sua experiência. Madeira nobre, iluminação intimista e a energia das brasas criam uma atmosfera única em Cascais.',
+        'Do design rústico-sofisticado às mesas estrategicamente posicionadas para visualizar a grelha a carvão vegetal, cada elemento foi pensado para elevar a sua experiência. Madeira nobre, iluminação intimista e a energia das brasas criam uma atmosfera única em Cascais.',
       cta: 'Reserve a Sua Mesa',
       stats: [
         { value: 'Cascais', label: 'Localização privilegiada' },
-        { value: 'Grelha Aberta', label: 'À vista de todos' },
-        { value: '80+', label: 'Lugares disponíveis' },
+        { value: 'Grelha a Carvão Vegetal', label: 'À vista de todos' },
+        { value: '100+', label: 'Mesas & lugares exclusivos' },
       ],
       labels: ['Interior', 'Ambiente', 'Sala', 'Espaço', 'Atmosfera', 'Detalhes'],
     },
@@ -40,12 +40,12 @@ export default function RestaurantExperience() {
       badge: 'The Space',
       title: 'Atmosphere that Breathes Authenticity',
       description:
-        'From rustic-sophisticated design to tables strategically positioned to view the open grill, every element was designed to elevate your experience. Noble wood, intimate lighting and the energy of embers create a unique atmosphere in Cascais.',
+        'From rustic-sophisticated design to tables strategically positioned to view the charcoal grill, every element was designed to elevate your experience. Noble wood, intimate lighting and the energy of embers create a unique atmosphere in Cascais.',
       cta: 'Reserve Your Table',
       stats: [
         { value: 'Cascais', label: 'Prime location' },
-        { value: 'Open Grill', label: 'In full view' },
-        { value: '80+', label: 'Available seats' },
+        { value: 'Charcoal Grill', label: 'In full view' },
+        { value: '100+', label: 'Tables & exclusive seats' },
       ],
       labels: ['Interior', 'Atmosphere', 'Dining Room', 'Space', 'Ambiance', 'Details'],
     },
@@ -53,12 +53,12 @@ export default function RestaurantExperience() {
       badge: "L'Espace",
       title: "Ambiance qui Respire l'Authenticité",
       description:
-        "Du design rustique-sophistiqué aux tables stratégiquement positionnées pour voir le grill ouvert, chaque élément a été pensé pour élever votre expérience. Bois noble, éclairage intime et l'énergie des braises créent une atmosphère unique à Cascais.",
+        "Du design rustique-sophistiqué aux tables stratégiquement positionnées pour voir le grill au charbon de bois, chaque élément a été pensé pour élever votre expérience. Bois noble, éclairage intime et l'énergie des braises créent une atmosphère unique à Cascais.",
       cta: 'Réservez Votre Table',
       stats: [
         { value: 'Cascais', label: 'Emplacement privilégié' },
-        { value: 'Grill Ouvert', label: 'En pleine vue' },
-        { value: '80+', label: 'Places disponibles' },
+        { value: 'Grill au Charbon', label: 'En pleine vue' },
+        { value: '100+', label: 'Tables & places exclusives' },
       ],
       labels: ['Intérieur', 'Ambiance', 'Salle', 'Espace', 'Atmosphère', 'Détails'],
     },

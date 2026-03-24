@@ -4,15 +4,13 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { 
-  Accessibility, 
-  Wind, 
-  Truck, 
-  Trees, 
-  ParkingCircle, 
-  Users, 
-  ShoppingBag, 
-  Heart, 
+import {
+  Accessibility,
+  Wind,
+  Trees,
+  ParkingCircle,
+  Users,
+  Heart,
   Wifi,
   Dog
 } from 'lucide-react';
@@ -25,11 +23,9 @@ export default function Amenities() {
   const amenities = [
     { key: 'accessibility', icon: Accessibility },
     { key: 'airConditioning', icon: Wind },
-    { key: 'delivery', icon: Truck },
     { key: 'outdoorSeating', icon: Trees },
     { key: 'parking', icon: ParkingCircle },
     { key: 'privateEvents', icon: Users },
-    { key: 'takeaway', icon: ShoppingBag },
     { key: 'weddings', icon: Heart },
     { key: 'wifi', icon: Wifi },
     { key: 'petFriendly', icon: Dog },

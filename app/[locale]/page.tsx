@@ -7,6 +7,7 @@ import LogoOverlap from '@/components/LogoOverlap';
 import PremiumMeatGallery from '@/components/PremiumMeatGallery';
 import MenuHighlights from '@/components/MenuHighlights';
 import RestaurantExperience from '@/components/RestaurantExperience';
+import PrivateExperiences from '@/components/PrivateExperiences';
 import MeatSection from '@/components/MeatSection';
 import DrinksSection from '@/components/DrinksSection';
 import EventsSection from '@/components/EventsSection';
@@ -15,10 +16,11 @@ import OpeningHours from '@/components/OpeningHours';
 import Testimonials from '@/components/Testimonials';
 import ReservationCTA from '@/components/ReservationCTA';
 import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import PhoneFloat from '@/components/PhoneFloat';
 import StickyReservationBar from '@/components/StickyReservationBar';
 import Preloader from '@/components/Preloader';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
+import BackgroundMusic from '@/components/BackgroundMusic';
 
 type Props = {
   params: { locale: string };
@@ -38,6 +40,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
         'pt-PT': 'https://latinagrill.pt/pt',
         'en': 'https://latinagrill.pt/en',
         'fr': 'https://latinagrill.pt/fr',
+        'ru': 'https://latinagrill.pt/ru',
+        'zh': 'https://latinagrill.pt/zh',
         'x-default': 'https://latinagrill.pt/pt',
       },
     },
@@ -79,6 +83,9 @@ export default function HomePage({ params: { locale } }: Props) {
         {/* 3. Experiência / Ambiente — buy-in emocional precoce */}
         <RestaurantExperience />
 
+        {/* 3b. Experiências Privadas — exclusividade e conversão */}
+        <PrivateExperiences />
+
         {/* 4. Logo 3D — transição de marca */}
         <LogoOverlap />
 
@@ -113,8 +120,9 @@ export default function HomePage({ params: { locale } }: Props) {
       </main>
       
       <Footer />
-      <WhatsAppFloat />
+      <PhoneFloat />
       <StickyReservationBar />
+      <BackgroundMusic />
 
       {/* Schema.org JSON-LD */}
       <script
@@ -167,11 +175,9 @@ export default function HomePage({ params: { locale } }: Props) {
               { '@type': 'LocationFeatureSpecification', name: 'Open Grill' },
               { '@type': 'LocationFeatureSpecification', name: 'Accessibility' },
               { '@type': 'LocationFeatureSpecification', name: 'Air Conditioning' },
-              { '@type': 'LocationFeatureSpecification', name: 'Delivery' },
               { '@type': 'LocationFeatureSpecification', name: 'Outdoor Seating' },
               { '@type': 'LocationFeatureSpecification', name: 'Parking' },
               { '@type': 'LocationFeatureSpecification', name: 'Private Events' },
-              { '@type': 'LocationFeatureSpecification', name: 'Takeaway' },
               { '@type': 'LocationFeatureSpecification', name: 'Wedding Venue' },
               { '@type': 'LocationFeatureSpecification', name: 'Free WiFi' },
               { '@type': 'LocationFeatureSpecification', name: 'Pet Friendly' },

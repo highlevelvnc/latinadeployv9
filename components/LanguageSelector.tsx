@@ -10,6 +10,8 @@ const locales = [
   { code: 'pt', label: 'PT', name: 'Português' },
   { code: 'en', label: 'EN', name: 'English' },
   { code: 'fr', label: 'FR', name: 'Français' },
+  { code: 'ru', label: 'RU', name: 'Русский' },
+  { code: 'zh', label: 'ZH', name: '中文' },
 ];
 
 export default function LanguageSelector() {

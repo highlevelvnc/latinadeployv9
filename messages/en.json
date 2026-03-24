@@ -16,7 +16,11 @@
     "titleHighlight": "Latin Soul",
     "description": "Premium meats carefully selected, prepared with technique and passion. In the heart of Cascais, we offer a unique gastronomic experience where meat excellence meets the vibrant energy of live music.",
     "cta": "Book a Table",
-    "ctaSecondary": "View Menu"
+    "ctaSecondary": "View Menu",
+    "music": {
+      "liveMusic": "Live music — Fri, Sat & Sun",
+      "ambientMusic": "Ambient music every day"
+    }
   },
   "highlights": {
     "badge": "Specialties",
@@ -47,7 +51,7 @@
     "title": "Live Music,",
     "titleHighlight": "Latin Energy",
     "description": "Every week, we transform dinner into a memorable experience. Immersive sounds, intimate atmosphere and the unique vibe of Cascais at night.",
-    "schedule": "Fridays and Saturdays, 9:00 PM",
+    "schedule": "Fridays, Saturdays and Sundays, 9:00 PM",
     "cta": "Book for Music Night"
   },
   "testimonials": {
@@ -105,15 +109,17 @@
     },
     "form": {
       "name": "Full name",
-      "phone": "Phone number",
+      "phone": "Phone contact",
+      "countryCode": "Code",
+      "phoneNumber": "Number",
       "date": "Date",
       "time": "Time",
       "guests": "Number of guests",
       "observations": "Special requests (optional)",
       "submit": "Confirm Reservation",
       "submitting": "Submitting...",
-      "whatsapp": "Or book via WhatsApp",
-      "callNow": "Call Now"
+      "callNow": "Call Now",
+      "directContact": "Prefer to contact us directly?"
     },
     "validation": {
       "required": "Required field",
@@ -126,8 +132,7 @@
       "title": "Reservation Received!",
       "message": "Thank you! Your reservation has been registered. We'll contact you shortly to confirm.",
       "close": "Close"
-    },
-    "whatsappMessage": "Hi! I'd like to book a table at Latina Grill Cascais for {date} at {time}, for {guests} people. Name: {name}."
+    }
   },
   "contact": {
     "title": "Visit Us in Cascais",
@@ -171,11 +176,9 @@
       "items": {
         "accessibility": "Accessibility",
         "airConditioning": "Air conditioning",
-        "delivery": "Delivery",
         "outdoorSeating": "Outdoor seating",
         "parking": "Parking",
         "privateEvents": "Private events",
-        "takeaway": "Takeaway",
         "weddings": "Wedding parties",
         "wifi": "Free Wi-Fi",
         "petFriendly": "Pet friendly"
@@ -217,10 +220,6 @@
     "phone": "Call Now",
     "note": "We recommend booking in advance for Fridays, Saturdays and special occasions."
   },
-  "whatsapp": {
-    "message": "Hi! I would like to make a reservation at Latina Grill Cascais.",
-    "ariaLabel": "Contact via WhatsApp"
-  },
   "footer": {
     "tagline": "Premium Meats · Live Music · Cascais",
     "rights": "All rights reserved.",
@@ -230,7 +229,7 @@
   "meta": {
     "home": {
       "title": "Latina Grill Cascais — Premium Steakhouse & Live Music",
-      "description": "The finest steakhouse restaurant in Cascais. World-class cuts, open grill, wine list and live music on Fridays and Saturdays. Book your table."
+      "description": "The finest steakhouse in Cascais. World-class cuts over charcoal, curated wine list and live music on Fridays, Saturdays and Sundays. Book your table."
     },
     "menu": {
       "title": "Menu — Premium Cuts & Wine Pairings | Latina Grill Cascais",
@@ -242,7 +241,7 @@
     },
     "contact": {
       "title": "Location & Contact — Latina Grill Cascais",
-      "description": "Find us in Cascais. Address, hours and contact details for Latina Grill — premium steakhouse with open grill at Malveira da Serra."
+      "description": "Find us in Cascais. Address, hours and contact details for Latina Grill — premium charcoal steakhouse at Malveira da Serra."
     }
   }
 }

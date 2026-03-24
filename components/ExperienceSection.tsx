@@ -16,19 +16,19 @@ export default function ExperienceSection() {
       badge: 'O Espaço',
       title: 'Onde a Grelha é Arte',
       subtitle: 'Experiência Premium',
-      description: 'Um restaurante desenhado para celebrar a carne na sua expressão máxima. Grelha à vista, ambiente sofisticado e uma atmosfera que convida a prolongar cada momento.'
+      description: 'Um restaurante desenhado para celebrar a carne na sua expressão máxima. Grelha a carvão vegetal, à vista de todos, ambiente sofisticado e uma atmosfera que convida a prolongar cada momento.'
     },
     en: {
       badge: 'The Space',
       title: 'Where Grilling is an Art',
       subtitle: 'Premium Experience',
-      description: 'A restaurant designed to celebrate meat at its finest. Open grill, sophisticated ambiance and an atmosphere that invites you to extend every moment.'
+      description: 'A restaurant designed to celebrate meat at its finest. Charcoal grill in full view, sophisticated ambiance and an atmosphere that invites you to extend every moment.'
     },
     fr: {
       badge: 'L\'Espace',
       title: 'Où le Grill est un Art',
       subtitle: 'Expérience Premium',
-      description: 'Un restaurant conçu pour célébrer la viande dans son expression maximale. Grill ouvert, ambiance sophistiquée et une atmosphère qui invite à prolonger chaque instant.'
+      description: 'Un restaurant conçu pour célébrer la viande dans son expression maximale. Grill au charbon de bois, ambiance sophistiquée et une atmosphère qui invite à prolonger chaque instant.'
     }
   };
 

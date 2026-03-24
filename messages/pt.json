@@ -16,7 +16,11 @@
     "titleHighlight": "Alma Latina",
     "description": "Carnes premium selecionadas, preparadas com técnica e paixão. No coração de Cascais, oferecemos uma experiência gastronómica única onde a excelência da carne encontra a energia vibrante da música ao vivo.",
     "cta": "Reservar Mesa",
-    "ctaSecondary": "Ver Menu"
+    "ctaSecondary": "Ver Menu",
+    "music": {
+      "liveMusic": "Música ao vivo — Sex, Sáb e Dom",
+      "ambientMusic": "Música ambiente todos os dias"
+    }
   },
   "highlights": {
     "badge": "Especialidades",
@@ -47,7 +51,7 @@
     "title": "Música ao Vivo,",
     "titleHighlight": "Energia Latina",
     "description": "Todas as semanas, transformamos o jantar numa experiência memorável. Sons envolventes, ambiente intimista e a vibração única de Cascais à noite.",
-    "schedule": "Sextas e Sábados, 21h00",
+    "schedule": "Sextas, Sábados e Domingos, 21h00",
     "cta": "Reservar para Noite Musical"
   },
   "testimonials": {
@@ -105,15 +109,17 @@
     },
     "form": {
       "name": "Nome completo",
-      "phone": "Telemóvel",
+      "phone": "Contacto telefónico",
+      "countryCode": "Indicativo",
+      "phoneNumber": "Número",
       "date": "Data",
       "time": "Hora",
       "guests": "Nº de pessoas",
       "observations": "Observações (opcional)",
       "submit": "Confirmar Reserva",
       "submitting": "A enviar...",
-      "whatsapp": "Ou reserve via WhatsApp",
-      "callNow": "Ligar agora"
+      "callNow": "Ligar agora",
+      "directContact": "Prefere contactar directamente?"
     },
     "validation": {
       "required": "Campo obrigatório",
@@ -126,8 +132,7 @@
       "title": "Reserva Recebida!",
       "message": "Obrigado! A sua reserva foi registada. Entraremos em contacto brevemente para confirmar.",
       "close": "Fechar"
-    },
-    "whatsappMessage": "Olá! Gostaria de reservar uma mesa no Latina Grill Cascais para {date} às {time}, para {guests} pessoas. Nome: {name}."
+    }
   },
   "contact": {
     "title": "Visite-nos em Cascais",
@@ -171,11 +176,9 @@
       "items": {
         "accessibility": "Acessibilidade",
         "airConditioning": "Ar condicionado",
-        "delivery": "Entrega",
         "outdoorSeating": "Mesas exteriores",
         "parking": "Estacionamento",
         "privateEvents": "Eventos privados",
-        "takeaway": "Takeaway",
         "weddings": "Festas de casamento",
         "wifi": "Wi-Fi gratuito",
         "petFriendly": "Permite animais de estimação"
@@ -217,10 +220,6 @@
     "phone": "Ligar Agora",
     "note": "Reserva antecipada recomendada para sextas, sábados e ocasiões especiais."
   },
-  "whatsapp": {
-    "message": "Olá! Gostaria de fazer uma reserva no Latina Grill Cascais.",
-    "ariaLabel": "Contactar via WhatsApp"
-  },
   "footer": {
     "tagline": "Carnes Premium · Música ao Vivo · Cascais",
     "rights": "Todos os direitos reservados.",
@@ -230,7 +229,7 @@
   "meta": {
     "home": {
       "title": "Latina Grill Cascais — Steakhouse Premium & Música ao Vivo",
-      "description": "O melhor restaurante de carnes em Cascais. Cortes premium do mundo, grelha aberta, carta de vinhos e música ao vivo às sextas e sábados. Reserve já."
+      "description": "O melhor restaurante de carnes em Cascais. Cortes premium do mundo, grelha a carvão vegetal, carta de vinhos e música ao vivo às sextas, sábados e domingos. Reserve já."
     },
     "menu": {
       "title": "Carta — Cortes Premium & Vinhos | Latina Grill Cascais",
@@ -242,7 +241,7 @@
     },
     "contact": {
       "title": "Localização & Contacto — Latina Grill Cascais",
-      "description": "Encontre-nos em Cascais. Morada, horários e contacto do Latina Grill — restaurante de carnes premium com grelha aberta na Malveira da Serra."
+      "description": "Encontre-nos em Cascais. Morada, horários e contacto do Latina Grill — restaurante de carnes premium com grelha a carvão vegetal na Malveira da Serra."
     }
   }
 }

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://latinagrill.pt';
-  const locales = ['pt', 'en', 'fr'];
+  const locales = ['pt', 'en', 'fr', 'ru', 'zh'];
   const routes = ['', '/menu', '/reservations', '/contact'];
 
   const sitemap: MetadataRoute.Sitemap = [];
