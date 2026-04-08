@@ -194,10 +194,22 @@
     "overlayTitle": "Tomahawk Premium",
     "overlaySubtitle": "45-Day Dry-Aged",
     "cards": [
-      { "name": "Rubia Gallega Gold Chuleton", "descriptor": "Galicia · Extended Dry-Ageing" },
-      { "name": "Wagyu Chuleton", "descriptor": "Intense Marbling · Slow Fire" },
-      { "name": "Australian Wagyu Tomahawk", "descriptor": "45-Day Aged · Statement Cut" },
-      { "name": "Selected T-Bone", "descriptor": "Dual Cut · Benchmark Texture" }
+      {
+        "name": "Rubia Gallega Gold Chuleton",
+        "descriptor": "Galicia · Extended Dry-Ageing"
+      },
+      {
+        "name": "Wagyu Chuleton",
+        "descriptor": "Intense Marbling · Slow Fire"
+      },
+      {
+        "name": "Australian Wagyu Tomahawk",
+        "descriptor": "45-Day Aged · Statement Cut"
+      },
+      {
+        "name": "Selected T-Bone",
+        "descriptor": "Dual Cut · Benchmark Texture"
+      }
     ]
   },
   "location": {
@@ -243,5 +255,55 @@
       "title": "Location & Contact — Latina Grill Cascais",
       "description": "Find us in Cascais. Address, hours and contact details for Latina Grill — premium charcoal steakhouse at Malveira da Serra."
     }
+  },
+  "common": {
+    "back": "Back",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "empty": "No results",
+    "currency": "EUR"
+  },
+  "menu": {
+    "title": "Menu",
+    "search": "Search dishes...",
+    "allCategories": "All",
+    "filters": "Filters",
+    "unavailable": "Unavailable",
+    "prepTime": "{minutes} min",
+    "emptyState": "No dishes found",
+    "featured": "Recommended",
+    "featuredSubtitle": "Most ordered and our top picks",
+    "shareTitle": "Perfect for Sharing",
+    "shareSubtitle": "Boards and dishes ideal for couples and groups",
+    "experiencesTitle": "Experiences",
+    "experiencesSubtitle": "Curated combinations for special moments",
+    "viewAll": "View all",
+    "completeDish": "Complete your dish",
+    "recommendedSauces": "Recommended sauces",
+    "recommendedSides": "Side dishes",
+    "relatedItems": "You may also like",
+    "included": "Included",
+    "tags": {
+      "spicy": "Spicy",
+      "vegetarian": "Vegetarian",
+      "vegan": "Vegan",
+      "gluten-free": "Gluten-Free",
+      "chefs-pick": "Chef's Pick",
+      "popular": "Popular",
+      "new": "New",
+      "bestseller": "Bestseller",
+      "signature": "Signature",
+      "premium": "Premium",
+      "wagyu": "Wagyu",
+      "gold": "Gold Selection",
+      "board": "Board"
+    }
+  },
+  "table": {
+    "badge": "Table {table}",
+    "label": "Table",
+    "lockedHint": "Identified by QR code",
+    "clearTable": "Clear table"
   }
 }

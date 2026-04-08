@@ -1,0 +1,72 @@
+'use client';
+
+import { useMemo } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { AnimatePresence } from 'framer-motion';
+import { useAppStore } from '@/stores/useAppStore';
+import { useMenuStore } from '@/stores/useMenuStore';
+import { menuItems } from '@/data/menu';
+import MenuItem from './MenuItem';
+import { t as lt } from '@/lib/localized';
+import type { MenuItem as MenuItemType } from '@/types/menu';
+import type { Locale } from '@/i18n';
+
+interface Props {
+  onSelectItem: (item: MenuItemType) => void;
+}
+
+export default function MenuGrid({ onSelectItem }: Props) {
+  const locale = useLocale() as Locale;
+  const t = useTranslations('menu');
+  const { activeCategory, searchQuery, activeTags } = useAppStore();
+  const unavailableItems = useMenuStore((s) => s.unavailableItems);
+
+  const filtered = useMemo(() => {
+    let items = menuItems.filter((i) => i.available);
+
+    if (activeCategory) {
+      items = items.filter((i) => i.categoryId === activeCategory);
+    }
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      items = items.filter(
+        (i) =>
+          lt(i.name, locale).toLowerCase().includes(q) ||
+          lt(i.description, locale).toLowerCase().includes(q)
+      );
+    }
+
+    if (activeTags.length > 0) {
+      items = items.filter((i) => activeTags.some((tag) => i.tags.includes(tag)));
+    }
+
+    // Sort unavailable items to the end
+    items.sort((a, b) => {
+      const aUnavail = unavailableItems.includes(a.id) ? 1 : 0;
+      const bUnavail = unavailableItems.includes(b.id) ? 1 : 0;
+      return aUnavail - bUnavail;
+    });
+
+    return items;
+  }, [activeCategory, searchQuery, activeTags, locale, unavailableItems]);
+
+  if (filtered.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <span className="mb-3 text-4xl opacity-20">🍽️</span>
+        <p className="text-sm text-white/30">{t('emptyState')}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <AnimatePresence mode="popLayout">
+        {filtered.map((item) => (
+          <MenuItem key={item.id} item={item} onSelect={onSelectItem} />
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}

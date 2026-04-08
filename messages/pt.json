@@ -194,10 +194,22 @@
     "overlayTitle": "Tomahawk Premium",
     "overlaySubtitle": "Maturação 45 dias",
     "cards": [
-      { "name": "Chuleton Rubia Gallega Gold", "descriptor": "Galiza · Maturação Lenta" },
-      { "name": "Chuleton Wagyu", "descriptor": "Marmoreado · Brasa Lenta" },
-      { "name": "Tomahawk Wagyu Austrália", "descriptor": "45 Dias · Corte Monumental" },
-      { "name": "T-Bone Selecionado", "descriptor": "Duplo Corte · Textura Firme" }
+      {
+        "name": "Chuleton Rubia Gallega Gold",
+        "descriptor": "Galiza · Maturação Lenta"
+      },
+      {
+        "name": "Chuleton Wagyu",
+        "descriptor": "Marmoreado · Brasa Lenta"
+      },
+      {
+        "name": "Tomahawk Wagyu Austrália",
+        "descriptor": "45 Dias · Corte Monumental"
+      },
+      {
+        "name": "T-Bone Selecionado",
+        "descriptor": "Duplo Corte · Textura Firme"
+      }
     ]
   },
   "location": {
@@ -243,5 +255,55 @@
       "title": "Localização & Contacto — Latina Grill Cascais",
       "description": "Encontre-nos em Cascais. Morada, horários e contacto do Latina Grill — restaurante de carnes premium com grelha a carvão vegetal na Malveira da Serra."
     }
+  },
+  "common": {
+    "back": "Voltar",
+    "close": "Fechar",
+    "loading": "A carregar...",
+    "error": "Ocorreu um erro",
+    "empty": "Sem resultados",
+    "currency": "EUR"
+  },
+  "menu": {
+    "title": "Menu",
+    "search": "Pesquisar pratos...",
+    "allCategories": "Todos",
+    "filters": "Filtros",
+    "unavailable": "Indisponível",
+    "prepTime": "{minutes} min",
+    "emptyState": "Nenhum prato encontrado",
+    "featured": "Recomendado",
+    "featuredSubtitle": "Os mais pedidos e as nossas sugestões",
+    "shareTitle": "Ideal para Partilhar",
+    "shareSubtitle": "Tábuas e pratos perfeitos para casais e grupos",
+    "experiencesTitle": "Experiências",
+    "experiencesSubtitle": "Combinações pensadas para momentos especiais",
+    "viewAll": "Ver todos",
+    "completeDish": "Complete o seu prato",
+    "recommendedSauces": "Molhos recomendados",
+    "recommendedSides": "Acompanhamentos",
+    "relatedItems": "Também vai gostar",
+    "included": "Incluído",
+    "tags": {
+      "spicy": "Picante",
+      "vegetarian": "Vegetariano",
+      "vegan": "Vegano",
+      "gluten-free": "Sem Glúten",
+      "chefs-pick": "Escolha do Chef",
+      "popular": "Popular",
+      "new": "Novo",
+      "bestseller": "Mais Vendido",
+      "signature": "Assinatura",
+      "premium": "Premium",
+      "wagyu": "Wagyu",
+      "gold": "Gold Selection",
+      "board": "Tábua"
+    }
+  },
+  "table": {
+    "badge": "Mesa {table}",
+    "label": "Mesa",
+    "lockedHint": "Identificada pelo QR code",
+    "clearTable": "Limpar mesa"
   }
 }

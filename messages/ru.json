@@ -194,10 +194,22 @@
     "overlayTitle": "Премиальный томагавк",
     "overlaySubtitle": "Выдержка 45 дней",
     "cards": [
-      { "name": "Чулетон Рубиа Галлега Gold", "descriptor": "Галисия · Медленное созревание" },
-      { "name": "Чулетон Вагю", "descriptor": "Мраморность · Медленный жар" },
-      { "name": "Томагавк Вагю Австралия", "descriptor": "45 дней · Монументальный отруб" },
-      { "name": "Отборный T-Bone", "descriptor": "Двойной отруб · Плотная текстура" }
+      {
+        "name": "Чулетон Рубиа Галлега Gold",
+        "descriptor": "Галисия · Медленное созревание"
+      },
+      {
+        "name": "Чулетон Вагю",
+        "descriptor": "Мраморность · Медленный жар"
+      },
+      {
+        "name": "Томагавк Вагю Австралия",
+        "descriptor": "45 дней · Монументальный отруб"
+      },
+      {
+        "name": "Отборный T-Bone",
+        "descriptor": "Двойной отруб · Плотная текстура"
+      }
     ]
   },
   "location": {
@@ -243,5 +255,55 @@
       "title": "Местоположение и контакты — Latina Grill Cascais",
       "description": "Найдите нас в Каскайше. Адрес, часы работы и контакты Latina Grill — ресторан с угольным грилем на Malveira da Serra."
     }
+  },
+  "common": {
+    "back": "Voltar",
+    "close": "Fechar",
+    "loading": "A carregar...",
+    "error": "Ocorreu um erro",
+    "empty": "Sem resultados",
+    "currency": "EUR"
+  },
+  "menu": {
+    "title": "Menu",
+    "search": "Pesquisar pratos...",
+    "allCategories": "Todos",
+    "filters": "Filtros",
+    "unavailable": "Indisponível",
+    "prepTime": "{minutes} min",
+    "emptyState": "Nenhum prato encontrado",
+    "featured": "Recomendado",
+    "featuredSubtitle": "Os mais pedidos e as nossas sugestões",
+    "shareTitle": "Ideal para Partilhar",
+    "shareSubtitle": "Tábuas e pratos perfeitos para casais e grupos",
+    "experiencesTitle": "Experiências",
+    "experiencesSubtitle": "Combinações pensadas para momentos especiais",
+    "viewAll": "Ver todos",
+    "completeDish": "Complete o seu prato",
+    "recommendedSauces": "Molhos recomendados",
+    "recommendedSides": "Acompanhamentos",
+    "relatedItems": "Também vai gostar",
+    "included": "Incluído",
+    "tags": {
+      "spicy": "Picante",
+      "vegetarian": "Vegetariano",
+      "vegan": "Vegano",
+      "gluten-free": "Sem Glúten",
+      "chefs-pick": "Escolha do Chef",
+      "popular": "Popular",
+      "new": "Novo",
+      "bestseller": "Mais Vendido",
+      "signature": "Assinatura",
+      "premium": "Premium",
+      "wagyu": "Wagyu",
+      "gold": "Gold Selection",
+      "board": "Tábua"
+    }
+  },
+  "table": {
+    "badge": "Mesa {table}",
+    "label": "Mesa",
+    "lockedHint": "Identificada pelo QR code",
+    "clearTable": "Limpar mesa"
   }
 }

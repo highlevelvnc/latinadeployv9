@@ -15,6 +15,10 @@ const config: Config = {
           light: '#1a1a1a',
           lighter: '#2a2a2a',
         },
+        surface: {
+          DEFAULT: '#141414',
+          elevated: '#1e1e1e',
+        },
         red: {
           DEFAULT: '#DC2626',
           dark: '#991B1B',
@@ -26,6 +30,8 @@ const config: Config = {
           yellow: '#EAB308',
           pink: '#EC4899',
           purple: '#A855F7',
+          green: '#22C55E',
+          blue: '#3B82F6',
         },
         light: {
           DEFAULT: '#F5F5F5',

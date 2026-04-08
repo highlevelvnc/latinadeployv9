@@ -194,10 +194,22 @@
     "overlayTitle": "顶级战斧牛排",
     "overlaySubtitle": "45天熟成",
     "cards": [
-      { "name": "Chuleton Rubia Gallega Gold", "descriptor": "加利西亚 · 慢速熟成" },
-      { "name": "和牛 Chuleton", "descriptor": "大理石纹 · 慢火炭烤" },
-      { "name": "澳大利亚和牛战斧", "descriptor": "45天 · 震撼大份" },
-      { "name": "精选 T-Bone", "descriptor": "双切 · 紧实质感" }
+      {
+        "name": "Chuleton Rubia Gallega Gold",
+        "descriptor": "加利西亚 · 慢速熟成"
+      },
+      {
+        "name": "和牛 Chuleton",
+        "descriptor": "大理石纹 · 慢火炭烤"
+      },
+      {
+        "name": "澳大利亚和牛战斧",
+        "descriptor": "45天 · 震撼大份"
+      },
+      {
+        "name": "精选 T-Bone",
+        "descriptor": "双切 · 紧实质感"
+      }
     ]
   },
   "location": {
@@ -243,5 +255,55 @@
       "title": "地址与联系方式 — Latina Grill Cascais",
       "description": "在卡斯凯什找到我们。Latina Grill 的地址、营业时间与联系方式——Malveira da Serra 的炭火烤肉餐厅。"
     }
+  },
+  "common": {
+    "back": "返回",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "empty": "暂无结果",
+    "currency": "EUR"
+  },
+  "menu": {
+    "title": "菜单",
+    "search": "搜索菜品...",
+    "allCategories": "全部",
+    "filters": "筛选",
+    "unavailable": "已售罄",
+    "prepTime": "{minutes} 分钟",
+    "emptyState": "未找到菜品",
+    "featured": "推荐",
+    "featuredSubtitle": "最受欢迎和我们的精选",
+    "shareTitle": "适合分享",
+    "shareSubtitle": "适合情侣和团体的拼盘和大份菜品",
+    "experiencesTitle": "体验套餐",
+    "experiencesSubtitle": "为特别时刻精心搭配",
+    "viewAll": "查看全部",
+    "completeDish": "搭配您的菜品",
+    "recommendedSauces": "推荐酱汁",
+    "recommendedSides": "配菜",
+    "relatedItems": "您可能还喜欢",
+    "included": "已含",
+    "tags": {
+      "spicy": "辣味",
+      "vegetarian": "素食",
+      "vegan": "纯素",
+      "gluten-free": "无麸质",
+      "chefs-pick": "主厨推荐",
+      "popular": "人气",
+      "new": "新品",
+      "bestseller": "畅销",
+      "signature": "招牌",
+      "premium": "精选",
+      "wagyu": "和牛",
+      "gold": "黄金甄选",
+      "board": "分享拼盘"
+    }
+  },
+  "table": {
+    "badge": "{table} 桌",
+    "label": "桌号",
+    "lockedHint": "已通过二维码识别",
+    "clearTable": "清除桌号"
   }
 }
