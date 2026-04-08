@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useLocale } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
@@ -854,15 +855,13 @@ export default function MenuHighlights() {
           transition={{ duration: 0.8, delay: 0.55 }}
           className="mt-16 flex justify-start"
         >
-          <a
-            href="/latina-grill-menu.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={`/${rawLocale}/menu`}
             className="group inline-flex items-center gap-2.5 text-[11.5px] uppercase tracking-[0.35em] text-white/30 transition-colors duration-300 hover:text-white/60"
           >
             <span>{t.cta}</span>
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

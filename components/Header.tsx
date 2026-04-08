@@ -91,18 +91,16 @@ export default function Header() {
               </Link>
             ))}
 
-            {/* PDF Menu Link */}
-            <a
-              href="/latina-grill-menu.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Menu Link */}
+            <Link
+              href={`/${locale}/menu`}
               className="flex items-center gap-1.5 text-white/55 hover:text-white/90 text-sm uppercase tracking-[0.18em] font-medium transition-colors duration-200 group relative"
               aria-label={pdfLabel}
             >
               <FileText className="w-3.5 h-3.5 text-white/35 group-hover:text-white/70 transition-colors" />
               <span>{pdfLabel}</span>
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-white/30 group-hover:w-full transition-all duration-300" />
-            </a>
+            </Link>
 
             {/* Language selector */}
             <div className="w-px h-4 bg-white/15 mx-1" />
@@ -152,17 +150,15 @@ export default function Header() {
               </Link>
             ))}
 
-            {/* PDF link mobile */}
-            <a
-              href="/latina-grill-menu.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Menu link mobile */}
+            <Link
+              href={`/${locale}/menu`}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-2 text-white/70 text-lg uppercase tracking-wider font-medium py-1 border-b border-white/5"
             >
               <FileText className="w-5 h-5 text-white/40" />
               {pdfLabel}
-            </a>
+            </Link>
 
             <a
               href="tel:+351968707515"

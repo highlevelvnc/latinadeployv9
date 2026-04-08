@@ -84,17 +84,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <a
-                  href="/latina-grill-menu.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-light/60 hover:text-light transition-colors text-sm"
-                >
-                  <FileText className="w-3.5 h-3.5 text-light/40" />
-                  {headings.menuPdf[locale as keyof typeof headings.menuPdf] || headings.menuPdf.pt}
-                </a>
-              </li>
             </ul>
           </div>
 

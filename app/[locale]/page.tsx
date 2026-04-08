@@ -138,7 +138,7 @@ export default function HomePage({ params: { locale } }: Props) {
             telephone: '+351968707515',
             priceRange: '€€€',
             servesCuisine: ['Steakhouse', 'Latin American', 'Portuguese', 'Grilled Meats'],
-            menu: 'https://latinagrill.pt/latina-grill-menu.pdf',
+            menu: `https://latinagrill.pt/${locale}/menu`,
             hasMap: 'https://www.google.com/maps/search/?api=1&query=Estrada+Da+Malveira+da+Serra+261+2750-782+Cascais',
             address: {
               '@type': 'PostalAddress',

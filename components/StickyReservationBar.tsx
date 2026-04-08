@@ -93,11 +93,9 @@ export default function StickyReservationBar() {
               <span>{t('reserve')}</span>
             </MotionLink>
 
-            {/* Secondary CTA — View Menu PDF */}
-            <motion.a
-              href="/latina-grill-menu.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Secondary CTA — View Menu */}
+            <MotionLink
+              href={`/${locale}/menu`}
               variants={buttonSecondaryVariants}
               initial="idle"
               whileHover="hover"
@@ -106,7 +104,7 @@ export default function StickyReservationBar() {
             >
               <FileText className="h-4 w-4 flex-shrink-0" />
               <span>{t('menu')}</span>
-            </motion.a>
+            </MotionLink>
           </div>
 
           {/* Safe area spacer for iOS home indicator */}

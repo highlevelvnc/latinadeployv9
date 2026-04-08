@@ -4,13 +4,15 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function MeatSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-8%' });
   const t = useTranslations('meats');
+  const locale = useLocale();
   const cards = t.raw('cards') as { name: string; descriptor: string }[];
 
   return (
@@ -129,15 +131,13 @@ export default function MeatSection() {
             </div>
 
             {/* CTA */}
-            <a
-              href="/latina-grill-menu.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/${locale}/menu`}
               className="group inline-flex items-center gap-3 rounded-full border border-red-500/30 bg-red-600/10 px-10 py-4 text-[13px] font-semibold uppercase tracking-[0.28em] text-white/85 transition-all duration-500 hover:border-red-500 hover:bg-red-600 hover:text-white hover:shadow-[0_16px_48px_rgba(180,20,20,0.35)]"
             >
               {t('cta')}
               <ArrowUpRight className="h-3.5 w-3.5 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            </Link>
           </motion.div>
 
         </div>
