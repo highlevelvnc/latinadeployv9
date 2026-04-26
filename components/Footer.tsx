@@ -24,13 +24,25 @@ const navLinks = {
     { label: 'Réservations', href: '/reservations' },
     { label: 'Contact',      href: '/contact' },
   ],
+  ru: [
+    { label: 'Главная',     href: '' },
+    { label: 'Меню',        href: '/menu' },
+    { label: 'Бронирование', href: '/reservations' },
+    { label: 'Контакты',    href: '/contact' },
+  ],
+  zh: [
+    { label: '首页',  href: '' },
+    { label: '菜单',  href: '/menu' },
+    { label: '预订',  href: '/reservations' },
+    { label: '联系',  href: '/contact' },
+  ],
 };
 
 const headings = {
-  links:   { pt: 'Links',         en: 'Links',        fr: 'Liens' },
-  contact: { pt: 'Contacto',      en: 'Contact',      fr: 'Contact' },
-  social:  { pt: 'Redes Sociais', en: 'Social Media', fr: 'Réseaux Sociaux' },
-  menuPdf: { pt: 'Menu PDF',      en: 'Menu PDF',     fr: 'Menu PDF' },
+  links:   { pt: 'Links',         en: 'Links',        fr: 'Liens',           ru: 'Ссылки',         zh: '链接' },
+  contact: { pt: 'Contacto',      en: 'Contact',      fr: 'Contact',         ru: 'Контакты',       zh: '联系我们' },
+  social:  { pt: 'Redes Sociais', en: 'Social Media', fr: 'Réseaux Sociaux', ru: 'Соцсети',        zh: '社交媒体' },
+  menuPdf: { pt: 'Menu PDF',      en: 'Menu PDF',     fr: 'Menu PDF',        ru: 'Меню PDF',       zh: '菜单 PDF' },
 };
 
 export default function Footer() {

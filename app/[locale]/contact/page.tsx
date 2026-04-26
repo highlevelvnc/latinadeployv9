@@ -162,7 +162,15 @@ async function ContactPage({ params: { locale } }: Props) {
                 href={`/${locale}/reservations`}
                 className="block text-center bg-gradient-to-r from-red to-red-dark hover:from-red-light hover:to-red text-light px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-red/40"
               >
-                {locale === 'pt' ? 'Reservar Mesa' : locale === 'en' ? 'Book a Table' : 'Réserver'}
+                {locale === 'pt'
+                  ? 'Reservar Mesa'
+                  : locale === 'fr'
+                    ? 'Réserver'
+                    : locale === 'ru'
+                      ? 'Забронировать стол'
+                      : locale === 'zh'
+                        ? '预订餐桌'
+                        : 'Book a Table'}
               </Link>
             </div>
 

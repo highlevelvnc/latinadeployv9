@@ -29,6 +29,18 @@ export default function ExperienceSection() {
       title: 'Où le Grill est un Art',
       subtitle: 'Expérience Premium',
       description: 'Un restaurant conçu pour célébrer la viande dans son expression maximale. Grill au charbon de bois, ambiance sophistiquée et une atmosphère qui invite à prolonger chaque instant.'
+    },
+    ru: {
+      badge: 'Пространство',
+      title: 'Где гриль — это искусство',
+      subtitle: 'Премиум-впечатление',
+      description: 'Ресторан, созданный, чтобы воспевать мясо в его лучшем проявлении. Угольный гриль на виду у гостей, изысканная атмосфера и обстановка, которая приглашает продлить каждый момент.'
+    },
+    zh: {
+      badge: '空间',
+      title: '炭烤即艺术',
+      subtitle: '极致体验',
+      description: '一家为颂扬顶级肉品而设计的餐厅。明火炭烤，雅致氛围，邀请您从容享受每一刻。'
     }
   };
 

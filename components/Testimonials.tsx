@@ -201,8 +201,14 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeSlide, setActiveSlide] = useState(0);
 
+  // ru and zh fall back to English reviews — these are real Google reviews,
+  // mostly written in PT/EN by past guests, and EN is the safest neutral fallback.
   const reviews =
-    locale === 'en' ? reviewsEN : locale === 'fr' ? reviewsFR : reviewsPT;
+    locale === 'fr'
+      ? reviewsFR
+      : locale === 'pt'
+        ? reviewsPT
+        : reviewsEN;
 
   const googleReviewsUrl = 'https://share.google/8vw79KB0bb72pWBIA';
 

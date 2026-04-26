@@ -28,6 +28,18 @@ export default function LogoOverlap() {
       title: 'Là où le feu, la coupe et la présentation se rencontrent',
       description:
         'Au cœur de Cascais, le Latina Grill transforme chaque service en une expérience visuelle et gastronomique. Viandes nobles, cuisson précise, ambiance sophistiquée et identité marquée par l’intensité des saveurs.'
+    },
+    ru: {
+      eyebrow: 'Latina Grill Cascais',
+      title: 'Там, где огонь, отруб и подача встречаются',
+      description:
+        'В самом сердце Каскайша Latina Grill превращает каждое обслуживание в визуальный и гастрономический опыт. Благородные отрубы, точный огонь, изысканная атмосфера и индивидуальность, рождённая насыщенностью вкусов.'
+    },
+    zh: {
+      eyebrow: 'Latina Grill Cascais',
+      title: '当炭火、肉切与呈现交汇',
+      description:
+        '坐落于卡斯凯什的心脏地带，Latina Grill将每一次用餐化为视觉与美食的双重体验。精选肉切、精准火候、雅致氛围，以及由浓郁风味塑造的独特个性。'
     }
   };
 

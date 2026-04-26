@@ -52,6 +52,28 @@ export default function ColdRoomSection() {
         { icon: Clock, value: '45 Jours', label: 'Affinage Maximum' },
         { icon: Award, value: '100%', label: 'Contrôle Quotidien' }
       ]
+    },
+    ru: {
+      badge: 'Процесс',
+      title: 'Камера выдержки',
+      subtitle: 'Где время становится вкусом',
+      description: 'Наша климатическая камера — тайное сердце Latina Grill. Здесь наука встречает традицию: температура 2°C, влажность 85% и 21–45 дней превращают мясо в шедевр. Каждый отруб контролируется ежедневно, обретая сложный вкус и нежнейшую текстуру, которую способна дать только настоящая сухая выдержка.',
+      stats: [
+        { icon: Thermometer, value: '2°C', label: 'Идеальная температура' },
+        { icon: Clock, value: '45 дней', label: 'Максимальная выдержка' },
+        { icon: Award, value: '100%', label: 'Ежедневный контроль' }
+      ]
+    },
+    zh: {
+      badge: '工艺',
+      title: '熟成室',
+      subtitle: '让时间化为风味',
+      description: 'Latina Grill的恒温熟成室，是品牌隐秘的核心。科学与传统在此交汇：2°C恒温、85%湿度，21至45天将肉品升华为艺术品。每一份肉切都经过每日精心监控，孕育出唯有真正干式熟成方能带来的复杂风味与丝滑口感。',
+      stats: [
+        { icon: Thermometer, value: '2°C', label: '完美温度' },
+        { icon: Clock, value: '45天', label: '极致熟成' },
+        { icon: Award, value: '100%', label: '每日把控' }
+      ]
     }
   };
 

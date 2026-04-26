@@ -23,6 +23,16 @@ const content = {
     title: 'Moments',
     cta: 'Suivre sur Instagram',
   },
+  ru: {
+    badge: '@latina.grill',
+    title: 'Моменты',
+    cta: 'Подписаться в Instagram',
+  },
+  zh: {
+    badge: '@latina.grill',
+    title: '精彩瞬间',
+    cta: '在 Instagram 上关注',
+  },
 };
 
 export default function PremiumGallery() {

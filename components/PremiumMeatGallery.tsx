@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl';
 import { Thermometer, Award, Clock } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-type LocaleKey = 'pt' | 'en' | 'fr';
+type LocaleKey = 'pt' | 'en' | 'fr' | 'ru' | 'zh';
 
 type Feature = {
   icon: LucideIcon;
@@ -26,7 +26,12 @@ type GalleryImage = {
 export default function PremiumMeatGallery() {
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
-  const locale = useLocale() as LocaleKey;
+  const rawLocale = useLocale();
+  const locale: LocaleKey = (['pt', 'en', 'fr', 'ru', 'zh'] as const).includes(
+    rawLocale as LocaleKey,
+  )
+    ? (rawLocale as LocaleKey)
+    : 'en';
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -187,6 +192,64 @@ export default function PremiumMeatGallery() {
           objectPosition: 'center center',
           thumbPosition: 'center center',
         },
+      ],
+    },
+
+    ru: {
+      overline: 'Dry-Aged · Fire · Precision',
+      title: 'Мясо, огонь и время — на пике',
+      subtitle:
+        'Контролируемая выдержка, выразительные отрубы и безупречно подготовленный огонь. Подача, продуманная для незабываемого впечатления.',
+      processText:
+        'Внимание не выражается словами. Оно проявляется в нарезке, прожарке, текстуре и в том, как каждый кусок попадает на стол.',
+      spotlightLabel: 'В фокусе',
+      gallerySubtitle: 'От холодильной камеры до углей',
+      features: [
+        {
+          icon: Thermometer,
+          label: 'Точная выдержка',
+          desc: 'Температура, время и стабильность строго контролируются на каждом этапе.',
+        },
+        {
+          icon: Award,
+          label: 'Отбор с критерием',
+          desc: 'Подбор по происхождению, текстуре, мраморности и эффектности подачи.',
+        },
+        {
+          icon: Clock,
+          label: 'Уважение ко времени',
+          desc: 'От отдыха до подачи — каждая деталь без спешки и излишеств.',
+        },
+      ],
+      images: [
+        { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: 'Происхождение, выдержка и контроль', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/bandejalatinatomahawk.webp', title: 'Latina Signature Board', subtitle: 'Монументальная подача', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/tomahawkchamas.webp', title: 'Fire Finish', subtitle: 'Огонь, интенсивность и зрелище', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/carne3.webp', title: 'Wagyu Detail', subtitle: 'Текстура и мраморность', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/costela.webp', title: 'Slow Depth', subtitle: 'Глубина вкуса', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: 'Точность перед грилем', objectPosition: 'center center', thumbPosition: 'center center' },
+      ],
+    },
+
+    zh: {
+      overline: 'Dry-Aged · Fire · Precision',
+      title: '肉、火与时间，臻于至善',
+      subtitle: '精准熟成、富有存在感的肉切，以及匠心驾驭的火候。一种为留下深刻印象而构思的呈现。',
+      processText: '用心，不在言语，而在切工、熟度、质地，以及每一份料理抵达餐桌的方式之中。',
+      spotlightLabel: '聚焦',
+      gallerySubtitle: '从冷藏室到炭火',
+      features: [
+        { icon: Thermometer, label: '精准熟成', desc: '温度、时间与稳定性，每一阶段皆严谨把控。' },
+        { icon: Award, label: '严选肉切', desc: '依据产地、纹理、油花及视觉表现精心挑选。' },
+        { icon: Clock, label: '尊重时间', desc: '从静置到上桌，每个细节皆从容不迫，恰到好处。' },
+      ],
+      images: [
+        { src: '/frigorifigo.jpeg', title: 'Cold Room Selection', subtitle: '产地、熟成与品控', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/bandejalatinatomahawk.webp', title: 'Latina Signature Board', subtitle: '宏伟的餐桌呈现', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/tomahawkchamas.webp', title: 'Fire Finish', subtitle: '火焰、强度与视觉震撼', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/carne3.webp', title: 'Wagyu Detail', subtitle: '质地与油花', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/costela.webp', title: 'Slow Depth', subtitle: '风味的深度', objectPosition: 'center center', thumbPosition: 'center center' },
+        { src: '/frigorifico1.jpeg', title: 'Curated Chamber', subtitle: '炭火前的精准', objectPosition: 'center center', thumbPosition: 'center center' },
       ],
     },
 

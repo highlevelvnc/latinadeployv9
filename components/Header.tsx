@@ -21,10 +21,18 @@ const nav = {
     { label: 'Réservations', href: '/reservations' },
     { label: 'Contact', href: '/contact' },
   ],
+  ru: [
+    { label: 'Бронирование', href: '/reservations' },
+    { label: 'Контакты', href: '/contact' },
+  ],
+  zh: [
+    { label: '预订', href: '/reservations' },
+    { label: '联系', href: '/contact' },
+  ],
 };
 
-const menuPdfLabel = { pt: 'Ver Menu', en: 'Open Menu', fr: 'Voir le Menu' };
-const reserveLabel = { pt: 'Reservar', en: 'Reserve', fr: 'Réserver' };
+const menuPdfLabel = { pt: 'Ver Menu', en: 'Open Menu', fr: 'Voir le Menu', ru: 'Открыть меню', zh: '查看菜单' };
+const reserveLabel = { pt: 'Reservar', en: 'Reserve', fr: 'Réserver', ru: 'Забронировать', zh: '预订' };
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);

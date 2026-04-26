@@ -44,6 +44,28 @@ export default function DrinksSection() {
         { name: 'Casamigos' },
         { name: 'Chocolate Martini' }
       ]
+    },
+    ru: {
+      badge: 'Премиум-бар',
+      title: 'Коктейли и вина',
+      description: 'От тщательно отобранной винной карты до эксклюзивных коктейлей — каждый напиток идеально дополняет насыщенность наших блюд.',
+      drinks: [
+        { name: 'Moscow Mule' },
+        { name: 'Blackberry' },
+        { name: 'Casamigos' },
+        { name: 'Chocolate Martini' }
+      ]
+    },
+    zh: {
+      badge: '精品酒吧',
+      title: '鸡尾酒与美酒',
+      description: '从精心挑选的酒单到独家调制的鸡尾酒，每一杯都与我们浓郁风味的菜肴完美搭配。',
+      drinks: [
+        { name: 'Moscow Mule' },
+        { name: 'Blackberry' },
+        { name: 'Casamigos' },
+        { name: 'Chocolate Martini' }
+      ]
     }
   };
 

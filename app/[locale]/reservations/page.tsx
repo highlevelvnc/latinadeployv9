@@ -71,12 +71,38 @@ function ReservationsPage({ params: { locale } }: Props) {
 
           {/* Additional Info */}
           <div className="mt-12 text-center text-sm text-cream/60">
-            <p>{locale === 'pt' ? 'Horário de funcionamento:' : locale === 'en' ? 'Opening hours:' : 'Horaires d\'ouverture:'}</p>
+            <p>
+              {locale === 'pt'
+                ? 'Horário de funcionamento:'
+                : locale === 'fr'
+                  ? "Horaires d'ouverture :"
+                  : locale === 'ru'
+                    ? 'Часы работы:'
+                    : locale === 'zh'
+                      ? '营业时间：'
+                      : 'Opening hours:'}
+            </p>
             <p className="font-medium text-cream/80 mt-1">
-              {locale === 'pt' ? 'Ter-Dom: 12h00-15h00, 19h00-23h30' : locale === 'en' ? 'Tue-Sun: 12:00-15:00, 19:00-23:30' : 'Mar-Dim: 12h00-15h00, 19h00-23h30'}
+              {locale === 'pt'
+                ? 'Ter-Dom: 12h00-15h00, 19h00-23h30'
+                : locale === 'fr'
+                  ? 'Mar-Dim: 12h00-15h00, 19h00-23h30'
+                  : locale === 'ru'
+                    ? 'Вт-Вс: 12:00-15:00, 19:00-23:30'
+                    : locale === 'zh'
+                      ? '周二至周日：12:00-15:00, 19:00-23:30'
+                      : 'Tue-Sun: 12:00-15:00, 19:00-23:30'}
             </p>
             <p className="mt-1">
-              {locale === 'pt' ? 'Segunda-feira: Encerrado' : locale === 'en' ? 'Monday: Closed' : 'Lundi: Fermé'}
+              {locale === 'pt'
+                ? 'Segunda-feira: Encerrado'
+                : locale === 'fr'
+                  ? 'Lundi : Fermé'
+                  : locale === 'ru'
+                    ? 'Понедельник: закрыто'
+                    : locale === 'zh'
+                      ? '周一：休息'
+                      : 'Monday: Closed'}
             </p>
           </div>
         </div>

@@ -45,6 +45,38 @@ const content = {
       { group: 'Sunday',            lunch: '12:30 – 4:00 PM', dinner: '6:30 – 10:30 PM',   note: 'Perfect for a family lunch' },
     ],
   },
+  ru: {
+    badge: 'Часы работы',
+    title: 'Открыто каждый день,',
+    titleAccent: 'обед и ужин',
+    description:
+      'С полудня до ночи Latina Grill готов принять вас. Рекомендуем бронировать заранее, особенно в выходные.',
+    infoA: { label: 'Обед и ужин', desc: 'Непрерывное обслуживание. Кухня работает каждый день.' },
+    infoB: { label: 'Рекомендуем бронировать', desc: 'Особенно в пятницу, субботу и в праздничные дни.' },
+    lunchLabel: 'Обед',
+    dinnerLabel: 'Ужин',
+    schedule: [
+      { group: 'Пн – Чт',  lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: 'Обед и ужин' },
+      { group: 'Пт и Сб',  lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: 'Расширенный график' },
+      { group: 'Воскресенье', lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: 'Идеально для семейного обеда' },
+    ],
+  },
+  zh: {
+    badge: '营业时间',
+    title: '每日营业，',
+    titleAccent: '午餐与晚餐',
+    description:
+      '从中午到夜晚，Latina Grill随时欢迎您。建议提前预订，尤其是周末。',
+    infoA: { label: '午餐与晚餐', desc: '全天连续供应，每日开放。' },
+    infoB: { label: '建议预订', desc: '尤其是周五、周六及特殊节日。' },
+    lunchLabel: '午餐',
+    dinnerLabel: '晚餐',
+    schedule: [
+      { group: '周一至周四', lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: '午餐与晚餐' },
+      { group: '周五与周六', lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: '延长时段' },
+      { group: '周日',       lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: '理想的家庭午餐' },
+    ],
+  },
   fr: {
     badge: "Heures d'Ouverture",
     title: 'Ouvert tous les jours,',
