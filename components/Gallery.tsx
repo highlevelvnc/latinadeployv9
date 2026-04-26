@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
@@ -47,18 +47,22 @@ export default function Gallery() {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') setSelectedImage(null);
-    if (e.key === 'ArrowLeft') handlePrevious();
-    if (e.key === 'ArrowRight') handleNext();
-  };
+  useEffect(() => {
+    if (selectedImage === null) return;
 
-  useState(() => {
-    if (selectedImage !== null) {
-      window.addEventListener('keydown', handleKeyDown as any);
-      return () => window.removeEventListener('keydown', handleKeyDown as any);
-    }
-  });
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedImage(null);
+      if (e.key === 'ArrowLeft') {
+        setSelectedImage((curr) => (curr === null ? null : curr === 0 ? images.length - 1 : curr - 1));
+      }
+      if (e.key === 'ArrowRight') {
+        setSelectedImage((curr) => (curr === null ? null : curr === images.length - 1 ? 0 : curr + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
 
   return (
     <>
