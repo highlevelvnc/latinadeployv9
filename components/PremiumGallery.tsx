@@ -33,13 +33,13 @@ export default function PremiumGallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const images = [
-    { src: '/tomahawklinda.jpeg', span: 'col-span-2 row-span-2', alt: 'Tomahawk' },
-    { src: '/ribeygrelha.jpeg', span: 'col-span-1', alt: 'Ribeye' },
-    { src: '/costela.jpeg', span: 'col-span-1', alt: 'Costela' },
-    { src: '/restaurantelocal3.jpeg', span: 'col-span-1', alt: 'Ambiente' },
-    { src: '/petitgateau.jpeg', span: 'col-span-1', alt: 'Sobremesa' },
-    { src: '/restaurantelocal2.jpeg', span: 'col-span-2', alt: 'Interior' },
-    { src: '/bandejalatina1.jpeg', span: 'col-span-1', alt: 'Bandeja' },
+    { src: '/tomahawklinda.webp', span: 'col-span-2 row-span-2', alt: 'Tomahawk' },
+    { src: '/ribeygrelha.webp', span: 'col-span-1', alt: 'Ribeye' },
+    { src: '/costela.webp', span: 'col-span-1', alt: 'Costela' },
+    { src: '/restaurantelocal3.webp', span: 'col-span-1', alt: 'Ambiente' },
+    { src: '/petitgateau.webp', span: 'col-span-1', alt: 'Sobremesa' },
+    { src: '/restaurantelocal2.webp', span: 'col-span-2', alt: 'Interior' },
+    { src: '/bandejalatina1.webp', span: 'col-span-1', alt: 'Bandeja' },
     { src: '/sobremesatrufa.jpeg', span: 'col-span-1', alt: 'Trufa' },
   ];
 

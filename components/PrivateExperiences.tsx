@@ -9,8 +9,8 @@ import { useLocale } from 'next-intl';
 const IMAGES = {
   cigar:    '/habanoscharuto.jpeg',   // Sala de charutos — cigar lounge hero
   private1: '/mesavazia.jpeg',        // Salas privativas — intimate table setting
-  service:  '/clientes1.jpeg',        // Atendimento dedicado — private service
-  terrace:  '/restaurantelocal4.jpeg',// Esplanada privada — outdoor setting
+  service:  '/clientes1.webp',        // Atendimento dedicado — private service
+  terrace:  '/restaurantelocal4.webp',// Esplanada privada — outdoor setting
   private2: '/restaurantelocal7.jpeg',// Ambientes privativos — venue atmosphere
 };
 

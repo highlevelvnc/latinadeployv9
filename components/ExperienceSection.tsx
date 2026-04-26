@@ -84,7 +84,7 @@ export default function ExperienceSection() {
               {/* Large Main Image */}
               <div className="col-span-2 relative h-[450px] overflow-hidden group">
                 <Image
-                  src="/grelhan.jpeg"
+                  src="/grelhan.webp"
                   alt="Grelha Latina Grill"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"
@@ -103,7 +103,7 @@ export default function ExperienceSection() {
 
               <div className="relative h-[250px] overflow-hidden group">
                 <Image
-                  src="/restaurantelocal1.jpeg"
+                  src="/restaurantelocal1.webp"
                   alt="Espaço Premium"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-1000 grayscale hover:grayscale-0"

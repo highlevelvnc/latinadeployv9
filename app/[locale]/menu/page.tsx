@@ -57,7 +57,7 @@ function MenuPageInner() {
             <ArrowLeft className="h-4 w-4" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Latina Grill"
               className="h-7 w-7 rounded-full object-contain"
             />

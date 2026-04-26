@@ -54,12 +54,18 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       type: 'website',
       images: [
         {
-          url: '/logo.png',
+          url: '/og-image.jpg',
           width: 1200,
           height: 630,
-          alt: 'Latina Grill Cascais',
+          alt: 'Latina Grill Cascais — Steakhouse',
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/og-image.jpg'],
     },
   };
 }
@@ -133,7 +139,7 @@ export default function HomePage({ params: { locale } }: Props) {
             '@type': 'Restaurant',
             name: 'Latina Grill Cascais',
             description: 'Steakhouse premium em Cascais com cortes do mundo, grelha aberta, carta de vinhos e música ao vivo às sextas e sábados.',
-            image: 'https://latinagrill.pt/logo.png',
+            image: 'https://latinagrill.pt/logo.webp',
             url: 'https://latinagrill.pt',
             telephone: '+351968707515',
             priceRange: '€€€',

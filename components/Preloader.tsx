@@ -49,7 +49,7 @@ export default function Preloader() {
             className="relative w-32 h-32 mb-6"
           >
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt="Latina Grill"
               fill
               className="object-contain"

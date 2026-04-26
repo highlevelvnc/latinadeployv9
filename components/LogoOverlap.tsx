@@ -59,7 +59,7 @@ export default function LogoOverlap() {
                 <div className="absolute inset-[6px] rounded-full border border-red-500/20" />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.06] to-transparent" />
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="Latina Grill"
                   fill
                   className="object-contain p-4 sm:p-5 drop-shadow-[0_0_30px_rgba(220,38,38,0.45)]"

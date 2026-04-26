@@ -13,7 +13,7 @@ const MotionLink = motion(Link);
 const AUTO_PLAY_INTERVAL = 5000;
 
 // Images that rotate through the stack (3 images = 3 events)
-const stackImages = ['/aniversario.jpeg', '/clientes.jpeg', '/aniversario1.jpeg'];
+const stackImages = ['/aniversario.jpeg', '/clientes.webp', '/aniversario1.jpeg'];
 
 // Stack visual configs: front → middle → back
 const stackConfigs = [

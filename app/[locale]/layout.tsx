@@ -42,8 +42,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
       <head>
-        <link rel="icon" href="/logo.png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="icon" href="/logo.webp" />
+        <link rel="apple-touch-icon" href="/logo.webp" />
       </head>
       <body className="font-sans antialiased bg-dark text-light">
         <NextIntlClientProvider messages={messages}>

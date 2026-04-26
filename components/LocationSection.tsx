@@ -120,7 +120,7 @@ export default function LocationSection() {
             <motion.div style={{ y: imageY }}>
               <div className="relative h-[600px] lg:h-[700px] overflow-hidden group">
                 <Image
-                  src="/restaurantelocal.jpeg"
+                  src="/restaurantelocal.webp"
                   alt="Latina Grill Cascais"
                   fill
                   className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"

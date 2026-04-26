@@ -48,7 +48,7 @@ export default function Footer() {
             <Link href={`/${locale}`} className="flex items-center gap-3 mb-4 group">
               <div className="relative w-10 h-10 flex-shrink-0">
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="Latina Grill"
                   fill
                   className="object-contain"

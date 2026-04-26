@@ -66,7 +66,7 @@ export default function Header() {
                 className="relative w-12 h-12 lg:w-14 lg:h-14"
               >
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="Latina Grill"
                   fill
                   className="object-contain drop-shadow-[0_0_20px_rgba(220,38,38,0.5)]"

@@ -29,7 +29,7 @@ export default function ReservationCTA() {
       {/* Subtle food image background — very low opacity for texture */}
       <div className="pointer-events-none absolute inset-0">
         <Image
-          src="/tomahawklinda.jpeg"
+          src="/tomahawklinda.webp"
           alt=""
           fill
           className="object-cover object-center"

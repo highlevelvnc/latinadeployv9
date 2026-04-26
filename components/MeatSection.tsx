@@ -42,7 +42,7 @@ export default function MeatSection() {
           >
             <div className="relative h-[520px] lg:h-[720px] overflow-hidden rounded-3xl group">
               <Image
-                src="/tomahawklatina.jpeg"
+                src="/tomahawklatina.webp"
                 alt="Tomahawk Premium"
                 fill
                 className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"

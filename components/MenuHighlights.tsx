@@ -67,7 +67,7 @@ const WINES: Wine[] = [
       en: 'House wine — pairs with the full grill: tomahawk, rib, picanha and premium cuts.',
       fr: "Vin maison — s'accorde avec tout le grill: tomahawk, côte, picanha et coupes premium.",
     },
-    image: '/mythologyc.jpg',
+    image: '/mythologyc.webp',
   },
 
   // ── PORTUGAL ─────────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ const WINES: Wine[] = [
       en: 'Grilled Tomahawk, dry-aged rib and the great house cuts.',
       fr: 'Tomahawk grillé, côte dry-aged et les grandes pièces de la maison.',
     },
-    image: '/wine-barcavelha.jpeg',
+    image: '/wine-barcavelha.webp',
   },
 
   {
@@ -151,7 +151,7 @@ const WINES: Wine[] = [
       en: 'Ribeye, Tomahawk Signature and noble cuts with strong plate presence.',
       fr: 'Ribeye, Tomahawk Signature et coupes nobles avec présence en assiette.',
     },
-    image: '/wine-leovillon.jpeg',
+    image: '/wine-leovillon.webp',
   },
 
   {
@@ -193,7 +193,7 @@ const WINES: Wine[] = [
       en: 'Premium Tomahawk, Wagyu and long dry-aged cuts.',
       fr: 'Tomahawk premium, Wagyu et pièces à maturation prolongée.',
     },
-    image: '/vinhopetrvs.jpeg',
+    image: '/vinhopetrvs.webp',
   },
 
   // ── Para adicionar novos vinhos: copie o bloco acima, preencha e descomente ──
@@ -219,13 +219,13 @@ const PAIRINGS: Pairing[] = [
     id: 'tomahawk-petrus',
     badge: { pt: 'Signature', en: 'Signature', fr: 'Signature' },
     meatTitle: { pt: 'Tomahawk na Brasa', en: 'Grilled Tomahawk', fr: 'Tomahawk Grillé' },
-    meatImage: '/tomahawkchamas.jpeg',
+    meatImage: '/tomahawkchamas.webp',
     wineNote: {
       pt: 'Château Petrus 2021 · Pomerol',
       en: 'Château Petrus 2021 · Pomerol',
       fr: 'Château Petrus 2021 · Pomerol',
     },
-    wineImage: '/vinhopetrvs.jpeg',
+    wineImage: '/vinhopetrvs.webp',
     bridgeNote: {
       pt: 'Merlot sedoso de Pomerol encontra a intensidade da brasa. Trufa e cacau elevam o corte.',
       en: 'Silky Pomerol Merlot meets the fire\'s intensity. Truffle and cocoa notes elevate the cut.',
@@ -236,13 +236,13 @@ const PAIRINGS: Pairing[] = [
     id: 'ribeye-leoville',
     badge: { pt: 'Premium', en: 'Premium', fr: 'Premium' },
     meatTitle: { pt: 'Ribeye Selection', en: 'Ribeye Selection', fr: 'Ribeye Selection' },
-    meatImage: '/ribeygrelha.jpeg',
+    meatImage: '/ribeygrelha.webp',
     wineNote: {
       pt: 'Ch. Léoville-Barton 2018 · Saint-Julien',
       en: 'Ch. Léoville-Barton 2018 · Saint-Julien',
       fr: 'Ch. Léoville-Barton 2018 · Saint-Julien',
     },
-    wineImage: '/wine-leovillon.jpeg',
+    wineImage: '/wine-leovillon.webp',
     bridgeNote: {
       pt: 'Cassis e grafite do Saint-Julien a espelhar o marmoreado e a intensidade do ribeye.',
       en: 'Cassis and graphite from Saint-Julien mirror the marbling and intensity of the ribeye.',
@@ -253,13 +253,13 @@ const PAIRINGS: Pairing[] = [
     id: 'costela-barcavelha',
     badge: { pt: 'Classic', en: 'Classic', fr: 'Classique' },
     meatTitle: { pt: 'Costela Lenta', en: 'Slow-Cooked Rib', fr: 'Côte Lente' },
-    meatImage: '/costela.jpeg',
+    meatImage: '/costela.webp',
     wineNote: {
       pt: 'Barca Velha 2015 · Douro Superior',
       en: 'Barca Velha 2015 · Douro Superior',
       fr: 'Barca Velha 2015 · Douro Supérieur',
     },
-    wineImage: '/wine-barcavelha.jpeg',
+    wineImage: '/wine-barcavelha.webp',
     bridgeNote: {
       pt: 'Complexidade legendária da Barca Velha a amplificar a profundidade da cozedura lenta.',
       en: 'Barca Velha\'s legendary complexity amplifies the depth of the slow cook.',
@@ -473,7 +473,7 @@ function CartaTab({ locale, t }: { locale: Locale; t: UIStrings }) {
 
   const hoveredWine = WINES.find((w) => w.id === hoveredId) ?? null;
   const houseWine = WINES.find((w) => w.isHouseLabel) ?? WINES[0];
-  const fallbackImage = houseWine?.image ?? WINES.find((w) => w.image)?.image ?? '/vinhopetrvs.jpeg';
+  const fallbackImage = houseWine?.image ?? WINES.find((w) => w.image)?.image ?? '/vinhopetrvs.webp';
   const activeImage = hoveredWine?.image ?? fallbackImage;
   const activeCaption = hoveredWine ?? houseWine;
 

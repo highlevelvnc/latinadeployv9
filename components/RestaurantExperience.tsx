@@ -73,10 +73,10 @@ export default function RestaurantExperience() {
   //   Row 3: local6 (col-span-2) | local7 (col-span-1)  → h 310px
   // Mobile (2-col, auto-rows-[200px]): all items col-span-1 → 3 rows of 2
   const bentoItems = [
-    { src: '/restaurantelocal1.jpeg', colSpan: 'md:col-span-2', label: t.labels[0] },
-    { src: '/restaurantelocal2.jpeg', colSpan: 'md:col-span-1', label: t.labels[1] },
-    { src: '/restaurantelocal3.jpeg', colSpan: 'md:col-span-1', label: t.labels[2] },
-    { src: '/restaurantelocal5.jpeg', colSpan: 'md:col-span-2', label: t.labels[3] },
+    { src: '/restaurantelocal1.webp', colSpan: 'md:col-span-2', label: t.labels[0] },
+    { src: '/restaurantelocal2.webp', colSpan: 'md:col-span-1', label: t.labels[1] },
+    { src: '/restaurantelocal3.webp', colSpan: 'md:col-span-1', label: t.labels[2] },
+    { src: '/restaurantelocal5.webp', colSpan: 'md:col-span-2', label: t.labels[3] },
     { src: '/restaurantelocal6.jpeg', colSpan: 'md:col-span-2', label: t.labels[4] },
     { src: '/restaurantelocal7.jpeg', colSpan: 'md:col-span-1', label: t.labels[5] },
   ];
@@ -183,7 +183,7 @@ export default function RestaurantExperience() {
             className="relative h-[420px] lg:h-[540px] overflow-hidden rounded-3xl group"
           >
             <Image
-              src="/restaurantelocal4.jpeg"
+              src="/restaurantelocal4.webp"
               alt="Interior Latina Grill Cascais"
               fill
               className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
