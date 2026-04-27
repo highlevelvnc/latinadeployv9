@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyReservationToken } from '@/lib/reservation-token';
 import { sendCustomerConfirmedEmail } from '@/lib/reservation-email';
 import { markConfirmed } from '@/lib/reservation-store';
+import { sendSMS, formatDateShort } from '@/lib/sms';
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,6 +34,12 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });
       }
     }
+
+    // SMS confirmation — best-effort, never blocks the email path
+    void sendSMS({
+      to: payload.phone,
+      body: `Latina Grill: reserva CONFIRMADA para ${formatDateShort(payload.date)} as ${payload.time}. Aguardamos a sua visita!`,
+    });
 
     // Persist confirmation so the cron can pick it up for D-1 reminders
     try {

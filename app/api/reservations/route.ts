@@ -9,6 +9,7 @@ import {
   sendOwnerNewRequestEmail,
 } from '@/lib/reservation-email';
 import { saveNewPending } from '@/lib/reservation-store';
+import { sendSMS, formatDateShort } from '@/lib/sms';
 
 interface ReservationData {
   name: string;
@@ -139,12 +140,16 @@ export async function POST(request: NextRequest) {
       console.error('[Latina Grill] KV save failed:', kvError);
     }
 
-    // Fire both emails in parallel; one failure must not block the other.
+    // Fire all messages in parallel; any failure must not block the others.
     const results = await Promise.allSettled([
       sendOwnerNewRequestEmail({ ...tokenPayload, iat: 0, exp: 0 }, adminToken),
       data.email
         ? sendCustomerPendingEmail({ ...tokenPayload, iat: 0, exp: 0 })
         : Promise.resolve(),
+      sendSMS({
+        to: data.phone,
+        body: `Latina Grill: pedido de reserva recebido para ${formatDateShort(data.date)} as ${data.time}. Confirmamos em ate 12h. Tel +351968707515`,
+      }),
     ]);
     for (const r of results) {
       if (r.status === 'rejected') {

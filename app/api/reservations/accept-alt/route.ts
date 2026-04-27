@@ -5,6 +5,7 @@ import {
   sendOwnerAlternativeAcceptedEmail,
 } from '@/lib/reservation-email';
 import { markConfirmed } from '@/lib/reservation-store';
+import { sendSMS, formatDateShort } from '@/lib/sms';
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,6 +56,12 @@ export async function POST(request: NextRequest) {
     } catch (e) {
       console.error('[Latina Grill] KV markConfirmed (accept-alt) failed:', e);
     }
+
+    // SMS confirmation with the accepted slot — best-effort
+    void sendSMS({
+      to: payload.phone,
+      body: `Latina Grill: reserva CONFIRMADA para ${formatDateShort(payload.date)} as ${slot}. Aguardamos a sua visita!`,
+    });
 
     return NextResponse.json({ success: true, slot });
   } catch (error) {

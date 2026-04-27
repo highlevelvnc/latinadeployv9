@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifyReservationToken } from '@/lib/reservation-token';
 import { sendCustomerDeclinedEmail } from '@/lib/reservation-email';
 import { markDeclined } from '@/lib/reservation-store';
+import { sendSMS, formatDateShort } from '@/lib/sms';
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,6 +32,12 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });
       }
     }
+
+    // SMS decline — short, polite, with phone for fallback contact
+    void sendSMS({
+      to: payload.phone,
+      body: `Latina Grill: lamentamos nao poder confirmar a reserva para ${formatDateShort(payload.date)}. Tel +351968707515 para outra data.`,
+    });
 
     try {
       await markDeclined(payload.reservationId);

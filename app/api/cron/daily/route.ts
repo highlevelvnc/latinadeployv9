@@ -10,6 +10,7 @@ import {
   sendCustomerReminderEmail,
   sendOwnerPendingDigestEmail,
 } from '@/lib/reservation-email';
+import { sendSMS } from '@/lib/sms';
 
 // ─── Daily cron ─────────────────────────────────────────────────────────────
 //
@@ -46,6 +47,7 @@ export async function GET(req: NextRequest) {
     remindersSent: 0,
     remindersSkipped: 0,
     remindersFailed: 0,
+    smsRemindersSent: 0,
     pendingDigestSent: false,
     pendingCount: 0,
   };
@@ -80,6 +82,18 @@ export async function GET(req: NextRequest) {
       } catch (e) {
         console.error('[Latina Grill cron] reminder failed for', r.id, e);
         stats.remindersFailed++;
+      }
+
+      // SMS reminder — fire-and-forget; SMS failures never block the email path
+      try {
+        await sendSMS({
+          to: r.phone,
+          body: `Latina Grill: lembrete amigavel - vemo-nos amanha as ${r.time}. Aguardamos a sua visita!`,
+        });
+        stats.smsRemindersSent++;
+      } catch (e) {
+        // sendSMS already logs internally; this catch is defensive
+        console.error('[Latina Grill cron] SMS reminder failed for', r.id, e);
       }
     }
   } catch (e) {
