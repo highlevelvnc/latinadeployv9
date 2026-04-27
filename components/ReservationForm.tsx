@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import {
@@ -15,6 +15,9 @@ import {
   Minus,
   Plus,
   AlertCircle,
+  Check,
+  Sun,
+  Moon,
 } from 'lucide-react';
 
 // ─── Country codes ────────────────────────────────────────────────────────────
@@ -42,29 +45,65 @@ const COUNTRY_CODES = [
   { code: '+52',  flag: '🇲🇽', name: 'MX' },
 ];
 
-// ─── Time slots ───────────────────────────────────────────────────────────────
+// ─── Time slots — fine-dining style: lunch + dinner (no afternoon) ──────────
+// Last reservation 22:30 to give the kitchen until 23:00 to wind down.
 
-const generateTimeSlots = () => {
-  const slots = [];
-  let hour = 12;
-  let minute = 30;
+const LUNCH_SLOTS = ['12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
+const DINNER_SLOTS = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30'];
 
-  while (hour < 23 || (hour === 23 && minute === 0)) {
-    slots.push(`${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`);
-    minute += 30;
-    if (minute >= 60) { minute = 0; hour++; }
-  }
-  return slots;
-};
-
-const TIME_SLOTS = generateTimeSlots();
 const PHONE_NUMBER = '+351 968 707 515';
+const PHONE_HREF = PHONE_NUMBER.replace(/\s/g, '');
 const EMAIL_ADDRESS = 'latinagrill@icloud.com';
+
+const MAX_DAYS_AHEAD = 90;       // Online bookings up to 3 months out
+const TIME_BUFFER_MIN = 60;      // Minimum lead time (min) for same-day reservations
+const LARGE_GROUP_THRESHOLD = 10;
+const MAX_GUESTS = 50;
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// ─── Date / time helpers ─────────────────────────────────────────────────────
+
+function getMinDate(): string {
+  return new Date().toISOString().split('T')[0];
+}
+
+function getMaxDate(): string {
+  const d = new Date();
+  d.setDate(d.getDate() + MAX_DAYS_AHEAD);
+  return d.toISOString().split('T')[0];
+}
+
+function isToday(dateStr: string): boolean {
+  return dateStr === getMinDate();
+}
+
+function slotToMinutes(slot: string): number {
+  const [h, m] = slot.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function getCurrentMinutesPlusBuffer(): number {
+  const now = new Date();
+  return now.getHours() * 60 + now.getMinutes() + TIME_BUFFER_MIN;
+}
+
+function getDayOfWeek(dateStr: string, locale: string): string {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  if (!y || !m || !d) return '';
+  // Noon UTC to avoid timezone shifting the day
+  return new Date(Date.UTC(y, m - 1, d, 12)).toLocaleDateString(locale, {
+    weekday: 'long',
+    timeZone: 'Europe/Lisbon',
+  });
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ReservationForm() {
   const t = useTranslations('reservation');
+  const locale = useLocale();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -81,6 +120,34 @@ export default function ReservationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // ─── Smart slot filtering — recomputes when date changes ─────────────────────
+  const availableSlots = useMemo(() => {
+    if (!formData.date || !isToday(formData.date)) {
+      return { lunch: LUNCH_SLOTS, dinner: DINNER_SLOTS };
+    }
+    const cutoff = getCurrentMinutesPlusBuffer();
+    return {
+      lunch: LUNCH_SLOTS.filter((s) => slotToMinutes(s) >= cutoff),
+      dinner: DINNER_SLOTS.filter((s) => slotToMinutes(s) >= cutoff),
+    };
+  }, [formData.date]);
+
+  const noSlotsAvailable =
+    formData.date &&
+    availableSlots.lunch.length === 0 &&
+    availableSlots.dinner.length === 0;
+
+  const dayOfWeek = useMemo(
+    () => getDayOfWeek(formData.date, locale),
+    [formData.date, locale],
+  );
+
+  // Real-time email validation (only flags as valid when fully typed)
+  const showEmailValid =
+    formData.email.trim() !== '' && EMAIL_REGEX.test(formData.email.trim());
+
+  const isLargeGroup = formData.guests > LARGE_GROUP_THRESHOLD;
+
   // ─── Validation ─────────────────────────────────────────────────────────────
 
   const validateForm = () => {
@@ -89,8 +156,7 @@ export default function ReservationForm() {
     if (!formData.name.trim()) newErrors.name = t('validation.required');
     if (!formData.phone.trim()) newErrors.phone = t('validation.required');
 
-    // Email is optional, but if provided must be valid
-    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    if (formData.email.trim() && !EMAIL_REGEX.test(formData.email.trim())) {
       newErrors.email = t('validation.invalidEmail');
     }
 
@@ -100,10 +166,24 @@ export default function ReservationForm() {
       const selected = new Date(formData.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      const max = new Date();
+      max.setDate(max.getDate() + MAX_DAYS_AHEAD);
+      max.setHours(23, 59, 59, 999);
+
       if (selected < today) newErrors.date = t('validation.pastDate');
+      else if (selected > max) newErrors.date = t('validation.tooFarFuture');
     }
 
-    if (!formData.time) newErrors.time = t('validation.required');
+    if (!formData.time) {
+      newErrors.time = t('validation.required');
+    } else if (
+      formData.date &&
+      isToday(formData.date) &&
+      slotToMinutes(formData.time) < getCurrentMinutesPlusBuffer()
+    ) {
+      newErrors.time = t('validation.timeNotAvailable');
+    }
+
     if (formData.guests < 1) newErrors.guests = t('validation.minGuests');
 
     setErrors(newErrors);
@@ -130,8 +210,7 @@ export default function ReservationForm() {
 
       if (!res.ok) throw new Error('Server error');
     } catch {
-      // Non-blocking: show success even if network fails —
-      // the server logs the reservation and email is sent server-side.
+      // Non-blocking: we surface success either way; server logs the failure.
     } finally {
       setIsSubmitting(false);
     }
@@ -139,7 +218,10 @@ export default function ReservationForm() {
     setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false);
-      setFormData({ name: '', countryCode: '+351', phone: '', email: '', date: '', time: '', guests: 2, observations: '' });
+      setFormData({
+        name: '', countryCode: '+351', phone: '', email: '',
+        date: '', time: '', guests: 2, observations: '',
+      });
       setErrors({});
     }, 5000);
   };
@@ -150,14 +232,53 @@ export default function ReservationForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Reset selected time if date changes — the available slots may be different
+    if (name === 'date' && value !== formData.date) {
+      setFormData((prev) => ({ ...prev, [name]: value, time: '' }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+
     if (errors[name]) {
       setErrors((prev) => { const n = { ...prev }; delete n[name]; return n; });
     }
   };
 
+  const handleTimeSelect = (slot: string) => {
+    setFormData((prev) => ({ ...prev, time: slot }));
+    if (errors.time) {
+      setErrors((prev) => { const n = { ...prev }; delete n.time; return n; });
+    }
+  };
+
   const handleGuestsChange = (delta: number) => {
-    setFormData((prev) => ({ ...prev, guests: Math.max(1, prev.guests + delta) }));
+    setFormData((prev) => ({
+      ...prev,
+      guests: Math.min(MAX_GUESTS, Math.max(1, prev.guests + delta)),
+    }));
+  };
+
+  // ─── Slot button (extracted for clarity) ─────────────────────────────────────
+
+  const TimeSlotButton = ({ slot }: { slot: string }) => {
+    const selected = formData.time === slot;
+    return (
+      <button
+        type="button"
+        onClick={() => handleTimeSelect(slot)}
+        aria-pressed={selected}
+        className={`
+          relative px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150
+          ${selected
+            ? 'bg-accent-orange text-dark border border-accent-orange shadow-md shadow-accent-orange/30 scale-[1.02]'
+            : 'bg-dark-lighter text-light border border-light/10 hover:border-accent-orange/50 hover:bg-light/[0.04] active:scale-[0.97]'
+          }
+        `}
+      >
+        {slot}
+      </button>
+    );
   };
 
   // ─── Render ──────────────────────────────────────────────────────────────────
@@ -176,7 +297,7 @@ export default function ReservationForm() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6" noValidate>
 
         {/* Name */}
         <div className="group">
@@ -190,6 +311,7 @@ export default function ReservationForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            autoComplete="name"
             className={`w-full bg-dark-lighter border ${errors.name ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
             placeholder="João Silva"
           />
@@ -200,14 +322,13 @@ export default function ReservationForm() {
           )}
         </div>
 
-        {/* Phone — country code selector + number input */}
+        {/* Phone */}
         <div className="group">
           <label className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <Phone className="w-4 h-4 text-accent-orange" />
             {t('form.phone')}
           </label>
           <div className="flex gap-2">
-            {/* Country code */}
             <select
               name="countryCode"
               value={formData.countryCode}
@@ -221,14 +342,13 @@ export default function ReservationForm() {
                 </option>
               ))}
             </select>
-
-            {/* Number */}
             <input
               type="tel"
               id="phone"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
+              autoComplete="tel-national"
               className={`flex-1 bg-dark-lighter border ${errors.phone ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
               placeholder="968 707 515"
             />
@@ -240,22 +360,44 @@ export default function ReservationForm() {
           )}
         </div>
 
-        {/* Email (optional) — used to send confirmation to the guest */}
+        {/* Email — real-time valid indicator */}
         <div className="group">
           <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
             <Mail className="w-4 h-4 text-accent-orange" />
             {t('form.email')}
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="email"
-            className={`w-full bg-dark-lighter border ${errors.email ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
-            placeholder="seu@email.com"
-          />
+          <div className="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              autoComplete="email"
+              inputMode="email"
+              className={`w-full bg-dark-lighter border rounded-xl px-4 py-3 pr-11 text-light placeholder:text-light/40 focus:outline-none focus:ring-2 transition-all
+                ${errors.email
+                  ? 'border-red focus:border-red focus:ring-red/20'
+                  : showEmailValid
+                    ? 'border-accent-green/60 focus:border-accent-green focus:ring-accent-green/20'
+                    : 'border-light/10 focus:border-accent-orange focus:ring-accent-orange/20'
+                }`}
+              placeholder="seu@email.com"
+            />
+            <AnimatePresence>
+              {showEmailValid && !errors.email && (
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-accent-green"
+                  aria-hidden="true"
+                >
+                  <Check className="w-5 h-5" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           {errors.email && (
             <p className="mt-1 text-sm text-red flex items-center gap-1">
               <AlertCircle className="w-3 h-3" />{errors.email}
@@ -263,52 +405,113 @@ export default function ReservationForm() {
           )}
         </div>
 
-        {/* Date + Time */}
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="group">
-            <label htmlFor="date" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
+        {/* Date — with day-of-week chip */}
+        <div className="group">
+          <label htmlFor="date" className="flex items-center justify-between gap-2 text-sm font-medium text-light mb-2">
+            <span className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-accent-orange" />
               {t('form.date')}
-            </label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              min={new Date().toISOString().split('T')[0]}
-              className={`w-full bg-dark-lighter border ${errors.date ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
-            />
-            {errors.date && (
-              <p className="mt-1 text-sm text-red flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />{errors.date}
-              </p>
-            )}
-          </div>
+            </span>
+            <AnimatePresence mode="wait">
+              {dayOfWeek && (
+                <motion.span
+                  key={dayOfWeek}
+                  initial={{ opacity: 0, x: 8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-xs uppercase tracking-wider text-accent-orange/70 font-normal"
+                >
+                  {dayOfWeek}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            min={getMinDate()}
+            max={getMaxDate()}
+            className={`w-full bg-dark-lighter border ${errors.date ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+          />
+          {errors.date && (
+            <p className="mt-1 text-sm text-red flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />{errors.date}
+            </p>
+          )}
+        </div>
 
-          <div className="group">
-            <label htmlFor="time" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-              <Clock className="w-4 h-4 text-accent-orange" />
-              {t('form.time')}
-            </label>
-            <select
-              id="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-              className={`w-full bg-dark-lighter border ${errors.time ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
-            >
-              <option value="">Selecione</option>
-              {TIME_SLOTS.map((slot) => (
-                <option key={slot} value={slot}>{slot}</option>
-              ))}
-            </select>
-            {errors.time && (
-              <p className="mt-1 text-sm text-red flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" />{errors.time}
-              </p>
-            )}
-          </div>
+        {/* Time — chip picker grouped by service */}
+        <div className="group">
+          <label className="flex items-center gap-2 text-sm font-medium text-light mb-3">
+            <Clock className="w-4 h-4 text-accent-orange" />
+            {t('form.time')}
+          </label>
+
+          {!formData.date ? (
+            <div className="rounded-xl border border-light/10 bg-dark-lighter px-4 py-6 text-center">
+              <p className="text-sm text-light/50 italic">{t('form.selectDateFirst')}</p>
+            </div>
+          ) : noSlotsAvailable ? (
+            <div className="rounded-xl border border-accent-orange/30 bg-accent-orange/5 p-4 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-accent-orange flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-light/85 space-y-2">
+                <p>{t('info.noSlotsToday')}</p>
+                <a
+                  href={`tel:${PHONE_HREF}`}
+                  className="inline-flex items-center gap-1.5 text-accent-orange hover:text-accent-yellow font-semibold transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  {PHONE_NUMBER}
+                </a>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-5">
+              {availableSlots.lunch.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <Sun className="w-3.5 h-3.5 text-accent-orange" />
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/55 font-medium">
+                      {t('info.lunch')}
+                    </span>
+                    <span className="text-[11px] text-light/30">12:30 – 15:00</span>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    {availableSlots.lunch.map((slot) => (
+                      <TimeSlotButton key={slot} slot={slot} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {availableSlots.dinner.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <Moon className="w-3.5 h-3.5 text-accent-orange" />
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/55 font-medium">
+                      {t('info.dinner')}
+                    </span>
+                    <span className="text-[11px] text-light/30">19:00 – 22:30</span>
+                  </div>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    {availableSlots.dinner.map((slot) => (
+                      <TimeSlotButton key={slot} slot={slot} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {errors.time && (
+            <p className="mt-2 text-sm text-red flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />{errors.time}
+            </p>
+          )}
         </div>
 
         {/* Guests */}
@@ -322,24 +525,67 @@ export default function ReservationForm() {
               type="button"
               onClick={() => handleGuestsChange(-1)}
               disabled={formData.guests <= 1}
-              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all disabled:opacity-50"
+              aria-label="−"
+              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all disabled:opacity-50 disabled:hover:border-light/10 active:scale-95"
             >
               <Minus className="w-5 h-5 text-light" />
             </button>
-            <div className="flex-1 bg-dark-lighter border border-light/10 rounded-xl px-6 py-3 text-center">
-              <span className="text-2xl font-semibold text-light">{formData.guests}</span>
+            <div className="flex-1 bg-dark-lighter border border-light/10 rounded-xl px-6 py-3 text-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={formData.guests}
+                  initial={{ y: 12, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -12, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  className="text-2xl font-semibold text-light inline-block"
+                >
+                  {formData.guests}
+                </motion.span>
+              </AnimatePresence>
               <span className="text-sm text-light/60 ml-2">
-                {formData.guests === 1 ? 'pessoa' : 'pessoas'}
+                {formData.guests === 1 ? t('form.guestSingular') : t('form.guestPlural')}
               </span>
             </div>
             <button
               type="button"
               onClick={() => handleGuestsChange(1)}
-              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all"
+              disabled={formData.guests >= MAX_GUESTS}
+              aria-label="+"
+              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all disabled:opacity-50 disabled:hover:border-light/10 active:scale-95"
             >
               <Plus className="w-5 h-5 text-light" />
             </button>
           </div>
+
+          {/* Large group inline note */}
+          <AnimatePresence>
+            {isLargeGroup && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                animate={{ opacity: 1, height: 'auto', marginTop: 12 }}
+                exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <div className="rounded-xl border border-accent-orange/30 bg-accent-orange/5 p-3.5 flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-accent-orange mt-0.5 flex-shrink-0" />
+                  <div className="text-sm text-light/85 leading-relaxed">
+                    <p className="font-semibold text-light mb-0.5">{t('info.largeGroupTitle')}</p>
+                    <p>
+                      {t('info.largeGroupNote')}{' '}
+                      <a
+                        href={`tel:${PHONE_HREF}`}
+                        className="text-accent-orange hover:text-accent-yellow font-semibold transition-colors whitespace-nowrap"
+                      >
+                        {PHONE_NUMBER}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Observations */}
@@ -354,6 +600,7 @@ export default function ReservationForm() {
             value={formData.observations}
             onChange={handleChange}
             rows={3}
+            maxLength={500}
             className="w-full bg-dark-lighter border border-light/10 rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all resize-none"
             placeholder="Algum pedido especial?"
           />
@@ -375,7 +622,7 @@ export default function ReservationForm() {
           </p>
           <div className="flex flex-col sm:flex-row gap-2.5">
             <a
-              href={`tel:${PHONE_NUMBER.replace(/\s/g, '')}`}
+              href={`tel:${PHONE_HREF}`}
               className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-all hover:border-accent-orange hover:text-accent-orange"
             >
               <Phone className="w-4 h-4 shrink-0" />

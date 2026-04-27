@@ -105,7 +105,12 @@
     "info": {
       "schedule": "预订时间：12:30 – 23:00",
       "minGuests": "1人起",
-      "allDays": "每天开放"
+      "allDays": "每天开放",
+      "lunch": "午餐",
+      "dinner": "晚餐",
+      "noSlotsToday": "今日已无可预订时段，请来电：",
+      "largeGroupTitle": "团体预订？",
+      "largeGroupNote": "10位以上的团体，建议直接致电以获得最佳服务："
     },
     "form": {
       "name": "全名",
@@ -117,6 +122,9 @@
       "guests": "用餐人数",
       "observations": "备注（可选）",
       "email": "邮箱（可选）",
+      "guestSingular": "位",
+      "guestPlural": "位",
+      "selectDateFirst": "请先选择日期",
       "submit": "确认预订",
       "submitting": "提交中...",
       "callNow": "立即致电",
@@ -128,7 +136,9 @@
       "minGuests": "最少1位宾客",
       "invalidDate": "无效日期",
       "pastDate": "不可预订过去的日期",
-      "invalidEmail": "邮箱无效"
+      "invalidEmail": "邮箱无效",
+      "tooFarFuture": "仅限3个月内的预订",
+      "timeNotAvailable": "时段已不可用"
     },
     "success": {
       "title": "预订已收到！",

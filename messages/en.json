@@ -105,7 +105,12 @@
     "info": {
       "schedule": "Reservation hours: 12:30 PM – 11:00 PM",
       "minGuests": "From 1 person",
-      "allDays": "Every day"
+      "allDays": "Every day",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "noSlotsToday": "No online slots available today — please call:",
+      "largeGroupTitle": "Large group?",
+      "largeGroupNote": "For parties over 10, we recommend contacting us directly:"
     },
     "form": {
       "name": "Full name",
@@ -117,6 +122,9 @@
       "guests": "Number of guests",
       "observations": "Special requests (optional)",
       "email": "Email (optional)",
+      "guestSingular": "person",
+      "guestPlural": "people",
+      "selectDateFirst": "Pick a date first",
       "submit": "Confirm Reservation",
       "submitting": "Submitting...",
       "callNow": "Call Now",
@@ -128,7 +136,9 @@
       "minGuests": "Minimum 1 person",
       "invalidDate": "Invalid date",
       "pastDate": "Cannot book for past dates",
-      "invalidEmail": "Invalid email"
+      "invalidEmail": "Invalid email",
+      "tooFarFuture": "Bookings up to 3 months ahead only",
+      "timeNotAvailable": "Time no longer available"
     },
     "success": {
       "title": "Reservation Received!",

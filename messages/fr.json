@@ -105,7 +105,12 @@
     "info": {
       "schedule": "Horaires de réservation : 12h30 – 23h00",
       "minGuests": "À partir de 1 personne",
-      "allDays": "Tous les jours"
+      "allDays": "Tous les jours",
+      "lunch": "Déjeuner",
+      "dinner": "Dîner",
+      "noSlotsToday": "Plus de créneaux disponibles aujourd'hui — veuillez appeler :",
+      "largeGroupTitle": "Groupe important ?",
+      "largeGroupNote": "Pour plus de 10 personnes, nous recommandons un contact direct :"
     },
     "form": {
       "name": "Nom complet",
@@ -117,6 +122,9 @@
       "guests": "Nombre de personnes",
       "observations": "Demandes spéciales (optionnel)",
       "email": "E-mail (facultatif)",
+      "guestSingular": "personne",
+      "guestPlural": "personnes",
+      "selectDateFirst": "Choisissez d'abord une date",
       "submit": "Confirmer la Réservation",
       "submitting": "Envoi en cours...",
       "callNow": "Appeler",
@@ -128,7 +136,9 @@
       "minGuests": "Minimum 1 personne",
       "invalidDate": "Date invalide",
       "pastDate": "Impossible de réserver pour des dates passées",
-      "invalidEmail": "E-mail invalide"
+      "invalidEmail": "E-mail invalide",
+      "tooFarFuture": "Réservations jusqu'à 3 mois à l'avance",
+      "timeNotAvailable": "Horaire plus disponible"
     },
     "success": {
       "title": "Réservation Reçue !",

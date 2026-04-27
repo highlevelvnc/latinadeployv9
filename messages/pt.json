@@ -105,7 +105,12 @@
     "info": {
       "schedule": "Horário de reservas: 12:30 – 23:00",
       "minGuests": "A partir de 1 pessoa",
-      "allDays": "Todos os dias"
+      "allDays": "Todos os dias",
+      "lunch": "Almoço",
+      "dinner": "Jantar",
+      "noSlotsToday": "Hoje já não é possível reservar online — por favor, ligue:",
+      "largeGroupTitle": "Grupo grande?",
+      "largeGroupNote": "Para mais de 10 pessoas, recomendamos contactar diretamente:"
     },
     "form": {
       "name": "Nome completo",
@@ -117,6 +122,9 @@
       "guests": "Nº de pessoas",
       "observations": "Observações (opcional)",
       "email": "Email (opcional)",
+      "guestSingular": "pessoa",
+      "guestPlural": "pessoas",
+      "selectDateFirst": "Escolha primeiro a data",
       "submit": "Confirmar Reserva",
       "submitting": "A enviar...",
       "callNow": "Ligar agora",
@@ -128,7 +136,9 @@
       "minGuests": "Mínimo 1 pessoa",
       "invalidDate": "Data inválida",
       "pastDate": "Não pode reservar para datas passadas",
-      "invalidEmail": "Email inválido"
+      "invalidEmail": "Email inválido",
+      "tooFarFuture": "Reservas até 3 meses no futuro",
+      "timeNotAvailable": "Horário já não disponível"
     },
     "success": {
       "title": "Reserva Recebida!",
