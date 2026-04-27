@@ -5,7 +5,10 @@ import { markConfirmed } from '@/lib/reservation-store';
 
 export async function POST(request: NextRequest) {
   try {
-    const { token } = (await request.json()) as { token?: string };
+    const body = (await request.json()) as { token?: string; message?: string };
+    const token = body.token;
+    const message = String(body.message ?? '').trim().slice(0, 500) || undefined;
+
     if (!token) {
       return NextResponse.json({ error: 'missing_token' }, { status: 400 });
     }
@@ -24,7 +27,7 @@ export async function POST(request: NextRequest) {
 
     if (payload.email) {
       try {
-        await sendCustomerConfirmedEmail(payload);
+        await sendCustomerConfirmedEmail(payload, message);
       } catch (e) {
         console.error('[Latina Grill] Confirmation email failed:', e);
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });

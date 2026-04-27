@@ -9,7 +9,7 @@ import {
 import type { ReservationTokenPayload } from '@/lib/reservation-token';
 
 const LUNCH_SLOTS = ['12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
-const DINNER_SLOTS = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30'];
+const DINNER_SLOTS = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'];
 
 const DECLINE_REASONS = [
   { value: 'capacity', label: 'Capacidade máxima nesse horário' },
@@ -18,7 +18,7 @@ const DECLINE_REASONS = [
   { value: 'other', label: 'Outro motivo' },
 ];
 
-type View = 'choose' | 'declining' | 'proposing' | 'success';
+type View = 'choose' | 'confirming' | 'declining' | 'proposing' | 'success';
 type SuccessKind = 'confirmed' | 'declined' | 'proposed';
 
 interface Props {
@@ -32,6 +32,9 @@ export default function AdminClient({ token, payload, dateLong }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successKind, setSuccessKind] = useState<SuccessKind | null>(null);
+
+  // Confirm form
+  const [confirmMessage, setConfirmMessage] = useState<string>('');
 
   // Decline form
   const [declineReasonValue, setDeclineReasonValue] = useState<string>('');
@@ -61,7 +64,10 @@ export default function AdminClient({ token, payload, dateLong }: Props) {
       const res = await fetch('/api/reservations/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({
+          token,
+          message: confirmMessage.trim() || undefined,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'failed');
@@ -260,9 +266,9 @@ export default function AdminClient({ token, payload, dateLong }: Props) {
               <ActionButton
                 primary
                 disabled={submitting}
-                onClick={confirmReservation}
+                onClick={() => { setError(null); setView('confirming'); }}
                 title="Confirmar Reserva"
-                subtitle="Cliente recebe confirmação automática"
+                subtitle="Cliente recebe confirmação · pode adicionar mensagem"
                 icon={<Check className="w-5 h-5" />}
               />
               <ActionButton
@@ -280,6 +286,97 @@ export default function AdminClient({ token, payload, dateLong }: Props) {
                 subtitle="Enviar resposta educada com motivo"
                 icon={<X className="w-5 h-5" />}
               />
+            </motion.div>
+          )}
+
+          {view === 'confirming' && (
+            <motion.div
+              key="confirming"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              className="border border-[#1f1c18] rounded-sm bg-[#0f0f0f] p-6 sm:p-8"
+            >
+              <button
+                onClick={() => setView('choose')}
+                className="text-xs text-white/50 hover:text-white/80 transition-colors flex items-center gap-1.5 mb-5"
+              >
+                <ArrowLeft className="w-3 h-3" /> Voltar
+              </button>
+
+              <h2 className="font-serif text-xl mb-2">Confirmar reserva</h2>
+              <p className="text-sm text-white/55 leading-relaxed mb-6">
+                Cliente vai receber email de confirmação imediatamente. Podes adicionar uma mensagem
+                pessoal opcional (ex: detalhes da mesa, agradecimento, atenção especial).
+              </p>
+
+              {/* Optional personal message */}
+              <label className="block mb-6">
+                <span className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2 block">
+                  Mensagem para o cliente <span className="normal-case tracking-normal text-white/30">(opcional)</span>
+                </span>
+                <textarea
+                  value={confirmMessage}
+                  onChange={(e) => setConfirmMessage(e.target.value)}
+                  rows={4}
+                  maxLength={500}
+                  placeholder="Ex: Reservei a mesa junto à janela. Parabéns pelo aniversário da sua mãe — vamos preparar algo especial."
+                  className="w-full bg-[#1a1a1a] border border-[#2a2a2a] focus:border-[#d4af6e] focus:outline-none p-3 text-sm leading-relaxed transition-colors resize-none"
+                />
+                <span className="block mt-1.5 text-[10px] text-white/30 text-right">
+                  {confirmMessage.length}/500
+                </span>
+              </label>
+
+              {/* Quick suggestions */}
+              <div className="mb-6">
+                <p className="text-[10px] uppercase tracking-[3px] text-white/40 mb-2">Sugestões rápidas</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'Reservei a sua mesa preferida.',
+                    'Vamos preparar algo especial.',
+                    'Será um prazer recebê-lo.',
+                  ].map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => setConfirmMessage((cur) => cur ? cur : suggestion)}
+                      disabled={!!confirmMessage}
+                      className="px-3 py-1.5 text-xs border border-[#2a2a2a] hover:border-[#d4af6e]/50 hover:text-[#d4af6e] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {error && (
+                <div className="flex items-start gap-2 p-3 mb-4 bg-red-950/40 border border-red-900/50 text-red-200 text-sm">
+                  <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>{error}</span>
+                </div>
+              )}
+
+              <button
+                disabled={submitting}
+                onClick={confirmReservation}
+                className="w-full py-4 text-sm uppercase tracking-[3px] disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+                style={{
+                  backgroundColor: '#d4af6e',
+                  color: '#0a0a0a',
+                  fontWeight: 700,
+                }}
+              >
+                {submitting ? (
+                  <><Loader2 className="w-4 h-4 animate-spin" /> A confirmar…</>
+                ) : (
+                  <>
+                    {confirmMessage.trim() ? 'Confirmar e Enviar Mensagem' : 'Confirmar Sem Mensagem'}
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
             </motion.div>
           )}
 

@@ -185,6 +185,7 @@ ${shellClose()}`;
 
 export async function sendCustomerConfirmedEmail(
   data: ReservationTokenPayload,
+  ownerMessage?: string,
 ): Promise<void> {
   if (!data.email) return;
   const resend = getResend();
@@ -197,6 +198,7 @@ export async function sendCustomerConfirmedEmail(
     guests: escapeHtml(String(data.guests)),
     guestsLabel: data.guests === 1 ? 'pessoa' : 'pessoas',
     observations: data.observations ? escapeHtml(data.observations) : '',
+    ownerMessage: ownerMessage ? escapeHtml(ownerMessage) : '',
     address: escapeHtml(RESTAURANT_ADDRESS),
     phone: escapeHtml(RESTAURANT_PHONE),
     phoneHref: sanitizePhoneForHref(RESTAURANT_PHONE),
@@ -209,7 +211,7 @@ A sua reserva está confirmada.
 Data:    ${formatDateLong(data.date)}
 Hora:    ${data.time}
 Pessoas: ${data.guests}
-
+${ownerMessage ? `\nUma mensagem da nossa equipa:\n  "${ownerMessage}"\n` : ''}
 Morada:   ${RESTAURANT_ADDRESS}
 Telefone: ${RESTAURANT_PHONE}
 
@@ -267,6 +269,14 @@ ${e.observations ? `<tr><td style="padding:14px 0;color:#888;vertical-align:top;
 <a href="${RESTAURANT_MAPS_URL}" style="display:inline-block;padding:14px 36px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#d4af6e;letter-spacing:3px;text-decoration:none;text-transform:uppercase;font-weight:600;">Ver no Mapa</a>
 </td></tr></table>
 </td></tr>
+
+${e.ownerMessage ? `<tr><td style="padding:32px 48px 0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding:24px 24px;background-color:#1a1610;border-left:3px solid #d4af6e;">
+<p style="margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#d4af6e;letter-spacing:3px;text-transform:uppercase;">Mensagem da nossa equipa</p>
+<p style="margin:0;font-family:Georgia,serif;font-size:16px;color:#f5f0e6;line-height:1.7;font-style:italic;">"${e.ownerMessage}"</p>
+</td></tr></table>
+</td></tr>` : ''}
 
 <tr><td align="center" style="padding:32px 48px;background-color:#0a0a0a;">
 <p style="margin:0;font-family:Georgia,serif;font-size:13px;color:#888;line-height:1.8;font-style:italic;">

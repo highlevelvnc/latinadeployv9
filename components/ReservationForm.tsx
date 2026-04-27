@@ -46,10 +46,10 @@ const COUNTRY_CODES = [
 ];
 
 // ─── Time slots — fine-dining style: lunch + dinner (no afternoon) ──────────
-// Last reservation 22:30 to give the kitchen until 23:00 to wind down.
+// Last reservation 22:00 — the kitchen closes at 22:00.
 
 const LUNCH_SLOTS = ['12:30', '13:00', '13:30', '14:00', '14:30', '15:00'];
-const DINNER_SLOTS = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30'];
+const DINNER_SLOTS = ['19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'];
 
 const PHONE_NUMBER = '+351 968 707 515';
 const PHONE_HREF = PHONE_NUMBER.replace(/\s/g, '');
