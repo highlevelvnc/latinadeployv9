@@ -5,6 +5,7 @@ import {
   type ReservationTokenPayload,
 } from '@/lib/reservation-token';
 import { sendCustomerAlternativeOfferedEmail } from '@/lib/reservation-email';
+import { markAlternativeOffered } from '@/lib/reservation-store';
 
 const TIME_REGEX = /^\d{1,2}:\d{2}$/;
 
@@ -78,6 +79,12 @@ export async function POST(request: NextRequest) {
         console.error('[Latina Grill] Alternative email failed:', e);
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });
       }
+    }
+
+    try {
+      await markAlternativeOffered(payload.reservationId);
+    } catch (e) {
+      console.error('[Latina Grill] KV markAlternativeOffered failed:', e);
     }
 
     return NextResponse.json({ success: true, customerToken });

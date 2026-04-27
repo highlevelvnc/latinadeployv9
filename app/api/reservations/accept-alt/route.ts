@@ -4,6 +4,7 @@ import {
   sendCustomerConfirmedEmail,
   sendOwnerAlternativeAcceptedEmail,
 } from '@/lib/reservation-email';
+import { markConfirmed } from '@/lib/reservation-store';
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,6 +48,12 @@ export async function POST(request: NextRequest) {
       if (results.every((r) => r.status === 'rejected')) {
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });
       }
+    }
+
+    try {
+      await markConfirmed(payload.reservationId, { newTime: slot });
+    } catch (e) {
+      console.error('[Latina Grill] KV markConfirmed (accept-alt) failed:', e);
     }
 
     return NextResponse.json({ success: true, slot });

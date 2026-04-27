@@ -655,6 +655,177 @@ O cliente recebeu email de confirmação automaticamente.`;
   if (error) throw new Error(`Owner alt-accepted email: ${error.message}`);
 }
 
+// ─── (8) CUSTOMER · D-1 reminder ────────────────────────────────────────────
+// Sent the day before the reservation by the daily cron job.
+
+export async function sendCustomerReminderEmail(
+  data: { name: string; email?: string; date: string; time: string; guests: number; observations?: string },
+): Promise<void> {
+  if (!data.email) return;
+  const resend = getResend();
+  if (!resend) return;
+
+  const e = {
+    firstName: escapeHtml(data.name.split(' ')[0] || data.name),
+    dateLong: escapeHtml(formatDateLong(data.date)),
+    time: escapeHtml(data.time),
+    guests: escapeHtml(String(data.guests)),
+    guestsLabel: data.guests === 1 ? 'pessoa' : 'pessoas',
+    address: escapeHtml(RESTAURANT_ADDRESS),
+    phone: escapeHtml(RESTAURANT_PHONE),
+    phoneHref: sanitizePhoneForHref(RESTAURANT_PHONE),
+  };
+
+  const text = `Olá ${data.name},
+
+Lembrete: a sua reserva é amanhã.
+
+  Data:    ${formatDateLong(data.date)}
+  Hora:    ${data.time}
+  Pessoas: ${data.guests}
+
+Morada:   ${RESTAURANT_ADDRESS}
+Telefone: ${RESTAURANT_PHONE}
+
+Aguardamos a sua visita.
+
+— Latina Grill Cascais`;
+
+  const html = `${HEAD}${shellOpen()}
+${brandHeader('Lembrete · Amanhã')}
+
+<tr><td align="center" style="padding:40px 32px 0;">
+<h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:38px;font-weight:normal;color:#f5f0e6;line-height:1.15;letter-spacing:1px;">
+Vemo-nos<br><em style="color:#d4af6e;font-style:italic;">amanhã</em>.
+</h1>
+</td></tr>
+
+<tr><td align="center" style="padding:24px 56px 0;">
+<p style="margin:0;font-family:Georgia,serif;font-size:16px;color:#bbb;line-height:1.8;">
+Olá ${e.firstName}, é só um lembrete amigável. A sua mesa está reservada para <strong style="color:#f5f0e6;text-transform:capitalize;">${e.dateLong}</strong> às <strong style="color:#f5f0e6;">${e.time}</strong>.
+</p>
+</td></tr>
+
+<tr><td align="center" style="padding:40px 32px 16px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="height:1px;width:60px;background-color:#d4af6e;font-size:0;line-height:0;">&nbsp;</td></tr>
+</table>
+</td></tr>
+
+<tr><td style="padding:0 48px 32px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding:14px 0;color:#888;width:110px;border-bottom:1px solid #1f1c18;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Hora</td>
+<td style="padding:14px 0;color:#f5f0e6;border-bottom:1px solid #1f1c18;font-family:Georgia,serif;font-size:18px;">${e.time}</td></tr>
+<tr><td style="padding:14px 0;color:#888;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Pessoas</td>
+<td style="padding:14px 0;color:#f5f0e6;font-family:Georgia,serif;font-size:18px;">${e.guests} ${e.guestsLabel}</td></tr>
+</table>
+</td></tr>
+
+<tr><td align="center" style="padding:32px 32px 0;background-color:#080808;border-top:1px solid #1f1c18;">
+<p style="margin:32px 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#d4af6e;letter-spacing:5px;text-transform:uppercase;">Encontre-nos</p>
+<p style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:18px;color:#f5f0e6;line-height:1.5;">${e.address}</p>
+<p style="margin:0 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#888;letter-spacing:1px;">
+<a href="tel:${e.phoneHref}" style="color:#888;text-decoration:none;">${e.phone}</a>
+</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 32px;">
+<tr><td style="border:1px solid #d4af6e;">
+<a href="${RESTAURANT_MAPS_URL}" style="display:inline-block;padding:14px 36px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#d4af6e;letter-spacing:3px;text-decoration:none;text-transform:uppercase;font-weight:600;">Ver no Mapa</a>
+</td></tr></table>
+</td></tr>
+
+<tr><td align="center" style="padding:32px 48px;background-color:#0a0a0a;">
+<p style="margin:0;font-family:Georgia,serif;font-size:13px;color:#888;line-height:1.8;font-style:italic;">
+Precisa alterar ou cancelar? Responda a este email ou ligue-nos diretamente.
+</p>
+</td></tr>
+
+${shellClose()}`;
+
+  const { error } = await resend.emails.send({
+    from: RESERVATION_FROM,
+    to: data.email,
+    replyTo: RESERVATION_REPLY_TO,
+    subject: `Lembrete: a sua reserva é amanhã às ${data.time}`,
+    text,
+    html,
+  });
+  if (error) throw new Error(`Customer reminder email: ${error.message}`);
+}
+
+// ─── (9) OWNER · pending digest — sent by cron when items are stuck ─────────
+
+export async function sendOwnerPendingDigestEmail(
+  pending: Array<{ id: string; name: string; date: string; time: string; guests: number; createdAt: number }>,
+): Promise<void> {
+  if (pending.length === 0) return;
+  const resend = getResend();
+  if (!resend) return;
+
+  const now = Date.now();
+  const rows = pending
+    .map((r) => {
+      const hours = Math.floor((now - r.createdAt) / 3_600_000);
+      return `<tr>
+<td style="padding:12px 0;border-bottom:1px solid #f0f0f0;font-family:Arial,sans-serif;font-size:14px;color:#1a1a1a;">
+<strong>${escapeHtml(r.name)}</strong>
+<br><span style="color:#888;font-size:12px;">${escapeHtml(r.date)} · ${escapeHtml(r.time)} · ${r.guests}p</span>
+</td>
+<td style="padding:12px 0;border-bottom:1px solid #f0f0f0;text-align:right;font-family:Arial,sans-serif;font-size:12px;color:#a87a1f;font-weight:700;">há ${hours}h</td>
+</tr>`;
+    })
+    .join('');
+
+  const text = `${pending.length} pedido(s) ainda aguardam decisão:
+
+${pending.map((r) => `  · ${r.name} — ${r.date} às ${r.time} (${r.guests}p) — pendente há ${Math.floor((now - r.createdAt) / 3_600_000)}h`).join('\n')}
+
+Abre o email original de cada pedido e clica no botão dourado "Confirmar ou Recusar".`;
+
+  const html = `<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pedidos pendentes</title></head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:-apple-system,Arial,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f5;"><tr>
+<td align="center" style="padding:32px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;border:1px solid #e5e5e5;">
+<tr><td style="background-color:#0a0a0a;padding:28px 32px;">
+<p style="margin:0;font-family:Arial,sans-serif;font-size:10px;letter-spacing:4px;color:#d4af6e;text-transform:uppercase;">Aguardam Decisão</p>
+<p style="margin:6px 0 0;font-family:Georgia,serif;font-size:18px;color:#f5f0e6;letter-spacing:3px;">LATINA GRILL CASCAIS</p>
+</td></tr>
+
+<tr><td style="padding:28px 32px 8px;background-color:#fffbe9;border-bottom:1px solid #e5e5e5;">
+<p style="margin:0;font-family:Georgia,serif;font-size:22px;color:#1a1a1a;line-height:1.4;">
+<strong style="color:#a87a1f;">${pending.length}</strong> ${pending.length === 1 ? 'pedido aguarda' : 'pedidos aguardam'} a tua decisão
+</p>
+<p style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:13px;color:#666;line-height:1.6;">
+Estes pedidos chegaram ao site e ainda não foram confirmados nem recusados. Cada cliente está à espera de resposta.
+</p>
+</td></tr>
+
+<tr><td style="padding:8px 32px 24px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+${rows}
+</table>
+</td></tr>
+
+<tr><td style="padding:20px 32px 28px;background-color:#fafafa;border-top:1px solid #e5e5e5;">
+<p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:13px;color:#1a1a1a;font-weight:600;">Como tratar:</p>
+<p style="margin:0;font-family:Arial,sans-serif;font-size:12px;color:#666;line-height:1.7;">
+Procura na inbox o email original de cada pedido (assunto começa com "⏳ Pedido — Nome…") e toca no botão dourado "<strong>Confirmar ou Recusar</strong>".
+</p>
+</td></tr>
+
+</table></td></tr></table></body></html>`;
+
+  const { error } = await resend.emails.send({
+    from: RESERVATION_FROM,
+    to: RESTAURANT_INBOX,
+    replyTo: RESERVATION_REPLY_TO,
+    subject: `⏳ ${pending.length} ${pending.length === 1 ? 'pedido aguarda decisão' : 'pedidos aguardam decisão'}`,
+    text,
+    html,
+  });
+  if (error) throw new Error(`Owner pending digest: ${error.message}`);
+}
+
 // ─── (7) OWNER · customer declined all alternatives — info only ─────────────
 
 export async function sendOwnerAlternativeDeclinedEmail(

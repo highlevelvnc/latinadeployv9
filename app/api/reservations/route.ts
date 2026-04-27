@@ -8,6 +8,7 @@ import {
   sendCustomerPendingEmail,
   sendOwnerNewRequestEmail,
 } from '@/lib/reservation-email';
+import { saveNewPending } from '@/lib/reservation-store';
 
 interface ReservationData {
   name: string;
@@ -120,6 +121,23 @@ export async function POST(request: NextRequest) {
       status: 'pending',
     };
     const adminToken = signReservationToken(tokenPayload);
+
+    // Persist the reservation so the daily cron can find it later.
+    // Best-effort: a KV outage should not prevent the email flow from running.
+    try {
+      await saveNewPending({
+        id: reservationId,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        date: data.date,
+        time: data.time,
+        guests: data.guests,
+        observations: data.observations,
+      });
+    } catch (kvError) {
+      console.error('[Latina Grill] KV save failed:', kvError);
+    }
 
     // Fire both emails in parallel; one failure must not block the other.
     const results = await Promise.allSettled([

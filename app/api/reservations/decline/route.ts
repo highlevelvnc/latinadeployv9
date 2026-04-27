@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyReservationToken } from '@/lib/reservation-token';
 import { sendCustomerDeclinedEmail } from '@/lib/reservation-email';
+import { markDeclined } from '@/lib/reservation-store';
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,6 +30,12 @@ export async function POST(request: NextRequest) {
         console.error('[Latina Grill] Decline email failed:', e);
         return NextResponse.json({ error: 'email_send_failed' }, { status: 500 });
       }
+    }
+
+    try {
+      await markDeclined(payload.reservationId);
+    } catch (e) {
+      console.error('[Latina Grill] KV markDeclined failed:', e);
     }
 
     return NextResponse.json({ success: true });
