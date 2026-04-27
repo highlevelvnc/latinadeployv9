@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva Confirmada — Latina Grill Cascais</title>
+  <!--[if mso]>
+  <style>body,table,td{font-family:Georgia,'Times New Roman',serif !important;}</style>
+  <![endif]-->
+
+  <!--
+    ────────────────────────────────────────────────────────────────────────
+    PREVIEW STANDALONE — Email automático que o CLIENTE recebe ao reservar.
+    ────────────────────────────────────────────────────────────────────────
+    Este ficheiro é uma cópia visual do template gerado pelo servidor
+    (app/api/reservations/route.ts → sendCustomerConfirmationEmail).
+
+    Os valores aqui são exemplos fixos para tu inspecionares como fica:
+      • Nome: Maria Silva
+      • Data: sábado, 15 de fevereiro de 2026
+      • Hora: 20:00
+      • Pessoas: 4
+      • Notas: "Mesa junto à janela, por favor. Aniversário."
+
+    Em produção, esses valores são substituídos automaticamente pelos
+    dados que o cliente preencheu no formulário do site.
+
+    NÃO precisa subir este ficheiro para o Resend — o envio é automático.
+    Só serve como referência visual.
+    ────────────────────────────────────────────────────────────────────────
+  -->
+</head>
+<body style="margin:0;padding:0;background-color:#0a0a0a;font-family:Georgia,'Times New Roman',serif;color:#f5f0e6;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">A sua reserva para sábado, 15 de fevereiro de 2026 às 20:00 foi recebida.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0a0a0a;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#0f0f0f;">
+
+          <!-- Gold accent top -->
+          <tr>
+            <td style="background:linear-gradient(90deg,#0f0f0f 0%,#d4af6e 50%,#0f0f0f 100%);height:2px;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+          <!-- Brand -->
+          <tr>
+            <td align="center" style="padding:40px 32px 8px;">
+              <p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#d4af6e;letter-spacing:6px;text-transform:uppercase;">Reserva Confirmada</p>
+              <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;color:#f5f0e6;letter-spacing:6px;">LATINA&nbsp;GRILL</p>
+              <p style="margin:4px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:9px;color:#666;letter-spacing:5px;">CASCAIS&nbsp;·&nbsp;EST.&nbsp;2014</p>
+            </td>
+          </tr>
+
+          <!-- Hero image -->
+          <tr>
+            <td style="padding:32px 0 0;">
+              <img src="https://latinagrill.pt/chapacarne.webp" alt="" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;">
+            </td>
+          </tr>
+
+          <!-- Headline -->
+          <tr>
+            <td align="center" style="padding:48px 32px 8px;">
+              <h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:42px;font-weight:normal;color:#f5f0e6;line-height:1.15;letter-spacing:1px;">À mesa,<br><em style="color:#d4af6e;font-style:italic;">em breve.</em></h1>
+            </td>
+          </tr>
+
+          <!-- Greeting -->
+          <tr>
+            <td align="center" style="padding:24px 56px 0;">
+              <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#bbb;line-height:1.8;">
+                Olá Maria, recebemos a sua reserva. Será um prazer recebê-lo na nossa casa.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td align="center" style="padding:40px 32px 16px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr><td style="height:1px;width:60px;background-color:#d4af6e;font-size:0;line-height:0;">&nbsp;</td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Reservation details -->
+          <tr>
+            <td style="padding:0 48px 32px;">
+              <p style="margin:0 0 24px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#d4af6e;letter-spacing:5px;text-transform:uppercase;text-align:center;">A Sua Reserva</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="padding:14px 0;color:#888;width:110px;border-bottom:1px solid #1f1c18;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Data</td>
+                  <td style="padding:14px 0;color:#f5f0e6;border-bottom:1px solid #1f1c18;font-family:Georgia,serif;font-size:16px;text-transform:capitalize;">sábado, 15 de fevereiro de 2026</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0;color:#888;border-bottom:1px solid #1f1c18;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Hora</td>
+                  <td style="padding:14px 0;color:#f5f0e6;border-bottom:1px solid #1f1c18;font-family:Georgia,serif;font-size:16px;">20:00</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0;color:#888;border-bottom:1px solid #1f1c18;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Pessoas</td>
+                  <td style="padding:14px 0;color:#f5f0e6;border-bottom:1px solid #1f1c18;font-family:Georgia,serif;font-size:16px;">4 pessoas</td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 0;color:#888;vertical-align:top;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;">Notas</td>
+                  <td style="padding:14px 0;color:#f5f0e6;font-family:Georgia,serif;font-size:15px;line-height:1.7;font-style:italic;">"Mesa junto à janela, por favor. Aniversário."</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Location -->
+          <tr>
+            <td align="center" style="padding:32px 32px 0;background-color:#080808;border-top:1px solid #1f1c18;">
+              <p style="margin:32px 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#d4af6e;letter-spacing:5px;text-transform:uppercase;">Encontre-nos</p>
+              <p style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:18px;color:#f5f0e6;line-height:1.5;">Rua Frederico Arouca 25, 2750-353 Cascais</p>
+              <p style="margin:0 0 28px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#888;letter-spacing:1px;">
+                <a href="tel:+351968707515" style="color:#888;text-decoration:none;">+351 968 707 515</a>
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 32px;">
+                <tr>
+                  <td style="border:1px solid #d4af6e;">
+                    <a href="https://maps.google.com/?q=Latina+Grill+Cascais+Rua+Frederico+Arouca+25" style="display:inline-block;padding:14px 36px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#d4af6e;letter-spacing:3px;text-decoration:none;text-transform:uppercase;font-weight:600;">Ver no Mapa</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Cancel/modify note -->
+          <tr>
+            <td align="center" style="padding:32px 48px;background-color:#0a0a0a;">
+              <p style="margin:0;font-family:Georgia,serif;font-size:13px;color:#888;line-height:1.8;font-style:italic;">
+                Precisa alterar ou cancelar? Responda a este email ou ligue-nos diretamente.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:32px;border-top:1px solid #1f1c18;background-color:#050505;">
+              <p style="margin:0 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:13px;color:#f5f0e6;letter-spacing:4px;">LATINA GRILL CASCAIS</p>
+              <p style="margin:0 0 14px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#666;letter-spacing:1px;">A casa do churrasco</p>
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;">
+                <a href="https://latinagrill.pt" style="color:#d4af6e;text-decoration:none;letter-spacing:2px;">latinagrill.pt</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Gold accent bottom -->
+          <tr>
+            <td style="background:linear-gradient(90deg,#0a0a0a 0%,#d4af6e 50%,#0a0a0a 100%);height:2px;font-size:0;line-height:0;">&nbsp;</td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

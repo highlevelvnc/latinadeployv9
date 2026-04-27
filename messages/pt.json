@@ -116,6 +116,7 @@
       "time": "Hora",
       "guests": "Nº de pessoas",
       "observations": "Observações (opcional)",
+      "email": "Email (opcional)",
       "submit": "Confirmar Reserva",
       "submitting": "A enviar...",
       "callNow": "Ligar agora",
@@ -126,7 +127,8 @@
       "invalidTime": "Hora deve estar entre 12:30 e 23:00",
       "minGuests": "Mínimo 1 pessoa",
       "invalidDate": "Data inválida",
-      "pastDate": "Não pode reservar para datas passadas"
+      "pastDate": "Não pode reservar para datas passadas",
+      "invalidEmail": "Email inválido"
     },
     "success": {
       "title": "Reserva Recebida!",

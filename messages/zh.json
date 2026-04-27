@@ -116,6 +116,7 @@
       "time": "时间",
       "guests": "用餐人数",
       "observations": "备注（可选）",
+      "email": "邮箱（可选）",
       "submit": "确认预订",
       "submitting": "提交中...",
       "callNow": "立即致电",
@@ -126,7 +127,8 @@
       "invalidTime": "时间须在 12:30 至 23:00 之间",
       "minGuests": "最少1位宾客",
       "invalidDate": "无效日期",
-      "pastDate": "不可预订过去的日期"
+      "pastDate": "不可预订过去的日期",
+      "invalidEmail": "邮箱无效"
     },
     "success": {
       "title": "预订已收到！",

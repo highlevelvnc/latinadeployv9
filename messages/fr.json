@@ -116,6 +116,7 @@
       "time": "Heure",
       "guests": "Nombre de personnes",
       "observations": "Demandes spéciales (optionnel)",
+      "email": "E-mail (facultatif)",
       "submit": "Confirmer la Réservation",
       "submitting": "Envoi en cours...",
       "callNow": "Appeler",
@@ -126,7 +127,8 @@
       "invalidTime": "L'heure doit être entre 12h30 et 23h00",
       "minGuests": "Minimum 1 personne",
       "invalidDate": "Date invalide",
-      "pastDate": "Impossible de réserver pour des dates passées"
+      "pastDate": "Impossible de réserver pour des dates passées",
+      "invalidEmail": "E-mail invalide"
     },
     "success": {
       "title": "Réservation Reçue !",

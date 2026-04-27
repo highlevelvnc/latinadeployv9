@@ -70,6 +70,7 @@ export default function ReservationForm() {
     name: '',
     countryCode: '+351',
     phone: '',
+    email: '',
     date: '',
     time: '',
     guests: 2,
@@ -87,6 +88,11 @@ export default function ReservationForm() {
 
     if (!formData.name.trim()) newErrors.name = t('validation.required');
     if (!formData.phone.trim()) newErrors.phone = t('validation.required');
+
+    // Email is optional, but if provided must be valid
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = t('validation.invalidEmail');
+    }
 
     if (!formData.date) {
       newErrors.date = t('validation.required');
@@ -133,7 +139,7 @@ export default function ReservationForm() {
     setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false);
-      setFormData({ name: '', countryCode: '+351', phone: '', date: '', time: '', guests: 2, observations: '' });
+      setFormData({ name: '', countryCode: '+351', phone: '', email: '', date: '', time: '', guests: 2, observations: '' });
       setErrors({});
     }, 5000);
   };
@@ -230,6 +236,29 @@ export default function ReservationForm() {
           {errors.phone && (
             <p className="mt-1 text-sm text-red flex items-center gap-1">
               <AlertCircle className="w-3 h-3" />{errors.phone}
+            </p>
+          )}
+        </div>
+
+        {/* Email (optional) — used to send confirmation to the guest */}
+        <div className="group">
+          <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
+            <Mail className="w-4 h-4 text-accent-orange" />
+            {t('form.email')}
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            autoComplete="email"
+            className={`w-full bg-dark-lighter border ${errors.email ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+            placeholder="seu@email.com"
+          />
+          {errors.email && (
+            <p className="mt-1 text-sm text-red flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" />{errors.email}
             </p>
           )}
         </div>

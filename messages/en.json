@@ -116,6 +116,7 @@
       "time": "Time",
       "guests": "Number of guests",
       "observations": "Special requests (optional)",
+      "email": "Email (optional)",
       "submit": "Confirm Reservation",
       "submitting": "Submitting...",
       "callNow": "Call Now",
@@ -126,7 +127,8 @@
       "invalidTime": "Time must be between 12:30 PM and 11:00 PM",
       "minGuests": "Minimum 1 person",
       "invalidDate": "Invalid date",
-      "pastDate": "Cannot book for past dates"
+      "pastDate": "Cannot book for past dates",
+      "invalidEmail": "Invalid email"
     },
     "success": {
       "title": "Reservation Received!",
