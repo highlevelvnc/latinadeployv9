@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/stores/useAppStore';
 import { useMenuStore } from '@/stores/useMenuStore';
 import { menuItems } from '@/data/menu';
+import { hasMenuItemImage } from '@/lib/menu-images';
 import MenuItem from './MenuItem';
 import { t as lt } from '@/lib/localized';
 import type { MenuItem as MenuItemType } from '@/types/menu';
@@ -41,11 +42,15 @@ export default function MenuGrid({ onSelectItem }: Props) {
       items = items.filter((i) => activeTags.some((tag) => i.tags.includes(tag)));
     }
 
-    // Sort unavailable items to the end
+    // Sort: items with photo first, then unavailable to the end
     items.sort((a, b) => {
       const aUnavail = unavailableItems.includes(a.id) ? 1 : 0;
       const bUnavail = unavailableItems.includes(b.id) ? 1 : 0;
-      return aUnavail - bUnavail;
+      if (aUnavail !== bUnavail) return aUnavail - bUnavail;
+
+      const aHasImg = hasMenuItemImage(a.id) ? 0 : 1;
+      const bHasImg = hasMenuItemImage(b.id) ? 0 : 1;
+      return aHasImg - bHasImg;
     });
 
     return items;

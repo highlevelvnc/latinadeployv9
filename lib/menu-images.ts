@@ -1,23 +1,70 @@
 /**
- * Selective image mapping for menu items.
- * Only items with a clearly matching photo get an image.
- * All others show a premium placeholder — no forced/wrong images.
- *
- * 11 items mapped → 11 unique image assignments (no excessive repeats).
+ * Image mapping for menu items.
+ * Items not in this map show an elegant placeholder.
  */
 
 const itemImageMap: Record<string, string> = {
-  'beef-croquettes':              '/menu/croqueta-gourmet.jpeg',
-  'shrimp-flambe':                '/menu/grilled-prawns.jpeg',
-  'short-ribs-12h':               '/menu/beef-ribs.jpeg',
-  'latina-skewer':                '/menu/beef-skewer.jpeg',
-  'kobe-tataki':                  '/menu/beef-chef-special.jpeg',
-  'chuleton-rubia-gallega-gold':  '/menu/chuletao-maturado-espanha.jpeg',
-  'tomahawk-wagyu-australia':     '/menu/tomahawk-steak.jpeg',
-  'rib-eye-rubia-gallega-250g':   '/menu/ribeye-served.jpeg',
-  'rib-eye-usa-250g':             '/menu/ribeye-grill.jpeg',
-  'golden-potatoes-truffle':      '/menu/truffle-dish.jpeg',
-  'tenderloin-tartare':           '/menu/fine-dining-plate.jpeg',
+  // Couvert
+  'beef-croquettes':                  '/menu/beef-croquettes.webp',
+
+  // Cold Starters
+  'beef-carpaccio':                   '/menu/beef-carpaccio.webp',
+  'tenderloin-tartare':               '/menu/beef-chef-special.jpeg',
+  'tuna-tartare':                     '/menu/tuna-tartare.webp',
+
+  // Hot Starters
+  'egg-croutons-truffle':             '/menu/egg-croutons-truffle.webp',
+
+  // Kids
+  'kids-spaghetti-bolognese':         '/menu/kids-spaghetti-bolognese.jpg',
+  'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
+
+  // Carnes Maturadas
+  'chuleton-rubia-gallega-gold':      '/menu/chuletao-maturado-espanha.jpeg',
+  'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
+  'tomahawk-australia-cognac-madeira':'/menu/tomahawk-australia-cognac-madeira.webp',
+  't-bone':                           '/menu/t-bone.webp',
+  'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.webp',
+
+  // Wagyu
+  'wagyu-trio':                       '/menu/fine-dining-plate.jpeg',
+
+  // Marisco
+  'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
+
+  // Seleção Premium
+  'picanha-250g':                     '/menu/picanha-250g.webp',
+  'filet-mignon-200g':                '/menu/filet-mignon-200g.webp',
+  'rib-eye-rubia-gallega-250g':       '/menu/ribeye-served.jpeg',
+  'sirloin-australia-250g':           '/menu/sirloin-australia-250g.webp',
+  'latina-skewer':                    '/menu/beef-skewer.jpeg',
+  'short-ribs-12h':                   '/menu/short-ribs-12h.webp',
+
+  // Outros Cortes
+  'iberian-pork-plumas':              '/menu/iberian-pork-plumas.jpg',
+
+  // Tábuas
+  'latina-premium-board':             '/menu/latina-premium-board.webp',
+
+  // Guarnições
+  'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
+  'grilled-vegetables':               '/menu/grilled-vegetables.webp',
+
+  // Golden Selection
+  'golden-rib-eye-usa-500g':          '/menu/ribeye-grill-2.jpeg',
+  'golden-rib-eye-500g':              '/menu/golden-rib-eye-500g.webp',
+  'golden-japanese-wagyu-300g':       '/menu/golden-japanese-wagyu-300g.webp',
+  'golden-t-bone-800g':               '/menu/ribeye-grill.jpeg',
+  'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk.webp',
+
+  // Sugestão do Chef
+  'chef-kobe-a5-bife-150g':           '/menu/chef-kobe-a5-bife-150g.webp',
+  'chef-chuleton-wagyu-premium':      '/menu/tomahawk-steak.jpeg',
+
+  // Sobremesas
+  'dessert-chocolate-fondant':        '/menu/dessert-chocolate-fondant.webp',
+  'dessert-latina-split':             '/menu/dessert-latina-split.webp',
+  'dessert-banoffee-pie':             '/menu/dessert-banoffee-pie.webp',
 };
 
 /**
