@@ -16,13 +16,12 @@ const itemImageMap: Record<string, string> = {
   'egg-croutons-truffle':             '/menu/egg-croutons-truffle.webp',
 
   // Kids
-  'kids-spaghetti-bolognese':         '/menu/kids-spaghetti-bolognese.jpg',
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
   'chuleton-rubia-gallega-gold':      '/menu/chuletao-maturado-espanha.jpeg',
   'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
-  'tomahawk-australia-cognac-madeira':'/menu/tomahawk-australia-cognac-madeira.webp',
+  'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
   't-bone':                           '/menu/t-bone.webp',
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.webp',
 
@@ -41,10 +40,10 @@ const itemImageMap: Record<string, string> = {
   'short-ribs-12h':                   '/menu/short-ribs-12h.webp',
 
   // Outros Cortes
-  'iberian-pork-plumas':              '/menu/iberian-pork-plumas.jpg',
+  // (iberian-pork-plumas: foto removida, aguardando melhor)
 
   // Tábuas
-  'latina-premium-board':             '/menu/latina-premium-board.webp',
+  // (latina-premium-board: foto removida, aguardando melhor)
 
   // Guarnições
   'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
@@ -52,14 +51,14 @@ const itemImageMap: Record<string, string> = {
 
   // Golden Selection
   'golden-rib-eye-usa-500g':          '/menu/ribeye-grill-2.jpeg',
-  'golden-rib-eye-500g':              '/menu/golden-rib-eye-500g.webp',
+  // (golden-rib-eye-500g: foto removida, aguardando melhor)
   'golden-japanese-wagyu-300g':       '/menu/golden-japanese-wagyu-300g.webp',
   'golden-t-bone-800g':               '/menu/ribeye-grill.jpeg',
   'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk.webp',
 
   // Sugestão do Chef
-  'chef-kobe-a5-bife-150g':           '/menu/chef-kobe-a5-bife-150g.webp',
-  'chef-chuleton-wagyu-premium':      '/menu/tomahawk-steak.jpeg',
+  // (chef-kobe-a5-bife-150g: foto removida, aguardando melhor)
+  // (chef-chuleton-wagyu-premium: foto reaproveitada para tomahawk cognac/madeira)
 
   // Sobremesas
   'dessert-chocolate-fondant':        '/menu/dessert-chocolate-fondant.webp',
