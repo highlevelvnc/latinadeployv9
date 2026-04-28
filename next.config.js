@@ -14,6 +14,14 @@ const nextConfig = {
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production'
+  },
+  async redirects() {
+    return [
+      { source: '/menu', destination: '/pt/menu', permanent: false },
+      { source: '/reservations', destination: '/pt/reservations', permanent: false },
+      { source: '/contact', destination: '/pt/contact', permanent: false },
+      { source: '/reservation', destination: '/pt/reservations', permanent: false },
+    ];
   }
 };
 
