@@ -12,9 +12,9 @@ export const RESERVATION_FROM = 'Latina Grill <reservas@latinagrill.pt>';
 export const RESERVATION_REPLY_TO = 'latinagrill@icloud.com';
 
 export const RESTAURANT_PHONE = '+351 968 707 515';
-export const RESTAURANT_ADDRESS = 'Rua Frederico Arouca 25, 2750-353 Cascais';
+export const RESTAURANT_ADDRESS = 'Estrada da Malveira da Serra, 261, 2750-787 Cascais';
 export const RESTAURANT_MAPS_URL =
-  'https://maps.google.com/?q=Latina+Grill+Cascais+Rua+Frederico+Arouca+25';
+  'https://maps.google.com/?q=Estrada+da+Malveira+da+Serra+261+2750-787+Cascais';
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://latinagrill.pt';
 

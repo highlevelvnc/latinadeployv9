@@ -161,7 +161,7 @@ colors: {
 ## 📞 Contactos
 
 - **Instagram**: [@latina.grill](https://www.instagram.com/latina.grill/)
-- **Localização**: Rua Frederico Arouca, 58, 2750-353 Cascais
+- **Localização**: Estrada da Malveira da Serra, 261, 2750-787 Cascais
 - **Website**: https://latinagrill.pt
 
 ---
