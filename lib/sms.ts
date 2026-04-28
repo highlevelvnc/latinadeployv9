@@ -20,7 +20,7 @@
 
 let cachedClient: import('twilio').Twilio | null | undefined;
 
-function getClient(): import('twilio').Twilio | null {
+async function getClient(): Promise<import('twilio').Twilio | null> {
   if (cachedClient !== undefined) return cachedClient;
 
   const sid = process.env.TWILIO_ACCOUNT_SID;
@@ -31,8 +31,7 @@ function getClient(): import('twilio').Twilio | null {
   }
 
   // Lazy import — Twilio SDK is heavy; only load when actually used.
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const twilio = require('twilio') as typeof import('twilio');
+  const { default: twilio } = await import('twilio');
   cachedClient = twilio(sid, token);
   return cachedClient;
 }
@@ -83,7 +82,7 @@ interface SendSmsOptions {
 }
 
 export async function sendSMS({ to, body }: SendSmsOptions): Promise<void> {
-  const client = getClient();
+  const client = await getClient();
   if (!client) {
     console.log('[Latina Grill] SMS skipped (TWILIO_* not configured):', { to: to.slice(0, 6) + '…', body: body.slice(0, 50) });
     return;
