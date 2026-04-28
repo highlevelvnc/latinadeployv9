@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 const VIDEOS = [
-  { src: '/videos/hero-croquetes.mp4', poster: '/videos/hero-croquetes.jpg' },
   { src: '/videos/hero-pratos.mp4', poster: '/videos/hero-pratos.jpg' },
+  { src: '/videos/hero-croquetes.mp4', poster: '/videos/hero-croquetes.jpg' },
   { src: '/videos/hero-kids.mp4', poster: '/videos/hero-kids.jpg' },
 ];
 
@@ -29,8 +29,11 @@ export default function HeroVideo() {
   const [videoBroken, setVideoBroken] = useState(false);
   const isMobile = useIsMobile();
 
+  // Mobile: never cycles. Stays on first video looping.
+  // Desktop: cycles via onEnded → setIndex.
+  const current = isMobile ? VIDEOS[0] : VIDEOS[index];
+
   useEffect(() => {
-    if (isMobile) return; // Skip video logic entirely on mobile (poster only)
     const video = videoRef.current;
     const el = containerRef.current;
     if (!video || !el || videoBroken) return;
@@ -51,35 +54,16 @@ export default function HeroVideo() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [videoBroken, index, isMobile]);
+  }, [videoBroken, index]);
 
   const handleEnded = () => {
-    setIndex((i) => (i + 1) % VIDEOS.length);
+    if (!isMobile) setIndex((i) => (i + 1) % VIDEOS.length);
   };
 
-  const current = VIDEOS[index];
-
-  // Mobile: static poster only — no <video> element to avoid WebKit crashes
-  if (isMobile) {
-    return (
-      <section
-        className="relative -mx-4 mb-6 h-[180px] overflow-hidden sm:mx-0 sm:rounded-3xl"
-        style={{
-          backgroundImage: `url(${VIDEOS[0].poster})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      </section>
-    );
-  }
-
-  // Desktop: full video carousel
   return (
     <section
       ref={containerRef}
-      className="relative mb-6 h-[260px] overflow-hidden rounded-3xl"
+      className="relative -mx-4 mb-6 h-[180px] overflow-hidden sm:mx-0 sm:rounded-3xl md:h-[260px]"
       style={{
         backgroundImage: `url(${current.poster})`,
         backgroundSize: 'cover',
@@ -89,9 +73,12 @@ export default function HeroVideo() {
       {!videoBroken && (
         <video
           ref={videoRef}
-          key={current.src}
+          // On mobile, video doesn't change → no key (no remount).
+          // On desktop, key changes per cycle to load next clip.
+          key={isMobile ? 'mobile-loop' : current.src}
           autoPlay
           muted
+          loop={isMobile}
           playsInline
           preload="metadata"
           poster={current.poster}
@@ -105,7 +92,7 @@ export default function HeroVideo() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      {!videoBroken && (
+      {!isMobile && !videoBroken && (
         <div className="absolute bottom-3 right-4 z-10 flex gap-1.5">
           {VIDEOS.map((_, i) => (
             <span
