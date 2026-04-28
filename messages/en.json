@@ -309,7 +309,9 @@
       "premium": "Premium",
       "wagyu": "Wagyu",
       "gold": "Gold Selection",
-      "board": "Board"
+      "board": "Board",
+      "lactose-free": "Lactose-Free",
+      "nut-free": "Nut-Free"
     }
   },
   "table": {

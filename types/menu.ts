@@ -16,6 +16,8 @@ export type DietaryTag =
   | 'vegetarian'
   | 'vegan'
   | 'gluten-free'
+  | 'lactose-free'
+  | 'nut-free'
   | 'chefs-pick'
   | 'popular'
   | 'new'

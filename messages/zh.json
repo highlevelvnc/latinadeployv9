@@ -309,7 +309,9 @@
       "premium": "精选",
       "wagyu": "和牛",
       "gold": "黄金甄选",
-      "board": "分享拼盘"
+      "board": "分享拼盘",
+      "lactose-free": "无乳糖",
+      "nut-free": "不含坚果"
     }
   },
   "table": {
