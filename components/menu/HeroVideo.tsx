@@ -1,0 +1,75 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+
+const VIDEOS = [
+  { src: '/videos/hero-croquetes.mp4', poster: '/videos/hero-croquetes.jpg' },
+  { src: '/videos/hero-pratos.mp4', poster: '/videos/hero-pratos.jpg' },
+  { src: '/videos/hero-kids.mp4', poster: '/videos/hero-kids.jpg' },
+];
+
+export default function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const el = containerRef.current;
+    if (!video || !el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleEnded = () => {
+    setIndex((i) => (i + 1) % VIDEOS.length);
+  };
+
+  const current = VIDEOS[index];
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative -mx-4 mb-6 h-[180px] overflow-hidden sm:mx-0 sm:rounded-3xl md:h-[260px]"
+    >
+      <video
+        ref={videoRef}
+        key={current.src}
+        autoPlay
+        muted
+        playsInline
+        preload="metadata"
+        poster={current.poster}
+        onEnded={handleEnded}
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src={current.src} type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+      <div className="absolute bottom-3 right-4 z-10 flex gap-1.5">
+        {VIDEOS.map((_, i) => (
+          <span
+            key={i}
+            className={`h-1 rounded-full transition-all ${
+              i === index ? 'w-6 bg-accent-yellow' : 'w-1.5 bg-white/40'
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

@@ -11,6 +11,7 @@ import { useMenuStore } from '@/stores/useMenuStore';
 import CategoryNav from '@/components/menu/CategoryNav';
 import SearchBar from '@/components/menu/SearchBar';
 import DietaryFilter from '@/components/menu/DietaryFilter';
+import HeroVideo from '@/components/menu/HeroVideo';
 import FeaturedSection from '@/components/menu/FeaturedSection';
 import ShareSection from '@/components/menu/ShareSection';
 import ExperienceSection from '@/components/menu/ExperienceSection';
@@ -83,6 +84,7 @@ function MenuPageInner() {
 
         {showCuratedSections && (
           <>
+            <HeroVideo />
             <FeaturedSection onSelectItem={setSelectedItem} />
             <ExperienceSection />
             <ShareSection onSelectItem={setSelectedItem} />
