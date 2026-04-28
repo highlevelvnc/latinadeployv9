@@ -24,9 +24,7 @@ const content = {
     lunchLabel: 'Almoço',
     dinnerLabel: 'Jantar',
     schedule: [
-      { group: 'Segunda a Quinta', lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: 'Almoço e jantar' },
-      { group: 'Sexta e Sábado',   lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: 'Horário alargado' },
-      { group: 'Domingo',          lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: 'Ideal para almoço em família' },
+      { group: 'Todos os dias', lunch: '12:30 – 15:30', dinner: '18:30 – 22:30', note: 'Cozinha aberta todos os dias, almoço e jantar' },
     ],
   },
   en: {
@@ -40,9 +38,7 @@ const content = {
     lunchLabel: 'Lunch',
     dinnerLabel: 'Dinner',
     schedule: [
-      { group: 'Monday – Thursday', lunch: '12:30 – 3:30 PM', dinner: '6:30 – 11:00 PM',  note: 'Lunch and dinner' },
-      { group: 'Friday & Saturday', lunch: '12:30 – 4:00 PM', dinner: '6:30 PM – midnight', note: 'Extended hours' },
-      { group: 'Sunday',            lunch: '12:30 – 4:00 PM', dinner: '6:30 – 10:30 PM',   note: 'Perfect for a family lunch' },
+      { group: 'Every day', lunch: '12:30 PM – 3:30 PM', dinner: '6:30 PM – 10:30 PM', note: 'Kitchen open every day, lunch and dinner' },
     ],
   },
   ru: {
@@ -56,9 +52,7 @@ const content = {
     lunchLabel: 'Обед',
     dinnerLabel: 'Ужин',
     schedule: [
-      { group: 'Пн – Чт',  lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: 'Обед и ужин' },
-      { group: 'Пт и Сб',  lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: 'Расширенный график' },
-      { group: 'Воскресенье', lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: 'Идеально для семейного обеда' },
+      { group: 'Каждый день', lunch: '12:30 – 15:30', dinner: '18:30 – 22:30', note: 'Кухня открыта каждый день, обед и ужин' },
     ],
   },
   zh: {
@@ -72,9 +66,7 @@ const content = {
     lunchLabel: '午餐',
     dinnerLabel: '晚餐',
     schedule: [
-      { group: '周一至周四', lunch: '12:30 – 15:30', dinner: '18:30 – 23:00', note: '午餐与晚餐' },
-      { group: '周五与周六', lunch: '12:30 – 16:00', dinner: '18:30 – 00:00', note: '延长时段' },
-      { group: '周日',       lunch: '12:30 – 16:00', dinner: '18:30 – 22:30', note: '理想的家庭午餐' },
+      { group: '每天', lunch: '12:30 – 15:30', dinner: '18:30 – 22:30', note: '厨房每日开放，午餐与晚餐' },
     ],
   },
   fr: {
@@ -88,9 +80,7 @@ const content = {
     lunchLabel: 'Déjeuner',
     dinnerLabel: 'Dîner',
     schedule: [
-      { group: 'Lundi – Jeudi',       lunch: '12h30 – 15h30', dinner: '18h30 – 23h00', note: 'Déjeuner et dîner' },
-      { group: 'Vendredi & Samedi',   lunch: '12h30 – 16h00', dinner: '18h30 – 00h00', note: 'Horaires étendus' },
-      { group: 'Dimanche',            lunch: '12h30 – 16h00', dinner: '18h30 – 22h30', note: 'Idéal pour un déjeuner en famille' },
+      { group: 'Tous les jours', lunch: '12h30 – 15h30', dinner: '18h30 – 22h30', note: 'Cuisine ouverte tous les jours, déjeuner et dîner' },
     ],
   },
 };

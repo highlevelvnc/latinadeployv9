@@ -43,7 +43,7 @@ async function ContactPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contact' });
 
-  const address = 'Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal';
+  const address = 'Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal';
   const addressEncoded = encodeURIComponent(address);
   const phoneNumber = '+351 968 707 515';
   const phoneNumberClean = phoneNumber.replace(/\s/g, '');

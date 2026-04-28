@@ -103,7 +103,7 @@
     "title": "预订您的餐桌",
     "description": "提前预订以确保最佳体验。我们的团队随时准备迎接您的到来。",
     "info": {
-      "schedule": "预订时间：12:30 – 23:00",
+      "schedule": "预订时间：12:30 – 22:00",
       "minGuests": "1人起",
       "allDays": "每天开放",
       "lunch": "午餐",
@@ -132,7 +132,7 @@
     },
     "validation": {
       "required": "必填项",
-      "invalidTime": "时间须在 12:30 至 23:00 之间",
+      "invalidTime": "时间须在 12:30 至 22:00 之间",
       "minGuests": "最少1位宾客",
       "invalidDate": "无效日期",
       "pastDate": "不可预订过去的日期",
@@ -150,19 +150,19 @@
     "title": "在卡斯凯什拜访我们",
     "address": {
       "label": "地址",
-      "street": "Estrada Da Malveira da Serra, 261",
-      "city": "2750-782 卡斯凯什，葡萄牙",
-      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "street": "Estrada da Malveira da Serra, 261",
+      "city": "2750-787 卡斯凯什，葡萄牙",
+      "full": "Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal",
       "directions": "如何到达",
       "openMaps": "在谷歌地图中打开"
     },
     "hours": {
       "label": "营业时间",
       "subtitle": "每天",
-      "lunch": "12:30 – 16:00",
-      "dinner": "18:30 – 23:00",
+      "lunch": "12:30 – 15:30",
+      "dinner": "18:30 – 22:30",
       "continuous": "全天连续服务",
-      "reservationsTime": "预订：12:30 – 23:00"
+      "reservationsTime": "预订：12:30 – 22:00"
     },
     "phone": {
       "label": "电话",
@@ -232,7 +232,7 @@
     "feature1Title": "优越地理位置",
     "feature1Desc": "Estrada da Malveira da Serra, 261",
     "feature2Title": "每天开放",
-    "feature2Desc": "12:30–16:00 | 18:30–23:00",
+    "feature2Desc": "12:30–15:30 | 18:30–22:30",
     "feature3Title": "4.8★ · 1000+条评价",
     "feature3Desc": "卡斯凯什评价最高的餐厅"
   },

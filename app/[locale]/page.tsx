@@ -145,12 +145,12 @@ export default function HomePage({ params: { locale } }: Props) {
             priceRange: '€€€',
             servesCuisine: ['Steakhouse', 'Latin American', 'Portuguese', 'Grilled Meats'],
             menu: `https://latinagrill.pt/${locale}/menu`,
-            hasMap: 'https://www.google.com/maps/search/?api=1&query=Estrada+Da+Malveira+da+Serra+261+2750-782+Cascais',
+            hasMap: 'https://www.google.com/maps/search/?api=1&query=Estrada+da+Malveira+da+Serra+261+2750-787+Cascais',
             address: {
               '@type': 'PostalAddress',
-              streetAddress: 'Estrada Da Malveira da Serra, 261',
+              streetAddress: 'Estrada da Malveira da Serra, 261',
               addressLocality: 'Cascais',
-              postalCode: '2750-782',
+              postalCode: '2750-787',
               addressCountry: 'PT',
             },
             geo: {
@@ -165,7 +165,7 @@ export default function HomePage({ params: { locale } }: Props) {
                   'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
                 ],
                 opens: '12:30',
-                closes: '16:00',
+                closes: '15:30',
               },
               {
                 '@type': 'OpeningHoursSpecification',
@@ -173,7 +173,7 @@ export default function HomePage({ params: { locale } }: Props) {
                   'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
                 ],
                 opens: '18:30',
-                closes: '23:00',
+                closes: '22:30',
               },
             ],
             paymentAccepted: ['Cash', 'Credit Card', 'Debit Card', 'Visa', 'Mastercard', 'American Express'],

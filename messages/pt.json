@@ -103,7 +103,7 @@
     "title": "Garanta a Sua Mesa",
     "description": "Reserve com antecedência para garantir a melhor experiência. A nossa equipa está pronta para recebê-lo.",
     "info": {
-      "schedule": "Horário de reservas: 12:30 – 23:00",
+      "schedule": "Horário de reservas: 12:30 – 22:00",
       "minGuests": "A partir de 1 pessoa",
       "allDays": "Todos os dias",
       "lunch": "Almoço",
@@ -132,7 +132,7 @@
     },
     "validation": {
       "required": "Campo obrigatório",
-      "invalidTime": "Hora deve estar entre 12:30 e 23:00",
+      "invalidTime": "Hora deve estar entre 12:30 e 22:00",
       "minGuests": "Mínimo 1 pessoa",
       "invalidDate": "Data inválida",
       "pastDate": "Não pode reservar para datas passadas",
@@ -150,19 +150,19 @@
     "title": "Visite-nos em Cascais",
     "address": {
       "label": "Morada",
-      "street": "Estrada Da Malveira da Serra, 261",
-      "city": "2750-782 Cascais, Portugal",
-      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "street": "Estrada da Malveira da Serra, 261",
+      "city": "2750-787 Cascais, Portugal",
+      "full": "Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal",
       "directions": "Como chegar",
       "openMaps": "Abrir no Google Maps"
     },
     "hours": {
       "label": "Horário de Funcionamento",
       "subtitle": "Todos os Dias",
-      "lunch": "12:30 – 16:00",
-      "dinner": "18:30 – 23:00",
+      "lunch": "12:30 – 15:30",
+      "dinner": "18:30 – 22:30",
       "continuous": "Serviço contínuo",
-      "reservationsTime": "Reservas: 12:30 – 23:00"
+      "reservationsTime": "Reservas: 12:30 – 22:00"
     },
     "phone": {
       "label": "Telefone",
@@ -232,7 +232,7 @@
     "feature1Title": "Localização Privilegiada",
     "feature1Desc": "Estrada da Malveira da Serra, 261",
     "feature2Title": "Aberto Todos os Dias",
-    "feature2Desc": "12:30–16:00 | 18:30–23:00",
+    "feature2Desc": "12:30–15:30 | 18:30–22:30",
     "feature3Title": "4.8★ · 1000+ Avaliações",
     "feature3Desc": "O restaurante mais avaliado de Cascais"
   },

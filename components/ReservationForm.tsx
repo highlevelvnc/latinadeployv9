@@ -495,7 +495,7 @@ export default function ReservationForm() {
                     <span className="text-[11px] uppercase tracking-[0.18em] text-light/55 font-medium">
                       {t('info.dinner')}
                     </span>
-                    <span className="text-[11px] text-light/30">19:00 – 22:30</span>
+                    <span className="text-[11px] text-light/30">19:00 – 22:00</span>
                   </div>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                     {availableSlots.dinner.map((slot) => (

@@ -108,12 +108,12 @@ export default function Footer() {
               <li className="flex items-start gap-2 text-light/60 text-sm">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent-orange" />
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Estrada+Da+Malveira+da+Serra+261+Cascais"
+                  href="https://www.google.com/maps/search/?api=1&query=Estrada+da+Malveira+da+Serra+261+2750-787+Cascais"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-light transition-colors"
                 >
-                  Estrada Da Malveira da Serra, 261<br />2750-782 Cascais
+                  Estrada da Malveira da Serra, 261<br />2750-787 Cascais
                 </a>
               </li>
               <li className="flex items-center gap-2 text-light/60 text-sm">
@@ -124,7 +124,9 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-light/60 text-sm">
                 <Mail className="w-4 h-4 flex-shrink-0 text-accent-orange" />
-                <span>info@latinagrill.pt</span>
+                <a href="mailto:latinagrill@icloud.com" className="hover:text-light transition-colors">
+                  latinagrill@icloud.com
+                </a>
               </li>
             </ul>
           </div>

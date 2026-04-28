@@ -103,7 +103,7 @@
     "title": "Réservez Votre Table",
     "description": "Réservez à l'avance pour garantir la meilleure expérience. Notre équipe est prête à vous accueillir.",
     "info": {
-      "schedule": "Horaires de réservation : 12h30 – 23h00",
+      "schedule": "Horaires de réservation : 12h30 – 22h00",
       "minGuests": "À partir de 1 personne",
       "allDays": "Tous les jours",
       "lunch": "Déjeuner",
@@ -132,7 +132,7 @@
     },
     "validation": {
       "required": "Champ obligatoire",
-      "invalidTime": "L'heure doit être entre 12h30 et 23h00",
+      "invalidTime": "L'heure doit être entre 12h30 et 22h00",
       "minGuests": "Minimum 1 personne",
       "invalidDate": "Date invalide",
       "pastDate": "Impossible de réserver pour des dates passées",
@@ -150,19 +150,19 @@
     "title": "Visitez-nous à Cascais",
     "address": {
       "label": "Adresse",
-      "street": "Estrada Da Malveira da Serra, 261",
-      "city": "2750-782 Cascais, Portugal",
-      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "street": "Estrada da Malveira da Serra, 261",
+      "city": "2750-787 Cascais, Portugal",
+      "full": "Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal",
       "directions": "Itinéraire",
       "openMaps": "Ouvrir dans Google Maps"
     },
     "hours": {
       "label": "Horaires d'Ouverture",
       "subtitle": "Tous les Jours",
-      "lunch": "12h30 – 16h00",
-      "dinner": "18h30 – 23h00",
+      "lunch": "12h30 – 15h30",
+      "dinner": "18h30 – 22h30",
       "continuous": "Service continu",
-      "reservationsTime": "Réservations : 12h30 – 23h00"
+      "reservationsTime": "Réservations : 12h30 – 22h00"
     },
     "phone": {
       "label": "Téléphone",
@@ -232,7 +232,7 @@
     "feature1Title": "Emplacement d'Exception",
     "feature1Desc": "Estrada da Malveira da Serra, 261",
     "feature2Title": "Ouvert Tous les Jours",
-    "feature2Desc": "12h30–16h00 | 18h30–23h00",
+    "feature2Desc": "12h30–15h30 | 18h30–22h30",
     "feature3Title": "4.8★ · 1000+ Avis",
     "feature3Desc": "Le restaurant le mieux noté de Cascais"
   },

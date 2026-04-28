@@ -103,7 +103,7 @@
     "title": "Забронируйте ваш стол",
     "description": "Бронируйте заранее для наилучшего опыта. Наша команда готова вас принять.",
     "info": {
-      "schedule": "Часы бронирования: 12:30 – 23:00",
+      "schedule": "Часы бронирования: 12:30 – 22:00",
       "minGuests": "От 1 гостя",
       "allDays": "Каждый день",
       "lunch": "Обед",
@@ -132,7 +132,7 @@
     },
     "validation": {
       "required": "Обязательное поле",
-      "invalidTime": "Время должно быть между 12:30 и 23:00",
+      "invalidTime": "Время должно быть между 12:30 и 22:00",
       "minGuests": "Минимум 1 гость",
       "invalidDate": "Недействительная дата",
       "pastDate": "Нельзя бронировать прошедшие даты",
@@ -150,19 +150,19 @@
     "title": "Посетите нас в Каскайше",
     "address": {
       "label": "Адрес",
-      "street": "Estrada Da Malveira da Serra, 261",
-      "city": "2750-782 Каскайш, Португалия",
-      "full": "Estrada Da Malveira da Serra, 261, 2750-782 Cascais, Portugal",
+      "street": "Estrada da Malveira da Serra, 261",
+      "city": "2750-787 Каскайш, Португалия",
+      "full": "Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal",
       "directions": "Как добраться",
       "openMaps": "Открыть в Google Maps"
     },
     "hours": {
       "label": "Часы работы",
       "subtitle": "Каждый день",
-      "lunch": "12:30 – 16:00",
-      "dinner": "18:30 – 23:00",
+      "lunch": "12:30 – 15:30",
+      "dinner": "18:30 – 22:30",
       "continuous": "Непрерывное обслуживание",
-      "reservationsTime": "Бронирования: 12:30 – 23:00"
+      "reservationsTime": "Бронирования: 12:30 – 22:00"
     },
     "phone": {
       "label": "Телефон",
@@ -232,7 +232,7 @@
     "feature1Title": "Отличное расположение",
     "feature1Desc": "Estrada da Malveira da Serra, 261",
     "feature2Title": "Открыто каждый день",
-    "feature2Desc": "12:30–16:00 | 18:30–23:00",
+    "feature2Desc": "12:30–15:30 | 18:30–22:30",
     "feature3Title": "4.8★ · 1000+ отзывов",
     "feature3Desc": "Самый оцениваемый ресторан в Каскайше"
   },

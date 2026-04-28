@@ -84,25 +84,14 @@ function ReservationsPage({ params: { locale } }: Props) {
             </p>
             <p className="font-medium text-cream/80 mt-1">
               {locale === 'pt'
-                ? 'Ter-Dom: 12h00-15h00, 19h00-23h30'
+                ? 'Todos os dias: 12:30–15:30, 18:30–22:30'
                 : locale === 'fr'
-                  ? 'Mar-Dim: 12h00-15h00, 19h00-23h30'
+                  ? 'Tous les jours : 12h30–15h30, 18h30–22h30'
                   : locale === 'ru'
-                    ? 'Вт-Вс: 12:00-15:00, 19:00-23:30'
+                    ? 'Каждый день: 12:30–15:30, 18:30–22:30'
                     : locale === 'zh'
-                      ? '周二至周日：12:00-15:00, 19:00-23:30'
-                      : 'Tue-Sun: 12:00-15:00, 19:00-23:30'}
-            </p>
-            <p className="mt-1">
-              {locale === 'pt'
-                ? 'Segunda-feira: Encerrado'
-                : locale === 'fr'
-                  ? 'Lundi : Fermé'
-                  : locale === 'ru'
-                    ? 'Понедельник: закрыто'
-                    : locale === 'zh'
-                      ? '周一：休息'
-                      : 'Monday: Closed'}
+                      ? '每天：12:30–15:30, 18:30–22:30'
+                      : 'Every day: 12:30–3:30 PM, 6:30–10:30 PM'}
             </p>
           </div>
         </div>
