@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { AnimatePresence } from 'framer-motion';
 import { useAppStore } from '@/stores/useAppStore';
 import { useMenuStore } from '@/stores/useMenuStore';
 import { menuItems } from '@/data/menu';
@@ -67,11 +66,9 @@ export default function MenuGrid({ onSelectItem }: Props) {
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      <AnimatePresence mode="popLayout">
-        {filtered.map((item) => (
-          <MenuItem key={item.id} item={item} onSelect={onSelectItem} />
-        ))}
-      </AnimatePresence>
+      {filtered.map((item) => (
+        <MenuItem key={item.id} item={item} onSelect={onSelectItem} />
+      ))}
     </div>
   );
 }

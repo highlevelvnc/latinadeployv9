@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { Flame, Leaf, Star, Sparkles, Award, Crown, Beef } from 'lucide-react';
 import { useMenuStore } from '@/stores/useMenuStore';
 import PriceDisplay from '@/components/shared/PriceDisplay';
@@ -56,12 +55,7 @@ export default function MenuItem({ item, onSelect }: Props) {
   const premium = isPremiumItem(item);
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+    <div
       onClick={() => onSelect(item)}
       aria-disabled={isUnavailable || undefined}
       className={`group relative cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
@@ -170,6 +164,6 @@ export default function MenuItem({ item, onSelect }: Props) {
           />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
