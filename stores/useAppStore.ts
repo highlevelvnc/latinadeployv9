@@ -15,7 +15,10 @@ export const useAppStore = create<AppStore>((set) => ({
   searchQuery: '',
   activeTags: [],
 
-  setActiveCategory: (id) => set({ activeCategory: id }),
+  // Selecting a category also clears active tag filters so the user always
+  // sees items from that category (e.g. clicking "Couverts" with "Vegetarian"
+  // active was returning 0 results).
+  setActiveCategory: (id) => set({ activeCategory: id, activeTags: [] }),
   setSearchQuery: (q) => set({ searchQuery: q }),
   toggleTag: (tag) =>
     set((state) => ({

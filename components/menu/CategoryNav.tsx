@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { useAppStore } from '@/stores/useAppStore';
 import { categories } from '@/data/menu';
 import { t as lt } from '@/lib/localized';
@@ -28,18 +27,13 @@ export default function CategoryNav() {
                 aria-selected={isActive}
                 onClick={() => setActiveCategory(item.id)}
                 className={cn(
-                  'relative shrink-0 rounded-full px-4 py-2 text-[12px] font-semibold tracking-wide transition-colors duration-200',
-                  isActive ? 'text-white' : 'text-white/40 hover:text-white/65'
+                  'shrink-0 rounded-full px-4 py-2 text-[12px] font-semibold tracking-wide transition-colors duration-200',
+                  isActive
+                    ? 'bg-red/90 text-white'
+                    : 'text-white/40 hover:text-white/65'
                 )}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="category-pill"
-                    className="absolute inset-0 rounded-full bg-red/90"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{item.label}</span>
+                {item.label}
               </button>
             );
           })}
