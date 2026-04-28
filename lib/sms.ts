@@ -8,10 +8,12 @@
 //   BR outbound SMS  ~$0.05 / message
 //
 // Sender:
-//   Uses an Alphanumeric Sender ID (e.g. "LatinaGrill") which is free —
-//   no Twilio number purchase required. Works in PT/BR/EU. In countries
-//   that don't allow alpha senders (US/CA) Twilio falls back to a generic
-//   short code automatically.
+//   Prefers TWILIO_MESSAGING_SERVICE_SID (a Messaging Service that bundles
+//   the Alphanumeric Sender "LatinaGrill" + sender selection rules). Falls
+//   back to TWILIO_FROM (direct alphanumeric) for legacy accounts.
+//   Alphanumeric Sender IDs are free — no Twilio number purchase required.
+//   Work in PT/BR/EU. In US/CA the Messaging Service auto-routes to a
+//   compatible long code if available.
 //
 // SMS body: keep ≤ 160 chars (1 SMS unit) when possible. Twilio segments
 // longer bodies but each segment is billed separately.
@@ -87,19 +89,21 @@ export async function sendSMS({ to, body }: SendSmsOptions): Promise<void> {
     return;
   }
 
-  const from = process.env.TWILIO_FROM || 'LatinaGrill';
   const e164 = toE164(to);
   if (!e164) {
     console.warn('[Latina Grill] SMS skipped: invalid phone format', { to: to.slice(0, 6) + '…' });
     return;
   }
 
+  const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
+  const from = process.env.TWILIO_FROM || 'LatinaGrill';
+
   try {
-    await client.messages.create({
-      to: e164,
-      from,
-      body,
-    });
+    await client.messages.create(
+      messagingServiceSid
+        ? { to: e164, body, messagingServiceSid }
+        : { to: e164, body, from },
+    );
   } catch (err) {
     // Common reasons: invalid number, country not enabled, low balance.
     // Log but don't throw — email is the source of truth.
