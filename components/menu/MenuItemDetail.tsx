@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, Flame, Leaf, Star, Sparkles, Award, Crown, Beef, Droplets, Carrot } from 'lucide-react';
@@ -41,7 +41,6 @@ export default function MenuItemDetail({ item, onClose }: Props) {
   const recommendedSides = useMemo(() => {
     if (!item) return [];
     if (!mainCourseCategories.includes(item.categoryId)) return [];
-    // Boards already include sides, skip
     if (item.tags.includes('board')) return [];
     const ids = getSidesForItem(item.id);
     return ids
@@ -49,6 +48,24 @@ export default function MenuItemDetail({ item, onClose }: Props) {
       .filter((m) => m !== undefined && m.available)
       .slice(0, 4);
   }, [item]);
+
+  // Lock body scroll while modal is open (prevents background page from scrolling)
+  useEffect(() => {
+    if (!item) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = previous; };
+  }, [item]);
+
+  // Close on ESC key
+  useEffect(() => {
+    if (!item) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [item, onClose]);
 
   return (
     <AnimatePresence>
@@ -63,18 +80,26 @@ export default function MenuItemDetail({ item, onClose }: Props) {
             className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
           />
 
-          {/* Panel */}
+          {/* Panel — split into non-scrolling header (image + close button) +
+              scrolling body (content). This keeps the X button always visible
+              on mobile, no matter how far the user scrolls. */}
           <motion.div
             initial={{ opacity: 0, y: '100%' }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             role="dialog"
+            aria-modal="true"
             aria-label={item ? lt(item.name, locale) : ''}
-            className="fixed inset-x-0 bottom-0 z-50 max-h-[90vh] overflow-y-auto rounded-t-3xl border-t border-white/10 bg-dark lg:inset-auto lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:max-h-[85vh] lg:w-full lg:max-w-lg lg:rounded-3xl lg:border"
+            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92vh] flex-col rounded-t-3xl border-t border-white/10 bg-dark lg:inset-auto lg:left-1/2 lg:top-1/2 lg:max-h-[88vh] lg:w-full lg:max-w-lg lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-3xl lg:border"
           >
-            {/* Header image area */}
-            <div className="relative h-48 overflow-hidden bg-dark-lighter lg:h-56">
+            {/* Drag handle indicator (mobile-only visual hint) */}
+            <div className="flex shrink-0 justify-center pt-2 pb-1 lg:hidden">
+              <div className="h-1 w-10 rounded-full bg-white/20" />
+            </div>
+
+            {/* Header: image (non-scrolling) */}
+            <div className="relative shrink-0 h-44 overflow-hidden bg-dark-lighter sm:h-52 lg:h-56">
               <MenuImage
                 itemId={item.id}
                 categoryId={item.categoryId}
@@ -82,23 +107,25 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                 priority
                 sizes="(max-width: 640px) 100vw, 512px"
               />
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-dark via-dark/20 to-transparent" />
-              {/* Premium glow for premium/wagyu/gold */}
+              <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-dark via-dark/30 to-transparent" />
               {(item.tags.includes('premium') || item.tags.includes('wagyu') || item.tags.includes('gold')) && (
-                <div className="absolute inset-0 z-10 bg-gradient-to-br from-accent-yellow/10 via-transparent to-red/5" />
+                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-br from-accent-yellow/10 via-transparent to-red/5" />
               )}
+
+              {/* Close button — z-30 so it's above gradient overlays.
+                  Only scale on tap (no hover:rotate, that broke touch UX). */}
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white/75 backdrop-blur-sm transition-all duration-200 hover:rotate-90 hover:bg-black/75 hover:text-white active:scale-90"
+                className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/65 text-white backdrop-blur-md transition-all duration-200 hover:scale-110 hover:bg-black/85 active:scale-90"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Content */}
-            <div className="px-6 pb-8 pt-5">
+            {/* Body: scrolls */}
+            <div className="overflow-y-auto overscroll-contain px-6 pb-8 pt-5">
               {/* Tags */}
               {item.tags.length > 0 && (
                 <div className="mb-3 flex flex-wrap gap-2">
@@ -107,7 +134,7 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                     return (
                       <span
                         key={tag}
-                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-surface px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/50"
+                        className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-surface px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/55"
                       >
                         {Icon && <Icon className="h-3 w-3" />}
                         {t(`tags.${tag}`)}
@@ -119,15 +146,19 @@ export default function MenuItemDetail({ item, onClose }: Props) {
 
               {/* Name + Price */}
               <div className="mb-2 flex items-start justify-between gap-4">
-                <h2 className="font-serif text-2xl font-bold text-white leading-tight">
+                <h2 className="font-serif text-2xl font-bold leading-tight text-white">
                   {lt(item.name, locale)}
                 </h2>
-                <PriceDisplay cents={item.price} priceUnit={item.priceUnit} className="shrink-0 text-xl font-bold text-red-light" />
+                <PriceDisplay
+                  cents={item.price}
+                  priceUnit={item.priceUnit}
+                  className="shrink-0 text-xl font-bold text-red-light"
+                />
               </div>
 
               {/* Prep time */}
               {item.preparationTime && (
-                <div className="mb-4 flex items-center gap-1.5 text-white/30">
+                <div className="mb-4 flex items-center gap-1.5 text-white/35">
                   <Clock className="h-3.5 w-3.5" />
                   <span className="text-[11px]">{t('prepTime', { minutes: item.preparationTime })}</span>
                 </div>
@@ -135,17 +166,17 @@ export default function MenuItemDetail({ item, onClose }: Props) {
 
               {/* Description */}
               {lt(item.description, locale) && (
-                <p className="mb-6 text-[14px] leading-relaxed text-white/50">
+                <p className="mb-6 text-[14px] leading-relaxed text-white/55">
                   {lt(item.description, locale)}
                 </p>
               )}
 
-              {/* ── Recommended Sauces (display-only) ── */}
+              {/* ── Recommended Sauces ── */}
               {recommendedSauces.length > 0 && (
                 <div className="mb-5">
                   <div className="mb-2.5 flex items-center gap-1.5">
                     <Droplets className="h-3.5 w-3.5 text-accent-orange" />
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-white/45">
                       {t('recommendedSauces')}
                     </span>
                   </div>
@@ -154,13 +185,13 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                       sauce ? (
                         <div
                           key={sauce.id}
-                          className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-surface px-3 py-1.5 text-[11px] text-white/60"
+                          className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-surface px-3 py-1.5 text-[11px] text-white/65"
                         >
                           <span>{lt(sauce.name, locale)}</span>
                           {sauce.price === null ? (
-                            <span className="text-[9px] text-accent-green/70 font-semibold">{t('included')}</span>
+                            <span className="text-[9px] font-semibold text-accent-green/80">{t('included')}</span>
                           ) : (
-                            <PriceDisplay cents={sauce.price} className="text-[10px] text-white/30" />
+                            <PriceDisplay cents={sauce.price} className="text-[10px] text-white/35" />
                           )}
                         </div>
                       ) : null
@@ -169,12 +200,12 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                 </div>
               )}
 
-              {/* ── Recommended Sides (display-only) ── */}
+              {/* ── Recommended Sides ── */}
               {recommendedSides.length > 0 && (
                 <div className="mb-2">
                   <div className="mb-2.5 flex items-center gap-1.5">
                     <Carrot className="h-3.5 w-3.5 text-accent-green" />
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-white/45">
                       {t('completeDish')}
                     </span>
                   </div>
@@ -189,9 +220,9 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-dark-lighter">
                               <span className="text-xs opacity-30">🥗</span>
                             </div>
-                            <span className="text-[12px] text-white/70">{lt(side.name, locale)}</span>
+                            <span className="text-[12px] text-white/75">{lt(side.name, locale)}</span>
                           </div>
-                          <PriceDisplay cents={side.price} className="text-[11px] text-white/40" />
+                          <PriceDisplay cents={side.price} className="text-[11px] text-white/45" />
                         </div>
                       ) : null
                     )}
