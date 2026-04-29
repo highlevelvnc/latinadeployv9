@@ -88,9 +88,10 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                 <div className="absolute inset-0 z-10 bg-gradient-to-br from-accent-yellow/10 via-transparent to-red/5" />
               )}
               <button
+                type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/50 text-white/70 backdrop-blur-sm transition-colors hover:text-white"
+                className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/55 text-white/75 backdrop-blur-sm transition-all duration-200 hover:rotate-90 hover:bg-black/75 hover:text-white active:scale-90"
               >
                 <X className="h-4 w-4" />
               </button>

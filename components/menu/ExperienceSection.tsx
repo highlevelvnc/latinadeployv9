@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { experienceCombos } from '@/data/recommendations';
@@ -36,12 +35,10 @@ export default function ExperienceSection() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         {combos.map((combo, i) => (
-          <motion.div
+          <div
             key={combo.id}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1, duration: 0.4 }}
-            className="relative overflow-hidden rounded-2xl border border-accent-yellow/15 bg-gradient-to-br from-accent-yellow/[0.04] via-surface to-surface"
+            style={{ animationDelay: `${i * 80}ms` }}
+            className="relative overflow-hidden rounded-2xl border border-accent-yellow/15 bg-gradient-to-br from-accent-yellow/[0.04] via-surface to-surface transition-all duration-300 animate-fade-in-up hover:-translate-y-0.5 hover:border-accent-yellow/35 hover:shadow-xl hover:shadow-accent-yellow/10"
           >
             {/* Badge */}
             <div className="absolute right-3 top-3 z-10">
@@ -81,7 +78,7 @@ export default function ExperienceSection() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

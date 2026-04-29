@@ -68,17 +68,28 @@ export default function MenuGrid({ onSelectItem }: Props) {
 
   if (filtered.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
-        <span className="mb-3 text-4xl opacity-20">🍽️</span>
-        <p className="text-sm text-white/30">{t('emptyState')}</p>
+      <div className="flex flex-col items-center justify-center px-4 py-24 text-center animate-fade-in-up">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/[0.08] bg-surface text-3xl opacity-40">
+          🍽
+        </div>
+        <p className="text-sm font-medium text-white/55">{t('emptyState')}</p>
+        <p className="mt-1 text-[12px] text-white/30">
+          {t('search')}
+        </p>
       </div>
     );
   }
 
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {filtered.map((item) => (
-        <MenuItem key={item.id} item={item} onSelect={onSelectItem} />
+      {filtered.map((item, i) => (
+        <div
+          key={item.id}
+          style={{ animationDelay: `${Math.min(i * 30, 300)}ms` }}
+          className="animate-fade-in-up"
+        >
+          <MenuItem item={item} onSelect={onSelectItem} />
+        </div>
       ))}
     </div>
   );

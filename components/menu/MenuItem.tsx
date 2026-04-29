@@ -38,7 +38,10 @@ const tagColors: Partial<Record<DietaryTag, string>> = {
 
 // Premium items get a subtle glow border
 const isPremiumItem = (item: MenuItemType) =>
-  item.tags.includes('premium') || item.tags.includes('wagyu') || item.tags.includes('gold') || item.tags.includes('signature');
+  item.tags.includes('premium') ||
+  item.tags.includes('wagyu') ||
+  item.tags.includes('gold') ||
+  item.tags.includes('signature');
 
 interface Props {
   item: MenuItemType;
@@ -55,42 +58,46 @@ export default function MenuItem({ item, onSelect }: Props) {
   const premium = isPremiumItem(item);
 
   return (
-    <div
+    <button
+      type="button"
       onClick={() => onSelect(item)}
       aria-disabled={isUnavailable || undefined}
-      className={`group relative cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isUnavailable
-          ? 'border-white/[0.04] bg-surface opacity-50 grayscale pointer-events-auto'
-          : premium
-            ? 'border-accent-yellow/15 bg-surface hover:border-accent-yellow/30 hover:shadow-lg hover:shadow-accent-yellow/5'
-            : 'border-white/[0.06] bg-surface hover:border-white/[0.12] hover:shadow-lg hover:shadow-black/20'
-      }`}
+      className={`group relative cursor-pointer overflow-hidden rounded-2xl border text-left transition-all duration-300 ease-out
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-dark
+        active:scale-[0.985]
+        ${
+          isUnavailable
+            ? 'border-white/[0.04] bg-surface opacity-50 grayscale pointer-events-auto'
+            : premium
+              ? 'border-accent-yellow/15 bg-surface hover:-translate-y-0.5 hover:border-accent-yellow/35 hover:shadow-xl hover:shadow-accent-yellow/10'
+              : 'border-white/[0.06] bg-surface hover:-translate-y-0.5 hover:border-white/15 hover:shadow-xl hover:shadow-black/30'
+        }`}
     >
       {/* ── Image Section ── */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-dark-lighter">
-        <MenuImage
-          itemId={item.id}
-          categoryId={item.categoryId}
-          alt={lt(item.name, locale)}
-          priority={false}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        />
+        {/* Image with smooth zoom on hover */}
+        <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110">
+          <MenuImage
+            itemId={item.id}
+            categoryId={item.categoryId}
+            alt={lt(item.name, locale)}
+            priority={false}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          />
+        </div>
 
         {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
 
-        {/* Premium shimmer overlay */}
-        {premium && (
-          <div className="absolute inset-0 z-10 bg-gradient-to-br from-accent-yellow/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        {/* Premium subtle glow — always visible at low opacity, intensifies on hover */}
+        {premium && !isUnavailable && (
+          <div className="absolute inset-0 z-10 bg-gradient-to-br from-accent-yellow/[0.06] via-transparent to-transparent transition-opacity duration-500 group-hover:from-accent-yellow/15" />
         )}
-
-        {/* Desktop hover zoom */}
-        <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105" />
 
         {/* Unavailable overlay */}
         {isUnavailable && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/50">
-            <span className="rounded-full bg-dark/90 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white/60 border border-white/10">
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/55 backdrop-blur-[1px]">
+            <span className="rounded-full border border-white/10 bg-dark/90 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white/70">
               {t('unavailable')}
             </span>
           </div>
@@ -134,7 +141,10 @@ export default function MenuItem({ item, onSelect }: Props) {
               const Icon = tagIcons[tag];
               const color = tagColors[tag] ?? 'text-white/40';
               return (
-                <span key={tag} className={`flex items-center gap-0.5 text-[9px] font-semibold uppercase tracking-wider ${color}`}>
+                <span
+                  key={tag}
+                  className={`flex items-center gap-0.5 text-[9px] font-semibold uppercase tracking-wider ${color}`}
+                >
                   {Icon && <Icon className="h-2.5 w-2.5" />}
                   {t(`tags.${tag}`)}
                 </span>
@@ -144,13 +154,17 @@ export default function MenuItem({ item, onSelect }: Props) {
         )}
 
         {/* Name */}
-        <h3 className={`text-[14px] font-semibold leading-snug line-clamp-2 mb-1 ${premium ? 'text-white' : 'text-white/90'}`}>
+        <h3
+          className={`mb-1 line-clamp-2 text-[14px] font-semibold leading-snug transition-colors group-hover:text-white ${
+            premium ? 'text-white' : 'text-white/90'
+          }`}
+        >
           {lt(item.name, locale)}
         </h3>
 
         {/* Description */}
         {lt(item.description, locale) && (
-          <p className="text-[11px] text-white/30 leading-relaxed line-clamp-2 mb-2">
+          <p className="mb-2 line-clamp-2 text-[11px] leading-relaxed text-white/30">
             {lt(item.description, locale)}
           </p>
         )}
@@ -160,10 +174,10 @@ export default function MenuItem({ item, onSelect }: Props) {
           <PriceDisplay
             cents={item.price}
             priceUnit={item.priceUnit}
-            className={`text-[15px] font-bold ${premium ? 'text-accent-yellow' : 'text-white/80'}`}
+            className={`text-[15px] font-bold ${premium ? 'text-accent-yellow' : 'text-white/85'}`}
           />
         </div>
       </div>
-    </div>
+    </button>
   );
 }
