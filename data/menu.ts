@@ -2,6 +2,28 @@ import type { CategoryGroup, MenuCategory, MenuItem } from '@/types/menu';
 
 export const categoryGroups: CategoryGroup[] = [
   {
+    id: 'entradas',
+    name: {
+      pt: 'Entradas',
+      en: 'Starters',
+      fr: 'Entrées',
+      zh: '前菜',
+    },
+    icon: 'Salad',
+    sortOrder: 10,
+  },
+  {
+    id: 'meats',
+    name: {
+      pt: 'Carnes',
+      en: 'Meats',
+      fr: 'Viandes',
+      zh: '肉类',
+    },
+    icon: 'Beef',
+    sortOrder: 20,
+  },
+  {
     id: 'alcoholic-drinks',
     name: {
       pt: 'Bebidas Alcoólicas',
@@ -26,20 +48,20 @@ export const categoryGroups: CategoryGroup[] = [
 ];
 
 export const categories: MenuCategory[] = [
-  { id: 'couvert', name: { pt: 'Couverts', en: 'Couverts', fr: 'Couverts', zh: '餐前小食' }, icon: 'Bread', sortOrder: 1 },
-  { id: 'cold-starters', name: { pt: 'Entradas Frias', en: 'Cold Starters', fr: 'Entrées Froides', zh: '冷前菜' }, icon: 'Salad', sortOrder: 2 },
-  { id: 'hot-starters', name: { pt: 'Entradas Quentes', en: 'Hot Starters', fr: 'Entrées Chaudes', zh: '热前菜' }, icon: 'Flame', sortOrder: 3 },
-  { id: 'cheese-cold-cuts', name: { pt: 'Queijos e Enchidos', en: 'Cheese and Cold Cuts', fr: 'Fromages et Charcuterie', zh: '奶酪与冷切' }, icon: 'Slice', sortOrder: 4 },
+  { id: 'couvert', name: { pt: 'Couverts', en: 'Couverts', fr: 'Couverts', zh: '餐前小食' }, icon: 'Bread', sortOrder: 1, parentGroup: 'entradas' },
+  { id: 'cold-starters', name: { pt: 'Entradas Frias', en: 'Cold Starters', fr: 'Entrées Froides', zh: '冷前菜' }, icon: 'Salad', sortOrder: 2, parentGroup: 'entradas' },
+  { id: 'hot-starters', name: { pt: 'Entradas Quentes', en: 'Hot Starters', fr: 'Entrées Chaudes', zh: '热前菜' }, icon: 'Flame', sortOrder: 3, parentGroup: 'entradas' },
+  { id: 'cheese-cold-cuts', name: { pt: 'Queijos e Enchidos', en: 'Cheese and Cold Cuts', fr: 'Fromages et Charcuterie', zh: '奶酪与冷切' }, icon: 'Slice', sortOrder: 4, parentGroup: 'entradas' },
   { id: 'kids', name: { pt: 'Kids', en: 'Kids', fr: 'Enfants', zh: '儿童菜单' }, icon: 'Baby', sortOrder: 5 },
-  { id: 'dry-aged-meats', name: { pt: 'Carnes Maturadas', en: 'Dry Aged Meats', fr: 'Viandes Maturées', zh: '熟成牛肉' }, icon: 'Beef', sortOrder: 6 },
-  { id: 'wagyu', name: { pt: 'Wagyu', en: 'Wagyu', fr: 'Wagyu', zh: '和牛' }, icon: 'Star', sortOrder: 7 },
+  { id: 'dry-aged-meats', name: { pt: 'Carnes Maturadas', en: 'Dry Aged Meats', fr: 'Viandes Maturées', zh: '熟成牛肉' }, icon: 'Beef', sortOrder: 6, parentGroup: 'meats' },
+  { id: 'wagyu', name: { pt: 'Wagyu', en: 'Wagyu', fr: 'Wagyu', zh: '和牛' }, icon: 'Star', sortOrder: 7, parentGroup: 'meats' },
   { id: 'grilled-seafood', name: { pt: 'Marisco Fresco na Grelha', en: 'Fresh Seafood on the Grill', fr: 'Fruits de Mer Frais au Grill', zh: '炭烤鲜海鲜' }, icon: 'Fish', sortOrder: 8 },
-  { id: 'premium-selection', name: { pt: 'Seleção Premium', en: 'Premium Selection', fr: 'Sélection Premium', zh: '精选高级肉类' }, icon: 'Award', sortOrder: 9 },
-  { id: 'other-cuts', name: { pt: 'Outros Cortes', en: 'Other Cuts', fr: 'Autres Pièces', zh: '其他肉类' }, icon: 'Utensils', sortOrder: 10 },
+  { id: 'premium-selection', name: { pt: 'Seleção Premium', en: 'Premium Selection', fr: 'Sélection Premium', zh: '精选高级肉类' }, icon: 'Award', sortOrder: 9, parentGroup: 'meats' },
+  { id: 'other-cuts', name: { pt: 'Outros Cortes', en: 'Other Cuts', fr: 'Autres Pièces', zh: '其他肉类' }, icon: 'Utensils', sortOrder: 10, parentGroup: 'meats' },
   { id: 'boards', name: { pt: 'Tábuas', en: 'Boards', fr: 'Planches', zh: '分享拼盘' }, icon: 'LayoutGrid', sortOrder: 11 },
   { id: 'side-dishes', name: { pt: 'Guarnições', en: 'Side Dishes', fr: 'Accompagnements', zh: '配菜' }, icon: 'Carrot', sortOrder: 12 },
   { id: 'vegetarian', name: { pt: 'Opções Vegetarianas', en: 'Vegetarian Options', fr: 'Options Végétariennes', zh: '素食' }, icon: 'Leaf', sortOrder: 13 },
-  { id: 'gold-selection', name: { pt: 'Golden Selection', en: 'Golden Selection', fr: 'Sélection Golden', zh: '黄金甄选' }, icon: 'Crown', sortOrder: 14 },
+  { id: 'gold-selection', name: { pt: 'Golden Selection', en: 'Golden Selection', fr: 'Sélection Golden', zh: '黄金甄选' }, icon: 'Crown', sortOrder: 14, parentGroup: 'meats' },
   { id: 'sauces', name: { pt: 'Molhos', en: 'Sauces', fr: 'Sauces', zh: '酱汁' }, icon: 'Droplets', sortOrder: 15 },
   { id: 'chef-suggestion', name: { pt: 'Sugestão do Chef', en: "Chef's Suggestion", fr: 'Suggestion du Chef', zh: '主厨推荐' }, icon: 'ChefHat', sortOrder: 0 },
   { id: 'desserts', name: { pt: 'Sobremesas', en: 'Desserts', fr: 'Desserts', zh: '甜点' }, icon: 'Cookie', sortOrder: 16 },
