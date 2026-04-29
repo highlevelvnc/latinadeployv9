@@ -48,4 +48,38 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none; /* Safari, Chrome */
   }
+
+  /* Endless horizontal marquee — used by Featured carousel.
+     Inner container must duplicate its children once and use `w-max`. */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+    will-change: transform;
+  }
+  .animate-marquee:hover,
+  .animate-marquee:focus-within {
+    animation-play-state: paused;
+  }
+
+  /* Subtle fade-in-up — used as a one-shot entrance for cards/sections.
+     Stagger via inline style: { animationDelay: '60ms' }. */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.4s ease-out backwards;
+    will-change: opacity, transform;
+  }
+
+  /* Accessibility: respect user's reduced-motion preference. */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-fade-in-up {
+      animation: none !important;
+    }
+  }
 }

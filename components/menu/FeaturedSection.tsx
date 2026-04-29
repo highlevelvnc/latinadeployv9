@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { Award } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { featuredItemIds } from '@/data/recommendations';
@@ -25,6 +24,11 @@ export default function FeaturedSection({ onSelectItem }: Props) {
 
   if (featured.length === 0) return null;
 
+  // Duplicated track for seamless loop. animation translates -50% so when the
+  // first set fully scrolls past, the second copy is exactly where the first
+  // one started, making the seam invisible.
+  const track = [...featured, ...featured];
+
   return (
     <section className="mb-8">
       <div className="mb-4 flex items-center gap-2">
@@ -35,54 +39,63 @@ export default function FeaturedSection({ onSelectItem }: Props) {
         </div>
       </div>
 
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        {featured.map((item, i) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.05, duration: 0.3 }}
-            onClick={() => onSelectItem(item)}
-            className="group relative min-w-[200px] max-w-[200px] shrink-0 cursor-pointer rounded-2xl border border-white/[0.08] bg-surface p-3 transition-all hover:border-red/20 hover:bg-surface-elevated"
-          >
-            {/* Image */}
-            <div className="relative mb-3 h-28 w-full overflow-hidden rounded-xl bg-dark-lighter">
-              <MenuImage
-                itemId={item.id}
-                categoryId={item.categoryId}
-                alt={lt(item.name, locale)}
-                priority={i < 3}
-                sizes="200px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
-              {/* Badge */}
-              {item.tags.includes('bestseller') && (
-                <span className="absolute left-2 top-2 z-20 rounded-full bg-accent-orange/90 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white">
-                  {t('tags.bestseller')}
-                </span>
-              )}
-              {item.tags.includes('signature') && !item.tags.includes('bestseller') && (
-                <span className="absolute left-2 top-2 z-20 rounded-full bg-accent-yellow/90 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider text-black">
-                  {t('tags.signature')}
-                </span>
-              )}
-            </div>
+      {/* Marquee container with edge fades. -mx-4 + px-4 makes it edge-to-edge
+          on mobile while keeping items aligned with the page padding. */}
+      <div className="relative -mx-4 overflow-hidden">
+        {/* Left fade gradient */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-dark to-transparent" />
+        {/* Right fade gradient */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-dark to-transparent" />
 
-            {/* Name */}
-            <h3 className="mb-1 text-[13px] font-semibold text-white/90 leading-snug line-clamp-2">
-              {lt(item.name, locale)}
-            </h3>
+        <div className="flex w-max gap-3 px-4 animate-marquee" aria-label={t('featured')}>
+          {track.map((item, i) => (
+            <button
+              key={`${item.id}-${i}`}
+              type="button"
+              onClick={() => onSelectItem(item)}
+              aria-hidden={i >= featured.length}
+              className="group relative flex w-[200px] shrink-0 cursor-pointer flex-col rounded-2xl border border-white/[0.08] bg-surface p-3 text-left transition-all duration-200 hover:border-red/25 hover:bg-surface-elevated active:scale-[0.98]"
+            >
+              {/* Image */}
+              <div className="relative mb-3 h-28 w-full overflow-hidden rounded-xl bg-dark-lighter">
+                <MenuImage
+                  itemId={item.id}
+                  categoryId={item.categoryId}
+                  alt={lt(item.name, locale)}
+                  priority={i < 3}
+                  sizes="200px"
+                />
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/40 to-transparent" />
 
-            {/* Price */}
-            <div className="flex items-center justify-between">
-              <PriceDisplay
-                cents={item.price}
-                priceUnit={item.priceUnit}
-                className="text-sm font-bold text-red-light"
-              />
-            </div>
-          </motion.div>
-        ))}
+                {/* Badge */}
+                {item.tags.includes('bestseller') && (
+                  <span className="absolute left-2 top-2 z-20 rounded-full bg-accent-orange/90 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider text-white shadow-sm shadow-black/30">
+                    {t('tags.bestseller')}
+                  </span>
+                )}
+                {item.tags.includes('signature') && !item.tags.includes('bestseller') && (
+                  <span className="absolute left-2 top-2 z-20 rounded-full bg-accent-yellow/90 px-2 py-0.5 text-[8px] font-bold uppercase tracking-wider text-black shadow-sm shadow-black/30">
+                    {t('tags.signature')}
+                  </span>
+                )}
+              </div>
+
+              {/* Name */}
+              <h3 className="mb-1 line-clamp-2 text-[13px] font-semibold leading-snug text-white/90">
+                {lt(item.name, locale)}
+              </h3>
+
+              {/* Price */}
+              <div className="mt-auto flex items-center justify-between">
+                <PriceDisplay
+                  cents={item.price}
+                  priceUnit={item.priceUnit}
+                  className="text-sm font-bold text-red-light"
+                />
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

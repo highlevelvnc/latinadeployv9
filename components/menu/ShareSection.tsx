@@ -1,7 +1,6 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { shareItemIds } from '@/data/recommendations';
@@ -37,13 +36,12 @@ export default function ShareSection({ onSelectItem }: Props) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         {shareItems.map((item, i) => (
-          <motion.div
+          <button
             key={item.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05, duration: 0.3 }}
+            type="button"
             onClick={() => onSelectItem(item)}
-            className="group relative flex gap-4 cursor-pointer rounded-2xl border border-accent-blue/10 bg-gradient-to-r from-accent-blue/[0.03] to-surface p-3 transition-all hover:border-accent-blue/20 hover:from-accent-blue/[0.06]"
+            style={{ animationDelay: `${i * 60}ms` }}
+            className="group relative flex cursor-pointer gap-4 rounded-2xl border border-accent-blue/10 bg-gradient-to-r from-accent-blue/[0.03] to-surface p-3 text-left transition-all duration-200 animate-fade-in-up hover:border-accent-blue/25 hover:from-accent-blue/[0.06] active:scale-[0.99]"
           >
             {/* Image */}
             <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-dark-lighter">
@@ -63,11 +61,11 @@ export default function ShareSection({ onSelectItem }: Props) {
             {/* Content */}
             <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
               <div>
-                <h3 className="text-[13px] font-semibold text-white/90 leading-snug line-clamp-1">
+                <h3 className="line-clamp-1 text-[13px] font-semibold leading-snug text-white/90">
                   {lt(item.name, locale)}
                 </h3>
                 {lt(item.description, locale) && (
-                  <p className="mt-0.5 text-[10px] text-white/35 leading-relaxed line-clamp-2">
+                  <p className="mt-0.5 line-clamp-2 text-[10px] leading-relaxed text-white/35">
                     {lt(item.description, locale)}
                   </p>
                 )}
@@ -78,7 +76,7 @@ export default function ShareSection({ onSelectItem }: Props) {
                 className="text-sm font-bold text-white/80"
               />
             </div>
-          </motion.div>
+          </button>
         ))}
       </div>
     </section>
