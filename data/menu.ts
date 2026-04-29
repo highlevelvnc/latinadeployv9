@@ -1,4 +1,29 @@
-import type { MenuCategory, MenuItem } from '@/types/menu';
+import type { CategoryGroup, MenuCategory, MenuItem } from '@/types/menu';
+
+export const categoryGroups: CategoryGroup[] = [
+  {
+    id: 'alcoholic-drinks',
+    name: {
+      pt: 'Bebidas Alcoólicas',
+      en: 'Alcoholic Drinks',
+      fr: 'Boissons Alcoolisées',
+      zh: '酒精饮品',
+    },
+    icon: 'Wine',
+    sortOrder: 100,
+  },
+  {
+    id: 'non-alcoholic-drinks',
+    name: {
+      pt: 'Bebidas Não Alcoólicas',
+      en: 'Non-Alcoholic Drinks',
+      fr: 'Boissons Sans Alcool',
+      zh: '无酒精饮品',
+    },
+    icon: 'CupSoda',
+    sortOrder: 200,
+  },
+];
 
 export const categories: MenuCategory[] = [
   { id: 'couvert', name: { pt: 'Couverts', en: 'Couverts', fr: 'Couverts', zh: '餐前小食' }, icon: 'Bread', sortOrder: 1 },
@@ -18,23 +43,23 @@ export const categories: MenuCategory[] = [
   { id: 'sauces', name: { pt: 'Molhos', en: 'Sauces', fr: 'Sauces', zh: '酱汁' }, icon: 'Droplets', sortOrder: 15 },
   { id: 'chef-suggestion', name: { pt: 'Sugestão do Chef', en: "Chef's Suggestion", fr: 'Suggestion du Chef', zh: '主厨推荐' }, icon: 'ChefHat', sortOrder: 0 },
   { id: 'desserts', name: { pt: 'Sobremesas', en: 'Desserts', fr: 'Desserts', zh: '甜点' }, icon: 'Cookie', sortOrder: 16 },
-  { id: 'wines-red-portugal', name: { pt: 'Vinhos Tintos – Portugal', en: 'Red Wines – Portugal', fr: 'Vins Rouges – Portugal', zh: '葡萄牙红酒' }, icon: 'Wine', sortOrder: 17 },
-  { id: 'wines-red-world', name: { pt: 'Vinhos Tintos do Mundo', en: 'Red Wines of the World', fr: 'Vins Rouges du Monde', zh: '世界红酒' }, icon: 'Wine', sortOrder: 18 },
-  { id: 'wines-white', name: { pt: 'Vinhos Brancos', en: 'White Wines', fr: 'Vins Blancs', zh: '白葡萄酒' }, icon: 'Wine', sortOrder: 19 },
-  { id: 'wines-rose', name: { pt: 'Vinhos Rosé', en: 'Rosé Wines', fr: 'Vins Rosés', zh: '桃红葡萄酒' }, icon: 'Wine', sortOrder: 20 },
-  { id: 'wines-sparkling', name: { pt: 'Espumantes & Champagne', en: 'Sparkling & Champagne', fr: 'Mousseux & Champagne', zh: '起泡酒与香槟' }, icon: 'Wine', sortOrder: 21 },
-  { id: 'wines-fortified', name: { pt: 'Vinhos Fortificados', en: 'Fortified Wines', fr: 'Vins Fortifiés', zh: '加强葡萄酒' }, icon: 'Wine', sortOrder: 22 },
-  { id: 'wines-by-glass', name: { pt: 'Vinho a Copo', en: 'Wine by the Glass', fr: 'Vin au Verre', zh: '杯装葡萄酒' }, icon: 'Wine', sortOrder: 23 },
-  { id: 'cocktails', name: { pt: 'Cocktails', en: 'Cocktails', fr: 'Cocktails', zh: '鸡尾酒' }, icon: 'Martini', sortOrder: 24 },
-  { id: 'sangrias', name: { pt: 'Sangrias', en: 'Sangrias', fr: 'Sangrias', zh: '桑格利亚' }, icon: 'Wine', sortOrder: 25 },
-  { id: 'mocktails', name: { pt: 'Mocktails', en: 'Mocktails', fr: 'Mocktails', zh: '无酒精鸡尾酒' }, icon: 'CupSoda', sortOrder: 26 },
-  { id: 'natural-juices', name: { pt: 'Sumos Naturais', en: 'Natural Juices', fr: 'Jus Naturels', zh: '鲜榨果汁' }, icon: 'Citrus', sortOrder: 27 },
-  { id: 'coffee-tea', name: { pt: 'Café & Chá', en: 'Coffee & Tea', fr: 'Café & Thé', zh: '咖啡与茶' }, icon: 'Coffee', sortOrder: 28 },
-  { id: 'soft-drinks', name: { pt: 'Refrigerantes', en: 'Soft Drinks', fr: 'Sodas', zh: '软饮' }, icon: 'CupSoda', sortOrder: 29 },
-  { id: 'beers', name: { pt: 'Cervejas', en: 'Beers', fr: 'Bières', zh: '啤酒' }, icon: 'Beer', sortOrder: 30 },
-  { id: 'waters', name: { pt: 'Águas', en: 'Waters', fr: 'Eaux', zh: '水' }, icon: 'Droplet', sortOrder: 31 },
-  { id: 'aperitifs', name: { pt: 'Aperitivos', en: 'Aperitifs', fr: 'Apéritifs', zh: '开胃酒' }, icon: 'Wine', sortOrder: 32 },
-  { id: 'liqueurs', name: { pt: 'Licores', en: 'Liqueurs', fr: 'Liqueurs', zh: '利口酒' }, icon: 'Wine', sortOrder: 33 },
+  { id: 'wines-red-portugal', name: { pt: 'Vinhos Tintos – Portugal', en: 'Red Wines – Portugal', fr: 'Vins Rouges – Portugal', zh: '葡萄牙红酒' }, icon: 'Wine', sortOrder: 17, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-red-world', name: { pt: 'Vinhos Tintos do Mundo', en: 'Red Wines of the World', fr: 'Vins Rouges du Monde', zh: '世界红酒' }, icon: 'Wine', sortOrder: 18, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-white', name: { pt: 'Vinhos Brancos', en: 'White Wines', fr: 'Vins Blancs', zh: '白葡萄酒' }, icon: 'Wine', sortOrder: 19, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-rose', name: { pt: 'Vinhos Rosé', en: 'Rosé Wines', fr: 'Vins Rosés', zh: '桃红葡萄酒' }, icon: 'Wine', sortOrder: 20, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-sparkling', name: { pt: 'Espumantes & Champagne', en: 'Sparkling & Champagne', fr: 'Mousseux & Champagne', zh: '起泡酒与香槟' }, icon: 'Wine', sortOrder: 21, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-fortified', name: { pt: 'Vinhos Fortificados', en: 'Fortified Wines', fr: 'Vins Fortifiés', zh: '加强葡萄酒' }, icon: 'Wine', sortOrder: 22, parentGroup: 'alcoholic-drinks' },
+  { id: 'wines-by-glass', name: { pt: 'Vinho a Copo', en: 'Wine by the Glass', fr: 'Vin au Verre', zh: '杯装葡萄酒' }, icon: 'Wine', sortOrder: 23, parentGroup: 'alcoholic-drinks' },
+  { id: 'cocktails', name: { pt: 'Cocktails', en: 'Cocktails', fr: 'Cocktails', zh: '鸡尾酒' }, icon: 'Martini', sortOrder: 24, parentGroup: 'alcoholic-drinks' },
+  { id: 'sangrias', name: { pt: 'Sangrias', en: 'Sangrias', fr: 'Sangrias', zh: '桑格利亚' }, icon: 'Wine', sortOrder: 25, parentGroup: 'alcoholic-drinks' },
+  { id: 'mocktails', name: { pt: 'Mocktails', en: 'Mocktails', fr: 'Mocktails', zh: '无酒精鸡尾酒' }, icon: 'CupSoda', sortOrder: 26, parentGroup: 'non-alcoholic-drinks' },
+  { id: 'natural-juices', name: { pt: 'Sumos Naturais', en: 'Natural Juices', fr: 'Jus Naturels', zh: '鲜榨果汁' }, icon: 'Citrus', sortOrder: 27, parentGroup: 'non-alcoholic-drinks' },
+  { id: 'coffee-tea', name: { pt: 'Café & Chá', en: 'Coffee & Tea', fr: 'Café & Thé', zh: '咖啡与茶' }, icon: 'Coffee', sortOrder: 28, parentGroup: 'non-alcoholic-drinks' },
+  { id: 'soft-drinks', name: { pt: 'Refrigerantes', en: 'Soft Drinks', fr: 'Sodas', zh: '软饮' }, icon: 'CupSoda', sortOrder: 29, parentGroup: 'non-alcoholic-drinks' },
+  { id: 'beers', name: { pt: 'Cervejas', en: 'Beers', fr: 'Bières', zh: '啤酒' }, icon: 'Beer', sortOrder: 30, parentGroup: 'alcoholic-drinks' },
+  { id: 'waters', name: { pt: 'Águas', en: 'Waters', fr: 'Eaux', zh: '水' }, icon: 'Droplet', sortOrder: 31, parentGroup: 'non-alcoholic-drinks' },
+  { id: 'aperitifs', name: { pt: 'Aperitivos', en: 'Aperitifs', fr: 'Apéritifs', zh: '开胃酒' }, icon: 'Wine', sortOrder: 32, parentGroup: 'alcoholic-drinks' },
+  { id: 'liqueurs', name: { pt: 'Licores', en: 'Liqueurs', fr: 'Liqueurs', zh: '利口酒' }, icon: 'Wine', sortOrder: 33, parentGroup: 'alcoholic-drinks' },
 ];
 
 export const menuItems: MenuItem[] = [

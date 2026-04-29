@@ -46,4 +46,20 @@ export interface MenuCategory {
   name: LocalizedString;
   icon: string;
   sortOrder: number;
+  /** Optional parent group id (e.g. 'alcoholic-drinks'). Categories with the same
+   *  parent are grouped under a single top-level button in the nav. */
+  parentGroup?: string;
+}
+
+/**
+ * Higher-level grouping over MenuCategory. Used to collapse many sub-categories
+ * (e.g. wines, cocktails, beers, aperitifs, liqueurs) under a single top-level
+ * button like "Bebidas Alcoólicas". Sub-categories show as a second-row of pills
+ * once the group is selected.
+ */
+export interface CategoryGroup {
+  id: string;
+  name: LocalizedString;
+  icon: string;
+  sortOrder: number;
 }

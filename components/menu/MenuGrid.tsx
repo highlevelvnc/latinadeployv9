@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAppStore } from '@/stores/useAppStore';
 import { useMenuStore } from '@/stores/useMenuStore';
-import { menuItems } from '@/data/menu';
+import { categories, categoryGroups, menuItems } from '@/data/menu';
 import { hasMenuItemImage } from '@/lib/menu-images';
 import MenuItem from './MenuItem';
 import { t as lt } from '@/lib/localized';
@@ -25,7 +25,18 @@ export default function MenuGrid({ onSelectItem }: Props) {
     let items = menuItems.filter((i) => i.available);
 
     if (activeCategory) {
-      items = items.filter((i) => i.categoryId === activeCategory);
+      // activeCategory may be either a sub-category id OR a group id (e.g.
+      // 'alcoholic-drinks'). If it's a group, include items from any of its
+      // sub-categories.
+      const isGroup = categoryGroups.some((g) => g.id === activeCategory);
+      if (isGroup) {
+        const subIds = new Set(
+          categories.filter((c) => c.parentGroup === activeCategory).map((c) => c.id)
+        );
+        items = items.filter((i) => subIds.has(i.categoryId));
+      } else {
+        items = items.filter((i) => i.categoryId === activeCategory);
+      }
     }
 
     if (searchQuery.trim()) {
