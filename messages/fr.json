@@ -274,7 +274,8 @@
     "loading": "Chargement...",
     "error": "Une erreur est survenue",
     "empty": "Aucun résultat",
-    "currency": "EUR"
+    "currency": "EUR",
+    "clearFilters": "Effacer"
   },
   "menu": {
     "title": "Menu",

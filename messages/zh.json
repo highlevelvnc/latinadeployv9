@@ -274,7 +274,8 @@
     "loading": "加载中...",
     "error": "发生错误",
     "empty": "暂无结果",
-    "currency": "EUR"
+    "currency": "EUR",
+    "clearFilters": "清除"
   },
   "menu": {
     "title": "菜单",

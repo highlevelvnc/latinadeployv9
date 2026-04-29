@@ -274,7 +274,8 @@
     "loading": "A carregar...",
     "error": "Ocorreu um erro",
     "empty": "Sem resultados",
-    "currency": "EUR"
+    "currency": "EUR",
+    "clearFilters": "Очистить"
   },
   "menu": {
     "title": "Menu",
