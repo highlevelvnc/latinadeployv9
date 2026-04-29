@@ -313,7 +313,8 @@
       "board": "Tábua",
       "lactose-free": "Sem Lactose",
       "nut-free": "Sem Frutos Secos"
-    }
+    },
+    "home": "Início"
   },
   "table": {
     "badge": "Mesa {table}",

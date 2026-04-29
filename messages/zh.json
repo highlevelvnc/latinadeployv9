@@ -313,7 +313,8 @@
       "board": "分享拼盘",
       "lactose-free": "无乳糖",
       "nut-free": "不含坚果"
-    }
+    },
+    "home": "首页"
   },
   "table": {
     "badge": "{table} 桌",

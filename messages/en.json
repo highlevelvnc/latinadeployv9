@@ -313,7 +313,8 @@
       "board": "Board",
       "lactose-free": "Lactose-Free",
       "nut-free": "Nut-Free"
-    }
+    },
+    "home": "Home"
   },
   "table": {
     "badge": "Table {table}",

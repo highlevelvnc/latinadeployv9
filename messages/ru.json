@@ -313,7 +313,8 @@
       "board": "Tábua",
       "lactose-free": "Без лактозы",
       "nut-free": "Без орехов"
-    }
+    },
+    "home": "Главная"
   },
   "table": {
     "badge": "Mesa {table}",

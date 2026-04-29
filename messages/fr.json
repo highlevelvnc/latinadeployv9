@@ -313,7 +313,8 @@
       "board": "Planche",
       "lactose-free": "Sans Lactose",
       "nut-free": "Sans Fruits à Coque"
-    }
+    },
+    "home": "Accueil"
   },
   "table": {
     "badge": "Table {table}",

@@ -83,13 +83,12 @@ export default function MenuGrid({ onSelectItem }: Props) {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {filtered.map((item, i) => (
-        <div
+        <MenuItem
           key={item.id}
+          item={item}
+          onSelect={onSelectItem}
           style={{ animationDelay: `${Math.min(i * 30, 300)}ms` }}
-          className="animate-fade-in-up"
-        >
-          <MenuItem item={item} onSelect={onSelectItem} />
-        </div>
+        />
       ))}
     </div>
   );

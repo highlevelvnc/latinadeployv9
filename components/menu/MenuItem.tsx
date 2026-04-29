@@ -46,9 +46,11 @@ const isPremiumItem = (item: MenuItemType) =>
 interface Props {
   item: MenuItemType;
   onSelect: (item: MenuItemType) => void;
+  /** Optional inline style — used by MenuGrid to stagger entrance animations. */
+  style?: React.CSSProperties;
 }
 
-export default function MenuItem({ item, onSelect }: Props) {
+export default function MenuItem({ item, onSelect, style }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
   const isItemAvailable = useMenuStore((s) => s.isItemAvailable);
@@ -62,7 +64,9 @@ export default function MenuItem({ item, onSelect }: Props) {
       type="button"
       onClick={() => onSelect(item)}
       aria-disabled={isUnavailable || undefined}
-      className={`group relative cursor-pointer overflow-hidden rounded-2xl border text-left transition-all duration-300 ease-out
+      style={style}
+      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border text-left transition-all duration-300 ease-out
+        animate-fade-in-up
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-dark
         active:scale-[0.985]
         ${
@@ -133,7 +137,7 @@ export default function MenuItem({ item, onSelect }: Props) {
       </div>
 
       {/* ── Content Section ── */}
-      <div className="p-3 pb-3.5">
+      <div className="flex flex-1 flex-col p-3 pb-3.5">
         {/* Tags row */}
         {item.tags.length > 0 && (
           <div className="mb-1.5 flex items-center gap-1.5">
@@ -169,8 +173,8 @@ export default function MenuItem({ item, onSelect }: Props) {
           </p>
         )}
 
-        {/* Price */}
-        <div className="flex items-center justify-between">
+        {/* Price — pushed to bottom of card so all prices align across the grid */}
+        <div className="mt-auto flex items-center justify-between pt-1">
           <PriceDisplay
             cents={item.price}
             priceUnit={item.priceUnit}

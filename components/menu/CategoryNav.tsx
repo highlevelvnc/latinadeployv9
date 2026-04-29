@@ -1,7 +1,8 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { Home } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
 import { categories, categoryGroups } from '@/data/menu';
 import { t as lt } from '@/lib/localized';
@@ -18,6 +19,7 @@ interface NavItem {
 
 export default function CategoryNav() {
   const locale = useLocale() as Locale;
+  const t = useTranslations('menu');
   const { activeCategory, setActiveCategory } = useAppStore();
 
   // Top-level nav: food cats (no parentGroup) + the 2 drink groups.
@@ -55,12 +57,29 @@ export default function CategoryNav() {
   return (
     <div className="sticky top-14 z-30 border-b border-white/[0.06] bg-dark/95 backdrop-blur-xl">
       <div className="container mx-auto px-4">
-        {/* Top-level: food categories + drink groups */}
+        {/* Top-level: "Início" + food categories + drink groups */}
         <div
           className="hide-scrollbar flex gap-1.5 overflow-x-auto py-2.5"
           role="tablist"
           aria-label="Menu categories"
         >
+          {/* "Início" — clicking returns to the curated landing view
+              (Recomendado, Experiências, Partilhar) with all items below. */}
+          <button
+            role="tab"
+            aria-selected={activeCategory === null}
+            onClick={() => setActiveCategory(null)}
+            className={cn(
+              'flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] font-semibold tracking-wide transition-colors duration-150',
+              activeCategory === null
+                ? 'bg-red/90 text-white shadow-sm shadow-red/20'
+                : 'text-white/55 hover:text-white/85 active:text-white'
+            )}
+          >
+            <Home className="h-3.5 w-3.5" />
+            {t('home')}
+          </button>
+
           {topLevel.map((item) => {
             const isActive =
               activeCategory === item.id ||
