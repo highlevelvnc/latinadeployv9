@@ -1139,12 +1139,17 @@ export const menuItems: MenuItem[] = [
     id: 'chef-kobe-a5-bife-150g',
     categoryId: 'chef-suggestion',
     name: {
-      pt: 'Kobe Japonés A5 – Bife (150 gr)',
+      pt: 'Kobe Japonês A5 – Bife (150g)',
       en: 'Japanese Kobe A5 – Steak (150g)',
       fr: 'Kobe Japonais A5 – Steak (150g)',
       zh: '日本神户 A5 牛排（150 克）',
     },
-    description: { pt: '', en: '', fr: '', zh: '' },
+    description: {
+      pt: 'Corte premium de Wagyu Japonês A5, reconhecido mundialmente pelo seu extraordinário marmoreio e textura extremamente macia. Grelhado cuidadosamente na brasa para realçar o sabor e a suculência da carne. Acompanha Batata Trufada e Legumes Grelhados.',
+      en: 'Premium Japanese Wagyu A5 cut, world-renowned for its extraordinary marbling and extremely tender texture. Carefully charcoal-grilled to enhance the flavor and juiciness of the meat. Served with Truffled Potato and Grilled Vegetables.',
+      fr: 'Coupe premium de Wagyu Japonais A5, mondialement reconnue pour son marbrage extraordinaire et sa texture extrêmement tendre. Grillée au charbon avec soin pour exalter la saveur et la jutosité de la viande. Accompagnée de Pomme de Terre Truffée et Légumes Grillés.',
+      zh: '顶级日本 A5 和牛，以非凡的大理石花纹和极致柔软口感闻名于世。小心炭烤以凸显肉的鲜味与多汁。搭配松露薯泥与烤蔬菜。',
+    },
     price: 15000,
     image: '/menu/chef-kobe-a5-bife-150g.webp',
     tags: ['wagyu', 'premium', 'signature', 'gold'],
@@ -1159,7 +1164,12 @@ export const menuItems: MenuItem[] = [
       fr: 'Chuletón de Wagyu – Premium (1 kg)',
       zh: '和牛带骨牛排 – 精选（1 公斤）',
     },
-    description: { pt: '', en: '', fr: '', zh: '' },
+    description: {
+      pt: 'Corte nobre de Wagyu extremamente marmorizado, grelhado na brasa para proporcionar uma experiência gastronómica única.',
+      en: 'Noble Wagyu cut with exceptional marbling, charcoal-grilled to provide a unique gastronomic experience.',
+      fr: 'Coupe noble de Wagyu exceptionnellement marbrée, grillée au charbon pour offrir une expérience gastronomique unique.',
+      zh: '极致大理石花纹的顶级和牛，炭烤呈现独特的美食体验。',
+    },
     price: 14500,
     priceUnit: '/kg',
     image: '/menu/tomahawk-steak.jpeg',
@@ -1179,7 +1189,6 @@ export const menuItems: MenuItem[] = [
   { id: 'dessert-caramelized-banana', categoryId: 'desserts', name: { pt: 'Banana Caramelizada', en: 'Caramelized Banana', fr: 'Banane Caramélisée', zh: '焦糖香蕉' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 900, image: '/menu/placeholder-dessert.jpg', tags: [], available: true },
   { id: 'dessert-seasonal-fruit-board', categoryId: 'desserts', name: { pt: 'Tábua Mista de Frutas Sazonais', en: 'Seasonal Fruit Board', fr: 'Planche de Fruits de Saison', zh: '时令水果拼盘' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 1050, image: '/menu/placeholder-dessert.jpg', tags: [], available: true },
   { id: 'dessert-brownie', categoryId: 'desserts', name: { pt: 'Brownie', en: 'Brownie', fr: 'Brownie', zh: '布朗尼' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 950, image: '/menu/placeholder-dessert.jpg', tags: [], available: true },
-  { id: 'dessert-banoffee-pie', categoryId: 'desserts', name: { pt: 'Banoffee Pie', en: 'Banoffee Pie', fr: 'Banoffee Pie', zh: '香蕉太妃派' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/dessert-banoffee-pie.webp', tags: [], available: true },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // VINHOS TINTOS — PORTUGAL (57 items from printed menu + 2 house selection)

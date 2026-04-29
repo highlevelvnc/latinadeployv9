@@ -63,7 +63,6 @@ const itemImageMap: Record<string, string> = {
   // Sobremesas
   'dessert-chocolate-fondant':        '/menu/dessert-chocolate-fondant.webp',
   'dessert-latina-split':             '/menu/dessert-latina-split.webp',
-  'dessert-banoffee-pie':             '/menu/dessert-banoffee-pie.webp',
 };
 
 /**
