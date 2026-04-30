@@ -89,46 +89,6 @@ export const menuItems: MenuItem[] = [
   // COUVERTS
   // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: 'basket-of-bread',
-    categoryId: 'couvert',
-    name: { pt: 'Cesta de Pão', en: 'Bread Basket', fr: 'Corbeille de Pain', zh: '面包篮' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 250,
-    image: '/menu/bread-basket.jpg',
-    tags: [],
-    available: true,
-  },
-  {
-    id: 'garlic-herb-butter',
-    categoryId: 'couvert',
-    name: {
-      pt: 'Manteiga de Alho e Ervas – Azeite e Balsámico',
-      en: 'Garlic & Herb Butter – Olive Oil and Balsamic',
-      fr: "Beurre à l'Ail et aux Herbes – Huile d'Olive et Balsamique",
-      zh: '香草蒜味黄油 – 橄榄油与香醋',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 250,
-    image: '/menu/garlic-butter.jpg',
-    tags: [],
-    available: true,
-  },
-  {
-    id: 'beef-croquettes',
-    categoryId: 'couvert',
-    name: {
-      pt: 'Croquetes de Novilho',
-      en: 'Beef Croquettes',
-      fr: 'Croquettes de Bœuf',
-      zh: '牛肉可乐饼',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 780,
-    image: '/menu/beef-croquettes.webp',
-    tags: ['bestseller'],
-    available: true,
-  },
-  {
     id: 'cheese-gratin',
     categoryId: 'couvert',
     name: {
@@ -143,65 +103,10 @@ export const menuItems: MenuItem[] = [
     tags: [],
     available: true,
   },
-  {
-    id: 'bolo-do-caco',
-    categoryId: 'couvert',
-    name: {
-      pt: 'Bolo do Caco com Manteiga de Alho',
-      en: 'Bolo do Caco with Garlic Butter',
-      fr: "Bolo do Caco au Beurre à l'Ail",
-      zh: '蒜香黄油葡式扁面包',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 480,
-    image: '/menu/bolo-do-caco.jpg',
-    tags: [],
-    available: true,
-  },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ENTRADAS FRIAS
   // ═══════════════════════════════════════════════════════════════════════════
-  {
-    id: 'beef-carpaccio',
-    categoryId: 'cold-starters',
-    name: { pt: 'Carpaccio de Novilho', en: 'Beef Carpaccio', fr: 'Carpaccio de Bœuf', zh: '生牛肉薄片' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1400,
-    image: '/menu/beef-carpaccio.webp',
-    tags: [],
-    available: true,
-  },
-  {
-    id: 'tenderloin-tartare',
-    categoryId: 'cold-starters',
-    name: {
-      pt: 'Tártaro de Lombos Nobres',
-      en: 'Noble Tenderloin Tartare',
-      fr: 'Tartare de Filets Nobles',
-      zh: '顶级牛里脊塔塔',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1800,
-    image: '/menu/beef-chef-special.jpeg',
-    tags: ['signature'],
-    available: true,
-  },
-  {
-    id: 'tuna-tartare',
-    categoryId: 'cold-starters',
-    name: {
-      pt: 'Tártaro de Atum com Pimenta Espelette e Abacate',
-      en: 'Tuna Tartare with Espelette Pepper and Avocado',
-      fr: "Tartare de Thon au Piment d'Espelette et Avocat",
-      zh: '埃斯佩莱特辣椒牛油果金枪鱼塔塔',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1780,
-    image: '/menu/tuna-tartare.webp',
-    tags: [],
-    available: true,
-  },
   {
     id: 'chef-caesar',
     categoryId: 'cold-starters',
@@ -217,55 +122,10 @@ export const menuItems: MenuItem[] = [
     tags: [],
     available: true,
   },
-  {
-    id: 'caesar-tuna',
-    categoryId: 'cold-starters',
-    name: {
-      pt: 'Salada Caesar com Atum Braseado',
-      en: 'Caesar Salad with Seared Tuna',
-      fr: 'Salade César au Thon Saisi',
-      zh: '炙烤金枪鱼凯撒沙拉',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1750,
-    image: '/menu/caesar-tuna.jpg',
-    tags: [],
-    available: true,
-  },
-  {
-    id: 'nachos-guacamole',
-    categoryId: 'cold-starters',
-    name: {
-      pt: 'Nachos com Guacamole',
-      en: 'Nachos with Guacamole',
-      fr: 'Nachos au Guacamole',
-      zh: '玉米片配牛油果酱',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 950,
-    image: '/menu/nachos.jpg',
-    tags: [],
-    available: true,
-  },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ENTRADAS QUENTES
   // ═══════════════════════════════════════════════════════════════════════════
-  {
-    id: 'tomato-soup-egg',
-    categoryId: 'hot-starters',
-    name: {
-      pt: 'Sopa de Tomate com Ovo BT',
-      en: 'Tomato Soup with Slow-Cooked Egg',
-      fr: 'Soupe de Tomate avec Œuf Basse Température',
-      zh: '番茄汤配低温蛋',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 900,
-    image: '/menu/tomato-soup.jpg',
-    tags: [],
-    available: true,
-  },
   {
     id: 'foie-gras-chef',
     categoryId: 'hot-starters',
@@ -282,21 +142,6 @@ export const menuItems: MenuItem[] = [
     available: true,
   },
   {
-    id: 'egg-croutons-truffle',
-    categoryId: 'hot-starters',
-    name: {
-      pt: 'Ovo BT com Croutons, Chips de Presunto e Trufas',
-      en: 'Slow-Cooked Egg with Croutons, Ham Chips and Truffles',
-      fr: 'Œuf Basse Température avec Croûtons, Chips de Jambon et Truffes',
-      zh: '低温蛋配面包丁、火腿脆片与松露',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 900,
-    image: '/menu/egg-croutons-truffle.webp',
-    tags: [],
-    available: true,
-  },
-  {
     id: 'shrimp-flambe',
     categoryId: 'hot-starters',
     name: { pt: 'Camarão Flambé', en: 'Flambéed Shrimp', fr: 'Crevettes Flambées', zh: '火焰大虾' },
@@ -304,16 +149,6 @@ export const menuItems: MenuItem[] = [
     price: 2100,
     image: '/menu/shrimp-flambe.jpg',
     tags: ['bestseller'],
-    available: true,
-  },
-  {
-    id: 'buffalo-wings',
-    categoryId: 'hot-starters',
-    name: { pt: 'Buffalo Wings', en: 'Buffalo Wings', fr: 'Buffalo Wings', zh: '水牛城鸡翅' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1300,
-    image: '/menu/buffalo-wings.jpg',
-    tags: ['spicy'],
     available: true,
   },
   {
@@ -343,16 +178,6 @@ export const menuItems: MenuItem[] = [
     price: 2500,
     image: '/menu/pata-negra.jpg',
     tags: ['premium'],
-    available: true,
-  },
-  {
-    id: 'cheese-board',
-    categoryId: 'cheese-cold-cuts',
-    name: { pt: 'Tábua de Queijos', en: 'Cheese Board', fr: 'Plateau de Fromages', zh: '奶酪拼盘' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 1900,
-    image: '/menu/cheese-board.jpg',
-    tags: [],
     available: true,
   },
 
@@ -736,16 +561,6 @@ export const menuItems: MenuItem[] = [
     available: true,
   },
   {
-    id: 'tender-board',
-    categoryId: 'boards',
-    name: { pt: 'Tender Board', en: 'Tender Board', fr: 'Tender Board', zh: 'Tender 拼盘' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 18300,
-    image: '/menu/tender-board.jpg',
-    tags: ['board', 'premium'],
-    available: true,
-  },
-  {
     id: 'dry-aged-board',
     categoryId: 'boards',
     name: {
@@ -909,21 +724,6 @@ export const menuItems: MenuItem[] = [
     available: true,
   },
   {
-    id: 'bean-rice-chorizo',
-    categoryId: 'side-dishes',
-    name: {
-      pt: 'Arroz de Feijão com Chouriço de Porco Preto',
-      en: 'Bean Rice with Iberian Pork Chorizo',
-      fr: 'Riz aux Haricots et Chorizo de Porc Ibérique',
-      zh: '伊比利亚黑猪香肠豆饭',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 550,
-    image: '/menu/bean-rice.jpg',
-    tags: [],
-    available: true,
-  },
-  {
     id: 'tomato-basil-duet',
     categoryId: 'side-dishes',
     name: {
@@ -936,31 +736,6 @@ export const menuItems: MenuItem[] = [
     price: 600,
     image: '/menu/tomato-basil.jpg',
     tags: [],
-    available: true,
-  },
-  {
-    id: 'rocket-parmesan-salad',
-    categoryId: 'side-dishes',
-    name: {
-      pt: 'Salada de Rúcula com Lascas de Parmesão e Balsâmico',
-      en: 'Rocket Salad with Parmesan Shavings and Balsamic',
-      fr: 'Salade de Roquette aux Copeaux de Parmesan et Balsamique',
-      zh: '帕玛森芝士片与香醋芝麻菜沙拉',
-    },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 550,
-    image: '/menu/rocket-salad.jpg',
-    tags: [],
-    available: true,
-  },
-  {
-    id: 'farofa-latina',
-    categoryId: 'side-dishes',
-    name: { pt: 'Farofa Latina', en: 'Latina Farofa', fr: 'Farofa Latina', zh: 'Latina 风味木薯粉' },
-    description: { pt: '', en: '', fr: '', zh: '' },
-    price: 550,
-    image: '/menu/farofa.jpg',
-    tags: ['signature'],
     available: true,
   },
 

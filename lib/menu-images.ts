@@ -4,17 +4,6 @@
  */
 
 const itemImageMap: Record<string, string> = {
-  // Couvert
-  'beef-croquettes':                  '/menu/beef-croquettes.webp',
-
-  // Cold Starters
-  'beef-carpaccio':                   '/menu/beef-carpaccio.webp',
-  'tenderloin-tartare':               '/menu/beef-chef-special.jpeg',
-  'tuna-tartare':                     '/menu/tuna-tartare.webp',
-
-  // Hot Starters
-  'egg-croutons-truffle':             '/menu/egg-croutons-truffle.webp',
-
   // Kids
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 

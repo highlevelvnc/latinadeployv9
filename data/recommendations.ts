@@ -100,10 +100,8 @@ export const featuredItemIds = [
 // ── "Ideal para Partilhar" items ──
 export const shareItemIds = [
   'latina-premium-board',
-  'tender-board',
   'dry-aged-board',
   'surf-turf-board',
-  'cheese-board',
   'pata-negra',
 ];
 
