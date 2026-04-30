@@ -5,6 +5,7 @@
 
 const itemImageMap: Record<string, string> = {
   // Kids
+  'kids-spaghetti-bolognese':         '/menu/kids-spaghetti-bolognese.png',
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
