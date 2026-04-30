@@ -17,16 +17,16 @@ const itemImageMap: Record<string, string> = {
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.jpeg',
 
   // Wagyu
-  'wagyu-trio':                       '/menu/fine-dining-plate.jpeg',
+  // (wagyu-trio: foto removida — aguardando foto real)
 
   // Marisco
   'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
 
   // Seleção Premium
   'picanha-250g':                     '/menu/picanha-250g-new.png',
-  'filet-mignon-200g':                '/menu/filet-mignon-200g.webp',
+  // (filet-mignon-200g: foto removida — aguardando foto real)
   'rib-eye-rubia-gallega-250g':       '/menu/rib-eye-rubia-gallega-250g.jpeg',
-  'sirloin-australia-250g':           '/menu/sirloin-australia-250g.webp',
+  // (sirloin-australia-250g: foto removida — aguardando foto real)
   'latina-skewer':                    '/menu/beef-skewer.jpeg',
   'short-ribs-12h':                   '/menu/short-ribs-12h.webp',
 
@@ -78,6 +78,7 @@ const itemImagePositionMap: Record<string, string> = {
   'golden-t-bone-800g':                '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
+  'chuleton-rubia-gallega-gold':       'bottom',
 };
 
 /**
