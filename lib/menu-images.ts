@@ -18,6 +18,7 @@ const itemImageMap: Record<string, string> = {
 
   // Wagyu
   // (wagyu-trio: foto removida — aguardando foto real)
+  'wagyu-rib-eye-japan-250g':         '/menu/wagyu-rib-eye-japan-250g.png',
 
   // Marisco
   'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
@@ -34,6 +35,7 @@ const itemImageMap: Record<string, string> = {
   'iberian-pork-plumas':              '/menu/iberian-pork-plumas.jpeg',
 
   // Entradas (Starters)
+  'cheese-gratin':                    '/menu/cheese-gratin.png',
   'foie-gras-chef':                   '/menu/foie-gras-chef.jpeg',
   'pata-negra':                       '/menu/pata-negra.png',
   'tenderloin-tartare':               '/menu/tenderloin-tartare.jpeg',
@@ -44,6 +46,7 @@ const itemImageMap: Record<string, string> = {
   // Guarnições
   'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
   'grilled-vegetables':               '/menu/grilled-vegetables.webp',
+  'truffled-mashed-potato':           '/menu/truffled-mashed-potato.png',
 
   // Golden Selection
   'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.png',
