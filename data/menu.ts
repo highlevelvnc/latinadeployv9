@@ -75,9 +75,8 @@ export const categories: MenuCategory[] = [
   { id: 'sangrias', name: { pt: 'Sangrias', en: 'Sangrias', fr: 'Sangrias', zh: '桑格利亚' }, icon: 'Wine', sortOrder: 99, parentGroup: 'alcoholic-drinks' },
   { id: 'mocktails', name: { pt: 'Mocktails', en: 'Mocktails', fr: 'Mocktails', zh: '无酒精鸡尾酒' }, icon: 'CupSoda', sortOrder: 96, parentGroup: 'non-alcoholic-drinks' },
   { id: 'natural-juices', name: { pt: 'Sumos Naturais', en: 'Natural Juices', fr: 'Jus Naturels', zh: '鲜榨果汁' }, icon: 'Citrus', sortOrder: 97, parentGroup: 'non-alcoholic-drinks' },
-  { id: 'coffee-tea', name: { pt: 'Café & Chá', en: 'Coffee & Tea', fr: 'Café & Thé', zh: '咖啡与茶' }, icon: 'Coffee', sortOrder: 98, parentGroup: 'non-alcoholic-drinks' },
-  { id: 'soft-drinks', name: { pt: 'Refrigerantes', en: 'Soft Drinks', fr: 'Sodas', zh: '软饮' }, icon: 'CupSoda', sortOrder: 99, parentGroup: 'non-alcoholic-drinks' },
-  { id: 'beers', name: { pt: 'Cervejas', en: 'Beers', fr: 'Bières', zh: '啤酒' }, icon: 'Beer', sortOrder: 100, parentGroup: 'alcoholic-drinks' },
+  { id: 'aperitifs', name: { pt: 'Aperitivos', en: 'Aperitifs', fr: 'Apéritifs', zh: '开胃酒' }, icon: 'Wine', sortOrder: 101, parentGroup: 'alcoholic-drinks' },
+  { id: 'liqueurs', name: { pt: 'Licores', en: 'Liqueurs', fr: 'Liqueurs', zh: '利口酒' }, icon: 'Wine', sortOrder: 102, parentGroup: 'alcoholic-drinks' },
 ];
 
 export const menuItems: MenuItem[] = [
@@ -1159,37 +1158,8 @@ export const menuItems: MenuItem[] = [
   // ÁGUAS (5 items)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CAFÉ & CHÁ (7 items)
-  // ═══════════════════════════════════════════════════════════════════════════
-  { id: 'coffee-expresso', categoryId: 'coffee-tea', name: { pt: 'Expresso', en: 'Espresso', fr: 'Expresso', zh: '浓缩咖啡' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 200, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-decaf', categoryId: 'coffee-tea', name: { pt: 'Descafeinado', en: 'Decaffeinated', fr: 'Décaféiné', zh: '低因咖啡' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 200, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-double-expresso', categoryId: 'coffee-tea', name: { pt: 'Double Expresso', en: 'Double Espresso', fr: 'Double Expresso', zh: '双份浓缩' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-americano', categoryId: 'coffee-tea', name: { pt: 'Café Americano', en: 'Americano', fr: 'Café Americano', zh: '美式咖啡' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-cappuccino', categoryId: 'coffee-tea', name: { pt: 'Cappuccino', en: 'Cappuccino', fr: 'Cappuccino', zh: '卡布奇诺' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 450, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-latte', categoryId: 'coffee-tea', name: { pt: 'Latte', en: 'Latte', fr: 'Latte', zh: '拿铁' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 450, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'coffee-tea', categoryId: 'coffee-tea', name: { pt: 'Chá', en: 'Tea', fr: 'Thé', zh: '茶' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // REFRIGERANTES (8 items)
-  // ═══════════════════════════════════════════════════════════════════════════
-  { id: 'soft-coca-cola', categoryId: 'soft-drinks', name: { pt: 'Coca-Cola', en: 'Coca-Cola', fr: 'Coca-Cola', zh: '可口可乐' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-coca-cola-zero', categoryId: 'soft-drinks', name: { pt: 'Coca-Cola Zero', en: 'Coca-Cola Zero', fr: 'Coca-Cola Zero', zh: '零度可口可乐' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-fanta', categoryId: 'soft-drinks', name: { pt: 'Fanta', en: 'Fanta', fr: 'Fanta', zh: '芬达' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-iced-tea', categoryId: 'soft-drinks', name: { pt: 'Iced Tea', en: 'Iced Tea', fr: 'Thé Glacé', zh: '冰茶' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-sprite', categoryId: 'soft-drinks', name: { pt: 'Sprite', en: 'Sprite', fr: 'Sprite', zh: '雪碧' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-ginger-ale', categoryId: 'soft-drinks', name: { pt: 'Ginger Ale', en: 'Ginger Ale', fr: 'Ginger Ale', zh: '姜汁汽水' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-ginger-beer', categoryId: 'soft-drinks', name: { pt: 'Ginger Beer', en: 'Ginger Beer', fr: 'Ginger Beer', zh: '姜汁啤酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'soft-red-bull', categoryId: 'soft-drinks', name: { pt: 'Red Bull', en: 'Red Bull', fr: 'Red Bull', zh: '红牛' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 450, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CERVEJAS (6 items)
-  // ═══════════════════════════════════════════════════════════════════════════
-  { id: 'beer-imperial', categoryId: 'beers', name: { pt: 'Imperial', en: 'Imperial', fr: 'Imperial', zh: 'Imperial' }, description: { pt: 'Pequena', en: 'Small', fr: 'Petite', zh: '小杯' }, price: 300, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'beer-tulipa', categoryId: 'beers', name: { pt: 'Tulipa', en: 'Tulipa', fr: 'Tulipa', zh: 'Tulipa' }, description: { pt: 'Média', en: 'Medium', fr: 'Moyenne', zh: '中杯' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'beer-caneca', categoryId: 'beers', name: { pt: 'Caneca', en: 'Caneca', fr: 'Caneca', zh: 'Caneca' }, description: { pt: 'Grande', en: 'Large', fr: 'Grande', zh: '大杯' }, price: 500, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'beer-sagres-preta', categoryId: 'beers', name: { pt: 'Sagres Preta', en: 'Sagres Dark Beer', fr: 'Sagres Brune', zh: 'Sagres 黑啤' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'beer-sagres-zero', categoryId: 'beers', name: { pt: 'Sagres 0%', en: 'Sagres 0%', fr: 'Sagres 0%', zh: 'Sagres 无酒精' }, description: { pt: 'Sem álcool', en: 'Alcohol-free', fr: 'Sans alcool', zh: '无酒精' }, price: 350, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // APERITIVOS (8 items)
@@ -1198,4 +1168,38 @@ export const menuItems: MenuItem[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   // LICORES (11 items)
   // ═══════════════════════════════════════════════════════════════════════════
+  // ═══════════════════════════════════════════════════════════════════════════
+  // APERITIVOS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // LICORES
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // APERITIVOS
+  // ═══════════════════════════════════════════════════════════════════════════
+  { id: 'aperitif-campari', categoryId: 'aperitifs', name: { pt: 'Campari', en: 'Campari', fr: 'Campari', zh: '金巴利' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 700, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-martini-ambrato', categoryId: 'aperitifs', name: { pt: 'Martini Ambrato', en: 'Martini Ambrato', fr: 'Martini Ambrato', zh: 'Martini Ambrato' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-martini-rosso', categoryId: 'aperitifs', name: { pt: 'Martini Rosso', en: 'Martini Rosso', fr: 'Martini Rosso', zh: 'Martini Rosso' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-martini-bianco', categoryId: 'aperitifs', name: { pt: 'Martini Bianco', en: 'Martini Bianco', fr: 'Martini Bianco', zh: 'Martini Bianco' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-moscatel-10', categoryId: 'aperitifs', name: { pt: 'Moscatel 10 Anos', en: 'Moscatel 10 Years', fr: 'Moscatel 10 Ans', zh: '10 年麝香酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-porto-chip-dry-white', categoryId: 'aperitifs', name: { pt: 'Porto Chip Dry White', en: 'Port Chip Dry White', fr: 'Porto Chip Dry White', zh: 'Chip Dry 白波特酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 1000, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-porto-tawny', categoryId: 'aperitifs', name: { pt: 'Porto Tawny', en: 'Port Tawny', fr: 'Porto Tawny', zh: '茶色波特酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 1000, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'aperitif-madeira-md', categoryId: 'aperitifs', name: { pt: 'Madeira MD', en: 'Madeira MD', fr: 'Madère MD', zh: 'Madeira MD' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 1000, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // LICORES
+  // ═══════════════════════════════════════════════════════════════════════════
+  { id: 'liqueur-amaretto', categoryId: 'liqueurs', name: { pt: 'Amaretto', en: 'Amaretto', fr: 'Amaretto', zh: '杏仁甜酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-amendoa-amarga', categoryId: 'liqueurs', name: { pt: 'Amêndoa Amarga', en: 'Bitter Almond Liqueur', fr: 'Liqueur d’Amande Amère', zh: '苦杏仁利口酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-baileys', categoryId: 'liqueurs', name: { pt: 'Baileys', en: 'Baileys', fr: 'Baileys', zh: '百利甜酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-cointreau', categoryId: 'liqueurs', name: { pt: 'Cointreau', en: 'Cointreau', fr: 'Cointreau', zh: '君度橙酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-drambuie', categoryId: 'liqueurs', name: { pt: 'Drambuie', en: 'Drambuie', fr: 'Drambuie', zh: 'Drambuie 蜂蜜酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-fernet-branca', categoryId: 'liqueurs', name: { pt: 'Fernet Branca', en: 'Fernet Branca', fr: 'Fernet Branca', zh: 'Fernet Branca' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-ginja', categoryId: 'liqueurs', name: { pt: 'Ginja', en: 'Ginja (Sour Cherry Liqueur)', fr: 'Ginja (Liqueur de Griotte)', zh: 'Ginja 樱桃酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-jagermeister', categoryId: 'liqueurs', name: { pt: 'Jägermeister', en: 'Jägermeister', fr: 'Jägermeister', zh: '野格' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-beirao', categoryId: 'liqueurs', name: { pt: 'Licor Beirão', en: 'Licor Beirão', fr: 'Licor Beirão', zh: 'Beirão 利口酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-limoncello', categoryId: 'liqueurs', name: { pt: 'Limoncello', en: 'Limoncello', fr: 'Limoncello', zh: '柠檬甜酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
+  { id: 'liqueur-malibu', categoryId: 'liqueurs', name: { pt: 'Malibu', en: 'Malibu', fr: 'Malibu', zh: 'Malibu 椰子酒' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 800, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
 ];
