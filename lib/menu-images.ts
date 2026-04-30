@@ -84,10 +84,9 @@ const itemImagePositionMap: Record<string, string> = {
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
   'chuleton-rubia-gallega-gold':       '50% 80%',
-  // Foie Gras: alimento na parte de baixo da foto. 'bottom' alinha o
-  // bottom da foto ao bottom do card → mostra MAIS da parte de baixo
-  // (= mais do alimento).
-  'foie-gras-chef':                    'bottom',
+  // Foie Gras: alimento na parte de baixo da foto, mas 'bottom' (100%)
+  // subia demais. '50% 75%' é o meio termo.
+  'foie-gras-chef':                    '50% 75%',
 };
 
 /**
