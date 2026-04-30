@@ -13,9 +13,12 @@ import type { Locale } from '@/i18n';
 
 interface Props {
   onSelectItem: (item: MenuItemType) => void;
+  /** Force a specific category id (used by the home view to show only "Entradas"
+   *  beneath ShareSection). Overrides the global activeCategory store value. */
+  forceCategoryId?: string;
 }
 
-export default function MenuGrid({ onSelectItem }: Props) {
+export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
   const { activeCategory, searchQuery } = useAppStore();
@@ -24,18 +27,19 @@ export default function MenuGrid({ onSelectItem }: Props) {
   const filtered = useMemo(() => {
     let items = menuItems.filter((i) => i.available);
 
-    if (activeCategory) {
+    const effectiveCategory = forceCategoryId ?? activeCategory;
+    if (effectiveCategory) {
       // activeCategory may be either a sub-category id OR a group id (e.g.
       // 'alcoholic-drinks'). If it's a group, include items from any of its
       // sub-categories.
-      const isGroup = categoryGroups.some((g) => g.id === activeCategory);
+      const isGroup = categoryGroups.some((g) => g.id === effectiveCategory);
       if (isGroup) {
         const subIds = new Set(
-          categories.filter((c) => c.parentGroup === activeCategory).map((c) => c.id)
+          categories.filter((c) => c.parentGroup === effectiveCategory).map((c) => c.id)
         );
         items = items.filter((i) => subIds.has(i.categoryId));
       } else {
-        items = items.filter((i) => i.categoryId === activeCategory);
+        items = items.filter((i) => i.categoryId === effectiveCategory);
       }
     }
 
@@ -60,7 +64,7 @@ export default function MenuGrid({ onSelectItem }: Props) {
     });
 
     return items;
-  }, [activeCategory, searchQuery, locale, unavailableItems]);
+  }, [activeCategory, searchQuery, locale, unavailableItems, forceCategoryId]);
 
   if (filtered.length === 0) {
     return (

@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Salad } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
 import { useTableStore } from '@/stores/useTableStore';
 import { useMenuStore } from '@/stores/useMenuStore';
@@ -78,14 +78,33 @@ function MenuPageInner() {
           <SearchBar />
         </div>
 
-        {showCuratedSections && (
+        {showCuratedSections ? (
           <>
             <FeaturedSection onSelectItem={setSelectedItem} />
             <ShareSection onSelectItem={setSelectedItem} />
-          </>
-        )}
 
-        <MenuGrid onSelectItem={setSelectedItem} />
+            {/* Beneath ShareSection on the home view: only the Entradas
+                category. The full menu grid is replaced by category navigation
+                via the top tabs. */}
+            <section className="mb-8">
+              <div className="mb-4 flex items-center gap-2">
+                <Salad className="h-5 w-5 text-accent-green" />
+                <div>
+                  <h2 className="font-serif text-lg font-bold text-white">
+                    {locale === 'pt' && 'Entradas'}
+                    {locale === 'en' && 'Starters'}
+                    {locale === 'fr' && 'Entrées'}
+                    {locale === 'ru' && 'Закуски'}
+                    {locale === 'zh' && '前菜'}
+                  </h2>
+                </div>
+              </div>
+              <MenuGrid onSelectItem={setSelectedItem} forceCategoryId="starters" />
+            </section>
+          </>
+        ) : (
+          <MenuGrid onSelectItem={setSelectedItem} />
+        )}
       </div>
 
       <MenuItemDetail item={selectedItem} onClose={() => setSelectedItem(null)} />
