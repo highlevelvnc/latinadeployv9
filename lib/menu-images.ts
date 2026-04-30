@@ -35,6 +35,7 @@ const itemImageMap: Record<string, string> = {
   // Entradas (Starters)
   'foie-gras-chef':                   '/menu/foie-gras-chef.jpeg',
   'pata-negra':                       '/menu/pata-negra.png',
+  'tenderloin-tartare':               '/menu/tenderloin-tartare.jpeg',
 
   // Tábuas
   // (latina-premium-board: foto removida, aguardando melhor)

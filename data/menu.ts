@@ -123,6 +123,21 @@ export const menuItems: MenuItem[] = [
     available: true,
   },
   {
+    id: 'tenderloin-tartare',
+    categoryId: 'starters',
+    name: {
+      pt: 'Tártaro de Lombos Nobres',
+      en: 'Noble Tenderloin Tartare',
+      fr: 'Tartare de Filets Nobles',
+      zh: '顶级牛里脊塔塔',
+    },
+    description: { pt: '', en: '', fr: '', zh: '' },
+    price: 1800,
+    image: '/menu/tenderloin-tartare.jpeg',
+    tags: ['signature'],
+    available: true,
+  },
+  {
     id: 'shrimp-flambe',
     categoryId: 'starters',
     name: { pt: 'Camarão Flambé', en: 'Flambéed Shrimp', fr: 'Crevettes Flambées', zh: '火焰大虾' },
