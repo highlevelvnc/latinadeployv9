@@ -48,7 +48,7 @@ const itemImageMap: Record<string, string> = {
 
   // Sugestão do Chef
   // (chef-kobe-a5-bife-150g: foto removida, aguardando melhor)
-  // (chef-chuleton-wagyu-premium: foto reaproveitada para tomahawk cognac/madeira)
+  'chef-chuleton-wagyu-premium':      '/menu/chuletao-maturado-espanha.jpeg',
 
   // Sobremesas
   'dessert-chocolate-fondant':        '/menu/dessert-chocolate-fondant.webp',
