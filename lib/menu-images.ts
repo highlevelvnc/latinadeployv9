@@ -67,15 +67,17 @@ const itemImageMap: Record<string, string> = {
  * Default is 'center'. Use 'top' / 'bottom' / etc when the meat
  * sits off-center in the source photo and gets cut off.
  */
-// 'bottom' alinha o BOTTOM da foto com o bottom do card → mostra MAIS
-// da parte de baixo da foto (onde está a carne nessas fotos com fogo
-// e fumaça em cima).
+// Per-item override of CSS object-position. Use percentage Y values:
+//   '50% 50%' = center (default)
+//   '50% 100%' = bottom (mostra mais da parte de baixo da foto)
+//   '50% 75%'  = entre center e bottom — mostra mais da carne sem
+//                cortar tudo de cima
 const itemImagePositionMap: Record<string, string> = {
-  'golden-chateaubriand-500g':         'bottom',
-  'rib-eye-usa-250g':                  'bottom',
-  'golden-t-bone-800g':                'bottom',
-  'golden-rib-eye-usa-500g':           'bottom',
-  'golden-australian-wagyu-tomahawk':  'bottom',
+  'golden-chateaubriand-500g':         '50% 75%',
+  'rib-eye-usa-250g':                  '50% 75%',
+  'golden-t-bone-800g':                '50% 75%',
+  'golden-rib-eye-usa-500g':           '50% 75%',
+  'golden-australian-wagyu-tomahawk':  '50% 75%',
 };
 
 /**
