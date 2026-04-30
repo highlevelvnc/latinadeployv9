@@ -68,10 +68,11 @@ const itemImageMap: Record<string, string> = {
  * sits off-center in the source photo and gets cut off.
  */
 const itemImagePositionMap: Record<string, string> = {
-  'golden-chateaubriand-500g': 'top',
-  'rib-eye-usa-250g':          'top',
-  'golden-t-bone-800g':        'top',
-  'golden-rib-eye-usa-500g':   'top',
+  'golden-chateaubriand-500g':         'top',
+  'rib-eye-usa-250g':                  'top',
+  'golden-t-bone-800g':                'top',
+  'golden-rib-eye-usa-500g':           'top',
+  'golden-australian-wagyu-tomahawk':  'top',
 };
 
 /**
