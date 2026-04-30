@@ -72,6 +72,9 @@ const itemImageMap: Record<string, string> = {
   'wine-red-duas-quintas-rp-2022':    '/menu/wine-duas-quintas-rp.png',
   'wine-red-poeira-55-barricas-2020': '/menu/wine-poeira-55-barricas.png',
   'wine-red-vale-d-maria-2021':       '/menu/wine-vale-d-maria.png',
+  'wine-red-apocalipse-romanos':      '/menu/wine-apocalipse-romanos.png',
+  'wine-red-humanitas-syrah':         '/menu/wine-humanitas-syrah.png',
+  'wine-red-tete-a-tete':             '/menu/wine-tete-a-tete.png',
 
   // Vinhos Tintos do Mundo
   'wine-red-directors-cut-coppola-2018': '/menu/wine-coppola-directors-cut.png',
