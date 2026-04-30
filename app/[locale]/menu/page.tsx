@@ -10,7 +10,6 @@ import { useTableStore } from '@/stores/useTableStore';
 import { useMenuStore } from '@/stores/useMenuStore';
 import CategoryNav from '@/components/menu/CategoryNav';
 import SearchBar from '@/components/menu/SearchBar';
-import DietaryFilter from '@/components/menu/DietaryFilter';
 import FeaturedSection from '@/components/menu/FeaturedSection';
 import ShareSection from '@/components/menu/ShareSection';
 import MenuGrid from '@/components/menu/MenuGrid';
@@ -23,7 +22,7 @@ import type { MenuItem } from '@/types/menu';
 function MenuPageInner() {
   const locale = useLocale();
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const { activeCategory, searchQuery, activeTags } = useAppStore();
+  const { activeCategory, searchQuery } = useAppStore();
   const { setTable } = useTableStore();
   const searchParams = useSearchParams();
 
@@ -42,7 +41,7 @@ function MenuPageInner() {
   }, [searchParams, setTable]);
 
   // Show curated sections only when viewing "All" with no search/filter active
-  const showCuratedSections = !activeCategory && !searchQuery.trim() && activeTags.length === 0;
+  const showCuratedSections = !activeCategory && !searchQuery.trim();
 
   return (
     <>
@@ -75,9 +74,8 @@ function MenuPageInner() {
       <CategoryNav />
 
       <div className="container mx-auto px-4 py-5">
-        <div className="mb-4 space-y-3">
+        <div className="mb-4">
           <SearchBar />
-          <DietaryFilter />
         </div>
 
         {showCuratedSections && (

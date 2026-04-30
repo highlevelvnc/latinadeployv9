@@ -18,7 +18,7 @@ interface Props {
 export default function MenuGrid({ onSelectItem }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
-  const { activeCategory, searchQuery, activeTags } = useAppStore();
+  const { activeCategory, searchQuery } = useAppStore();
   const unavailableItems = useMenuStore((s) => s.unavailableItems);
 
   const filtered = useMemo(() => {
@@ -48,10 +48,6 @@ export default function MenuGrid({ onSelectItem }: Props) {
       );
     }
 
-    if (activeTags.length > 0) {
-      items = items.filter((i) => activeTags.some((tag) => i.tags.includes(tag)));
-    }
-
     // Sort: items with photo first, then unavailable to the end
     items.sort((a, b) => {
       const aUnavail = unavailableItems.includes(a.id) ? 1 : 0;
@@ -64,7 +60,7 @@ export default function MenuGrid({ onSelectItem }: Props) {
     });
 
     return items;
-  }, [activeCategory, searchQuery, activeTags, locale, unavailableItems]);
+  }, [activeCategory, searchQuery, locale, unavailableItems]);
 
   if (filtered.length === 0) {
     return (
