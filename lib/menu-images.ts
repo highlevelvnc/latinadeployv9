@@ -11,7 +11,7 @@ const itemImageMap: Record<string, string> = {
   // Carnes Maturadas
   'chuleton-rubia-gallega-gold':      '/menu/chuleton-rubia-gallega-gold.jpeg',
   'chuleton-wagyu':                   '/menu/chuleton-wagyu.png',
-  'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
+  // (tomahawk-wagyu-australia: foto removida — aguardando foto real)
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
   't-bone':                           '/menu/t-bone.webp',
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.jpeg',
