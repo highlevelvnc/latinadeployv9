@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { getMenuItemImage } from '@/lib/menu-images';
+import { getMenuItemImage, getMenuItemImagePosition } from '@/lib/menu-images';
 
 interface Props {
   itemId: string;
@@ -42,6 +42,7 @@ export default function MenuImage({
   sizes = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw',
 }: Props) {
   const src = getMenuItemImage(itemId);
+  const objectPosition = getMenuItemImagePosition(itemId);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -63,13 +64,14 @@ export default function MenuImage({
         height={fill ? undefined : height}
         sizes={sizes}
         priority={priority}
+        // object-position via inline style — Tailwind doesn't have arbitrary
+        // value support for this property in older configs, and we need
+        // per-item override (golden-chateaubriand and rib-eye-usa look better
+        // with 'top' so the meat doesn't get cut at the bottom).
+        style={{ objectPosition }}
         className={cn(
-          // object-cover preenche todo o card slot (sem letterboxing nas
-          // pontas) — fica "tela cheia" no quadrinho. Pode cropar levemente
-          // as pontas em fotos muito off-aspect, mas o ganho visual de
-          // ocupar 100% do espaço compensa. object-center mantém o foco
-          // no meio da foto (onde geralmente está a carne).
-          'object-cover object-center transition-opacity duration-500',
+          // object-cover preenche todo o card slot — "tela cheia" no quadrinho.
+          'object-cover transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',
           className,
         )}

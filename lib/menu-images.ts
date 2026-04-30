@@ -63,10 +63,29 @@ const itemImageMap: Record<string, string> = {
 };
 
 /**
+ * Per-item override of object-position for the image crop.
+ * Default is 'center'. Use 'top' / 'bottom' / etc when the meat
+ * sits off-center in the source photo and gets cut off.
+ */
+const itemImagePositionMap: Record<string, string> = {
+  'golden-chateaubriand-500g': 'top',
+  'rib-eye-usa-250g':          'top',
+  'golden-t-bone-800g':        'top',
+  'golden-rib-eye-usa-500g':   'top',
+};
+
+/**
  * Get the image for a menu item, or null if none is mapped.
  */
 export function getMenuItemImage(itemId: string): string | null {
   return itemImageMap[itemId] ?? null;
+}
+
+/**
+ * Get the CSS object-position for an item's image. Defaults to 'center'.
+ */
+export function getMenuItemImagePosition(itemId: string): string {
+  return itemImagePositionMap[itemId] ?? 'center';
 }
 
 /**
