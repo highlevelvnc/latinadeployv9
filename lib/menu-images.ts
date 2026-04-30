@@ -65,6 +65,16 @@ const itemImageMap: Record<string, string> = {
   'dessert-latina-split':             '/menu/dessert-latina-split.png',
   'dessert-forest-cheesecake':        '/menu/dessert-forest-cheesecake.png',
   'dessert-waffle-icecream-nutella':  '/menu/dessert-waffle-icecream-nutella.png',
+
+  // Vinhos Tintos – Portugal
+  'wine-red-charme-niepoort-2022':    '/menu/wine-charme-niepoort.png',
+  'wine-red-abandonado-gaivosa-2022': '/menu/wine-abandonado-gaivosa.png',
+  'wine-red-duas-quintas-rp-2022':    '/menu/wine-duas-quintas-rp.png',
+  'wine-red-poeira-55-barricas-2020': '/menu/wine-poeira-55-barricas.png',
+  'wine-red-vale-d-maria-2021':       '/menu/wine-vale-d-maria.png',
+
+  // Vinhos Tintos do Mundo
+  'wine-red-directors-cut-coppola-2018': '/menu/wine-coppola-directors-cut.png',
 };
 
 /**
