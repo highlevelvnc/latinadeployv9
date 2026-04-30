@@ -8,7 +8,8 @@ const itemImageMap: Record<string, string> = {
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
-  'chuleton-rubia-gallega-gold':      '/menu/chuletao-maturado-espanha.jpeg',
+  // (chuleton-rubia-gallega-gold: aguardando foto correta)
+  'chuleton-wagyu':                   '/menu/chuletao-maturado-espanha.jpeg',
   'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
   't-bone':                           '/menu/t-bone.webp',
