@@ -75,6 +75,15 @@ const itemImageMap: Record<string, string> = {
   'wine-red-apocalipse-romanos':      '/menu/wine-apocalipse-romanos.png',
   'wine-red-humanitas-syrah':         '/menu/wine-humanitas-syrah.png',
   'wine-red-tete-a-tete':             '/menu/wine-tete-a-tete.png',
+  'wine-red-marques-borba-2021':      '/menu/wine-marques-borba.png',
+  'wine-red-vale-meao-2022':          '/menu/wine-vale-meao.png',
+  'wine-red-chryseia-ps-2022':        '/menu/wine-chryseia.png',
+  'wine-red-crasto-2022':             '/menu/wine-crasto.png',
+  'wine-red-pintas-character-2022':   '/menu/wine-pintas-character.png',
+  'wine-red-doga-2013':               '/menu/wine-doga-2013.png',
+  'wine-red-alves-sousa-memorias-30': '/menu/wine-alves-sousa-memorias-30.png',
+  'wine-red-cartuxa-vinea-2019':      '/menu/wine-cartuxa-vinea-2019.png',
+  'wine-red-cartuxa-evora-2022':      '/menu/wine-cartuxa-evora-2022.png',
 
   // Vinhos Tintos do Mundo
   'wine-red-directors-cut-coppola-2018': '/menu/wine-coppola-directors-cut.png',
