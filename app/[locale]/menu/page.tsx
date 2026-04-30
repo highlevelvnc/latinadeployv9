@@ -13,7 +13,6 @@ import SearchBar from '@/components/menu/SearchBar';
 import DietaryFilter from '@/components/menu/DietaryFilter';
 import FeaturedSection from '@/components/menu/FeaturedSection';
 import ShareSection from '@/components/menu/ShareSection';
-import ExperienceSection from '@/components/menu/ExperienceSection';
 import MenuGrid from '@/components/menu/MenuGrid';
 import MenuItemDetail from '@/components/menu/MenuItemDetail';
 import TableBadge from '@/components/shared/TableBadge';
@@ -84,7 +83,6 @@ function MenuPageInner() {
         {showCuratedSections && (
           <>
             <FeaturedSection onSelectItem={setSelectedItem} />
-            <ExperienceSection />
             <ShareSection onSelectItem={setSelectedItem} />
           </>
         )}

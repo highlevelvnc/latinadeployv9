@@ -107,52 +107,6 @@ export const shareItemIds = [
   'pata-negra',
 ];
 
-// ── Experience / Combo definitions ──
-export interface ExperienceCombo {
-  id: string;
-  name: { pt: string; en: string; fr: string; zh: string };
-  description: { pt: string; en: string; fr: string; zh: string };
-  itemIds: string[];
-  badge: { pt: string; en: string; fr: string; zh: string };
-}
-
-export const experienceCombos: ExperienceCombo[] = [
-  {
-    id: 'dinner-for-two',
-    name: {
-      pt: 'Jantar para 2',
-      en: 'Dinner for Two',
-      fr: 'Dîner pour Deux',
-      zh: '双人晚餐',
-    },
-    description: {
-      pt: 'Uma entrada, dois pratos premium, duas guarnições e molho à escolha.',
-      en: 'One starter, two premium dishes, two sides and sauce of your choice.',
-      fr: 'Une entrée, deux plats premium, deux accompagnements et sauce au choix.',
-      zh: '一份前菜、两份高级主菜、两份配菜和一种酱汁。',
-    },
-    itemIds: ['tenderloin-tartare', 'filet-mignon-200g', 'picanha-250g', 'golden-potatoes-truffle', 'truffled-mashed-potato'],
-    badge: { pt: 'Para 2', en: 'For 2', fr: 'Pour 2', zh: '双人' },
-  },
-  {
-    id: 'premium-experience',
-    name: {
-      pt: 'Premium Experience',
-      en: 'Premium Experience',
-      fr: 'Expérience Premium',
-      zh: '高级体验',
-    },
-    description: {
-      pt: 'Tataki de Kobe, Wagyu Trio, guarnição premium e molho trufado.',
-      en: 'Kobe Tataki, Wagyu Trio, premium side and truffled sauce.',
-      fr: 'Tataki de Kobe, Trio Wagyu, accompagnement premium et sauce truffée.',
-      zh: '神户牛炙烤、和牛三重奏、高级配菜和松露酱汁。',
-    },
-    itemIds: ['kobe-tataki', 'wagyu-trio', 'golden-potatoes-truffle'],
-    badge: { pt: 'Premium', en: 'Premium', fr: 'Premium', zh: '精选' },
-  },
-];
-
 // ── Helper: get sauces for an item ──
 export function getSaucesForItem(itemId: string): string[] {
   return sauceRecommendations[itemId] ?? defaultSauces;
