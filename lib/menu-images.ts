@@ -73,7 +73,7 @@ const itemImageMap: Record<string, string> = {
 //   '50% 75%'  = entre center e bottom — mostra mais da carne sem
 //                cortar tudo de cima
 const itemImagePositionMap: Record<string, string> = {
-  'golden-chateaubriand-500g':         '50% 75%',
+  'golden-chateaubriand-500g':         'bottom',
   'rib-eye-usa-250g':                  '50% 75%',
   'golden-t-bone-800g':                '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
