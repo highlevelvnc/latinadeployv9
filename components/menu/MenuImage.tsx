@@ -22,11 +22,11 @@ function Placeholder({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'absolute inset-0 flex items-center justify-center bg-gradient-to-br from-surface-elevated via-surface to-dark',
+        'absolute inset-0 flex items-center justify-center bg-gradient-to-br from-stone-700/30 via-stone-800/20 to-stone-900/30',
         className,
       )}
     >
-      <span className="text-4xl opacity-[0.08] select-none">🍽</span>
+      <span className="text-4xl opacity-[0.12] select-none">🍽</span>
     </div>
   );
 }
@@ -64,7 +64,11 @@ export default function MenuImage({
         sizes={sizes}
         priority={priority}
         className={cn(
-          'object-cover transition-opacity duration-500',
+          // object-contain keeps the meat fully visible and centered in the
+          // card slot — no awkward edge-cropping. The card image area uses a
+          // warm neutral background (set on the parent in MenuItem) so any
+          // letterboxing blends with the card style instead of looking black.
+          'object-contain transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',
           className,
         )}

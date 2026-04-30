@@ -77,7 +77,7 @@ export default function MenuItem({ item, onSelect, style }: Props) {
         }`}
     >
       {/* ── Image Section ── */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-dark-lighter">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-stone-700/25 via-stone-800/15 to-stone-900/25">
         {/* Image with smooth zoom on hover */}
         <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110">
           <MenuImage
