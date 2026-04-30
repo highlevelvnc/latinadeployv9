@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Award } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { featuredItemIds } from '@/data/recommendations';
-import PriceDisplay from '@/components/shared/PriceDisplay';
 import MenuImage from '@/components/menu/MenuImage';
 import { t as lt } from '@/lib/localized';
 import type { MenuItem } from '@/types/menu';
@@ -81,18 +80,9 @@ export default function FeaturedSection({ onSelectItem }: Props) {
               </div>
 
               {/* Name */}
-              <h3 className="mb-1 line-clamp-2 text-[13px] font-semibold leading-snug text-white/90">
+              <h3 className="line-clamp-2 text-[13px] font-semibold leading-snug text-white/90">
                 {lt(item.name, locale)}
               </h3>
-
-              {/* Price */}
-              <div className="mt-auto flex items-center justify-between">
-                <PriceDisplay
-                  cents={item.price}
-                  priceUnit={item.priceUnit}
-                  className="text-sm font-bold text-red-light"
-                />
-              </div>
             </button>
           ))}
         </div>

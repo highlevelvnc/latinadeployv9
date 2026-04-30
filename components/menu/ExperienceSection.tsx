@@ -5,7 +5,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Sparkles } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { experienceCombos } from '@/data/recommendations';
-import PriceDisplay from '@/components/shared/PriceDisplay';
 import { t as lt } from '@/lib/localized';
 import type { Locale } from '@/i18n';
 
@@ -17,9 +16,8 @@ export default function ExperienceSection() {
     return experienceCombos.map((combo) => {
       const items = combo.itemIds
         .map((id) => menuItems.find((m) => m.id === id))
-        .filter((m) => m !== undefined && m.available && m.price !== null);
-      const totalCents = items.reduce((sum, m) => sum + (m!.price ?? 0), 0);
-      return { ...combo, resolvedItems: items, totalCents };
+        .filter((m) => m !== undefined && m.available);
+      return { ...combo, resolvedItems: items };
     });
   }, []);
 
@@ -59,24 +57,16 @@ export default function ExperienceSection() {
               </p>
 
               {/* Items list */}
-              <div className="mb-4 space-y-1.5">
+              <ul className="space-y-1.5">
                 {combo.resolvedItems.map((item) =>
                   item ? (
-                    <div key={item.id} className="flex items-center justify-between text-[11px]">
-                      <span className="text-white/60">{lt(item.name, locale)}</span>
-                      <PriceDisplay cents={item.price} className="text-white/35" />
-                    </div>
+                    <li key={item.id} className="flex items-center gap-2 text-[12px] text-white/65">
+                      <span className="h-1 w-1 shrink-0 rounded-full bg-accent-yellow/60" />
+                      <span>{lt(item.name, locale)}</span>
+                    </li>
                   ) : null
                 )}
-              </div>
-
-              {/* Total */}
-              <div className="flex items-center justify-between border-t border-white/[0.06] pt-3">
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-white/30">Total</span>
-                  <PriceDisplay cents={combo.totalCents} className="block text-lg font-bold text-red-light" />
-                </div>
-              </div>
+              </ul>
             </div>
           </div>
         ))}

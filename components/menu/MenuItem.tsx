@@ -3,7 +3,6 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { Flame, Leaf, Star, Sparkles, Award, Crown, Beef } from 'lucide-react';
 import { useMenuStore } from '@/stores/useMenuStore';
-import PriceDisplay from '@/components/shared/PriceDisplay';
 import MenuImage from '@/components/menu/MenuImage';
 import { t as lt } from '@/lib/localized';
 import type { MenuItem as MenuItemType, DietaryTag } from '@/types/menu';
@@ -168,19 +167,10 @@ export default function MenuItem({ item, onSelect, style }: Props) {
 
         {/* Description */}
         {lt(item.description, locale) && (
-          <p className="mb-2 line-clamp-2 text-[11px] leading-relaxed text-white/30">
+          <p className="line-clamp-2 text-[11px] leading-relaxed text-white/30">
             {lt(item.description, locale)}
           </p>
         )}
-
-        {/* Price — pushed to bottom of card so all prices align across the grid */}
-        <div className="mt-auto flex items-center justify-between pt-1">
-          <PriceDisplay
-            cents={item.price}
-            priceUnit={item.priceUnit}
-            className={`text-[15px] font-bold ${premium ? 'text-accent-yellow' : 'text-white/85'}`}
-          />
-        </div>
       </div>
     </button>
   );

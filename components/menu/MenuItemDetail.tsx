@@ -4,7 +4,6 @@ import { useEffect, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, Flame, Leaf, Star, Sparkles, Award, Crown, Beef, Droplets, Carrot } from 'lucide-react';
-import PriceDisplay from '@/components/shared/PriceDisplay';
 import MenuImage from '@/components/menu/MenuImage';
 import { t as lt } from '@/lib/localized';
 import { menuItems } from '@/data/menu';
@@ -144,17 +143,10 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                 </div>
               )}
 
-              {/* Name + Price */}
-              <div className="mb-2 flex items-start justify-between gap-4">
-                <h2 className="font-serif text-2xl font-bold leading-tight text-white">
-                  {lt(item.name, locale)}
-                </h2>
-                <PriceDisplay
-                  cents={item.price}
-                  priceUnit={item.priceUnit}
-                  className="shrink-0 text-xl font-bold text-red-light"
-                />
-              </div>
+              {/* Name */}
+              <h2 className="mb-2 font-serif text-2xl font-bold leading-tight text-white">
+                {lt(item.name, locale)}
+              </h2>
 
               {/* Prep time */}
               {item.preparationTime && (
@@ -185,14 +177,9 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                       sauce ? (
                         <div
                           key={sauce.id}
-                          className="flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-surface px-3 py-1.5 text-[11px] text-white/65"
+                          className="rounded-full border border-white/[0.08] bg-surface px-3 py-1.5 text-[11px] text-white/65"
                         >
-                          <span>{lt(sauce.name, locale)}</span>
-                          {sauce.price === null ? (
-                            <span className="text-[9px] font-semibold text-accent-green/80">{t('included')}</span>
-                          ) : (
-                            <PriceDisplay cents={sauce.price} className="text-[10px] text-white/35" />
-                          )}
+                          {lt(sauce.name, locale)}
                         </div>
                       ) : null
                     )}
@@ -214,15 +201,12 @@ export default function MenuItemDetail({ item, onClose }: Props) {
                       side ? (
                         <div
                           key={side.id}
-                          className="flex items-center justify-between rounded-xl border border-white/[0.06] bg-surface px-3 py-2"
+                          className="flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-surface px-3 py-2"
                         >
-                          <div className="flex items-center gap-2.5">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-dark-lighter">
-                              <span className="text-xs opacity-30">🥗</span>
-                            </div>
-                            <span className="text-[12px] text-white/75">{lt(side.name, locale)}</span>
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-dark-lighter">
+                            <span className="text-xs opacity-30">🥗</span>
                           </div>
-                          <PriceDisplay cents={side.price} className="text-[11px] text-white/45" />
+                          <span className="text-[12px] text-white/75">{lt(side.name, locale)}</span>
                         </div>
                       ) : null
                     )}

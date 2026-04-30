@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Users } from 'lucide-react';
 import { menuItems } from '@/data/menu';
 import { shareItemIds } from '@/data/recommendations';
-import PriceDisplay from '@/components/shared/PriceDisplay';
 import MenuImage from '@/components/menu/MenuImage';
 import { t as lt } from '@/lib/localized';
 import type { MenuItem } from '@/types/menu';
@@ -59,22 +58,15 @@ export default function ShareSection({ onSelectItem }: Props) {
             </div>
 
             {/* Content */}
-            <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
-              <div>
-                <h3 className="line-clamp-1 text-[13px] font-semibold leading-snug text-white/90">
-                  {lt(item.name, locale)}
-                </h3>
-                {lt(item.description, locale) && (
-                  <p className="mt-0.5 line-clamp-2 text-[10px] leading-relaxed text-white/35">
-                    {lt(item.description, locale)}
-                  </p>
-                )}
-              </div>
-              <PriceDisplay
-                cents={item.price}
-                priceUnit={item.priceUnit}
-                className="text-sm font-bold text-white/80"
-              />
+            <div className="flex min-w-0 flex-1 flex-col justify-center py-0.5">
+              <h3 className="line-clamp-1 text-[13px] font-semibold leading-snug text-white/90">
+                {lt(item.name, locale)}
+              </h3>
+              {lt(item.description, locale) && (
+                <p className="mt-0.5 line-clamp-2 text-[10px] leading-relaxed text-white/35">
+                  {lt(item.description, locale)}
+                </p>
+              )}
             </div>
           </button>
         ))}
