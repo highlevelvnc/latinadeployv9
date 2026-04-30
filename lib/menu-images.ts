@@ -67,12 +67,15 @@ const itemImageMap: Record<string, string> = {
  * Default is 'center'. Use 'top' / 'bottom' / etc when the meat
  * sits off-center in the source photo and gets cut off.
  */
+// 'bottom' alinha o BOTTOM da foto com o bottom do card → mostra MAIS
+// da parte de baixo da foto (onde está a carne nessas fotos com fogo
+// e fumaça em cima).
 const itemImagePositionMap: Record<string, string> = {
-  'golden-chateaubriand-500g':         'top',
-  'rib-eye-usa-250g':                  'top',
-  'golden-t-bone-800g':                'top',
-  'golden-rib-eye-usa-500g':           'top',
-  'golden-australian-wagyu-tomahawk':  'top',
+  'golden-chateaubriand-500g':         'bottom',
+  'rib-eye-usa-250g':                  'bottom',
+  'golden-t-bone-800g':                'bottom',
+  'golden-rib-eye-usa-500g':           'bottom',
+  'golden-australian-wagyu-tomahawk':  'bottom',
 };
 
 /**
