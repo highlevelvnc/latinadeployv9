@@ -64,11 +64,12 @@ export default function MenuImage({
         sizes={sizes}
         priority={priority}
         className={cn(
-          // object-contain keeps the meat fully visible and centered in the
-          // card slot — no awkward edge-cropping. The card image area uses a
-          // warm neutral background (set on the parent in MenuItem) so any
-          // letterboxing blends with the card style instead of looking black.
-          'object-contain transition-opacity duration-500',
+          // object-cover preenche todo o card slot (sem letterboxing nas
+          // pontas) — fica "tela cheia" no quadrinho. Pode cropar levemente
+          // as pontas em fotos muito off-aspect, mas o ganho visual de
+          // ocupar 100% do espaço compensa. object-center mantém o foco
+          // no meio da foto (onde geralmente está a carne).
+          'object-cover object-center transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',
           className,
         )}
