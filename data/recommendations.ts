@@ -19,62 +19,29 @@ export const mainCourseCategories = [
   'vegetarian',
 ];
 
-// ── Recommended sauces per meat item (fallback: top 4 sauces) ──
-export const sauceRecommendations: Record<string, string[]> = {
-  // Wagyu items → lighter sauces
-  'wagyu-trio': ['truffled-ponzu', 'chimichurri'],
-  'wagyu-rib-eye-japan-250g': ['truffled-ponzu', 'three-peppers'],
-  'chuleton-wagyu': ['truffled-ponzu', 'mustard-madeira', 'chimichurri'],
-  'golden-japanese-wagyu-300g': ['truffled-ponzu', 'three-peppers'],
-  'golden-iberian-chuleton-wagyu': ['truffled-ponzu', 'chimichurri'],
-  'golden-australian-wagyu-tomahawk': ['truffled-ponzu', 'mustard-madeira'],
-  'kobe-tataki': ['truffled-ponzu'],
-  // Premium steaks → robust sauces
-  'filet-mignon-200g': ['three-peppers', 'mustard-madeira', 'truffled-ponzu'],
-  'picanha-250g': ['chimichurri', 'piri-piri-latina', 'three-peppers'],
-  'rib-eye-rubia-gallega-250g': ['three-peppers', 'mustard-madeira'],
-  'sirloin-australia-250g': ['chimichurri', 'three-peppers'],
-  'latina-skewer': ['chimichurri', 'piri-piri-latina'],
-  'short-ribs-12h': ['chimichurri', 'mustard-madeira'],
-  'rib-eye-usa-250g': ['three-peppers', 'mustard-madeira', 'chimichurri'],
-  't-bone': ['three-peppers', 'chimichurri'],
-  // Dry aged
-  'chuleton-rubia-gallega-gold': ['mustard-madeira', 'three-peppers', 'chimichurri'],
-  'tomahawk-wagyu-australia': ['truffled-ponzu', 'chimichurri'],
-  'tomahawk-australia-cognac-madeira': ['mustard-madeira', 'three-peppers'],
-  // Other cuts
-  'iberian-pork-plumas': ['mustard-madeira', 'piri-piri-latina'],
-  'farm-chicken-supremes': ['piri-piri-latina', 'truffled-aioli'],
-  // Seafood
-  'blue-lobster': ['truffled-aioli', 'truffled-ponzu'],
-  'lobster': ['truffled-aioli', 'truffled-ponzu'],
-  'tiger-prawn': ['piri-piri-latina', 'truffled-aioli'],
-  'grilled-tuna-steak': ['truffled-ponzu', 'chimichurri'],
-  // Gold selection
-  'golden-chateaubriand-500g': ['three-peppers', 'mustard-madeira', 'truffled-ponzu'],
-  'golden-rib-eye-usa-500g': ['three-peppers', 'mustard-madeira'],
-  'golden-rib-eye-500g': ['three-peppers', 'chimichurri'],
-  'golden-t-bone-800g': ['three-peppers', 'chimichurri', 'mustard-madeira'],
-};
+// ── Recommended sauces per meat item ──
+// Sauces foram removidos do menu (decisão da Cláudia). Mantemos o helper
+// para não quebrar imports, mas retorna sempre [].
+export const sauceRecommendations: Record<string, string[]> = {};
 
 // Default sauces when no specific mapping exists
-export const defaultSauces = ['chimichurri', 'three-peppers', 'truffled-ponzu', 'piri-piri-latina'];
+export const defaultSauces: string[] = [];
 
 // ── Recommended sides (premium first) ──
 export const sideRecommendations: Record<string, string[]> = {
   // Wagyu → refined sides
-  'wagyu-trio': ['truffled-mashed-potato', 'grilled-vegetables', 'rocket-parmesan-salad'],
+  'wagyu-trio': ['truffled-mashed-potato', 'grilled-vegetables'],
   'wagyu-rib-eye-japan-250g': ['truffled-mashed-potato', 'golden-potatoes-truffle', 'grilled-vegetables'],
-  'kobe-tataki': ['rocket-parmesan-salad', 'grilled-vegetables'],
+  'kobe-tataki': ['grilled-vegetables'],
   // Steaks → hearty sides
   'filet-mignon-200g': ['golden-potatoes-truffle', 'truffled-mashed-potato', 'grilled-vegetables'],
-  'picanha-250g': ['fries-truffle-aioli', 'bean-rice-chorizo', 'farofa-latina'],
-  'latina-skewer': ['farofa-latina', 'bean-rice-chorizo', 'fries-truffle-aioli'],
-  'short-ribs-12h': ['truffled-mashed-potato', 'farofa-latina', 'bean-rice-chorizo'],
+  'picanha-250g': ['fries-truffle-aioli'],
+  'latina-skewer': ['fries-truffle-aioli'],
+  'short-ribs-12h': ['truffled-mashed-potato'],
   // Seafood → lighter sides
-  'blue-lobster': ['golden-potatoes-truffle', 'grilled-vegetables', 'rocket-parmesan-salad'],
-  'lobster': ['golden-potatoes-truffle', 'grilled-vegetables', 'rocket-parmesan-salad'],
-  'grilled-tuna-steak': ['grilled-vegetables', 'rocket-parmesan-salad', 'river-rice'],
+  'blue-lobster': ['golden-potatoes-truffle', 'grilled-vegetables'],
+  'lobster': ['golden-potatoes-truffle', 'grilled-vegetables'],
+  'grilled-tuna-steak': ['grilled-vegetables', 'river-rice'],
 };
 
 // Default sides (prioritize premium/popular)
