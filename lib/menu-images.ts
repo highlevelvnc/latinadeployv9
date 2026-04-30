@@ -78,7 +78,7 @@ const itemImagePositionMap: Record<string, string> = {
   'golden-t-bone-800g':                '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
-  'chuleton-rubia-gallega-gold':       'bottom',
+  'chuleton-rubia-gallega-gold':       '50% 80%',
 };
 
 /**
