@@ -84,6 +84,10 @@ const itemImagePositionMap: Record<string, string> = {
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
   'chuleton-rubia-gallega-gold':       '50% 80%',
+  // Foie Gras: alimento fica no topo da foto (peppercorns enchem o fundo).
+  // 'top' alinha o topo da foto ao topo do card → mostra MAIS do topo
+  // (= mais do alimento), em vez de cropar para mostrar peppercorns.
+  'foie-gras-chef':                    'top',
 };
 
 /**
