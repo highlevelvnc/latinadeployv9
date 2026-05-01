@@ -68,6 +68,11 @@ function MenuItemImpl({ item, onSelect, style, priority = false }: Props) {
   const dynamicAvailable = isItemAvailable(item.id);
   const isUnavailable = !item.available || !dynamicAvailable;
   const premium = isPremiumItem(item);
+  // Top-tier items (Gold + Wagyu) get a slow breathing gold glow ring —
+  // very subtle but unmistakably premium. "Signature/premium" alone
+  // doesn't trigger it (would be too many cards glowing); only the
+  // crown items do.
+  const topTier = !isUnavailable && (item.tags.includes('gold') || item.tags.includes('wagyu'));
 
   // For wines, show the country flag in the corner of the image —
   // helps customers spot French / Italian / Spanish bottles at a glance
@@ -101,7 +106,8 @@ function MenuItemImpl({ item, onSelect, style, priority = false }: Props) {
             : premium
               ? 'border-accent-yellow/15 bg-surface hover:-translate-y-0.5 hover:border-accent-yellow/35 hover:shadow-xl hover:shadow-accent-yellow/10'
               : 'border-white/[0.06] bg-surface hover:-translate-y-0.5 hover:border-white/15 hover:shadow-xl hover:shadow-black/30'
-        }`}
+        }
+        ${topTier ? 'premium-glow' : ''}`}
     >
       {/* ── Image Section ── */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-stone-700/25 via-stone-800/15 to-stone-900/25">

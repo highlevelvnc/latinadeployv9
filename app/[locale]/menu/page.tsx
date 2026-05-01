@@ -97,39 +97,42 @@ function MenuPageInner() {
 
       <CategoryNav />
 
-      <main id={mainId} className="container mx-auto px-4 py-5">
-        <div className="mb-4">
+      <main id={mainId} className="ambient-gold-top container relative mx-auto px-4 py-5">
+        {/* Children sit above the ::before glow */}
+        <div className="relative z-10 mb-4">
           <SearchBar />
         </div>
 
-        {showCuratedSections ? (
-          <>
-            <FeaturedSection onSelectItem={setSelectedItem} />
+        <div className="relative z-10">
+          {showCuratedSections ? (
+            <>
+              <FeaturedSection onSelectItem={setSelectedItem} />
 
-            {/* On the home view (no filter): show only the Entradas
-                category beneath Featured. The full menu grid is reached
-                via the top category tabs. ShareSection ("Ideal para
-                Partilhar") removed temporariamente — sem fotos das
-                tábuas ainda. */}
-            <section className="mb-8">
-              <div className="mb-4 flex items-center gap-2">
-                <Salad className="h-5 w-5 text-accent-green" />
-                <div>
-                  <h2 className="font-serif text-lg font-bold text-white">
-                    {locale === 'pt' && 'Entradas'}
-                    {locale === 'en' && 'Starters'}
-                    {locale === 'fr' && 'Entrées'}
-                    {locale === 'ru' && 'Закуски'}
-                    {locale === 'zh' && '前菜'}
-                  </h2>
+              {/* On the home view (no filter): show only the Entradas
+                  category beneath Featured. The full menu grid is reached
+                  via the top category tabs. ShareSection ("Ideal para
+                  Partilhar") removed temporariamente — sem fotos das
+                  tábuas ainda. */}
+              <section className="mb-8">
+                <div className="mb-4 flex items-center gap-2">
+                  <Salad className="h-5 w-5 text-accent-green" />
+                  <div>
+                    <h2 className="font-serif text-lg font-bold text-white">
+                      {locale === 'pt' && 'Entradas'}
+                      {locale === 'en' && 'Starters'}
+                      {locale === 'fr' && 'Entrées'}
+                      {locale === 'ru' && 'Закуски'}
+                      {locale === 'zh' && '前菜'}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-              <MenuGrid onSelectItem={setSelectedItem} forceCategoryId="starters" />
-            </section>
-          </>
-        ) : (
-          <MenuGrid onSelectItem={setSelectedItem} />
-        )}
+                <MenuGrid onSelectItem={setSelectedItem} forceCategoryId="starters" />
+              </section>
+            </>
+          ) : (
+            <MenuGrid onSelectItem={setSelectedItem} />
+          )}
+        </div>
       </main>
 
       <MenuItemDetail

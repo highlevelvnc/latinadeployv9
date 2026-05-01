@@ -140,6 +140,47 @@
     50%      { transform: scale(1.08); opacity: 0.75; }
   }
 
+  /* Warm ambient glow at the top of the page — gives the menu a
+     candlelit / restaurant ambiance instead of a flat dark surface.
+     The glow is intentionally subtle (max 8% gold) so it doesn't
+     compete with photography. */
+  .ambient-gold-top {
+    position: relative;
+  }
+  .ambient-gold-top::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 480px;
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(234, 179, 8, 0.08) 0%,
+      rgba(234, 179, 8, 0.025) 30%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Slow, breathing gold glow — for premium/gold/wagyu cards.
+     Using box-shadow with a subtle yellow ring that opacity-pulses. */
+  @keyframes premiumGoldGlow {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(234, 179, 8, 0.12),
+        0 4px 24px -4px rgba(234, 179, 8, 0.08);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(234, 179, 8, 0.22),
+        0 6px 32px -4px rgba(234, 179, 8, 0.18);
+    }
+  }
+  .premium-glow {
+    animation: premiumGoldGlow 4.5s ease-in-out infinite;
+    will-change: box-shadow;
+  }
+
   /* Accessibility: respect user's reduced-motion preference.
      We also kill the wine hero's spinning halo + breathing glow so users
      who opted out of motion get a calm, static experience. */
@@ -148,7 +189,8 @@
     .animate-fade-in-up,
     .animate-breathe-glow,
     .animate-shimmer,
-    .animate-shimmer-skel {
+    .animate-shimmer-skel,
+    .premium-glow {
       animation: none !important;
     }
     [style*="wineHaloSpin"],

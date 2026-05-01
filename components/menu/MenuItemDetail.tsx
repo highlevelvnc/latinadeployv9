@@ -230,17 +230,44 @@ export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
                 </motion.div>
               )}
 
-              {/* Description */}
-              {lt(item.description, locale) && (
-                <motion.p
-                  className="mb-6 text-[14px] leading-relaxed text-white/55 [text-wrap:pretty]"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.14, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {lt(item.description, locale)}
-                </motion.p>
-              )}
+              {/* Description — drop cap when prose is long enough.
+                  Short descriptions (< 80 chars) keep clean alignment;
+                  longer ones get the editorial drop cap (matches the
+                  wine experience for consistency). */}
+              {lt(item.description, locale) && (() => {
+                const desc = lt(item.description, locale);
+                const useDropCap = desc.length >= 80;
+                return useDropCap ? (
+                  <motion.p
+                    className="mb-6 text-[14px] leading-[1.65] text-white/55 [text-wrap:pretty]"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.14, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <motion.span
+                      aria-hidden
+                      initial={{ opacity: 0, scale: 0.7 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.22, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="float-left mr-2 mt-1 block font-serif text-[42px] font-bold leading-[0.85] text-accent-yellow/85"
+                      style={{ textShadow: '0 4px 14px rgba(234,179,8,0.2)' }}
+                    >
+                      {desc.charAt(0)}
+                    </motion.span>
+                    <span className="sr-only">{desc.charAt(0)}</span>
+                    {desc.slice(1)}
+                  </motion.p>
+                ) : (
+                  <motion.p
+                    className="mb-6 text-[14px] leading-relaxed text-white/55 [text-wrap:pretty]"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.14, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {desc}
+                  </motion.p>
+                );
+              })()}
 
               {/* ── Recommended Sauces ── */}
               {recommendedSauces.length > 0 && (

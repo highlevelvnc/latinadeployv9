@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAppStore } from '@/stores/useAppStore';
 import { useMenuStore } from '@/stores/useMenuStore';
@@ -148,7 +148,7 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
           className="mb-3 flex items-center justify-between text-[11px] font-medium uppercase tracking-wider text-white/45 animate-fade-in-up"
           aria-live="polite"
         >
-          <span>{countLabel(filtered.length)}</span>
+          <CountBadge count={filtered.length} label={countLabel} />
         </div>
       )}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -168,4 +168,33 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
       </div>
     </>
   );
+}
+
+/**
+ * Animated count: ticks from previous → new value over ~400ms with
+ * easeOutQuart. Feels alive, draws the eye to the (changed) result
+ * count without being noisy.
+ */
+function CountBadge({ count, label }: { count: number; label: (n: number) => string }) {
+  const [display, setDisplay] = useState(count);
+  useEffect(() => {
+    if (display === count) return;
+    const start = display;
+    const delta = count - start;
+    const duration = 400;
+    const t0 = performance.now();
+    let raf = 0;
+    const step = (t: number) => {
+      const p = Math.min(1, (t - t0) / duration);
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - p, 4);
+      const next = Math.round(start + delta * eased);
+      setDisplay(next);
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
+  return <span>{label(display)}</span>;
 }
