@@ -134,6 +134,23 @@ const itemImageMap: Record<string, string> = {
   'wine-red-voltface-reserva-2022':   '/menu/wine-voltface-reserva-2022.webp',
   'wine-red-ravasqueira-romas-2021':  '/menu/wine-ravasqueira-romas-2021.webp',
   'wine-red-cem-reis-syrah-2022':     '/menu/wine-cem-reis-syrah-2022.webp',
+  // +10 vinhos top-tier do Douro/Alentejo (Cláudia)
+  'wine-red-peso-icone-2018':         '/menu/wine-peso-icone-2018.webp',
+  // Foto da garrafa diz "Caricatura DOURO" — menu descreve como
+  // Alentejo. Mesmo produtor (Paulo Laureano) — flag pra confirmar
+  // se a região do menu está certa.
+  'wine-red-paulo-laureano-caricatura-bottle': '/menu/wine-paulo-laureano-caricatura.webp',
+  // Foto da garrafa diz "Mil Réis Limited Edition DOURO 2019" — menu
+  // descreve como Alentejo sem ano. Confirmar com Cláudia.
+  'wine-red-mil-reis':                '/menu/wine-mil-reis.webp',
+  'wine-red-batuta-niepoort-2022':    '/menu/wine-batuta-niepoort-2022.webp',
+  'wine-red-redoma-niepoort-2021':    '/menu/wine-redoma-niepoort-2021.webp',
+  'wine-red-valle-dona-maria-douro-2022': '/menu/wine-valle-dona-maria-2022.webp',
+  'wine-red-vallado-tres-melros-2023': '/menu/wine-vallado-tres-melros-2023.webp',
+  // Barca Velha — top icônico, 3 vintages
+  'wine-red-barca-velha-2011':        '/menu/wine-barca-velha-2011.webp',
+  'wine-red-barca-velha-1991':        '/menu/wine-barca-velha-1991.webp',
+  'wine-red-barca-velha-1983':        '/menu/wine-barca-velha-1983.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
