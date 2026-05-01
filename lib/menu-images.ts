@@ -52,10 +52,14 @@ const itemImageMap: Record<string, string> = {
 
   // Golden Selection
   'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.png',
-  'golden-rib-eye-usa-500g':          '/menu/ribeye-grill-2.jpeg',
+  // O que estava mapeado como "japanese wagyu 300g.webp" era na verdade
+  // a foto do USA Wagyu Rib Eye 500g — corrigido. Da versão japonesa
+  // ainda não há foto real.
+  'golden-rib-eye-usa-500g':          '/menu/golden-usa-wagyu-rib-eye-500g.webp',
   // (golden-rib-eye-500g: foto removida, aguardando melhor)
-  'golden-japanese-wagyu-300g':       '/menu/golden-japanese-wagyu-300g.webp',
-  'golden-t-bone-800g':               '/menu/ribeye-grill.jpeg',
+  // (golden-japanese-wagyu-300g: sem foto real ainda)
+  // (golden-t-bone-800g: foto removida — a anterior era de rib eye,
+  //  não T-bone; aguardando foto real)
   'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.png',
 
   // Sugestão do Chef
@@ -141,7 +145,6 @@ const itemImageMap: Record<string, string> = {
 const itemImagePositionMap: Record<string, string> = {
   'golden-chateaubriand-500g':         'bottom',
   'rib-eye-usa-250g':                  '50% 75%',
-  'golden-t-bone-800g':                '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
   // Foie Gras: alimento na parte de baixo da foto, mas 'bottom' (100%)
