@@ -54,6 +54,8 @@ const itemImageMap: Record<string, string> = {
   'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
   'grilled-vegetables':               '/menu/grilled-vegetables.webp',
   'truffled-mashed-potato':           '/menu/truffled-mashed-potato.webp',
+  'sweet-potato-garlic-oregano':      '/menu/sweet-potato-garlic-oregano.webp',
+  'tomato-basil-duet':                '/menu/tomato-basil-duet.webp',
 
   // Golden Selection
   'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.webp',
