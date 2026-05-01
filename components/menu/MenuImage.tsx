@@ -53,8 +53,12 @@ export default function MenuImage({
 
   return (
     <>
+      {/* Shimmering skeleton while loading — feels much faster perceptually
+          than a flat gray box. Uses .animate-shimmer-skel from globals.css */}
       {!loaded && (
-        <div className="absolute inset-0 z-[1] animate-pulse bg-surface-elevated" />
+        <div className="absolute inset-0 z-[1] overflow-hidden bg-stone-900/40">
+          <div className="absolute inset-0 animate-shimmer-skel" />
+        </div>
       )}
       <Image
         src={src}
@@ -66,11 +70,9 @@ export default function MenuImage({
         priority={priority}
         // object-position via inline style — Tailwind doesn't have arbitrary
         // value support for this property in older configs, and we need
-        // per-item override (golden-chateaubriand and rib-eye-usa look better
-        // with 'top' so the meat doesn't get cut at the bottom).
+        // per-item override.
         style={{ objectPosition }}
         className={cn(
-          // object-cover preenche todo o card slot — "tela cheia" no quadrinho.
           'object-cover transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',
           className,

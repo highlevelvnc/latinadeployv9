@@ -5,6 +5,7 @@ import { Flame, Leaf, Star, Sparkles, Award, Crown, Beef } from 'lucide-react';
 import { useMenuStore } from '@/stores/useMenuStore';
 import MenuImage from '@/components/menu/MenuImage';
 import { t as lt } from '@/lib/localized';
+import { getWineCountryFlag } from '@/lib/wine-info';
 import type { MenuItem as MenuItemType, DietaryTag } from '@/types/menu';
 import type { Locale } from '@/i18n';
 
@@ -58,6 +59,12 @@ export default function MenuItem({ item, onSelect, style }: Props) {
   const isUnavailable = !item.available || !dynamicAvailable;
   const premium = isPremiumItem(item);
 
+  // For wines, show the country flag in the corner of the image —
+  // helps customers spot French / Italian / Spanish bottles at a glance
+  // without opening each card.
+  const isWine = item.categoryId.startsWith('wines-');
+  const wineFlag = isWine ? getWineCountryFlag(item) : null;
+
   return (
     <button
       type="button"
@@ -103,6 +110,13 @@ export default function MenuItem({ item, onSelect, style }: Props) {
             <span className="rounded-full border border-white/10 bg-dark/90 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white/70">
               {t('unavailable')}
             </span>
+          </div>
+        )}
+
+        {/* Country flag — top right corner for wines (helps scan at a glance) */}
+        {wineFlag && (
+          <div className="absolute right-2 top-2 z-20 flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-black/55 text-base shadow-md shadow-black/30 backdrop-blur-md">
+            <span aria-hidden>{wineFlag}</span>
           </div>
         )}
 

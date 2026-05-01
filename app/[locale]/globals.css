@@ -69,6 +69,24 @@
     background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
   }
 
+  /* Skeleton shimmer for image loading. Faster perceptually than a flat
+     gray box — the moving sheen tells the user "loading, almost there". */
+  @keyframes shimmerSkel {
+    0%   { background-position: -150% 0; }
+    100% { background-position: 250% 0; }
+  }
+  .animate-shimmer-skel {
+    background-image: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmerSkel 1.6s ease-in-out infinite;
+    will-change: background-position;
+  }
+
   /* Slow, breathing radial glow — used as backdrop for the wine hero
      to give a "spotlight that lives" feel without being distracting. */
   @keyframes breatheGlow {

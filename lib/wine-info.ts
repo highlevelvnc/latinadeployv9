@@ -376,6 +376,31 @@ interface WineLike {
   tags: readonly string[];
 }
 
+/**
+ * Resolve the country flag emoji for a wine card. First tries the curated
+ * wineInfo map; falls back to inferring from `description.pt` (region name).
+ */
+const REGION_TO_FLAG: { match: string[]; flag: string }[] = [
+  { match: ['douro', 'alentejo', 'bairrada', 'dão', 'dao', 'tejo', 'setúbal', 'setubal', 'évora', 'evora'], flag: '🇵🇹' },
+  { match: ['frança', 'franca', 'france', 'bordeaux', 'médoc', 'medoc', 'châteauneuf', 'chateauneuf', 'rhône', 'rhone'], flag: '🇫🇷' },
+  { match: ['itália', 'italia', 'italy', 'toscana', 'tuscany', 'bolgheri', 'montalcino'], flag: '🇮🇹' },
+  { match: ['espanha', 'spain', 'rioja', 'ribera del duero', 'toro'], flag: '🇪🇸' },
+  { match: ['eua', 'usa', 'estados unidos', 'califórnia', 'california'], flag: '🇺🇸' },
+];
+
+export function getWineCountryFlag(item: WineLike): string | null {
+  // First: curated entry
+  const curated = wineInfo[item.id];
+  if (curated?.country) return curated.country;
+
+  // Fallback: infer from description.pt (region name)
+  const region = (item.description.pt ?? '').toLowerCase();
+  for (const { match, flag } of REGION_TO_FLAG) {
+    if (match.some((m) => region.includes(m))) return flag;
+  }
+  return null;
+}
+
 export function getWinePopularityScore(item: WineLike): number {
   let score = 0;
 

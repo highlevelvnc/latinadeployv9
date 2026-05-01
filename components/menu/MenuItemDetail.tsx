@@ -12,6 +12,10 @@ import { getSaucesForItem, getSidesForItem, meatCategories, mainCourseCategories
 import type { MenuItem, DietaryTag } from '@/types/menu';
 import type { Locale } from '@/i18n';
 
+// (dynamic import was introducing a regression where wines opened from the
+// second one onward didn't render their body content — reverted to static
+// import. The ~10KB bundle savings weren't worth the broken UX.)
+
 /** Wines and wine-related categories use a dedicated immersive modal. */
 const WINE_CATEGORIES = new Set([
   'wines-red-portugal',
