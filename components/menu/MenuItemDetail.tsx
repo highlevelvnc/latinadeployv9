@@ -16,16 +16,22 @@ import type { Locale } from '@/i18n';
 // second one onward didn't render their body content — reverted to static
 // import. The ~10KB bundle savings weren't worth the broken UX.)
 
-/** Wines and wine-related categories use a dedicated immersive modal. */
-const WINE_CATEGORIES = new Set([
-  'wines-red-portugal',
-  'wines-red-world',
-  'wines-white',
-  'wines-rose',
-  'wines-sparkling',
-  'wines-fortified',
-  'wines-by-glass',
-]);
+/**
+ * Wines and wine-related categories use a dedicated immersive modal.
+ *
+ * IMPORTANT: This used to be a hardcoded Set of category IDs, but when we
+ * split reds by country (wines-red-france, wines-red-italy, wines-red-spain,
+ * wines-red-usa) those new categories weren't added — and ALL non-Portugal
+ * red wines silently fell back to the generic modal (no history, no pairing,
+ * no flag). The user reported "only Pera Manca shows everything" — that's
+ * because only wines-red-portugal was in the list.
+ *
+ * Switching to a prefix check means any future wine category (e.g.
+ * wines-orange, wines-natural, wines-by-region-tuscany) is auto-included.
+ */
+function isWineCategory(categoryId: string): boolean {
+  return categoryId.startsWith('wines-');
+}
 
 const tagIcons: Partial<Record<DietaryTag, typeof Flame>> = {
   spicy: Flame, vegetarian: Leaf, vegan: Leaf, 'chefs-pick': Star, 'new': Sparkles,
@@ -85,7 +91,7 @@ export default function MenuItemDetail({ item, onClose }: Props) {
   // Wines get an immersive, editorial-style modal. The branch is AFTER the
   // hook calls so we don't violate the rules of hooks (hooks must run in the
   // same order every render).
-  if (item && WINE_CATEGORIES.has(item.categoryId)) {
+  if (item && isWineCategory(item.categoryId)) {
     return <WineDetail item={item} onClose={onClose} />;
   }
 
