@@ -12,7 +12,7 @@ const itemImageMap: Record<string, string> = {
   // (chuleton-rubia-gallega-gold: foto removida — a versão Gold ainda
   //  não tem foto real; a anterior era do Rubia Gallega normal)
   'chuleton-wagyu':                   '/menu/chuleton-wagyu.webp',
-  // (tomahawk-wagyu-australia: foto removida — aguardando foto real)
+  'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
   't-bone':                           '/menu/t-bone.webp',
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.jpeg',
@@ -29,9 +29,11 @@ const itemImageMap: Record<string, string> = {
 
   // Seleção Premium
   'picanha-250g':                     '/menu/picanha-250g-new.webp',
-  // (filet-mignon-200g: foto removida — aguardando foto real)
+  'filet-mignon-200g':                '/menu/filet-mignon-200g.webp',
   'rib-eye-rubia-gallega-250g':       '/menu/rib-eye-rubia-gallega-250g.jpeg',
-  // (sirloin-australia-250g: foto removida — aguardando foto real)
+  'sirloin-australia-250g':           '/menu/sirloin-australia-250g.webp',
+  'maminha-black-angus-250g':         '/menu/maminha-black-angus-250g.webp',
+  'farm-chicken-supremes':            '/menu/farm-chicken-supremes.webp',
   'latina-skewer':                    '/menu/beef-skewer.jpeg',
   'short-ribs-12h':                   '/menu/short-ribs-12h.webp',
 
@@ -74,7 +76,7 @@ const itemImageMap: Record<string, string> = {
   'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.webp',
 
   // Sugestão do Chef
-  // (chef-kobe-a5-bife-150g: foto removida, aguardando melhor)
+  'chef-kobe-a5-bife-150g':           '/menu/chef-kobe-a5-bife-150g.webp',
   'chef-chuleton-wagyu-premium':      '/menu/chuleton-wagyu.webp',
 
   // Sobremesas
