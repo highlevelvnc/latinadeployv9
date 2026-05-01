@@ -66,6 +66,9 @@ const itemImageMap: Record<string, string> = {
   'dessert-forest-cheesecake':        '/menu/dessert-forest-cheesecake.png',
   'dessert-waffle-icecream-nutella':  '/menu/dessert-waffle-icecream-nutella.png',
 
+  // Cocktails
+  'cocktail-whisky-sour':             '/menu/whiskysour.jpeg',
+
   // Vinhos Tintos – Portugal
   'wine-red-charme-niepoort-2022':    '/menu/wine-charme-niepoort.webp',
   'wine-red-abandonado-gaivosa-2022': '/menu/wine-abandonado-gaivosa.webp',
