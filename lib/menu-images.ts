@@ -251,9 +251,9 @@ const itemImagePositionMap: Record<string, string> = {
  *   1.3  = 30% mais perto (boa pra fotos com muito espaço vazio)
  */
 const itemImageScaleMap: Record<string, number> = {
-  // Spaghetti Bolognese: o prato fica pequeno no quadro original com
-  // muito branco em volta — zoom pra preencher melhor o card.
-  'kids-spaghetti-bolognese':          1.25,
+  // Spaghetti Bolognese: o prato fica muito pequeno no quadro original
+  // com muita mesa em volta — zoom forte pra preencher o card.
+  'kids-spaghetti-bolognese':          1.5,
 };
 
 /**

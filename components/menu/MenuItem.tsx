@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Flame, Leaf, Star, Sparkles, Award, Crown, Beef } from 'lucide-react';
 import { useMenuStore } from '@/stores/useMenuStore';
@@ -50,7 +51,13 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-export default function MenuItem({ item, onSelect, style }: Props) {
+/**
+ * Memoized — re-renders only when the item reference, onSelect callback,
+ * or style change. In long grids (134 wines), unmemoized this re-rendered
+ * every card on every search keystroke or category switch, even when only
+ * 2-3 cards actually changed.
+ */
+function MenuItemImpl({ item, onSelect, style }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
   const isItemAvailable = useMenuStore((s) => s.isItemAvailable);
@@ -199,3 +206,6 @@ export default function MenuItem({ item, onSelect, style }: Props) {
     </button>
   );
 }
+
+const MenuItem = memo(MenuItemImpl);
+export default MenuItem;
