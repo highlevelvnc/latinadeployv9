@@ -163,6 +163,16 @@ const itemImageMap: Record<string, string> = {
   'wine-sparkling-gh-mumm-brut':      '/menu/wine-gh-mumm-brut.webp',
   'wine-sparkling-moet-brut-imperial': '/menu/wine-moet-brut-imperial.webp',
   'wine-sparkling-dom-perignon-2013': '/menu/wine-dom-perignon-2013.webp',
+  // Brancos (+7) — Vinho Verde, Beira Interior, Alentejo
+  'wine-white-angelmo-mendes-muros-antigos': '/menu/wine-muros-antigos.webp',
+  'wine-white-so-alvarinho':          '/menu/wine-so-alvarinho.webp',
+  'wine-white-soalheiro-granit':      '/menu/wine-soalheiro-granit.webp',
+  'wine-white-soalheiro-alvarinho':   '/menu/wine-soalheiro-alvarinho.webp',
+  'wine-white-castelo-rodrigo':       '/menu/wine-castelo-rodrigo.webp',
+  'wine-white-joaquim-madeira':       '/menu/wine-joaquim-madeira.webp',
+  'wine-white-pera-manca-white':      '/menu/wine-pera-manca-white.webp',  // ⭐
+  // Madeira (+1)
+  'wine-madeira-verdelho-5y-barbeito-2013': '/menu/wine-madeira-verdelho-5y-barbeito.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
