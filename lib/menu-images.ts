@@ -41,6 +41,9 @@ const itemImageMap: Record<string, string> = {
   'foie-gras-chef':                   '/menu/foie-gras-chef.jpeg',
   'pata-negra':                       '/menu/pata-negra.webp',
   'tenderloin-tartare':               '/menu/tenderloin-tartare.jpeg',
+  'chef-caesar':                      '/menu/chef-caesar.webp',
+  'shrimp-flambe':                    '/menu/shrimp-flambe.webp',
+  'kobe-tataki':                      '/menu/kobe-tataki.webp',
 
   // Tábuas
   // (latina-premium-board: foto removida, aguardando melhor)
