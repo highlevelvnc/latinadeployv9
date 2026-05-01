@@ -235,9 +235,11 @@ const itemImagePositionMap: Record<string, string> = {
   'rib-eye-usa-250g':                  '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
-  // Foie Gras: alimento na parte de baixo da foto, mas 'bottom' (100%)
-  // subia demais. '50% 75%' é o meio termo.
-  'foie-gras-chef':                    '50% 75%',
+  // Foie Gras: a foto é portrait com o foie gras na parte SUPERIOR
+  // do quadro (mesa de madeira ocupa o topo, prato no meio, base
+  // vazia em baixo). Posição baixa cortava a comida — biased pro
+  // topo (30%) pra mostrar foie + flor + grãos.
+  'foie-gras-chef':                    '50% 30%',
 };
 
 /**
