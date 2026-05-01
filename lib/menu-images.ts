@@ -136,10 +136,10 @@ const itemImageMap: Record<string, string> = {
   'wine-red-cem-reis-syrah-2022':     '/menu/wine-cem-reis-syrah-2022.webp',
   // +10 vinhos top-tier do Douro/Alentejo (Cláudia)
   'wine-red-peso-icone-2018':         '/menu/wine-peso-icone-2018.webp',
-  // Foto da garrafa diz "Caricatura DOURO" — menu descreve como
-  // Alentejo. Mesmo produtor (Paulo Laureano) — flag pra confirmar
-  // se a região do menu está certa.
-  'wine-red-paulo-laureano-caricatura-bottle': '/menu/wine-paulo-laureano-caricatura.webp',
+  // Caricatura: foto v2 (mais polida) substituiu a v1. Menu descreve
+  // como Alentejo mas a garrafa diz Douro — mesmo produtor Paulo
+  // Laureano. Flag pra confirmar a região do menu.
+  'wine-red-paulo-laureano-caricatura-bottle': '/menu/wine-paulo-laureano-caricatura-v2.webp',
   // Foto da garrafa diz "Mil Réis Limited Edition DOURO 2019" — menu
   // descreve como Alentejo sem ano. Confirmar com Cláudia.
   'wine-red-mil-reis':                '/menu/wine-mil-reis.webp',
@@ -173,6 +173,19 @@ const itemImageMap: Record<string, string> = {
   'wine-white-pera-manca-white':      '/menu/wine-pera-manca-white.webp',  // ⭐
   // Madeira (+1)
   'wine-madeira-verdelho-5y-barbeito-2013': '/menu/wine-madeira-verdelho-5y-barbeito.webp',
+  // +2 Madeiras
+  'wine-madeira-verdelho-10y-barbeito': '/menu/wine-madeira-verdelho-10y-barbeito.webp',
+  'wine-madeira-dry-sercial-1930':    '/menu/wine-madeira-dry-sercial-1930.webp',  // ⭐ raríssimo
+  // Tintos Douro (+2 com match limpo de tinto/ano)
+  'wine-red-duas-quintas-reserva-2022': '/menu/wine-duas-quintas-reserva-2022.webp',
+  'wine-red-espinho-grande-reserva-2019': '/menu/wine-espinho-grande-reserva-2019.webp',
+  // Brancos Douro (+5) — bottles têm cor escura, assumindo versões
+  // brancas do menu pelo nome do produtor
+  'wine-white-carm':                  '/menu/wine-carm.webp',
+  'wine-white-carm-reserva':          '/menu/wine-carm-reserva.webp',
+  'wine-white-cottage-wines':         '/menu/wine-cottage-wines.webp',
+  'wine-white-planalto':              '/menu/wine-planalto.webp',
+  'wine-white-vale-dona-maria-sabor': '/menu/wine-vale-dona-maria-sabor.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
