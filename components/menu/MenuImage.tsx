@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { getMenuItemImage, getMenuItemImagePosition } from '@/lib/menu-images';
+import { getMenuItemImage, getMenuItemImagePosition, getMenuItemImageScale } from '@/lib/menu-images';
 
 interface Props {
   itemId: string;
@@ -43,6 +43,7 @@ export default function MenuImage({
 }: Props) {
   const src = getMenuItemImage(itemId);
   const objectPosition = getMenuItemImagePosition(itemId);
+  const scale = getMenuItemImageScale(itemId);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
@@ -68,10 +69,15 @@ export default function MenuImage({
         height={fill ? undefined : height}
         sizes={sizes}
         priority={priority}
-        // object-position via inline style — Tailwind doesn't have arbitrary
-        // value support for this property in older configs, and we need
-        // per-item override.
-        style={{ objectPosition }}
+        // object-position e transform.scale via inline style — Tailwind
+        // não tem suporte a arbitrary values destas props nas versões
+        // antigas, e precisamos do override per-item.
+        // O scale > 1 dá mais zoom no prato (útil quando a foto original
+        // tem muito espaço vazio em volta do alimento).
+        style={{
+          objectPosition,
+          ...(scale !== 1 && { transform: `scale(${scale})` }),
+        }}
         className={cn(
           'object-cover transition-opacity duration-500',
           loaded ? 'opacity-100' : 'opacity-0',

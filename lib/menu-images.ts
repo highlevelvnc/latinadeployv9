@@ -197,15 +197,12 @@ const itemImageMap: Record<string, string> = {
 };
 
 /**
- * Per-item override of object-position for the image crop.
- * Default is 'center'. Use 'top' / 'bottom' / etc when the meat
- * sits off-center in the source photo and gets cut off.
+ * Per-item override of CSS object-position. Use percentage Y values:
+ *   '50% 50%'  = center (default)
+ *   '50% 100%' = bottom (mostra mais da parte de baixo da foto)
+ *   '50% 75%'  = entre center e bottom — mostra mais da carne sem
+ *                cortar tudo de cima
  */
-// Per-item override of CSS object-position. Use percentage Y values:
-//   '50% 50%' = center (default)
-//   '50% 100%' = bottom (mostra mais da parte de baixo da foto)
-//   '50% 75%'  = entre center e bottom — mostra mais da carne sem
-//                cortar tudo de cima
 const itemImagePositionMap: Record<string, string> = {
   'golden-chateaubriand-500g':         'bottom',
   'rib-eye-usa-250g':                  '50% 75%',
@@ -214,6 +211,22 @@ const itemImagePositionMap: Record<string, string> = {
   // Foie Gras: alimento na parte de baixo da foto, mas 'bottom' (100%)
   // subia demais. '50% 75%' é o meio termo.
   'foie-gras-chef':                    '50% 75%',
+};
+
+/**
+ * Per-item zoom override (CSS transform: scale).
+ * Default is 1.0. Use values >1 to zoom INTO the photo (útil quando o
+ * prato fica pequeno demais no card original — combine com object-position
+ * pra controlar onde o zoom é centrado).
+ *
+ *   1.0  = default
+ *   1.15 = 15% mais perto
+ *   1.3  = 30% mais perto (boa pra fotos com muito espaço vazio)
+ */
+const itemImageScaleMap: Record<string, number> = {
+  // Spaghetti Bolognese: o prato fica pequeno no quadro original com
+  // muito branco em volta — zoom pra preencher melhor o card.
+  'kids-spaghetti-bolognese':          1.25,
 };
 
 /**
@@ -228,6 +241,13 @@ export function getMenuItemImage(itemId: string): string | null {
  */
 export function getMenuItemImagePosition(itemId: string): string {
   return itemImagePositionMap[itemId] ?? 'center';
+}
+
+/**
+ * Get the per-item zoom factor (CSS transform: scale). Defaults to 1.
+ */
+export function getMenuItemImageScale(itemId: string): number {
+  return itemImageScaleMap[itemId] ?? 1;
 }
 
 /**
