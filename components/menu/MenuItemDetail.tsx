@@ -278,7 +278,7 @@ export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
                 </motion.div>
               )}
 
-              {/* ── Recommended Sides ── */}
+              {/* ── Recommended Sides — thumbnails clicáveis ── */}
               {recommendedSides.length > 0 && (
                 <motion.div
                   className="mb-2"
@@ -292,24 +292,73 @@ export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
                       {t('completeDish')}
                     </span>
                   </div>
-                  <div className="space-y-2">
+                  {/* Grid 1×N mobile / 2×N desktop. Cada side é um <button>
+                      com foto real, nome e chip "Ver acompanhamento". Tap
+                      faz swap pro detail do acompanhamento. */}
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {recommendedSides.map((side, idx) =>
                       side ? (
                         <motion.div
                           key={side.id}
-                          initial={{ opacity: 0, x: -8 }}
-                          animate={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
                           transition={{
                             delay: 0.28 + idx * 0.06,
                             duration: 0.35,
                             ease: [0.22, 1, 0.36, 1],
                           }}
-                          className="flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-surface px-3 py-2 transition-all duration-200 hover:border-accent-green/25 hover:bg-accent-green/5"
                         >
-                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-dark-lighter">
-                            <span className="text-xs opacity-30">🥗</span>
-                          </div>
-                          <span className="text-[12px] text-white/75">{lt(side.name, locale)}</span>
+                          {onSelectItem ? (
+                            <button
+                              type="button"
+                              onClick={() => onSelectItem(side)}
+                              aria-label={`${lt(side.name, locale)} — abrir detalhe`}
+                              className="group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border border-accent-green/15 bg-accent-green/[0.04] p-2 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-green/40 hover:bg-accent-green/[0.08] hover:shadow-md hover:shadow-accent-green/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green/60 focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:scale-[0.98]"
+                            >
+                              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-stone-900/70">
+                                <MenuImage
+                                  itemId={side.id}
+                                  categoryId={side.categoryId}
+                                  alt={lt(side.name, locale)}
+                                  sizes="48px"
+                                />
+                                <span
+                                  aria-hidden
+                                  className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-inset ring-white/5"
+                                />
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="line-clamp-2 text-[12.5px] font-semibold leading-tight text-white/90 group-hover:text-white">
+                                  {lt(side.name, locale)}
+                                </div>
+                                <div className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-green/65 group-hover:text-accent-green">
+                                  <Carrot className="h-2.5 w-2.5" />
+                                  {{
+                                    pt: 'Ver acompanhamento',
+                                    en: 'View side',
+                                    fr: 'Voir l’accompagnement',
+                                    ru: 'Открыть',
+                                    zh: '查看配菜',
+                                  }[locale] ?? 'Ver acompanhamento'}
+                                </div>
+                              </div>
+                            </button>
+                          ) : (
+                            // Fallback estático quando não há onSelectItem
+                            <div className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-surface p-2">
+                              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-stone-900/70">
+                                <MenuImage
+                                  itemId={side.id}
+                                  categoryId={side.categoryId}
+                                  alt={lt(side.name, locale)}
+                                  sizes="48px"
+                                />
+                              </div>
+                              <span className="text-[12.5px] font-semibold text-white/85">
+                                {lt(side.name, locale)}
+                              </span>
+                            </div>
+                          )}
                         </motion.div>
                       ) : null
                     )}
