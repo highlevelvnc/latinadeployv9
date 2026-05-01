@@ -116,6 +116,14 @@ const itemImageMap: Record<string, string> = {
   'wine-red-vadio-baga-2021':         '/menu/wine-vadio-2021.webp',
   'wine-red-vadio-2015':              '/menu/wine-vadio-2015.webp',
   'wine-red-cabeco-toiro-reserva-2022': '/menu/wine-cabeco-toiro-reserva-2022.webp',
+  // Foto bate o produtor mas o ano da garrafa (Colheita 2023) é
+  // diferente do ano do menu (JPR 2022) — mesmo produtor Duorum.
+  'wine-red-duorum-jpr-2022':         '/menu/wine-duorum-jpr.webp',
+  'wine-red-oliveirinha-alves-sousa-bottle': '/menu/wine-oliveirinha-douro.webp',
+  // Garrafa "Reserva" sem ano legível na foto; menu tem 2019.
+  'wine-red-romanos-reserva-2019':    '/menu/wine-romanos-reserva.webp',
+  // Garrafa mostra "2015" mas menu tem 2018 — mesmo produtor Valbom.
+  'wine-red-valbom-2018':             '/menu/wine-valbom-douro.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
