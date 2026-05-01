@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,24 +27,20 @@ interface Props {
 }
 
 /**
- * Immersive wine detail modal.
+ * Immersive editorial wine modal.
  *
- * Bug fixes (this revision):
- * - X button was sometimes unresponsive: it lived above a giant
- *   <button> (the WineHero zoom area) that covered ~48vh. Mistaps near
- *   the X edge triggered the zoom instead. Solution:
- *     1. WineHero is now a <div> with onClick on a small INNER zoom badge,
- *        not the entire hero area. Tap-down anywhere else does nothing.
- *     2. X has z-50 (above zoom badge z-20), 44×44 touch target,
- *        stopPropagation on click, and visible backdrop+ring for affordance.
- * - Exit animation shortened so navigating between wines feels snappy.
+ * UX rules tested:
+ * - X is z-50 with 44×44 touch target + stopPropagation. WineHero is
+ *   NOT a giant button anymore — only a small Zoom badge in the corner
+ *   triggers the lightbox. So mistaps near X never trigger zoom.
+ * - mode="wait" + 0.2s exit on backdrop = snappy nav between wines.
+ * - Body scroll lock is delegated to the parent MenuItemDetail so we
+ *   don't get the race-condition where the page becomes unscrollable.
  */
 export default function WineDetail({ item, onClose }: Props) {
   const locale = useLocale() as Locale;
   const [zoomed, setZoomed] = useState(false);
 
-  // Close on ESC. Zoom takes precedence: ESC first closes the lightbox,
-  // then closes the modal on a second press.
   useEffect(() => {
     if (!item) return;
     const handleEsc = (e: KeyboardEvent) => {
@@ -61,21 +57,16 @@ export default function WineDetail({ item, onClose }: Props) {
       {item && (
         <motion.div
           key="wine-modal"
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Backdrop */}
           <div
             onClick={onClose}
             className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md"
           />
 
-          {/* Centering wrapper — flex centers on desktop, pins to bottom on mobile.
-              pointer-events-none so clicks fall through to the backdrop UNLESS
-              they hit the panel (which is pointer-events-auto). */}
           <div className="pointer-events-none fixed inset-0 z-50 flex items-end justify-center lg:items-center lg:p-6">
             <motion.div
               initial={{ y: '100%', opacity: 0 }}
@@ -85,15 +76,23 @@ export default function WineDetail({ item, onClose }: Props) {
               role="dialog"
               aria-modal="true"
               aria-label={lt(item.name, locale)}
-              className="pointer-events-auto relative flex max-h-[94vh] w-full flex-col overflow-hidden rounded-t-3xl border-t border-white/10 bg-gradient-to-b from-zinc-950 via-stone-950 to-black shadow-2xl shadow-black/60 lg:max-h-[90vh] lg:max-w-2xl lg:rounded-3xl lg:border"
+              className="pointer-events-auto relative flex max-h-[94vh] w-full flex-col overflow-hidden rounded-t-3xl border-t border-white/10 bg-gradient-to-b from-zinc-950 via-stone-950 to-black shadow-2xl shadow-black/70 lg:max-h-[90vh] lg:max-w-2xl lg:rounded-3xl lg:border"
             >
-              {/* Drag handle (mobile-only) */}
-              <div className="flex shrink-0 justify-center pt-2 pb-1 lg:hidden">
+              {/* Drag handle (mobile-only) — pushed below safe area so it
+                  doesn't sit under the iPhone notch / dynamic island */}
+              <div
+                className="flex shrink-0 justify-center pb-1 lg:hidden"
+                style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 8px)' }}
+              >
                 <div className="h-1 w-10 rounded-full bg-white/25" />
               </div>
 
-              {/* Close button — z-50, bigger touch target, stopPropagation,
-                  enhanced visibility with ring + drop shadow */}
+              {/* Close button — positioned with enough top padding to clear:
+                  • Safari iOS notch / dynamic island (~50-60px)
+                  • Chrome iOS URL bar (~50px) — it overlays content rather
+                    than reducing the viewport, so env(safe-area-inset-top)
+                    returns 0 and the X gets covered.
+                  Solution: max(env, 60px) so we never end up under browser UI. */}
               <button
                 type="button"
                 onClick={(e) => {
@@ -101,7 +100,8 @@ export default function WineDetail({ item, onClose }: Props) {
                   onClose();
                 }}
                 aria-label="Close"
-                className="absolute right-3.5 top-3.5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white shadow-lg shadow-black/50 ring-1 ring-white/10 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-white/35 hover:bg-black active:scale-90 lg:top-5 lg:right-5"
+                style={{ top: 'max(env(safe-area-inset-top, 0px) + 12px, 60px)' }}
+                className="absolute right-3.5 z-50 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white shadow-lg shadow-black/50 ring-1 ring-white/10 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-white/35 hover:bg-black active:scale-90 lg:!top-5 lg:right-5"
               >
                 <X className="h-5 w-5" strokeWidth={2.5} />
               </button>
@@ -114,7 +114,6 @@ export default function WineDetail({ item, onClose }: Props) {
             </motion.div>
           </div>
 
-          {/* Fullscreen lightbox */}
           {zoomed && (
             <Lightbox item={item} onClose={() => setZoomed(false)} locale={locale} />
           )}
@@ -124,7 +123,7 @@ export default function WineDetail({ item, onClose }: Props) {
   );
 }
 
-/* ── Hero — vertical bottle showcase (NOT clickable as a whole) ─────────── */
+/* ── Hero — bottle showcase with breathing spotlight + floor reflection ─ */
 function WineHero({
   item,
   onZoom,
@@ -137,41 +136,56 @@ function WineHero({
   const src = getMenuItemImage(item.id);
 
   return (
-    <div className="relative">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-radial from-amber-950/40 via-transparent to-transparent" />
+    <div className="relative overflow-hidden">
+      {/* Slow breathing warm spotlight — gives the bottle a "lived" feel */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-radial from-amber-700/35 via-amber-900/15 to-transparent animate-breathe-glow" />
+
+      {/* Soft fade to dark at the bottom — frames the bottle */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-stone-950" />
 
-      <div className="relative mx-auto flex h-[40vh] min-h-[260px] w-full items-end justify-center overflow-hidden lg:h-[46vh]">
+      {/* Stage / reflection ground */}
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-12 w-[55%] -translate-x-1/2 rounded-[100%] bg-amber-950/40 blur-2xl" />
+
+      <div className="relative mx-auto flex h-[42vh] min-h-[280px] w-full items-end justify-center pb-2 lg:h-[48vh]">
         {src ? (
-          <Image
-            src={src}
-            alt={lt(item.name, locale)}
-            fill
-            sizes="(max-width: 1024px) 100vw, 700px"
-            priority
-            className="object-contain object-bottom"
-          />
+          <motion.div
+            initial={{ y: 24, opacity: 0, scale: 0.96 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            transition={{ delay: 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="relative h-full w-full"
+          >
+            <Image
+              src={src}
+              alt={lt(item.name, locale)}
+              fill
+              sizes="(max-width: 1024px) 100vw, 700px"
+              priority
+              className="object-contain object-bottom drop-shadow-[0_24px_28px_rgba(0,0,0,0.65)]"
+            />
+          </motion.div>
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <Wine className="h-24 w-24 text-white/10" />
           </div>
         )}
 
-        {/* Zoom badge — small clickable area in the corner. Doesn't capture
-            taps anywhere else on the hero, so the X above is never blocked. */}
+        {/* Zoom badge — small clickable area, doesn't block X above */}
         {src && (
-          <button
+          <motion.button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onZoom();
             }}
             aria-label="Zoom image"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.3 }}
             className="absolute bottom-4 right-4 z-20 flex items-center gap-1.5 rounded-full border border-white/20 bg-black/65 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white/95 shadow-md shadow-black/40 backdrop-blur-md transition-all duration-200 hover:scale-105 hover:bg-black/85 active:scale-95"
           >
             <Maximize2 className="h-3.5 w-3.5" />
             Zoom
-          </button>
+          </motion.button>
         )}
       </div>
     </div>
@@ -182,36 +196,83 @@ function WineHero({
 function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
   const info = getWineInfo(item.id);
   const region = lt(item.description, locale);
+  const fullName = lt(item.name, locale);
+  const { displayName, vintage } = useMemo(() => parseVintage(fullName), [fullName]);
+
+  // Stagger config for the entire body
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.07, delayChildren: 0.18 },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 14 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+  };
+
+  const isHighlight = item.tags.includes('gold') ||
+    item.tags.includes('signature') ||
+    item.tags.includes('premium');
 
   return (
-    <div className="px-6 pb-10 pt-7 lg:px-10 lg:pt-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="px-6 pb-10 pt-7 lg:px-10 lg:pt-9"
+    >
       {/* Tags row */}
       {item.tags.length > 0 && (
-        <div className="mb-4 flex flex-wrap gap-1.5">
+        <motion.div variants={itemVariants} className="mb-4 flex flex-wrap gap-1.5">
           {item.tags.map((tag) => {
             const Icon = tagIcons[tag];
+            const isPrestige = tag === 'gold' || tag === 'signature' || tag === 'premium';
             return (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 rounded-full border border-accent-yellow/30 bg-accent-yellow/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-yellow"
+                className="relative inline-flex items-center gap-1 overflow-hidden rounded-full border border-accent-yellow/30 bg-accent-yellow/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent-yellow"
               >
-                {Icon && <Icon className="h-3 w-3" />}
-                {tag}
+                {/* Subtle shimmer sweep on prestige tags */}
+                {isPrestige && (
+                  <span className="pointer-events-none absolute inset-0 animate-shimmer" />
+                )}
+                {Icon && <Icon className="relative z-10 h-3 w-3" />}
+                <span className="relative z-10">{tag}</span>
               </span>
             );
           })}
-        </div>
+        </motion.div>
       )}
 
-      {/* Wine name — editorial style */}
-      <h2 className="font-serif text-[28px] font-bold leading-[1.05] tracking-tight text-white sm:text-3xl lg:text-4xl">
-        {lt(item.name, locale)}
-      </h2>
+      {/* Wine name + vintage display */}
+      <motion.div variants={itemVariants}>
+        <h2 className="font-serif text-[28px] font-bold leading-[1.05] tracking-tight text-white sm:text-3xl lg:text-4xl">
+          {displayName}
+        </h2>
+        {vintage && (
+          <div className="mt-3 flex items-baseline gap-3">
+            <span className="font-serif text-[44px] font-light leading-none tracking-tight text-accent-yellow lg:text-[52px]">
+              {vintage}
+            </span>
+            <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
+              {{
+                pt: 'Safra',
+                en: 'Vintage',
+                fr: 'Millésime',
+                ru: 'Урожай',
+                zh: '年份',
+              }[locale] ?? 'Vintage'}
+            </span>
+          </div>
+        )}
+      </motion.div>
 
-      {/* Region + country flag */}
-      <div className="mt-5 flex flex-wrap items-center gap-2.5">
+      {/* Region + flag */}
+      <motion.div variants={itemVariants} className="mt-5 flex flex-wrap items-center gap-2.5">
         {region && (
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 backdrop-blur-sm">
             <MapPin className="h-3.5 w-3.5 text-accent-yellow" />
             <span className="text-[12px] font-semibold uppercase tracking-wider text-white/90">
               {region}
@@ -220,72 +281,93 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
         )}
         {info?.country && (
           <span
-            className="text-[26px] leading-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]"
+            className="text-[26px] leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
             aria-hidden
           >
             {info.country}
           </span>
         )}
-      </div>
+      </motion.div>
 
-      {/* Grapes (if curated) */}
+      {/* Grapes */}
       {info?.grapes && (
-        <div className="mt-5 flex items-start gap-2 text-[12.5px] text-white/60">
+        <motion.div
+          variants={itemVariants}
+          className="mt-5 flex items-start gap-2 text-[12.5px] text-white/65"
+        >
           <Grape className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/40" />
           <span className="italic leading-relaxed">{info.grapes}</span>
-        </div>
+        </motion.div>
       )}
 
       {/* Editorial divider */}
-      <div className="my-8 flex items-center gap-3">
+      <motion.div variants={itemVariants} className="my-8 flex items-center gap-3">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
         <Wine className="h-4 w-4 text-white/35" />
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-      </div>
+      </motion.div>
 
       {/* History */}
-      <Section
-        icon={<BookOpen className="h-4 w-4 text-accent-yellow" />}
-        title={
-          {
-            pt: 'História',
-            en: 'History',
-            fr: 'Histoire',
-            ru: 'История',
-            zh: '故事',
-          }[locale] ?? 'História'
-        }
-      >
-        <p className="text-[14.5px] leading-[1.65] text-white/80">
-          {info?.history
-            ? lt(info.history as never, locale)
-            : genericHistory(region, locale)}
-        </p>
-      </Section>
+      <motion.div variants={itemVariants} className="mb-7">
+        <SectionHeader
+          icon={<BookOpen className="h-4 w-4 text-accent-yellow" />}
+          title={
+            {
+              pt: 'História',
+              en: 'History',
+              fr: 'Histoire',
+              ru: 'История',
+              zh: '故事',
+            }[locale] ?? 'História'
+          }
+        />
+        {/* Editorial quote-style block */}
+        <div className="relative pl-5">
+          <span
+            className="pointer-events-none absolute -left-1 -top-3 select-none font-serif text-[64px] leading-none text-accent-yellow/25"
+            aria-hidden
+          >
+            “
+          </span>
+          <p className="text-[14.5px] leading-[1.7] text-white/85">
+            {info?.history
+              ? lt(info.history as never, locale)
+              : genericHistory(region, locale)}
+          </p>
+        </div>
+      </motion.div>
 
       {/* Pairing */}
-      <Section
-        icon={<UtensilsCrossed className="h-4 w-4 text-accent-yellow" />}
-        title={
-          {
-            pt: 'Harmonização sugerida',
-            en: 'Suggested pairing',
-            fr: 'Accord suggéré',
-            ru: 'Рекомендуемое сочетание',
-            zh: '推荐搭配',
-          }[locale] ?? 'Harmonização sugerida'
-        }
-      >
-        <p className="text-[14.5px] leading-[1.65] text-white/80">
+      <motion.div variants={itemVariants} className="mb-7">
+        <SectionHeader
+          icon={<UtensilsCrossed className="h-4 w-4 text-accent-yellow" />}
+          title={
+            {
+              pt: 'Harmonização sugerida',
+              en: 'Suggested pairing',
+              fr: 'Accord suggéré',
+              ru: 'Рекомендуемое сочетание',
+              zh: '推荐搭配',
+            }[locale] ?? 'Harmonização sugerida'
+          }
+        />
+        <p className="text-[14.5px] leading-[1.7] text-white/85">
           {info?.pairing
             ? lt(info.pairing as never, locale)
             : genericPairing(item, locale)}
         </p>
-      </Section>
+      </motion.div>
 
       {/* Sommelier note */}
-      <div className="mt-9 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3.5 text-center">
-        <p className="text-[11px] italic leading-relaxed text-white/55">
+      <motion.div
+        variants={itemVariants}
+        className={`mt-9 rounded-xl border ${
+          isHighlight
+            ? 'border-accent-yellow/20 bg-accent-yellow/[0.04]'
+            : 'border-white/[0.06] bg-white/[0.02]'
+        } px-4 py-4 text-center`}
+      >
+        <p className="text-[11.5px] italic leading-relaxed text-white/60">
           {{
             pt: 'Consulte o nosso sommelier para harmonizações personalizadas e disponibilidade.',
             en: 'Ask our sommelier for personalized pairings and availability.',
@@ -294,35 +376,34 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
             zh: '请咨询我们的侍酒师了解个性化搭配。',
           }[locale] ?? 'Consulte o nosso sommelier.'}
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-/* ── Section helper ─────────────────────────────────────────────────────── */
-function Section({
-  icon,
-  title,
-  children,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-}) {
+/* ── Section header ─────────────────────────────────────────────────────── */
+function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div className="mb-7">
-      <div className="mb-2.5 flex items-center gap-2">
-        {icon}
-        <h3 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">
-          {title}
-        </h3>
-      </div>
-      {children}
+    <div className="mb-3 flex items-center gap-2">
+      {icon}
+      <h3 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/65">
+        {title}
+      </h3>
     </div>
   );
 }
 
-/* ── Generic fallbacks when wine isn't curated in wine-info.ts ──────────── */
+/* ── Helpers ───────────────────────────────────────────────────────────── */
+
+/** Pulls a 4-digit year out of the wine name for big-display vintage. */
+function parseVintage(name: string): { displayName: string; vintage: string | null } {
+  const match = name.match(/\b(19|20)\d{2}\b/);
+  if (!match) return { displayName: name, vintage: null };
+  // Remove the year + any surrounding spaces
+  const displayName = name.replace(match[0], '').replace(/\s+/g, ' ').trim();
+  return { displayName, vintage: match[0] };
+}
+
 function genericHistory(region: string, locale: Locale): string {
   if (locale === 'pt') {
     return region
@@ -403,7 +484,8 @@ function Lightbox({
           onClose();
         }}
         aria-label="Close zoom"
-        className="absolute right-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white shadow-lg shadow-black/50 ring-1 ring-white/10 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:bg-black active:scale-90"
+        style={{ top: 'max(env(safe-area-inset-top, 0px) + 12px, 60px)' }}
+        className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white shadow-lg shadow-black/50 ring-1 ring-white/10 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:bg-black active:scale-90 lg:!top-5"
       >
         <X className="h-5 w-5" strokeWidth={2.5} />
       </button>
