@@ -89,6 +89,11 @@ const itemImageMap: Record<string, string> = {
   'wine-red-grande-reserva-alentejo-2018': '/menu/wine-grande-reserva-alentejo-2018.png',
   'wine-red-monte-xisto-2020':        '/menu/wine-monte-xisto-2020.png',
   'wine-red-monte-meao-vinha-novos-2022': '/menu/wine-monte-meao-vinha-novos-2022.png',
+  'wine-red-pera-manca-2018':         '/menu/wine-pera-manca.png',
+  'wine-red-castas-portuguesas-laureano': '/menu/wine-castas-portuguesas-laureano.png',
+  'wine-red-quinta-alcube-2016':      '/menu/wine-quinta-alcube-2016.png',
+  'wine-red-infinitae-premium':       '/menu/wine-infinitae-premium.png',
+  'wine-red-pacheca-douro-2019':      '/menu/wine-pacheca-douro-2019.png',
 
   // Vinhos Tintos do Mundo
   'wine-red-chapoutier-cotes-rhone-2022': '/menu/wine-chapoutier.png',
