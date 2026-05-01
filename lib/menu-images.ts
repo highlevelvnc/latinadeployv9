@@ -75,7 +75,7 @@ const itemImageMap: Record<string, string> = {
   'wine-red-apocalipse-romanos':      '/menu/wine-apocalipse-romanos.png',
   'wine-red-humanitas-syrah':         '/menu/wine-humanitas-syrah.png',
   'wine-red-tete-a-tete':             '/menu/wine-tete-a-tete.png',
-  'wine-red-marques-borba-2021':      '/menu/wine-marques-borba.png',
+  // (wine-red-marques-borba-2021: foto atualizada para 2024 abaixo)
   'wine-red-vale-meao-2022':          '/menu/wine-vale-meao.png',
   'wine-red-chryseia-ps-2022':        '/menu/wine-chryseia.png',
   'wine-red-crasto-2022':             '/menu/wine-crasto.png',
@@ -94,6 +94,23 @@ const itemImageMap: Record<string, string> = {
   'wine-red-quinta-alcube-2016':      '/menu/wine-quinta-alcube-2016.png',
   'wine-red-infinitae-premium':       '/menu/wine-infinitae-premium.png',
   'wine-red-pacheca-douro-2019':      '/menu/wine-pacheca-douro-2019.png',
+  'wine-red-marques-borba-2021':      '/menu/wine-marques-borba-2024.png',
+  'wine-red-dona-maria-2020':         '/menu/wine-dona-maria.png',
+  'wine-red-mouchao-2016':            '/menu/wine-mouchao.png',
+  'wine-red-vadio-baga-2021':         '/menu/wine-vadio-2021.png',
+  'wine-red-vadio-2015':              '/menu/wine-vadio-2015.png',
+  'wine-red-cabeco-toiro-reserva-2022': '/menu/wine-cabeco-toiro-reserva-2022.png',
+  // Vinhos Tintos do Mundo (mais)
+  'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.png',
+  'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.png',
+  'wine-red-valbuena-vega-sicilia-2019': '/menu/wine-valbuena-vega-sicilia.png',
+  'wine-red-chateau-pavie-2010':      '/menu/wine-chateau-pavie-2010.png',
+  'wine-red-chateau-margaux-2012':    '/menu/wine-chateau-margaux-2012.png',
+  'wine-red-sassicaia-2019':          '/menu/wine-sassicaia-2019.png',
+  'wine-red-tignanello-toscana-2020': '/menu/wine-tignanello-2022.png',
+  'wine-red-kressmann-monopole-2019': '/menu/wine-kressmann-monopole-2019.png',
+  'wine-red-pian-delle-vigne-2020':   '/menu/wine-pian-delle-vigne-2020.png',
+  'wine-red-contugo-bolgheri-2022':   '/menu/wine-contugo-bolgheri-2022.png',
 
   // Vinhos Tintos do Mundo
   'wine-red-chapoutier-cotes-rhone-2022': '/menu/wine-chapoutier.png',
