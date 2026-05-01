@@ -47,13 +47,19 @@ export default function FeaturedSection({ onSelectItem }: Props) {
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-dark to-transparent" />
 
         <div className="flex w-max gap-3 px-4 animate-marquee" aria-label={t('featured')}>
-          {track.map((item, i) => (
+          {track.map((item, i) => {
+            const isDuplicate = i >= featured.length;
+            return (
             <button
               key={`${item.id}-${i}`}
               type="button"
               onClick={() => onSelectItem(item)}
-              aria-hidden={i >= featured.length}
-              className="group relative flex w-[200px] shrink-0 cursor-pointer flex-col rounded-2xl border border-white/[0.08] bg-surface p-3 text-left transition-all duration-200 hover:border-red/25 hover:bg-surface-elevated active:scale-[0.98]"
+              // Duplicates exist only for the seamless loop animation —
+              // they must not appear in tab order or screen reader output.
+              aria-hidden={isDuplicate}
+              tabIndex={isDuplicate ? -1 : 0}
+              aria-label={lt(item.name, locale)}
+              className="group relative flex w-[200px] shrink-0 cursor-pointer flex-col rounded-2xl border border-white/[0.08] bg-surface p-3 text-left transition-all duration-200 hover:border-red/25 hover:bg-surface-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-dark active:scale-[0.98]"
             >
               {/* Image */}
               <div className="relative mb-3 h-28 w-full overflow-hidden rounded-xl bg-dark-lighter">
@@ -84,7 +90,8 @@ export default function FeaturedSection({ onSelectItem }: Props) {
                 {lt(item.name, locale)}
               </h3>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

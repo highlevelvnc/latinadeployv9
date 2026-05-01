@@ -125,18 +125,44 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
     );
   }
 
+  // Count label for the filtered view — gives the user spatial context
+  // ("estou olhando 14 pratos em Carnes Maturadas") without taking visual
+  // weight away from the cards themselves.
+  const showCountBadge = !!(activeCategory || searchQuery.trim()) && !forceCategoryId;
+  const countLabel = (n: number): string => {
+    const map: Record<string, [string, string]> = {
+      pt: ['1 prato', `${n} pratos`],
+      en: ['1 dish', `${n} dishes`],
+      fr: ['1 plat', `${n} plats`],
+      ru: ['1 блюдо', `${n} блюд`],
+      zh: ['1 道菜', `${n} 道菜`],
+    };
+    const [singular, plural] = map[locale] ?? map.pt;
+    return n === 1 ? singular : plural;
+  };
+
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {filtered.map((item, i) => (
-        <MenuItem
-          key={item.id}
-          item={item}
-          onSelect={onSelectItem}
-          // Tighter stagger (20ms × 12 items = 240ms total) — gives a
-          // crisp wave without dragging on long lists.
-          style={{ animationDelay: `${Math.min(i * 20, 240)}ms` }}
-        />
-      ))}
-    </div>
+    <>
+      {showCountBadge && (
+        <div
+          className="mb-3 flex items-center justify-between text-[11px] font-medium uppercase tracking-wider text-white/45 animate-fade-in-up"
+          aria-live="polite"
+        >
+          <span>{countLabel(filtered.length)}</span>
+        </div>
+      )}
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {filtered.map((item, i) => (
+          <MenuItem
+            key={item.id}
+            item={item}
+            onSelect={onSelectItem}
+            // Tighter stagger (20ms × 12 items = 240ms total) — gives a
+            // crisp wave without dragging on long lists.
+            style={{ animationDelay: `${Math.min(i * 20, 240)}ms` }}
+          />
+        ))}
+      </div>
+    </>
   );
 }

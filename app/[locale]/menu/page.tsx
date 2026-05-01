@@ -44,20 +44,44 @@ function MenuPageInner() {
   // Show curated sections only when viewing "All" with no search/filter active
   const showCuratedSections = !activeCategory && !searchQuery.trim();
 
+  // Skip-link target ID — keyboard users can press Tab once to jump
+  // directly to the menu content, bypassing the header/nav.
+  const mainId = 'menu-main';
+
+  // Localized "Skip to menu" copy (no need for full i18n key — single string).
+  const skipLabel = {
+    pt: 'Saltar para o menu',
+    en: 'Skip to menu',
+    fr: 'Aller au menu',
+    ru: 'Перейти к меню',
+    zh: '跳至菜单',
+  }[locale] ?? 'Skip to menu';
+
   return (
     <>
+      {/* Skip link — invisible until focused via Tab. Crucial for keyboard
+          and screen reader users to bypass the sticky header + category nav. */}
+      <a
+        href={`#${mainId}`}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-red focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg focus:shadow-red/40 focus:ring-2 focus:ring-white"
+      >
+        {skipLabel}
+      </a>
+
       {/* Mini header — integrates with the site */}
       <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-dark/95 backdrop-blur-xl">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+            aria-label="Latina Grill — voltar para a página inicial"
+            className="flex items-center gap-2 rounded-lg text-white/60 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
           >
             <ArrowLeft className="h-4 w-4" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.webp"
-              alt="Latina Grill"
+              alt=""
+              aria-hidden="true"
               className="h-7 w-7 rounded-full object-contain"
             />
             <span className="hidden font-serif text-sm font-bold text-white sm:block">
@@ -74,7 +98,7 @@ function MenuPageInner() {
 
       <CategoryNav />
 
-      <div className="container mx-auto px-4 py-5">
+      <main id={mainId} className="container mx-auto px-4 py-5">
         <div className="mb-4">
           <SearchBar />
         </div>
@@ -106,7 +130,7 @@ function MenuPageInner() {
         ) : (
           <MenuGrid onSelectItem={setSelectedItem} />
         )}
-      </div>
+      </main>
 
       <MenuItemDetail item={selectedItem} onClose={() => setSelectedItem(null)} />
       <ScrollToTop />

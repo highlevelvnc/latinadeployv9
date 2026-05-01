@@ -3,18 +3,30 @@
 import { useEffect, useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import { X, Clock, Flame, Leaf, Star, Sparkles, Award, Crown, Beef, Droplets, Carrot } from 'lucide-react';
 import MenuImage from '@/components/menu/MenuImage';
-import WineDetail from '@/components/menu/WineDetail';
 import { t as lt } from '@/lib/localized';
 import { menuItems } from '@/data/menu';
 import { getSaucesForItem, getSidesForItem, meatCategories, mainCourseCategories } from '@/data/recommendations';
 import type { MenuItem, DietaryTag } from '@/types/menu';
 import type { Locale } from '@/i18n';
 
-// (dynamic import was introducing a regression where wines opened from the
-// second one onward didn't render their body content — reverted to static
-// import. The ~10KB bundle savings weren't worth the broken UX.)
+/**
+ * WineDetail is 683 lines and only used when the user opens a wine.
+ * Lazy-loading saves ~12KB from the initial JS bundle.
+ *
+ * IMPORTANT: ssr:false is intentional — WineDetail uses framer-motion
+ * heavily and we hit hydration mismatch issues otherwise. Loading state
+ * is a no-op (the parent backdrop already provides visual feedback).
+ *
+ * The previous regression where "from the 2nd wine onward, body didn't
+ * render" was caused by a constant key on the outer motion.div, NOT by
+ * dynamic import. That bug is fixed in WineDetail itself (key=item.id).
+ */
+const WineDetail = dynamic(() => import('@/components/menu/WineDetail'), {
+  ssr: false,
+});
 
 /**
  * Wines and wine-related categories use a dedicated immersive modal.

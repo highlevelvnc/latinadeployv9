@@ -9,8 +9,7 @@ const itemImageMap: Record<string, string> = {
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
-  // (chuleton-rubia-gallega-gold: foto removida — a versão Gold ainda
-  //  não tem foto real; a anterior era do Rubia Gallega normal)
+  'chuleton-rubia-gallega-gold':      '/menu/chuleton-rubia-gallega-gold.webp',
   'chuleton-wagyu':                   '/menu/chuleton-wagyu.webp',
   'tomahawk-wagyu-australia':         '/menu/tomahawk-wagyu-australia.webp',
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
@@ -18,7 +17,7 @@ const itemImageMap: Record<string, string> = {
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.jpeg',
 
   // Wagyu
-  // (wagyu-trio: foto removida — aguardando foto real)
+  'wagyu-trio':                       '/menu/wagyu-trio.webp',
   'wagyu-rib-eye-japan-250g':         '/menu/wagyu-rib-eye-japan-250g.webp',
 
   // Marisco
@@ -65,14 +64,11 @@ const itemImageMap: Record<string, string> = {
 
   // Golden Selection
   'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.webp',
-  // O que estava mapeado como "japanese wagyu 300g.webp" era na verdade
-  // a foto do USA Wagyu Rib Eye 500g — corrigido. Da versão japonesa
-  // ainda não há foto real.
   'golden-rib-eye-usa-500g':          '/menu/golden-usa-wagyu-rib-eye-500g.webp',
-  // (golden-rib-eye-500g: foto removida, aguardando melhor)
-  // (golden-japanese-wagyu-300g: sem foto real ainda)
-  // (golden-t-bone-800g: foto removida — a anterior era de rib eye,
-  //  não T-bone; aguardando foto real)
+  'golden-rib-eye-500g':              '/menu/golden-rib-eye-500g.webp',
+  'golden-japanese-wagyu-300g':       '/menu/golden-japanese-wagyu-300g.webp',
+  'golden-t-bone-800g':               '/menu/golden-t-bone-800g.webp',
+  'golden-iberian-chuleton-wagyu':    '/menu/golden-iberian-chuleton-wagyu.webp',
   'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.webp',
 
   // Sugestão do Chef

@@ -65,8 +65,18 @@ export default function SearchBar() {
         onChange={(e) => setSearchQuery(e.target.value)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        // Esc on focused input clears the query (standard UX pattern).
+        // Without this users had to manually delete or click the X.
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' && searchQuery) {
+            setSearchQuery('');
+            e.currentTarget.blur();
+          }
+        }}
         placeholder={t('search')}
         aria-label={t('search')}
+        autoComplete="off"
+        spellCheck={false}
         className="w-full bg-transparent py-3 pl-11 pr-24 text-sm text-white outline-none placeholder:text-white/25"
       />
 

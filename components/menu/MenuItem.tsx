@@ -65,11 +65,21 @@ export default function MenuItem({ item, onSelect, style }: Props) {
   const isWine = item.categoryId.startsWith('wines-');
   const wineFlag = isWine ? getWineCountryFlag(item) : null;
 
+  // Accessible label for screen readers — name + key context.
+  // Without this, VoiceOver/TalkBack only announce "button" → user has
+  // no idea what they're about to open.
+  const ariaParts: string[] = [lt(item.name, locale)];
+  if (isUnavailable) ariaParts.push(t('unavailable'));
+  if (premium) ariaParts.push('premium');
+  if (item.tags.includes('signature')) ariaParts.push('signature');
+  const ariaLabel = ariaParts.join(', ');
+
   return (
     <button
       type="button"
       onClick={() => onSelect(item)}
       aria-disabled={isUnavailable || undefined}
+      aria-label={ariaLabel}
       style={style}
       className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border text-left transition-all duration-300 ease-out
         animate-fade-in-up
