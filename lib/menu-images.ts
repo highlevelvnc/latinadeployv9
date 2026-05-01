@@ -5,13 +5,13 @@
 
 const itemImageMap: Record<string, string> = {
   // Kids
-  'kids-spaghetti-bolognese':         '/menu/kids-spaghetti-bolognese.png',
+  'kids-spaghetti-bolognese':         '/menu/kids-spaghetti-bolognese.webp',
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
   // (chuleton-rubia-gallega-gold: foto removida — a versão Gold ainda
   //  não tem foto real; a anterior era do Rubia Gallega normal)
-  'chuleton-wagyu':                   '/menu/chuleton-wagyu.png',
+  'chuleton-wagyu':                   '/menu/chuleton-wagyu.webp',
   // (tomahawk-wagyu-australia: foto removida — aguardando foto real)
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
   't-bone':                           '/menu/t-bone.webp',
@@ -19,14 +19,14 @@ const itemImageMap: Record<string, string> = {
 
   // Wagyu
   // (wagyu-trio: foto removida — aguardando foto real)
-  'wagyu-rib-eye-japan-250g':         '/menu/wagyu-rib-eye-japan-250g.png',
+  'wagyu-rib-eye-japan-250g':         '/menu/wagyu-rib-eye-japan-250g.webp',
 
   // Marisco
   'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
   'lobster':                          '/menu/lagosta.webp',
 
   // Seleção Premium
-  'picanha-250g':                     '/menu/picanha-250g-new.png',
+  'picanha-250g':                     '/menu/picanha-250g-new.webp',
   // (filet-mignon-200g: foto removida — aguardando foto real)
   'rib-eye-rubia-gallega-250g':       '/menu/rib-eye-rubia-gallega-250g.jpeg',
   // (sirloin-australia-250g: foto removida — aguardando foto real)
@@ -37,9 +37,9 @@ const itemImageMap: Record<string, string> = {
   'iberian-pork-plumas':              '/menu/iberian-pork-plumas.jpeg',
 
   // Entradas (Starters)
-  'cheese-gratin':                    '/menu/cheese-gratin.png',
+  'cheese-gratin':                    '/menu/cheese-gratin.webp',
   'foie-gras-chef':                   '/menu/foie-gras-chef.jpeg',
-  'pata-negra':                       '/menu/pata-negra.png',
+  'pata-negra':                       '/menu/pata-negra.webp',
   'tenderloin-tartare':               '/menu/tenderloin-tartare.jpeg',
 
   // Tábuas
@@ -48,10 +48,10 @@ const itemImageMap: Record<string, string> = {
   // Guarnições
   'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
   'grilled-vegetables':               '/menu/grilled-vegetables.webp',
-  'truffled-mashed-potato':           '/menu/truffled-mashed-potato.png',
+  'truffled-mashed-potato':           '/menu/truffled-mashed-potato.webp',
 
   // Golden Selection
-  'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.png',
+  'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.webp',
   // O que estava mapeado como "japanese wagyu 300g.webp" era na verdade
   // a foto do USA Wagyu Rib Eye 500g — corrigido. Da versão japonesa
   // ainda não há foto real.
@@ -60,17 +60,17 @@ const itemImageMap: Record<string, string> = {
   // (golden-japanese-wagyu-300g: sem foto real ainda)
   // (golden-t-bone-800g: foto removida — a anterior era de rib eye,
   //  não T-bone; aguardando foto real)
-  'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.png',
+  'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.webp',
 
   // Sugestão do Chef
   // (chef-kobe-a5-bife-150g: foto removida, aguardando melhor)
-  'chef-chuleton-wagyu-premium':      '/menu/chuleton-wagyu.png',
+  'chef-chuleton-wagyu-premium':      '/menu/chuleton-wagyu.webp',
 
   // Sobremesas
   'dessert-chocolate-fondant':        '/menu/dessert-chocolate-fondant.webp',
-  'dessert-latina-split':             '/menu/dessert-latina-split.png',
-  'dessert-forest-cheesecake':        '/menu/dessert-forest-cheesecake.png',
-  'dessert-waffle-icecream-nutella':  '/menu/dessert-waffle-icecream-nutella.png',
+  'dessert-latina-split':             '/menu/dessert-latina-split.webp',
+  'dessert-forest-cheesecake':        '/menu/dessert-forest-cheesecake.webp',
+  'dessert-waffle-icecream-nutella':  '/menu/dessert-waffle-icecream-nutella.webp',
 
   // Cocktails
   'cocktail-whisky-sour':             '/menu/whiskysour.jpeg',
