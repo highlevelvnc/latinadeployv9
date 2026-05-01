@@ -135,24 +135,22 @@ export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
             className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
           />
 
-          {/* Panel — split into non-scrolling header (image + close button) +
-              scrolling body (content). This keeps the X button always visible
-              on mobile, no matter how far the user scrolls. */}
-          <motion.div
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            role="dialog"
-            aria-modal="true"
-            aria-label={item ? lt(item.name, locale) : ''}
-            className="fixed inset-x-0 bottom-0 z-50 flex max-h-[92vh] flex-col rounded-t-3xl border-t border-white/10 bg-dark lg:inset-auto lg:left-1/2 lg:top-1/2 lg:max-h-[88vh] lg:w-full lg:max-w-lg lg:-translate-x-1/2 lg:-translate-y-1/2 lg:rounded-3xl lg:border"
-          >
-            {/* Drag handle indicator (mobile-only visual hint) */}
-            <div className="flex shrink-0 justify-center pt-2 pb-1 lg:hidden">
-              <div className="h-1 w-10 rounded-full bg-white/20" />
-            </div>
-
+          {/* Centering wrapper — flex container that centers the panel
+              vertically on all viewports. Antes o panel ficava colado em
+              bottom-0 (bottom sheet), o que deixava ele com muito espaço
+              vazio embaixo quando o conteúdo era curto (ex: acompanhamentos).
+              Agora fica centralizado mas mantém a animação slide-up. */}
+          <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={item ? lt(item.name, locale) : ''}
+              className="pointer-events-auto relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-dark shadow-2xl shadow-black/60 lg:max-h-[88vh] lg:max-w-lg"
+            >
             {/* Header: image (non-scrolling) */}
             <div className="relative shrink-0 h-44 overflow-hidden bg-dark-lighter sm:h-52 lg:h-56">
               <MenuImage
@@ -394,6 +392,7 @@ export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
               )}
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
