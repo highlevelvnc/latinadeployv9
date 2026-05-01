@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, MapPin, Wine, Award, Crown, Sparkles, Star,
-  Maximize2, Grape, BookOpen, UtensilsCrossed,
+  Maximize2, Grape, BookOpen, UtensilsCrossed, ChevronDown,
 } from 'lucide-react';
 import { t as lt } from '@/lib/localized';
 import { getMenuItemImage } from '@/lib/menu-images';
@@ -40,6 +40,8 @@ interface Props {
 export default function WineDetail({ item, onClose }: Props) {
   const locale = useLocale() as Locale;
   const [zoomed, setZoomed] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!item) return;
@@ -51,6 +53,22 @@ export default function WineDetail({ item, onClose }: Props) {
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
   }, [item, zoomed, onClose]);
+
+  // Reset scroll + show scroll hint each time a new wine opens.
+  // Without this, on iOS Safari the scroll position from the previous
+  // wine could persist and the user lands mid-body, missing the hero.
+  useEffect(() => {
+    if (!item) return;
+    setShowScrollHint(true);
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [item]);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    if (scrollRef.current.scrollTop > 24 && showScrollHint) {
+      setShowScrollHint(false);
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -114,10 +132,53 @@ export default function WineDetail({ item, onClose }: Props) {
               </button>
 
               {/* Scrollable body */}
-              <div className="flex-1 overflow-y-auto overscroll-contain">
+              <div
+                ref={scrollRef}
+                onScroll={handleScroll}
+                className="flex-1 overflow-y-auto overscroll-contain"
+              >
                 <WineHero item={item} onZoom={() => setZoomed(true)} locale={locale} />
                 <WineBody item={item} locale={locale} />
+                {/* Bottom safe-area padding so the home indicator doesn't
+                    eat into the sommelier note on iPhone. */}
+                <div style={{ height: 'env(safe-area-inset-bottom, 0px)' }} />
               </div>
+
+              {/* Scroll-for-more hint — pulses gently at the bottom of the
+                  modal when there's content below the fold. Disappears the
+                  moment the user starts scrolling. Crucial because the hero
+                  image is large and the history/pairing sit below it.
+                  This is the fix for "I only see name + região, where's the
+                  history?" — telling the user there's more to see. */}
+              <AnimatePresence>
+                {showScrollHint && (
+                  <motion.div
+                    key="scroll-hint"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: 0.7, duration: 0.4 }}
+                    className="pointer-events-none absolute inset-x-0 bottom-0 z-30 flex flex-col items-center pb-3"
+                    style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 14px)' }}
+                  >
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                    <motion.div
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+                      className="relative flex items-center gap-1.5 rounded-full border border-white/15 bg-black/60 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 backdrop-blur-md shadow-lg shadow-black/40"
+                    >
+                      <ChevronDown className="h-3 w-3" />
+                      {{
+                        pt: 'História',
+                        en: 'History',
+                        fr: 'Histoire',
+                        ru: 'Подробнее',
+                        zh: '故事',
+                      }[locale] ?? 'História'}
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
 
@@ -163,7 +224,12 @@ function WineHero({
         }}
       />
 
-      <div className="relative mx-auto flex h-[42vh] min-h-[280px] w-full items-end justify-center pb-2 lg:h-[48vh]">
+      {/* Hero height tuned so the "História" headline is visible above
+          the fold on a typical phone (iPhone 16 ~ 932 viewport): ~32vh
+          for the bottle leaves enough room for tags + name + região +
+          start of the história section. Reduced from 42vh after user
+          feedback that the body looked empty. */}
+      <div className="relative mx-auto flex h-[32vh] min-h-[220px] w-full items-end justify-center pb-1 lg:h-[40vh]">
         {src ? (
           <motion.div
             initial={{ y: 36, opacity: 0, scale: 0.94 }}
@@ -230,17 +296,19 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
   const fullName = lt(item.name, locale);
   const { displayName, vintage } = useMemo(() => parseVintage(fullName), [fullName]);
 
-  // Stagger config for the entire body
+  // Stagger config — kept tight so the entire body (history + pairing
+  // + sommelier) is on-screen well under 800ms. Longer delays were
+  // making users on iOS think the history "wasn't loading".
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.07, delayChildren: 0.18 },
+      transition: { staggerChildren: 0.04, delayChildren: 0.05 },
     },
   };
   const itemVariants = {
-    hidden: { opacity: 0, y: 14 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] } },
   };
 
   const isHighlight = item.tags.includes('gold') ||
@@ -285,18 +353,15 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
         {vintage && (
           <motion.div
             className="mt-3 flex items-baseline gap-3"
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.18, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* The vintage number: subtle scale-in with a hairline underline
-                for editorial weight. The underline draws AFTER the number
-                lands — feels like a stamp being pressed. */}
             <div className="relative">
               <motion.span
-                initial={{ opacity: 0, scale: 0.85, letterSpacing: '0.1em' }}
-                animate={{ opacity: 1, scale: 1, letterSpacing: '-0.02em' }}
-                transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.22, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="block font-serif text-[44px] font-light leading-none tracking-tight text-accent-yellow lg:text-[52px]"
                 style={{ textShadow: '0 4px 18px rgba(234,179,8,0.18)' }}
               >
@@ -306,7 +371,7 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
                 aria-hidden
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ delay: 1.0, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.45, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="block h-px origin-left bg-accent-yellow/40 mt-1.5"
               />
             </div>
@@ -337,9 +402,9 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
           <motion.span
             className="text-[26px] leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
             aria-hidden
-            initial={{ opacity: 0, scale: 0.5, rotate: -12 }}
+            initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: 0.85, type: 'spring', stiffness: 280, damping: 14 }}
+            transition={{ delay: 0.3, type: 'spring', stiffness: 260, damping: 14 }}
           >
             {info.country}
           </motion.span>
@@ -359,17 +424,17 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
 
       {/* Editorial divider — animated lines that draw from the center
           outward + a tiny rotating wine glyph as the focal point */}
-      <motion.div variants={itemVariants} className="my-8 flex items-center gap-3">
+      <motion.div variants={itemVariants} className="my-7 flex items-center gap-3">
         <motion.div
           className="h-px origin-right flex-1 bg-gradient-to-r from-transparent via-white/15 to-white/25"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 1.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.45, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         />
         <motion.div
-          initial={{ opacity: 0, scale: 0.6, rotate: -90 }}
+          initial={{ opacity: 0, scale: 0.7, rotate: -45 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ delay: 1.25, duration: 0.5, type: 'spring', stiffness: 220, damping: 14 }}
+          transition={{ delay: 0.5, type: 'spring', stiffness: 240, damping: 15 }}
         >
           <Wine className="h-4 w-4 text-accent-yellow/70" />
         </motion.div>
@@ -377,7 +442,7 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
           className="h-px origin-left flex-1 bg-gradient-to-l from-transparent via-white/15 to-white/25"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 1.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.45, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         />
       </motion.div>
 
@@ -402,9 +467,9 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
           <motion.span
             className="pointer-events-none absolute -left-1 -top-3 select-none font-serif text-[64px] leading-none text-accent-yellow/25"
             aria-hidden
-            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+            initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: 1.4, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.6, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             “
           </motion.span>
@@ -482,7 +547,7 @@ function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }
         aria-hidden
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ delay: 0.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.18, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="h-px flex-1 origin-left bg-gradient-to-r from-white/15 to-transparent"
       />
     </div>
