@@ -23,17 +23,6 @@ export const categoryGroups: CategoryGroup[] = [
     icon: 'Wine',
     sortOrder: 70,
   },
-  {
-    id: 'non-alcoholic-drinks',
-    name: {
-      pt: 'Bebidas Não Alcoólicas',
-      en: 'Non-Alcoholic Drinks',
-      fr: 'Boissons Sans Alcool',
-      zh: '无酒精饮品',
-    },
-    icon: 'CupSoda',
-    sortOrder: 80,
-  },
 ];
 
 export const categories: MenuCategory[] = [
@@ -61,8 +50,6 @@ export const categories: MenuCategory[] = [
   { id: 'wines-fortified', name: { pt: 'Vinhos Fortificados', en: 'Fortified Wines', fr: 'Vins Fortifiés', zh: '加强葡萄酒' }, icon: 'Wine', sortOrder: 96, parentGroup: 'alcoholic-drinks' },
   { id: 'cocktails', name: { pt: 'Cocktails', en: 'Cocktails', fr: 'Cocktails', zh: '鸡尾酒' }, icon: 'Martini', sortOrder: 98, parentGroup: 'alcoholic-drinks' },
   { id: 'sangrias', name: { pt: 'Sangrias', en: 'Sangrias', fr: 'Sangrias', zh: '桑格利亚' }, icon: 'Wine', sortOrder: 99, parentGroup: 'alcoholic-drinks' },
-  { id: 'mocktails', name: { pt: 'Mocktails', en: 'Mocktails', fr: 'Mocktails', zh: '无酒精鸡尾酒' }, icon: 'CupSoda', sortOrder: 96, parentGroup: 'non-alcoholic-drinks' },
-  { id: 'natural-juices', name: { pt: 'Sumos Naturais', en: 'Natural Juices', fr: 'Jus Naturels', zh: '鲜榨果汁' }, icon: 'Citrus', sortOrder: 97, parentGroup: 'non-alcoholic-drinks' },
 ];
 
 export const menuItems: MenuItem[] = [
@@ -1114,31 +1101,6 @@ export const menuItems: MenuItem[] = [
   { id: 'sangria-latina-2l', categoryId: 'sangrias', name: { pt: 'Sangria Latina (2 L)', en: 'Latina Sangria (2 L)', fr: 'Sangria Latina (2 L)', zh: 'Latina 桑格利亚（2 升）' }, description: { pt: 'Frutos Tropicais, Maracujá, Vodka, Rum, Espumante', en: 'Tropical Fruits, Passion Fruit, Vodka, Rum, Sparkling Wine', fr: 'Fruits Tropicaux, Fruit de la Passion, Vodka, Rhum, Mousseux', zh: '热带水果、百香果、伏特加、朗姆酒、起泡酒' }, price: 3800, image: '/menu/placeholder-drink.jpg', tags: ['signature'], available: true },
   { id: 'sangria-red-lips-bottle', categoryId: 'sangrias', name: { pt: 'Sangria Red Lips (Garrafa)', en: 'Red Lips Sangria (Bottle)', fr: 'Sangria Red Lips (Bouteille)', zh: 'Red Lips 桑格利亚（瓶装）' }, description: { pt: 'Frutos Vermelhos, Vodka, Gin, Espumante', en: 'Red Berries, Vodka, Gin, Sparkling Wine', fr: 'Fruits Rouges, Vodka, Gin, Mousseux', zh: '红色莓果、伏特加、金酒、起泡酒' }, price: 2200, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
   { id: 'sangria-red-lips-2l', categoryId: 'sangrias', name: { pt: 'Sangria Red Lips (2 L)', en: 'Red Lips Sangria (2 L)', fr: 'Sangria Red Lips (2 L)', zh: 'Red Lips 桑格利亚（2 升）' }, description: { pt: 'Frutos Vermelhos, Vodka, Gin, Espumante', en: 'Red Berries, Vodka, Gin, Sparkling Wine', fr: 'Fruits Rouges, Vodka, Gin, Mousseux', zh: '红色莓果、伏特加、金酒、起泡酒' }, price: 3400, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // MOCKTAILS (4 items — sem álcool)
-  // ═══════════════════════════════════════════════════════════════════════════
-  { id: 'mocktail-virgin-colada', categoryId: 'mocktails', name: { pt: 'Virgin Colada', en: 'Virgin Colada', fr: 'Virgin Colada', zh: '无酒精椰林飘香' }, description: { pt: 'Ananás, Leite de Côco', en: 'Pineapple, Coconut Milk', fr: 'Ananas, Lait de Coco', zh: '菠萝、椰奶' }, price: 980, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'mocktail-virgin-mojito', categoryId: 'mocktails', name: { pt: 'Virgin Mojito', en: 'Virgin Mojito', fr: 'Virgin Mojito', zh: '无酒精莫吉托' }, description: { pt: 'Maracujá, Sumo de Lima, Gasosa, Menta', en: 'Passion Fruit, Lime Juice, Soda, Mint', fr: 'Fruit de la Passion, Jus de Citron Vert, Soda, Menthe', zh: '百香果、青柠汁、苏打、薄荷' }, price: 990, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'mocktail-latina-splash', categoryId: 'mocktails', name: { pt: 'Latina Splash', en: 'Latina Splash', fr: 'Latina Splash', zh: 'Latina Splash' }, description: { pt: 'Xarope de Gengibre, Chá da Casa, Sumo de Lima. Sabores: Morango, Maracujá, Maçã Verde.', en: 'Ginger Syrup, Homemade Tea, Lime Juice. Flavours: Strawberry, Passion Fruit, Green Apple.', fr: 'Sirop de Gingembre, Thé Maison, Jus de Citron Vert. Saveurs : Fraise, Fruit de la Passion, Pomme Verte.', zh: '姜汁糖浆、自制茶、青柠汁。口味：草莓、百香果、青苹果。' }, price: 1100, image: '/menu/placeholder-drink.jpg', tags: ['signature'], available: true },
-  { id: 'mocktail-homemade-lemonade', categoryId: 'mocktails', name: { pt: 'Limonada da Casa', en: 'Homemade Lemonade', fr: 'Limonade Maison', zh: '自制柠檬水' }, description: { pt: '', en: '', fr: '', zh: '' }, price: 1000, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SUMOS NATURAIS (5 items — conforme a época)
-  // ═══════════════════════════════════════════════════════════════════════════
-  { id: 'juice-orange', categoryId: 'natural-juices', name: { pt: 'Sumo de Laranja', en: 'Orange Juice', fr: "Jus d'Orange", zh: '鲜榨橙汁' }, description: { pt: 'Conforme a época', en: 'In season', fr: 'De saison', zh: '当季' }, price: 950, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'juice-watermelon', categoryId: 'natural-juices', name: { pt: 'Sumo de Melancia', en: 'Watermelon Juice', fr: "Jus de Pastèque", zh: '鲜榨西瓜汁' }, description: { pt: 'Conforme a época', en: 'In season', fr: 'De saison', zh: '当季' }, price: 950, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'juice-pineapple-mint', categoryId: 'natural-juices', name: { pt: 'Sumo de Ananás & Hortelã', en: 'Pineapple & Mint Juice', fr: 'Jus Ananas & Menthe', zh: '菠萝薄荷汁' }, description: { pt: 'Conforme a época', en: 'In season', fr: 'De saison', zh: '当季' }, price: 950, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'juice-passion-fruit', categoryId: 'natural-juices', name: { pt: 'Sumo de Maracujá', en: 'Passion Fruit Juice', fr: 'Jus de Fruit de la Passion', zh: '百香果汁' }, description: { pt: 'Conforme a época', en: 'In season', fr: 'De saison', zh: '当季' }, price: 950, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-  { id: 'juice-strawberry', categoryId: 'natural-juices', name: { pt: 'Sumo de Morango', en: 'Strawberry Juice', fr: 'Jus de Fraise', zh: '草莓汁' }, description: { pt: 'Conforme a época', en: 'In season', fr: 'De saison', zh: '当季' }, price: 950, image: '/menu/placeholder-drink.jpg', tags: [], available: true },
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ÁGUAS (5 items)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-
-
-
 
 
 
