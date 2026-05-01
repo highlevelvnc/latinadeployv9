@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Award } from 'lucide-react';
 import { menuItems } from '@/data/menu';
@@ -16,6 +17,22 @@ interface Props {
 export default function FeaturedSection({ onSelectItem }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(true);
+
+  // Pause the marquee animation when the section scrolls out of view —
+  // saves CPU/battery on devices where the user is deep in the menu and
+  // the carousel keeps animating uselessly above. Uses IntersectionObserver
+  // (passive, no scroll handler).
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: '50px' } // small buffer — start animating just before visible
+    );
+    obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
 
   const featured = featuredItemIds
     .map((id) => menuItems.find((m) => m.id === id))
@@ -29,7 +46,7 @@ export default function FeaturedSection({ onSelectItem }: Props) {
   const track = [...featured, ...featured];
 
   return (
-    <section className="mb-8">
+    <section ref={sectionRef} className="mb-8">
       <div className="mb-4 flex items-center gap-2">
         <Award className="h-5 w-5 text-accent-yellow" />
         <div>
@@ -46,7 +63,12 @@ export default function FeaturedSection({ onSelectItem }: Props) {
         {/* Right fade gradient */}
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-dark to-transparent" />
 
-        <div className="flex w-max gap-3 px-4 animate-marquee" aria-label={t('featured')}>
+        <div
+          className="flex w-max gap-3 px-4 animate-marquee"
+          // Pause animation when offscreen — saves CPU on devices.
+          style={{ animationPlayState: inView ? 'running' : 'paused' }}
+          aria-label={t('featured')}
+        >
           {track.map((item, i) => {
             const isDuplicate = i >= featured.length;
             return (

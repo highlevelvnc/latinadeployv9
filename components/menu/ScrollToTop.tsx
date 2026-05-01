@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
+import { useScrolledPast } from '@/lib/useScrollY';
 
 /**
  * Floating "back to top" button that fades in once the user has scrolled
@@ -14,14 +14,7 @@ import { ChevronUp } from 'lucide-react';
  * appear/disappear feels intentional — not a jarring snap.
  */
 export default function ScrollToTop() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setVisible(window.scrollY > 600);
-    handler();
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
+  const visible = useScrolledPast(600);
 
   return (
     <AnimatePresence>

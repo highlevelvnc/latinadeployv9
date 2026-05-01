@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   X, MapPin, Wine, Award, Crown, Sparkles, Star,
   Maximize2, Grape, BookOpen, UtensilsCrossed, ChevronDown,
+  Thermometer, Hourglass, Clock,
 } from 'lucide-react';
 import { t as lt } from '@/lib/localized';
 import { getMenuItemImage } from '@/lib/menu-images';
@@ -289,6 +290,57 @@ function WineHero({
   );
 }
 
+/* ── Service hints (temp / decant / aging) ─────────────────────────────── */
+function ServiceHints({ item, locale }: { item: MenuItem; locale: Locale }) {
+  const svc = getServiceInfo(item);
+  const labels = {
+    serve: { pt: 'Servir', en: 'Serve', fr: 'Servir', ru: 'Подавать', zh: '侍酒' }[locale] ?? 'Servir',
+    decant: { pt: 'Decantar', en: 'Decant', fr: 'Carafer', ru: 'Декант.', zh: '醒酒' }[locale] ?? 'Decantar',
+    decantUnit: { pt: 'min', en: 'min', fr: 'min', ru: 'мин', zh: '分钟' }[locale] ?? 'min',
+    aging: { pt: 'Guarda', en: 'Aging', fr: 'Garde', ru: 'Хранение', zh: '陈年' }[locale] ?? 'Guarda',
+    agingUnit: { pt: 'anos', en: 'years', fr: 'ans', ru: 'лет', zh: '年' }[locale] ?? 'anos',
+  };
+  const items: { icon: typeof Thermometer; label: string; value: string }[] = [
+    { icon: Thermometer, label: labels.serve, value: svc.temp },
+  ];
+  if (svc.decant) {
+    items.push({ icon: Hourglass, label: labels.decant, value: `${svc.decant} ${labels.decantUnit}` });
+  }
+  if (svc.aging) {
+    items.push({ icon: Clock, label: labels.aging, value: `${svc.aging} ${labels.agingUnit}` });
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="mt-6 grid gap-2"
+      style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
+    >
+      {items.map(({ icon: Icon, label, value }, idx) => (
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 + idx * 0.06, duration: 0.3 }}
+          className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2 transition-colors duration-300 hover:border-accent-yellow/20 hover:bg-accent-yellow/[0.04]"
+        >
+          <Icon className="h-3.5 w-3.5 shrink-0 text-accent-yellow/70" />
+          <div className="min-w-0">
+            <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/40">
+              {label}
+            </div>
+            <div className="truncate text-[12px] font-semibold text-white/85">
+              {value}
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
+
 /* ── Editorial body — name, region, history, pairing ─────────────────── */
 function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
   const info = getWineInfo(item.id);
@@ -422,6 +474,11 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
         </motion.div>
       )}
 
+      {/* Service hints — sommelier-style triplet of micro-cards
+          (temperatura · decantação · guarda). Derived from category
+          and tags; no need for per-wine data. */}
+      <ServiceHints item={item} locale={locale} />
+
       {/* Editorial divider — animated lines that draw from the center
           outward + a tiny rotating wine glyph as the focal point */}
       <motion.div variants={itemVariants} className="my-7 flex items-center gap-3">
@@ -446,7 +503,9 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
         />
       </motion.div>
 
-      {/* History */}
+      {/* History — drop cap (large editorial first letter) gives an
+          unmistakably premium feel. Quote mark sits behind for layered
+          editorial flair. */}
       <motion.div variants={itemVariants} className="mb-7">
         <SectionHeader
           icon={<BookOpen className="h-4 w-4 text-accent-yellow" />}
@@ -460,28 +519,18 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
             }[locale] ?? 'História'
           }
         />
-        {/* Editorial quote-style block. The opening quote scales/rotates
-            in slightly after the paragraph — feels like the punctuation
-            is being drawn over the text. */}
-        <div className="relative pl-5">
-          <motion.span
-            className="pointer-events-none absolute -left-1 -top-3 select-none font-serif text-[64px] leading-none text-accent-yellow/25"
-            aria-hidden
-            initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ delay: 0.6, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
-            “
-          </motion.span>
-          <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">
-            {info?.history
+        <HistoryParagraph
+          text={
+            info?.history
               ? lt(info.history as never, locale)
-              : genericHistory(region, locale)}
-          </p>
-        </div>
+              : genericHistory(region, locale)
+          }
+        />
       </motion.div>
 
-      {/* Pairing */}
+      {/* Pairing — when the pairing text starts with a comma-separated
+          list of dishes, render those as chips for visual rhythm. The
+          explanatory tail (after the first period) stays as prose. */}
       <motion.div variants={itemVariants} className="mb-7">
         <SectionHeader
           icon={<UtensilsCrossed className="h-4 w-4 text-accent-yellow" />}
@@ -495,11 +544,13 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
             }[locale] ?? 'Harmonização sugerida'
           }
         />
-        <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">
-          {info?.pairing
-            ? lt(info.pairing as never, locale)
-            : genericPairing(item, locale)}
-        </p>
+        <PairingBlock
+          text={
+            info?.pairing
+              ? lt(info.pairing as never, locale)
+              : genericPairing(item, locale)
+          }
+        />
       </motion.div>
 
       {/* Sommelier note — gold gradient sweep on hover for prestige wines.
@@ -533,6 +584,81 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
   );
 }
 
+/* ── History paragraph with drop cap ──────────────────────────────────── */
+function HistoryParagraph({ text }: { text: string }) {
+  const firstChar = text.charAt(0);
+  const rest = text.slice(1);
+  return (
+    <div className="relative">
+      {/* Decorative oversized quotation mark — sits behind the text */}
+      <motion.span
+        className="pointer-events-none absolute -left-2 -top-6 select-none font-serif text-[80px] leading-none text-accent-yellow/15"
+        aria-hidden
+        initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        “
+      </motion.span>
+      <p className="relative text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">
+        <motion.span
+          aria-hidden
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="float-left mr-2 mt-1 block font-serif text-[52px] font-bold leading-[0.8] text-accent-yellow"
+          style={{
+            textShadow: '0 4px 16px rgba(234,179,8,0.25)',
+          }}
+        >
+          {firstChar}
+        </motion.span>
+        {/* SR users get the full unmodified text — drop cap is purely visual */}
+        <span className="sr-only">{firstChar}</span>
+        {rest}
+      </p>
+    </div>
+  );
+}
+
+/* ── Pairing block: chips + tail prose ────────────────────────────────── */
+function PairingBlock({ text }: { text: string }) {
+  const { dishes, rest } = splitPairingDishes(text);
+  // Heuristic: if we couldn't extract clean dish chips (ie. first segment
+  // is a long sentence), just render plain prose instead.
+  if (dishes.length < 2) {
+    return <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">{text}</p>;
+  }
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2">
+        {dishes.map((dish, idx) => (
+          <motion.span
+            key={`${dish}-${idx}`}
+            initial={{ opacity: 0, y: 6, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.2 + idx * 0.07, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-1.5 rounded-full border border-accent-yellow/20 bg-accent-yellow/[0.06] px-3 py-1.5 text-[12px] font-medium text-white/85 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-yellow/40 hover:bg-accent-yellow/10"
+          >
+            <UtensilsCrossed className="h-3 w-3 text-accent-yellow/70" />
+            {dish}
+          </motion.span>
+        ))}
+      </div>
+      {rest && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 + dishes.length * 0.07, duration: 0.4 }}
+          className="mt-3 text-[13px] italic leading-relaxed text-white/55 [text-wrap:pretty]"
+        >
+          {rest}
+        </motion.p>
+      )}
+    </div>
+  );
+}
+
 /* ── Section header ─────────────────────────────────────────────────────── */
 function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
@@ -555,6 +681,48 @@ function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }
 }
 
 /* ── Helpers ───────────────────────────────────────────────────────────── */
+
+/**
+ * Service hints derived from category + tags. No need to author per-wine
+ * data — sommeliers agree on broad ranges by style. Premium reds get a
+ * decant suggestion; sparkling wines get a colder temp; etc.
+ */
+type ServiceInfo = { temp: string; decant: number | null; aging: string | null };
+
+function getServiceInfo(item: MenuItem): ServiceInfo {
+  const isWhite = item.categoryId === 'wines-white';
+  const isSparkling = item.categoryId === 'wines-sparkling';
+  const isRose = item.categoryId === 'wines-rose';
+  const isFortified = item.categoryId === 'wines-fortified';
+  const isPremium = item.tags.includes('premium') || item.tags.includes('signature');
+  const isGold = item.tags.includes('gold');
+
+  if (isSparkling) return { temp: '6–8°C', decant: null, aging: null };
+  if (isWhite) return { temp: '10–12°C', decant: null, aging: null };
+  if (isRose) return { temp: '8–10°C', decant: null, aging: null };
+  if (isFortified) return { temp: '14–16°C', decant: null, aging: null };
+  // Reds
+  if (isGold) return { temp: '16–18°C', decant: 60, aging: '15+' };
+  if (isPremium) return { temp: '16–18°C', decant: 30, aging: '8–12' };
+  return { temp: '16–18°C', decant: null, aging: null };
+}
+
+/** Splits a pairing paragraph into clickable-style chips when possible. */
+function splitPairingDishes(text: string): { dishes: string[]; rest: string } {
+  // Pattern: "Dish A, Dish B, Dish C. Optional explanation." → split before period.
+  const periodIdx = text.indexOf('.');
+  if (periodIdx === -1) {
+    return { dishes: text.split(',').map((s) => s.trim()).filter(Boolean), rest: '' };
+  }
+  const dishesPart = text.slice(0, periodIdx);
+  const rest = text.slice(periodIdx + 1).trim();
+  const dishes = dishesPart.split(',').map((s) => s.trim()).filter(Boolean);
+  // Sanity: if "dishes" looks like prose (very long single chunk), bail.
+  if (dishes.length === 1 && dishes[0].length > 80) {
+    return { dishes: [], rest: text };
+  }
+  return { dishes, rest };
+}
 
 /** Pulls a 4-digit year out of the wine name for big-display vintage. */
 function parseVintage(name: string): { displayName: string; vintage: string | null } {

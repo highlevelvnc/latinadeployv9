@@ -157,6 +157,9 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
             key={item.id}
             item={item}
             onSelect={onSelectItem}
+            // First 6 cards (2 rows mobile, 1 row desktop) load eagerly
+            // for LCP. Rest lazy via Next/Image's default behavior.
+            priority={i < 6}
             // Tighter stagger (20ms × 12 items = 240ms total) — gives a
             // crisp wave without dragging on long lists.
             style={{ animationDelay: `${Math.min(i * 20, 240)}ms` }}

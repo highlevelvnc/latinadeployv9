@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { useAppStore } from '@/stores/useAppStore';
 import { categories, categoryGroups } from '@/data/menu';
 import { t as lt } from '@/lib/localized';
+import { useScrolledPast } from '@/lib/useScrollY';
 import type { Locale } from '@/i18n';
 import type { LocalizedString } from '@/types/menu';
 import { cn } from '@/lib/utils';
@@ -20,7 +21,8 @@ interface NavItem {
 export default function CategoryNav() {
   const locale = useLocale() as Locale;
   const { activeCategory, setActiveCategory } = useAppStore();
-  const [scrolled, setScrolled] = useState(false);
+  // Scroll-aware elevation: stronger shadow once user passes the hero
+  const scrolled = useScrolledPast(8);
 
   // Top-level nav: food cats (no parentGroup) + the 2 drink groups.
   // Drink sub-categories are hidden until their group is selected.
@@ -53,16 +55,6 @@ export default function CategoryNav() {
       .filter((c) => c.parentGroup === activeGroupId)
       .sort((a, b) => a.sortOrder - b.sortOrder);
   }, [activeGroupId]);
-
-  // Scroll-aware elevation: when the user has scrolled past the hero
-  // area, give the nav a stronger shadow + slightly darker bg so it
-  // feels properly elevated above the content.
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 8);
-    handler();
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
 
   return (
     <div

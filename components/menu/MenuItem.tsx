@@ -49,6 +49,9 @@ interface Props {
   onSelect: (item: MenuItemType) => void;
   /** Optional inline style — used by MenuGrid to stagger entrance animations. */
   style?: React.CSSProperties;
+  /** Whether to set Image priority for LCP. Set true for the first 4-6 cards
+   *  in the visible grid so they load eagerly without waiting for IO. */
+  priority?: boolean;
 }
 
 /**
@@ -57,7 +60,7 @@ interface Props {
  * every card on every search keystroke or category switch, even when only
  * 2-3 cards actually changed.
  */
-function MenuItemImpl({ item, onSelect, style }: Props) {
+function MenuItemImpl({ item, onSelect, style, priority = false }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
   const isItemAvailable = useMenuStore((s) => s.isItemAvailable);
@@ -108,7 +111,7 @@ function MenuItemImpl({ item, onSelect, style }: Props) {
             itemId={item.id}
             categoryId={item.categoryId}
             alt={lt(item.name, locale)}
-            priority={false}
+            priority={priority}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         </div>

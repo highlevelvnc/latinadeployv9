@@ -90,6 +90,18 @@ export default function MenuItemDetail({ item, onClose }: Props) {
     return () => { document.body.style.overflow = previous; };
   }, [item]);
 
+  // Save the element that had focus before opening, restore on close.
+  // Without this, keyboard users lose their place after closing — the
+  // browser puts focus back on <body>, which is disorienting.
+  useEffect(() => {
+    if (!item) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    return () => {
+      // Restore focus on next tick so React finishes its unmount first.
+      requestAnimationFrame(() => previousFocus?.focus?.());
+    };
+  }, [item]);
+
   // Close on ESC key
   useEffect(() => {
     if (!item) return;
