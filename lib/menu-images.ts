@@ -179,13 +179,10 @@ const itemImageMap: Record<string, string> = {
   // Tintos Douro (+2 com match limpo de tinto/ano)
   'wine-red-duas-quintas-reserva-2022': '/menu/wine-duas-quintas-reserva-2022.webp',
   'wine-red-espinho-grande-reserva-2019': '/menu/wine-espinho-grande-reserva-2019.webp',
-  // Brancos Douro (+5) — bottles têm cor escura, assumindo versões
-  // brancas do menu pelo nome do produtor
-  'wine-white-carm':                  '/menu/wine-carm.webp',
-  'wine-white-carm-reserva':          '/menu/wine-carm-reserva.webp',
-  'wine-white-cottage-wines':         '/menu/wine-cottage-wines.webp',
-  'wine-white-planalto':              '/menu/wine-planalto.webp',
-  'wine-white-vale-dona-maria-sabor': '/menu/wine-vale-dona-maria-sabor.webp',
+  // (Carm, Carm Reserva, Cottage Wines, Planalto, Vale Dona Maria
+  //  Vinhas do Sabor: as fotos enviadas eram garrafas escuras que não
+  //  parecem brancos — desmapeadas. Aguardando fotos das versões
+  //  brancas reais.)
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
