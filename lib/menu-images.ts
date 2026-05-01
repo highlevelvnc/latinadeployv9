@@ -9,7 +9,8 @@ const itemImageMap: Record<string, string> = {
   'kids-cheeseburger':                '/menu/kids-cheeseburger.webp',
 
   // Carnes Maturadas
-  'chuleton-rubia-gallega-gold':      '/menu/chuleton-rubia-gallega-gold.jpeg',
+  // (chuleton-rubia-gallega-gold: foto removida — a versão Gold ainda
+  //  não tem foto real; a anterior era do Rubia Gallega normal)
   'chuleton-wagyu':                   '/menu/chuleton-wagyu.png',
   // (tomahawk-wagyu-australia: foto removida — aguardando foto real)
   'tomahawk-australia-cognac-madeira':'/menu/tomahawk-steak.jpeg',
@@ -143,7 +144,6 @@ const itemImagePositionMap: Record<string, string> = {
   'golden-t-bone-800g':                '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
-  'chuleton-rubia-gallega-gold':       '50% 80%',
   // Foie Gras: alimento na parte de baixo da foto, mas 'bottom' (100%)
   // subia demais. '50% 75%' é o meio termo.
   'foie-gras-chef':                    '50% 75%',
