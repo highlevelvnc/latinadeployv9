@@ -64,6 +64,11 @@
     animation-play-state: paused;
   }
 
+  /* Radial gradient utility — used by the wine detail hero (warm cellar feel) */
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
+  }
+
   /* Subtle fade-in-up — used as a one-shot entrance for cards/sections.
      Stagger via inline style: { animationDelay: '60ms' }. */
   @keyframes fadeInUp {

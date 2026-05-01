@@ -5,11 +5,23 @@ import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, Flame, Leaf, Star, Sparkles, Award, Crown, Beef, Droplets, Carrot } from 'lucide-react';
 import MenuImage from '@/components/menu/MenuImage';
+import WineDetail from '@/components/menu/WineDetail';
 import { t as lt } from '@/lib/localized';
 import { menuItems } from '@/data/menu';
 import { getSaucesForItem, getSidesForItem, meatCategories, mainCourseCategories } from '@/data/recommendations';
 import type { MenuItem, DietaryTag } from '@/types/menu';
 import type { Locale } from '@/i18n';
+
+/** Wines and wine-related categories use a dedicated immersive modal. */
+const WINE_CATEGORIES = new Set([
+  'wines-red-portugal',
+  'wines-red-world',
+  'wines-white',
+  'wines-rose',
+  'wines-sparkling',
+  'wines-fortified',
+  'wines-by-glass',
+]);
 
 const tagIcons: Partial<Record<DietaryTag, typeof Flame>> = {
   spicy: Flame, vegetarian: Leaf, vegan: Leaf, 'chefs-pick': Star, 'new': Sparkles,
@@ -24,6 +36,12 @@ interface Props {
 export default function MenuItemDetail({ item, onClose }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
+
+  // Wines get an immersive, editorial-style modal (vertical bottle hero,
+  // click-to-zoom lightbox, region badge, no sauce/side recommendations).
+  if (item && WINE_CATEGORIES.has(item.categoryId)) {
+    return <WineDetail item={item} onClose={onClose} />;
+  }
 
   // Recommended sauces for meat items (display-only)
   const recommendedSauces = useMemo(() => {
