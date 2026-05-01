@@ -151,6 +151,18 @@ const itemImageMap: Record<string, string> = {
   'wine-red-barca-velha-2011':        '/menu/wine-barca-velha-2011.webp',
   'wine-red-barca-velha-1991':        '/menu/wine-barca-velha-1991.webp',
   'wine-red-barca-velha-1983':        '/menu/wine-barca-velha-1983.webp',
+  // Tintos internacionais (+5)
+  'wine-red-protos-crianza-2020':     '/menu/wine-protos-crianza-2020.webp',
+  'wine-red-protos-reserva-2019':     '/menu/wine-protos-reserva-2019.webp',
+  'wine-red-vega-sicilia-unico-2014': '/menu/wine-vega-sicilia-unico-2014.webp',
+  'wine-red-senechaux-chateauneuf-2015': '/menu/wine-senechaux-chateauneuf-2015.webp',
+  'wine-red-brunello-montalcino-2016': '/menu/wine-brunello-montalcino-2016.webp',
+  'wine-red-georges-latour-beaulieu-2008': '/menu/wine-georges-latour-beaulieu-2008.webp',
+  // Espumantes / Champagnes (+4)
+  'wine-sparkling-freixenet-cordon-negro': '/menu/wine-freixenet-cordon-negro.webp',
+  'wine-sparkling-gh-mumm-brut':      '/menu/wine-gh-mumm-brut.webp',
+  'wine-sparkling-moet-brut-imperial': '/menu/wine-moet-brut-imperial.webp',
+  'wine-sparkling-dom-perignon-2013': '/menu/wine-dom-perignon-2013.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
