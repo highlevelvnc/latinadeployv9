@@ -35,19 +35,18 @@ export const sideRecommendations: Record<string, string[]> = {
   'kobe-tataki': ['grilled-vegetables'],
   // Steaks → hearty sides
   'filet-mignon-200g': ['golden-potatoes-truffle', 'truffled-mashed-potato', 'grilled-vegetables'],
-  'picanha-250g': ['fries-truffle-aioli'],
-  'latina-skewer': ['fries-truffle-aioli'],
+  'picanha-250g': ['golden-potatoes-truffle', 'grilled-vegetables'],
+  'latina-skewer': ['golden-potatoes-truffle', 'grilled-vegetables'],
   'short-ribs-12h': ['truffled-mashed-potato'],
   // Seafood → lighter sides
   'blue-lobster': ['golden-potatoes-truffle', 'grilled-vegetables'],
   'lobster': ['golden-potatoes-truffle', 'grilled-vegetables'],
-  'grilled-tuna-steak': ['grilled-vegetables', 'river-rice'],
+  'grilled-tuna-steak': ['grilled-vegetables'],
 };
 
 // Default sides (prioritize premium/popular)
 export const defaultSides = [
   'golden-potatoes-truffle',
-  'fries-truffle-aioli',
   'truffled-mashed-potato',
   'grilled-vegetables',
 ];
