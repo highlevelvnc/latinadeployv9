@@ -82,6 +82,11 @@ const itemImageMap: Record<string, string> = {
   'dessert-latina-split':             '/menu/dessert-latina-split.webp',
   'dessert-forest-cheesecake':        '/menu/dessert-forest-cheesecake.webp',
   'dessert-waffle-icecream-nutella':  '/menu/dessert-waffle-icecream-nutella.webp',
+  'dessert-caramelized-banana':       '/menu/dessert-caramelized-banana.webp',
+  'dessert-brownie':                  '/menu/dessert-brownie.webp',
+  'dessert-churros':                  '/menu/dessert-churros.webp',
+  'dessert-apple-crumble':            '/menu/dessert-apple-crumble.webp',
+  'dessert-seasonal-fruit-board':     '/menu/dessert-seasonal-fruit-board.webp',
 
   // Cocktails
   'cocktail-whisky-sour':             '/menu/whiskysour.jpeg',
