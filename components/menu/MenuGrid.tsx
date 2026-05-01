@@ -83,15 +83,44 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
   }, [activeCategory, searchQuery, locale, unavailableItems, forceCategoryId]);
 
   if (filtered.length === 0) {
+    // Quick-tap suggestion chips — dropping the user back to a populated
+    // category instead of leaving them at a dead end.
+    const suggestions: { id: string; label: Record<string, string> }[] = [
+      { id: 'starters', label: { pt: 'Entradas', en: 'Starters', fr: 'Entrées', ru: 'Закуски', zh: '前菜' } },
+      { id: 'gold-selection', label: { pt: 'Golden', en: 'Golden', fr: 'Golden', ru: 'Golden', zh: '黄金甄选' } },
+      { id: 'alcoholic-drinks', label: { pt: 'Vinhos', en: 'Wines', fr: 'Vins', ru: 'Вина', zh: '葡萄酒' } },
+      { id: 'desserts', label: { pt: 'Sobremesas', en: 'Desserts', fr: 'Desserts', ru: 'Десерты', zh: '甜点' } },
+    ];
     return (
-      <div className="flex flex-col items-center justify-center px-4 py-24 text-center animate-fade-in-up">
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-white/[0.08] bg-surface text-3xl opacity-40">
+      <div className="flex flex-col items-center justify-center px-4 py-20 text-center animate-fade-in-up">
+        {/* Pulsing icon — feels alive, not empty. */}
+        <div
+          className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/[0.08] bg-surface text-3xl opacity-50"
+          style={{ animation: 'gentlePulse 2.4s ease-in-out infinite' }}
+        >
           🍽
         </div>
-        <p className="text-sm font-medium text-white/55">{t('emptyState')}</p>
-        <p className="mt-1 text-[12px] text-white/30">
-          {t('search')}
+        <p className="mb-1 text-sm font-medium text-white/65">{t('emptyState')}</p>
+        <p className="mb-6 text-[12px] text-white/35">
+          {locale === 'pt' && 'Tente uma das sugestões abaixo'}
+          {locale === 'en' && 'Try one of the suggestions below'}
+          {locale === 'fr' && 'Essayez une des suggestions ci-dessous'}
+          {locale === 'ru' && 'Попробуйте одно из предложений ниже'}
+          {locale === 'zh' && '试试以下建议'}
         </p>
+        <div className="flex flex-wrap justify-center gap-2">
+          {suggestions.map((s, idx) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => useAppStore.getState().setActiveCategory(s.id)}
+              className="rounded-full border border-white/10 bg-surface px-4 py-1.5 text-[11.5px] font-semibold text-white/75 transition-all duration-200 hover:-translate-y-0.5 hover:border-red/35 hover:bg-red/10 hover:text-white active:scale-95"
+              style={{ animation: `fadeInUp 0.4s ${0.1 + idx * 0.06}s backwards ease-out` }}
+            >
+              {s.label[locale] ?? s.label.pt}
+            </button>
+          ))}
+        </div>
       </div>
     );
   }
@@ -103,7 +132,9 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
           key={item.id}
           item={item}
           onSelect={onSelectItem}
-          style={{ animationDelay: `${Math.min(i * 30, 300)}ms` }}
+          // Tighter stagger (20ms × 12 items = 240ms total) — gives a
+          // crisp wave without dragging on long lists.
+          style={{ animationDelay: `${Math.min(i * 20, 240)}ms` }}
         />
       ))}
     </div>

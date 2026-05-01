@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocale } from 'next-intl';
+import { motion } from 'framer-motion';
 import { useAppStore } from '@/stores/useAppStore';
 import { categories, categoryGroups } from '@/data/menu';
 import { t as lt } from '@/lib/localized';
@@ -19,6 +20,7 @@ interface NavItem {
 export default function CategoryNav() {
   const locale = useLocale() as Locale;
   const { activeCategory, setActiveCategory } = useAppStore();
+  const [scrolled, setScrolled] = useState(false);
 
   // Top-level nav: food cats (no parentGroup) + the 2 drink groups.
   // Drink sub-categories are hidden until their group is selected.
@@ -52,11 +54,29 @@ export default function CategoryNav() {
       .sort((a, b) => a.sortOrder - b.sortOrder);
   }, [activeGroupId]);
 
+  // Scroll-aware elevation: when the user has scrolled past the hero
+  // area, give the nav a stronger shadow + slightly darker bg so it
+  // feels properly elevated above the content.
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 8);
+    handler();
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
   return (
-    <div className="sticky top-14 z-30 border-b border-white/[0.06] bg-dark/95 backdrop-blur-xl">
+    <div
+      className={cn(
+        'sticky top-14 z-30 border-b transition-all duration-300',
+        scrolled
+          ? 'border-white/[0.08] bg-dark/95 shadow-lg shadow-black/40 backdrop-blur-xl'
+          : 'border-white/[0.06] bg-dark/95 backdrop-blur-xl'
+      )}
+    >
       <div className="container mx-auto px-4">
         {/* Top-level: food categories + drink groups.
-            Clicking the active tab again deselects it (returns to landing view). */}
+            Active pill uses framer-motion's layoutId so it slides smoothly
+            between tabs instead of jumping. */}
         <div
           className="hide-scrollbar flex gap-1.5 overflow-x-auto py-2.5"
           role="tablist"
@@ -73,21 +93,34 @@ export default function CategoryNav() {
                 aria-selected={isActive}
                 onClick={() => setActiveCategory(isActive ? null : item.id)}
                 className={cn(
-                  'shrink-0 rounded-full px-3.5 py-1.5 text-[11.5px] font-semibold tracking-wide transition-colors duration-150',
-                  isActive
-                    ? 'bg-red/90 text-white shadow-sm shadow-red/20'
-                    : 'text-white/55 hover:text-white/85 active:text-white'
+                  'relative shrink-0 rounded-full px-3.5 py-1.5 text-[11.5px] font-semibold tracking-wide transition-colors duration-200',
+                  isActive ? 'text-white' : 'text-white/55 hover:text-white/85 active:text-white'
                 )}
               >
-                {lt(item.name, locale)}
+                {/* Animated background pill — uses layoutId so it morphs
+                    between tabs as the user clicks different categories.
+                    Sits behind the text via z-0/relative trick. */}
+                {isActive && (
+                  <motion.span
+                    layoutId="active-cat-pill"
+                    className="absolute inset-0 rounded-full bg-red/90 shadow-md shadow-red/30"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{lt(item.name, locale)}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Sub-categories: only visible when a drink group is selected */}
+        {/* Sub-categories: only visible when a drink group is selected.
+            Animated entrance: slides down from above with a slight fade. */}
         {subCategories.length > 0 && (
-          <div
+          <motion.div
+            key={activeGroupId}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="hide-scrollbar flex gap-1.5 overflow-x-auto border-t border-white/[0.04] pb-2.5 pt-2"
             role="tablist"
             aria-label="Sub-categories"
@@ -104,17 +137,17 @@ export default function CategoryNav() {
                     setActiveCategory(isActive ? c.parentGroup ?? null : c.id)
                   }
                   className={cn(
-                    'shrink-0 rounded-full border px-2.5 py-1 text-[10.5px] font-medium tracking-wide transition-colors duration-150',
+                    'relative shrink-0 rounded-full border px-2.5 py-1 text-[10.5px] font-medium tracking-wide transition-all duration-200',
                     isActive
-                      ? 'border-red/60 bg-red/15 text-red-light'
-                      : 'border-white/10 text-white/50 hover:border-white/25 hover:text-white/85'
+                      ? 'border-red/60 bg-red/15 text-red-light scale-[1.02]'
+                      : 'border-white/10 text-white/50 hover:border-white/25 hover:text-white/85 hover:scale-[1.02]'
                   )}
                 >
                   {lt(c.name, locale)}
                 </button>
               );
             })}
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

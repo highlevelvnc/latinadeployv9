@@ -14,6 +14,7 @@ import FeaturedSection from '@/components/menu/FeaturedSection';
 import ShareSection from '@/components/menu/ShareSection';
 import MenuGrid from '@/components/menu/MenuGrid';
 import MenuItemDetail from '@/components/menu/MenuItemDetail';
+import ScrollToTop from '@/components/menu/ScrollToTop';
 import TableBadge from '@/components/shared/TableBadge';
 import LanguageSelector from '@/components/LanguageSelector';
 import type { MenuItem } from '@/types/menu';
@@ -108,6 +109,7 @@ function MenuPageInner() {
       </div>
 
       <MenuItemDetail item={selectedItem} onClose={() => setSelectedItem(null)} />
+      <ScrollToTop />
     </>
   );
 }
