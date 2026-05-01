@@ -74,6 +74,13 @@ const itemImageMap: Record<string, string> = {
 
   // Cocktails
   'cocktail-whisky-sour':             '/menu/whiskysour.jpeg',
+  'cocktail-espresso-martini':        '/menu/cocktail-espresso-martini.webp',
+  'cocktail-irish-coffee':            '/menu/cocktail-irish-coffee.webp',
+  'cocktail-passion-margarita':       '/menu/cocktail-passion-margarita.webp',
+  // Best-guess matches (não tinha foto exata, encaixados pelo visual):
+  'cocktail-rin':                     '/menu/cocktail-rin.webp',          // morango em coupe → Rin (Espumante + Morango)
+  'cocktail-caipiroska':              '/menu/blackraspberry.jpeg',         // gin de frutos vermelhos → Morangoska/Caipiroska multi-fruta
+  'cocktail-americano':               '/menu/martini.jpeg',                // Martini Fiero rosa-laranja → Americano (Campari + Vermouth)
 
   // Vinhos Tintos – Portugal
   'wine-red-charme-niepoort-2022':    '/menu/wine-charme-niepoort.webp',
