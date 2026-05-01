@@ -98,6 +98,14 @@
     will-change: opacity, transform;
   }
 
+  /* Slow rotating conic halo — sits behind the wine bottle in the hero.
+     Used inline via `style={{ animation: 'wineHaloSpin ...' }}` so the
+     keyframe lives here and the component owns the timing/opacity. */
+  @keyframes wineHaloSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
   /* Diagonal shimmer sweep — used on premium/gold tags to draw the eye. */
   @keyframes shimmer {
     0%   { background-position: -200% center; }
@@ -125,10 +133,18 @@
     will-change: opacity, transform;
   }
 
-  /* Accessibility: respect user's reduced-motion preference. */
+  /* Accessibility: respect user's reduced-motion preference.
+     We also kill the wine hero's spinning halo + breathing glow so users
+     who opted out of motion get a calm, static experience. */
   @media (prefers-reduced-motion: reduce) {
     .animate-marquee,
-    .animate-fade-in-up {
+    .animate-fade-in-up,
+    .animate-breathe-glow,
+    .animate-shimmer,
+    .animate-shimmer-skel {
+      animation: none !important;
+    }
+    [style*="wineHaloSpin"] {
       animation: none !important;
     }
   }

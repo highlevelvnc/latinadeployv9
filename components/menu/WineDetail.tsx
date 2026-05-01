@@ -55,8 +55,15 @@ export default function WineDetail({ item, onClose }: Props) {
   return (
     <AnimatePresence mode="wait">
       {item && (
+        // KEY tied to item.id — without this, framer-motion + the nested
+        // staggered variants in <WineBody> don't reliably reset between
+        // wines. Symptom: only the first wine opened renders its full body;
+        // subsequent wines show a blank/partial body. Forcing the key to
+        // change per item guarantees AnimatePresence cycles exit→enter and
+        // every nested motion.div gets a fresh mount with `initial="hidden"`
+        // → `animate="visible"` running again.
         <motion.div
-          key="wine-modal"
+          key={`wine-${item.id}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -146,13 +153,37 @@ function WineHero({
       {/* Stage / reflection ground */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 h-12 w-[55%] -translate-x-1/2 rounded-[100%] bg-amber-950/40 blur-2xl" />
 
+      {/* Slow rotating halo behind the bottle — gives depth without
+          competing with the breathing glow */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+        style={{
+          background: 'conic-gradient(from 0deg, transparent, rgba(217,119,6,0.18), transparent, rgba(180,83,9,0.12), transparent)',
+          animation: 'wineHaloSpin 22s linear infinite',
+        }}
+      />
+
       <div className="relative mx-auto flex h-[42vh] min-h-[280px] w-full items-end justify-center pb-2 lg:h-[48vh]">
         {src ? (
           <motion.div
-            initial={{ y: 24, opacity: 0, scale: 0.96 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ delay: 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative h-full w-full"
+            initial={{ y: 36, opacity: 0, scale: 0.94 }}
+            animate={{
+              y: [0, -6, 0],
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              y: {
+                delay: 0.6,
+                duration: 5,
+                ease: 'easeInOut',
+                repeat: Infinity,
+                repeatType: 'mirror',
+              },
+              opacity: { delay: 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+              scale: { delay: 0.05, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+            }}
+            className="relative h-full w-full will-change-transform"
           >
             <Image
               src={src}
@@ -252,10 +283,33 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
           {displayName}
         </h2>
         {vintage && (
-          <div className="mt-3 flex items-baseline gap-3">
-            <span className="font-serif text-[44px] font-light leading-none tracking-tight text-accent-yellow lg:text-[52px]">
-              {vintage}
-            </span>
+          <motion.div
+            className="mt-3 flex items-baseline gap-3"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* The vintage number: subtle scale-in with a hairline underline
+                for editorial weight. The underline draws AFTER the number
+                lands — feels like a stamp being pressed. */}
+            <div className="relative">
+              <motion.span
+                initial={{ opacity: 0, scale: 0.85, letterSpacing: '0.1em' }}
+                animate={{ opacity: 1, scale: 1, letterSpacing: '-0.02em' }}
+                transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="block font-serif text-[44px] font-light leading-none tracking-tight text-accent-yellow lg:text-[52px]"
+                style={{ textShadow: '0 4px 18px rgba(234,179,8,0.18)' }}
+              >
+                {vintage}
+              </motion.span>
+              <motion.span
+                aria-hidden
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 1.0, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="block h-px origin-left bg-accent-yellow/40 mt-1.5"
+              />
+            </div>
             <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
               {{
                 pt: 'Safra',
@@ -265,27 +319,30 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
                 zh: '年份',
               }[locale] ?? 'Vintage'}
             </span>
-          </div>
+          </motion.div>
         )}
       </motion.div>
 
       {/* Region + flag */}
       <motion.div variants={itemVariants} className="mt-5 flex flex-wrap items-center gap-2.5">
         {region && (
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 backdrop-blur-sm">
-            <MapPin className="h-3.5 w-3.5 text-accent-yellow" />
+          <div className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 backdrop-blur-sm transition-all duration-300 hover:border-accent-yellow/30 hover:bg-accent-yellow/[0.06]">
+            <MapPin className="h-3.5 w-3.5 text-accent-yellow transition-transform duration-300 group-hover:scale-110" />
             <span className="text-[12px] font-semibold uppercase tracking-wider text-white/90">
               {region}
             </span>
           </div>
         )}
         {info?.country && (
-          <span
+          <motion.span
             className="text-[26px] leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
             aria-hidden
+            initial={{ opacity: 0, scale: 0.5, rotate: -12 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 0.85, type: 'spring', stiffness: 280, damping: 14 }}
           >
             {info.country}
-          </span>
+          </motion.span>
         )}
       </motion.div>
 
@@ -300,11 +357,28 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
         </motion.div>
       )}
 
-      {/* Editorial divider */}
+      {/* Editorial divider — animated lines that draw from the center
+          outward + a tiny rotating wine glyph as the focal point */}
       <motion.div variants={itemVariants} className="my-8 flex items-center gap-3">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-        <Wine className="h-4 w-4 text-white/35" />
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+        <motion.div
+          className="h-px origin-right flex-1 bg-gradient-to-r from-transparent via-white/15 to-white/25"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 1.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.6, rotate: -90 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ delay: 1.25, duration: 0.5, type: 'spring', stiffness: 220, damping: 14 }}
+        >
+          <Wine className="h-4 w-4 text-accent-yellow/70" />
+        </motion.div>
+        <motion.div
+          className="h-px origin-left flex-1 bg-gradient-to-l from-transparent via-white/15 to-white/25"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 1.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        />
       </motion.div>
 
       {/* History */}
@@ -321,15 +395,20 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
             }[locale] ?? 'História'
           }
         />
-        {/* Editorial quote-style block */}
+        {/* Editorial quote-style block. The opening quote scales/rotates
+            in slightly after the paragraph — feels like the punctuation
+            is being drawn over the text. */}
         <div className="relative pl-5">
-          <span
+          <motion.span
             className="pointer-events-none absolute -left-1 -top-3 select-none font-serif text-[64px] leading-none text-accent-yellow/25"
             aria-hidden
+            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 1.4, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             “
-          </span>
-          <p className="text-[14.5px] leading-[1.7] text-white/85">
+          </motion.span>
+          <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">
             {info?.history
               ? lt(info.history as never, locale)
               : genericHistory(region, locale)}
@@ -351,23 +430,31 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
             }[locale] ?? 'Harmonização sugerida'
           }
         />
-        <p className="text-[14.5px] leading-[1.7] text-white/85">
+        <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">
           {info?.pairing
             ? lt(info.pairing as never, locale)
             : genericPairing(item, locale)}
         </p>
       </motion.div>
 
-      {/* Sommelier note */}
+      {/* Sommelier note — gold gradient sweep on hover for prestige wines.
+          On non-highlight wines, a softer fade. Always feels alive. */}
       <motion.div
         variants={itemVariants}
-        className={`mt-9 rounded-xl border ${
+        whileHover={{ y: -2 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        className={`group relative mt-9 overflow-hidden rounded-xl border px-4 py-4 text-center transition-colors duration-500 ${
           isHighlight
-            ? 'border-accent-yellow/20 bg-accent-yellow/[0.04]'
-            : 'border-white/[0.06] bg-white/[0.02]'
-        } px-4 py-4 text-center`}
+            ? 'border-accent-yellow/25 bg-accent-yellow/[0.04] hover:border-accent-yellow/45 hover:bg-accent-yellow/[0.08]'
+            : 'border-white/[0.08] bg-white/[0.02] hover:border-white/15 hover:bg-white/[0.04]'
+        }`}
       >
-        <p className="text-[11.5px] italic leading-relaxed text-white/60">
+        {/* Subtle horizontal sheen on hover */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full"
+        />
+        <p className="relative text-[11.5px] italic leading-relaxed text-white/65">
           {{
             pt: 'Consulte o nosso sommelier para harmonizações personalizadas e disponibilidade.',
             en: 'Ask our sommelier for personalized pairings and availability.',
@@ -389,6 +476,15 @@ function SectionHeader({ icon, title }: { icon: React.ReactNode; title: string }
       <h3 className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/65">
         {title}
       </h3>
+      {/* Hairline that draws to the right of the header — adds editorial
+          rhythm without overwhelming. */}
+      <motion.span
+        aria-hidden
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.35, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="h-px flex-1 origin-left bg-gradient-to-r from-white/15 to-transparent"
+      />
     </div>
   );
 }
