@@ -124,6 +124,16 @@ const itemImageMap: Record<string, string> = {
   'wine-red-romanos-reserva-2019':    '/menu/wine-romanos-reserva.webp',
   // Garrafa mostra "2015" mas menu tem 2018 — mesmo produtor Valbom.
   'wine-red-valbom-2018':             '/menu/wine-valbom-douro.webp',
+  // Vinhos tintos Portugal — mais 9 fotos da Cláudia
+  'wine-red-dao-niepoort-2021':       '/menu/wine-dao-niepoort-2021.webp',
+  'wine-red-monteirinhos-manel-chaves-2021': '/menu/wine-monteirinhos-manel-chaves-2021.webp',
+  'wine-red-luis-pato-vinhas-velhas-2022': '/menu/wine-luis-pato-vinhas-velhas-2022.webp',
+  'wine-red-palacio-bucaco-2015':     '/menu/wine-palacio-bucaco-2015.webp',
+  'wine-red-cabeco-toiro-alicante-2018': '/menu/wine-cabeco-toiro-alicante-2018.webp',
+  'wine-red-cartuxa-colheita-2020':   '/menu/wine-cartuxa-colheita-2020.webp',
+  'wine-red-voltface-reserva-2022':   '/menu/wine-voltface-reserva-2022.webp',
+  'wine-red-ravasqueira-romas-2021':  '/menu/wine-ravasqueira-romas-2021.webp',
+  'wine-red-cem-reis-syrah-2022':     '/menu/wine-cem-reis-syrah-2022.webp',
   // Vinhos Tintos do Mundo (mais)
   'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
   'wine-red-pintia-ribera-duero-2019':'/menu/wine-pintia.webp',
