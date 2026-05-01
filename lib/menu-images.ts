@@ -38,6 +38,10 @@ const itemImageMap: Record<string, string> = {
   // Outros Cortes
   'iberian-pork-plumas':              '/menu/iberian-pork-plumas.jpeg',
 
+  // Vegetarianas / Veganas
+  'truffled-mushroom-risotto':        '/menu/truffled-mushroom-risotto.webp',
+  'tagliatelle-portobello-walnuts':   '/menu/tagliatelle-portobello-walnuts.webp',
+
   // Entradas (Starters)
   'cheese-gratin':                    '/menu/cheese-gratin.webp',
   'foie-gras-chef':                   '/menu/foie-gras-chef.jpeg',
