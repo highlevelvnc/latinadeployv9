@@ -6,6 +6,7 @@ import { useAppStore } from '@/stores/useAppStore';
 import { useMenuStore } from '@/stores/useMenuStore';
 import { categories, categoryGroups, menuItems } from '@/data/menu';
 import { hasMenuItemImage } from '@/lib/menu-images';
+import { getWinePopularityScore } from '@/lib/wine-info';
 import MenuItem from './MenuItem';
 import { t as lt } from '@/lib/localized';
 import type { MenuItem as MenuItemType } from '@/types/menu';
@@ -52,7 +53,12 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
       );
     }
 
-    // Sort: items with photo first, then unavailable to the end
+    // Sort priority:
+    //   1. Available items before unavailable
+    //   2. Items with photo before placeholders
+    //   3. (wines only) Popularity score — see lib/wine-info.ts.
+    //      We DO NOT sort by price — the client explicitly asked not to
+    //      show the most expensive bottles at the top.
     items.sort((a, b) => {
       const aUnavail = unavailableItems.includes(a.id) ? 1 : 0;
       const bUnavail = unavailableItems.includes(b.id) ? 1 : 0;
@@ -60,7 +66,17 @@ export default function MenuGrid({ onSelectItem, forceCategoryId }: Props) {
 
       const aHasImg = hasMenuItemImage(a.id) ? 0 : 1;
       const bHasImg = hasMenuItemImage(b.id) ? 0 : 1;
-      return aHasImg - bHasImg;
+      if (aHasImg !== bHasImg) return aHasImg - bHasImg;
+
+      // Within the same available+photo tier, wines bubble up the popular
+      // ones (curated + signature/premium + popular regions).
+      const aIsWine = a.categoryId.startsWith('wines-');
+      const bIsWine = b.categoryId.startsWith('wines-');
+      if (aIsWine && bIsWine) {
+        const diff = getWinePopularityScore(b) - getWinePopularityScore(a);
+        if (diff !== 0) return diff;
+      }
+      return 0;
     });
 
     return items;

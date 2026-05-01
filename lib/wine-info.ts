@@ -269,3 +269,43 @@ export const wineInfo: Record<string, WineInfo> = {
 export function getWineInfo(itemId: string): WineInfo | null {
   return wineInfo[itemId] ?? null;
 }
+
+/**
+ * Popularity score for sorting wines top-to-bottom in the grid.
+ *
+ * Higher = shown earlier. Built from heuristics:
+ *  - Curated wines (with a hand-written history in wineInfo) → known/famous
+ *  - Has a real photo mapped → editorial weight
+ *  - Tags: bestseller > signature > premium > everything
+ *  - Popular Portuguese regions get a small nudge
+ *
+ * EXPLICITLY DOES NOT factor in price — the client doesn't want the most
+ * expensive bottles at the top of the list.
+ */
+const POPULAR_REGIONS_HIGH = ['douro', 'alentejo'];
+const POPULAR_REGIONS_MID = ['bairrada', 'dão', 'dao', 'bordeaux', 'toscana', 'tuscany'];
+
+interface WineLike {
+  id: string;
+  description: { pt: string };
+  tags: readonly string[];
+}
+
+export function getWinePopularityScore(item: WineLike): number {
+  let score = 0;
+
+  // Curated wines are the well-known / famous ones — top tier
+  if (wineInfo[item.id]) score += 100;
+
+  // Tag weights (no 'bestseller' on wines yet but kept for future)
+  if (item.tags.includes('bestseller')) score += 40;
+  if (item.tags.includes('signature')) score += 25;
+  if (item.tags.includes('premium')) score += 10;
+
+  // Popular regions get a small nudge so customers see familiar names first
+  const region = (item.description.pt ?? '').toLowerCase();
+  if (POPULAR_REGIONS_HIGH.some((r) => region.includes(r))) score += 8;
+  else if (POPULAR_REGIONS_MID.some((r) => region.includes(r))) score += 4;
+
+  return score;
+}
