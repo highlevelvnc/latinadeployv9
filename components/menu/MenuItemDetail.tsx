@@ -53,9 +53,12 @@ const tagIcons: Partial<Record<DietaryTag, typeof Flame>> = {
 interface Props {
   item: MenuItem | null;
   onClose: () => void;
+  /** Replace the currently-shown item — used by the wine pairing chips
+   *  to navigate from a wine to one of its suggested dishes. */
+  onSelectItem?: (item: MenuItem) => void;
 }
 
-export default function MenuItemDetail({ item, onClose }: Props) {
+export default function MenuItemDetail({ item, onClose, onSelectItem }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
 
@@ -116,7 +119,7 @@ export default function MenuItemDetail({ item, onClose }: Props) {
   // hook calls so we don't violate the rules of hooks (hooks must run in the
   // same order every render).
   if (item && isWineCategory(item.categoryId)) {
-    return <WineDetail item={item} onClose={onClose} />;
+    return <WineDetail item={item} onClose={onClose} onSelectItem={onSelectItem} />;
   }
 
   return (

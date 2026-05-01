@@ -12,6 +12,8 @@ import {
 import { t as lt } from '@/lib/localized';
 import { getMenuItemImage } from '@/lib/menu-images';
 import { getWineInfo } from '@/lib/wine-info';
+import { findMenuItemByPairingText } from '@/lib/wine-pairing-match';
+import MenuImage from '@/components/menu/MenuImage';
 import type { MenuItem, DietaryTag } from '@/types/menu';
 import type { Locale } from '@/i18n';
 
@@ -25,6 +27,8 @@ const tagIcons: Partial<Record<DietaryTag, typeof Wine>> = {
 interface Props {
   item: MenuItem | null;
   onClose: () => void;
+  /** Replace the shown item — used by pairing chips to jump to a dish. */
+  onSelectItem?: (item: MenuItem) => void;
 }
 
 /**
@@ -38,7 +42,7 @@ interface Props {
  * - Body scroll lock is delegated to the parent MenuItemDetail so we
  *   don't get the race-condition where the page becomes unscrollable.
  */
-export default function WineDetail({ item, onClose }: Props) {
+export default function WineDetail({ item, onClose, onSelectItem }: Props) {
   const locale = useLocale() as Locale;
   const [zoomed, setZoomed] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(true);
@@ -139,7 +143,7 @@ export default function WineDetail({ item, onClose }: Props) {
                 className="flex-1 overflow-y-auto overscroll-contain"
               >
                 <WineHero item={item} onZoom={() => setZoomed(true)} locale={locale} />
-                <WineBody item={item} locale={locale} />
+                <WineBody item={item} locale={locale} onSelectItem={onSelectItem} />
                 {/* Bottom safe-area padding so the home indicator doesn't
                     eat into the sommelier note on iPhone. */}
                 <div style={{ height: 'env(safe-area-inset-bottom, 0px)' }} />
@@ -342,7 +346,15 @@ function ServiceHints({ item, locale }: { item: MenuItem; locale: Locale }) {
 }
 
 /* ── Editorial body — name, region, history, pairing ─────────────────── */
-function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
+function WineBody({
+  item,
+  locale,
+  onSelectItem,
+}: {
+  item: MenuItem;
+  locale: Locale;
+  onSelectItem?: (item: MenuItem) => void;
+}) {
   const info = getWineInfo(item.id);
   const region = lt(item.description, locale);
   const fullName = lt(item.name, locale);
@@ -550,6 +562,8 @@ function WineBody({ item, locale }: { item: MenuItem; locale: Locale }) {
               ? lt(info.pairing as never, locale)
               : genericPairing(item, locale)
           }
+          locale={locale}
+          onSelectItem={onSelectItem}
         />
       </motion.div>
 
@@ -621,35 +635,101 @@ function HistoryParagraph({ text }: { text: string }) {
   );
 }
 
-/* ── Pairing block: chips + tail prose ────────────────────────────────── */
-function PairingBlock({ text }: { text: string }) {
+/* ── Pairing block: dish thumbnails (when matched) + tail prose ───────── */
+function PairingBlock({
+  text,
+  locale,
+  onSelectItem,
+}: {
+  text: string;
+  locale: Locale;
+  onSelectItem?: (item: MenuItem) => void;
+}) {
   const { dishes, rest } = splitPairingDishes(text);
-  // Heuristic: if we couldn't extract clean dish chips (ie. first segment
-  // is a long sentence), just render plain prose instead.
+  // Resolve each dish chip to a real MenuItem (or null when no good match).
+  // useMemo MUST come before any early return — rules of hooks.
+  const resolved = useMemo(
+    () =>
+      dishes.map((dish) => ({
+        text: dish,
+        match: findMenuItemByPairingText(dish, locale),
+      })),
+    [dishes, locale],
+  );
+
+  // Heuristic: if we couldn't extract clean chips (first segment is a long
+  // sentence), just render prose. Same behaviour as before.
   if (dishes.length < 2) {
-    return <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">{text}</p>;
+    return (
+      <p className="text-[14.5px] leading-[1.72] text-white/85 [text-wrap:pretty]">{text}</p>
+    );
   }
+
   return (
     <div>
-      <div className="flex flex-wrap gap-2">
-        {dishes.map((dish, idx) => (
-          <motion.span
-            key={`${dish}-${idx}`}
-            initial={{ opacity: 0, y: 6, scale: 0.95 }}
+      {/* Grid of pairing cards. Matched dishes get a real thumbnail and
+          tap → open the dish detail. Unmatched fall back to a plain chip. */}
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {resolved.map(({ text: dishText, match }, idx) => (
+          <motion.div
+            key={`${dishText}-${idx}`}
+            initial={{ opacity: 0, y: 6, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.2 + idx * 0.07, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-1.5 rounded-full border border-accent-yellow/20 bg-accent-yellow/[0.06] px-3 py-1.5 text-[12px] font-medium text-white/85 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-yellow/40 hover:bg-accent-yellow/10"
+            transition={{ delay: 0.2 + idx * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            <UtensilsCrossed className="h-3 w-3 text-accent-yellow/70" />
-            {dish}
-          </motion.span>
+            {match && onSelectItem ? (
+              <button
+                type="button"
+                onClick={() => onSelectItem(match)}
+                aria-label={`${lt(match.name, locale)} — abrir detalhe`}
+                className="group relative flex w-full items-center gap-3 overflow-hidden rounded-xl border border-accent-yellow/15 bg-accent-yellow/[0.04] p-2 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-accent-yellow/40 hover:bg-accent-yellow/[0.08] hover:shadow-md hover:shadow-accent-yellow/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-yellow/60 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-950 active:scale-[0.98]"
+              >
+                {/* Thumbnail */}
+                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-stone-900/70">
+                  <MenuImage
+                    itemId={match.id}
+                    categoryId={match.categoryId}
+                    alt={lt(match.name, locale)}
+                    sizes="48px"
+                  />
+                  {/* Subtle inner ring to lift the thumb visually */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-inset ring-white/5"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="line-clamp-2 text-[12.5px] font-semibold leading-tight text-white/90 group-hover:text-white">
+                    {lt(match.name, locale)}
+                  </div>
+                  <div className="mt-1 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.18em] text-accent-yellow/65 group-hover:text-accent-yellow">
+                    <UtensilsCrossed className="h-2.5 w-2.5" />
+                    {{
+                      pt: 'Ver prato',
+                      en: 'View dish',
+                      fr: 'Voir le plat',
+                      ru: 'Открыть',
+                      zh: '查看菜品',
+                    }[locale] ?? 'Ver prato'}
+                  </div>
+                </div>
+              </button>
+            ) : (
+              // Fallback: no menu match — keep as labeled pill so the
+              // visual rhythm of the row stays consistent.
+              <div className="flex h-full items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.02] px-3 py-3 text-[12.5px] font-medium text-white/70">
+                <UtensilsCrossed className="h-3 w-3 shrink-0 text-white/35" />
+                {dishText}
+              </div>
+            )}
+          </motion.div>
         ))}
       </div>
       {rest && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 + dishes.length * 0.07, duration: 0.4 }}
+          transition={{ delay: 0.4 + dishes.length * 0.06, duration: 0.4 }}
           className="mt-3 text-[13px] italic leading-relaxed text-white/55 [text-wrap:pretty]"
         >
           {rest}

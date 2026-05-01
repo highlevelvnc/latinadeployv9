@@ -132,7 +132,11 @@ function MenuPageInner() {
         )}
       </main>
 
-      <MenuItemDetail item={selectedItem} onClose={() => setSelectedItem(null)} />
+      <MenuItemDetail
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+        onSelectItem={setSelectedItem}
+      />
       <ScrollToTop />
     </>
   );
