@@ -84,6 +84,18 @@ const itemImageMap: Record<string, string> = {
   'wine-red-alves-sousa-memorias-30': '/menu/wine-alves-sousa-memorias-30.png',
   'wine-red-cartuxa-vinea-2019':      '/menu/wine-cartuxa-vinea-2019.png',
   'wine-red-cartuxa-evora-2022':      '/menu/wine-cartuxa-evora-2022.png',
+  'wine-red-bioma-niepoort-2018':     '/menu/wine-bioma-niepoort.png',
+  'wine-red-pombal-vesuvio-2022':     '/menu/wine-pombal-vesuvio.png',
+  'wine-red-grande-reserva-alentejo-2018': '/menu/wine-grande-reserva-alentejo-2018.png',
+  'wine-red-monte-xisto-2020':        '/menu/wine-monte-xisto-2020.png',
+  'wine-red-monte-meao-vinha-novos-2022': '/menu/wine-monte-meao-vinha-novos-2022.png',
+
+  // Vinhos Tintos do Mundo
+  'wine-red-chapoutier-cotes-rhone-2022': '/menu/wine-chapoutier.png',
+  'wine-red-cigare-volant-2021':      '/menu/wine-bonny-doon-cigare.png',
+  'wine-red-loratoire-des-papes-2023':'/menu/wine-loratoire-des-papes-2023.png',
+  'wine-red-beausejour-hostens-2019': '/menu/wine-beausejour-hostens-2019.png',
+  'wine-red-vignobles-quet-dupontet-2019': '/menu/wine-vignobles-quet-dupontet-2019.png',
 
   // Vinhos Tintos do Mundo
   'wine-red-directors-cut-coppola-2018': '/menu/wine-coppola-directors-cut.png',
