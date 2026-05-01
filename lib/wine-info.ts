@@ -105,6 +105,91 @@ export const wineInfo: Record<string, WineInfo> = {
     country: '🇵🇹',
   },
 
+  'wine-red-pintas-character-2022': {
+    history: {
+      pt: 'Wine & Soul é o projeto de Sandra Tavares e Jorge Serôdio Borges no Vale Mendiz. Pintas Character é o segundo vinho da casa, das vinhas mais novas — fresco, expressivo e com a assinatura inconfundível dos produtores.',
+      en: 'Wine & Soul is the Sandra Tavares and Jorge Serôdio Borges project in Vale Mendiz. Pintas Character is the second wine, from younger vines — fresh, expressive and with the unmistakable signature.',
+      fr: 'Wine & Soul, projet de Sandra Tavares et Jorge Serôdio Borges. Pintas Character vient des vignes plus jeunes — frais et expressif.',
+      zh: 'Wine & Soul是Sandra Tavares与Jorge Serôdio Borges位于Vale Mendiz的项目。Pintas Character出自较年轻的葡萄园，新鲜、富表现力。',
+    },
+    pairing: {
+      pt: 'Picanha 250g, Filet Mignon, Espetada Latina. Versátil — combina com refeições principais variadas.',
+      en: 'Picanha 250g, Filet Mignon, Latina Skewer. Versatile — pairs with varied mains.',
+      fr: 'Picanha 250g, Filet Mignon, Brochette Latina. Polyvalent.',
+      zh: '臀盖肉250克、菲力牛排、Latina牛串。搭配灵活。',
+    },
+    grapes: 'Touriga Nacional, Touriga Franca, Tinta Roriz, Tinto Cão',
+    country: '🇵🇹',
+  },
+
+  'wine-red-crasto-vinhas-velhas-2022': {
+    history: {
+      pt: 'Quinta do Crasto é uma das mais reconhecidas casas do Douro, com vinhas centenárias plantadas em socalcos sobre o rio Douro. Vinhas Velhas é o vinho que melhor expressa a complexidade dessas vinhas antigas.',
+      en: 'Quinta do Crasto is one of the most renowned Douro houses, with century-old vineyards on terraces above the Douro river. Vinhas Velhas best expresses the complexity of those old vines.',
+      fr: 'Quinta do Crasto, l\'une des grandes maisons du Douro. Vinhas Velhas exprime la complexité des très vieilles vignes en terrasses.',
+      zh: 'Quinta do Crasto是杜奥最知名的酒庄之一，百年老藤分布在杜奥河上方梯田。Vinhas Velhas最能展现这些老藤的复杂度。',
+    },
+    pairing: {
+      pt: 'Tomahawk Wagyu, Costela 12h, Chuletón Maturado. Concentração e elegância.',
+      en: 'Wagyu Tomahawk, 12h Short Ribs, Aged Chuletón. Concentration and elegance.',
+      fr: 'Tomahawk Wagyu, Côtes 12h, Chuletón Maturé.',
+      zh: '和牛战斧、12小时慢蒸牛肋、熟成带骨牛排。浓郁与优雅兼具。',
+    },
+    grapes: 'Field blend de mais de 30 castas tradicionais',
+    country: '🇵🇹',
+  },
+
+  'wine-red-pintia-ribera-duero-2019': {
+    history: {
+      pt: 'Pintia é o projeto Vega Sicilia em Toro, lançado em 2003. Toro é uma DO árida com Tempranillo robusto (chamada localmente Tinta de Toro). Vinho potente, frutado e moderno.',
+      en: 'Pintia is the Vega Sicilia project in Toro, launched in 2003. Toro is an arid DO with robust Tempranillo (called Tinta de Toro locally). Powerful, fruity and modern.',
+      fr: 'Pintia, projet Vega Sicilia à Toro depuis 2003. DO aride au Tempranillo robuste (Tinta de Toro). Puissant et moderne.',
+      zh: 'Pintia是Vega Sicilia于2003年在Toro产区创立的项目。Toro是干旱DO，Tempranillo（当地称Tinta de Toro）厚重果香现代。',
+    },
+    pairing: {
+      pt: 'Costela 12 horas, Tomahawk, Picanha. Estrutura e força — pede carnes intensas.',
+      en: '12h Short Ribs, Tomahawk, Picanha. Structure and force — calls for intense meats.',
+      fr: 'Côtes 12h, Tomahawk, Picanha. Structure et force.',
+      zh: '12小时慢蒸牛肋、战斧、臀盖肉。架构强劲。',
+    },
+    grapes: 'Tinta de Toro (Tempranillo)',
+    country: '🇪🇸',
+  },
+
+  'wine-red-vega-sicilia-unico-2014': {
+    history: {
+      pt: 'O Único é a maior expressão de Vega Sicilia e um dos vinhos mais cobiçados do mundo. Repousa entre 9 e 11 anos antes de ser lançado, em barricas, cubas e garrafa. Para vinte celebrar, mais nada.',
+      en: 'Único is Vega Sicilia\'s greatest expression and one of the most coveted wines in the world. Rests 9 to 11 years before release, in barrels, vats and bottle. For grand celebrations only.',
+      fr: 'Único est la plus haute expression de Vega Sicilia, l\'un des vins les plus convoités au monde. 9 à 11 ans de garde avant sortie. Pour les grandes célébrations.',
+      zh: 'Único是Vega Sicilia的巅峰之作，世界上最受追捧的葡萄酒之一。在橡木桶、大桶和瓶中陈年9至11年方上市。盛大庆典之选。',
+    },
+    pairing: {
+      pt: 'Tomahawk Wagyu Austrália, Chuletón Wagyu Ibérico Premium do Chef. Vinho de gala — para momentos únicos.',
+      en: 'Australian Wagyu Tomahawk, Iberian Wagyu Chuletón Premium. A gala wine — for unique moments.',
+      fr: 'Tomahawk Wagyu Australien, Chuletón Wagyu Premium. Vin de gala.',
+      zh: '澳洲和牛战斧、伊比利亚和牛带骨牛排。盛宴之选——独特时刻。',
+    },
+    grapes: 'Tempranillo, Cabernet Sauvignon',
+    country: '🇪🇸',
+  },
+
+  'wine-red-brunello-montalcino-2016': {
+    history: {
+      pt: 'Brunello di Montalcino é uma das mais nobres DOCG da Itália. Feito 100% com Sangiovese Grosso (chamado localmente "Brunello"), exige no mínimo 5 anos de envelhecimento, dos quais 2 em barrica. Pura tradição toscana.',
+      en: 'Brunello di Montalcino is one of Italy\'s noblest DOCGs. Made 100% from Sangiovese Grosso (called "Brunello" locally), requires minimum 5 years aging including 2 in barrel. Pure Tuscan tradition.',
+      fr: 'Brunello di Montalcino, l\'une des DOCG les plus nobles d\'Italie. 100% Sangiovese Grosso, 5 ans minimum dont 2 en fût.',
+      zh: 'Brunello di Montalcino是意大利最尊贵的DOCG之一。100% Sangiovese Grosso（当地称"Brunello"），法定至少5年陈年其中2年于木桶。纯正托斯卡纳传统。',
+    },
+    pairing: {
+      pt: 'Costela 12 horas, Plumas com Cereja Basca, Tomahawk Maturado. Tradição e profundidade.',
+      en: '12h Short Ribs, Iberian Pork with Basque Cherry, Aged Tomahawk. Tradition and depth.',
+      fr: 'Côtes 12h, Plumas Cerise Basque, Tomahawk Maturé.',
+      zh: '12小时慢蒸牛肋、巴斯克樱桃黑猪肉、熟成战斧。传统与深度。',
+    },
+    grapes: 'Sangiovese Grosso (Brunello)',
+    country: '🇮🇹',
+  },
+
   // ─── Espanha ──────────────────────────────────────────────────────
   'wine-red-valbuena-vega-sicilia-2019': {
     history: {
