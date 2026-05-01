@@ -37,12 +37,6 @@ export default function MenuItemDetail({ item, onClose }: Props) {
   const locale = useLocale() as Locale;
   const t = useTranslations('menu');
 
-  // Wines get an immersive, editorial-style modal (vertical bottle hero,
-  // click-to-zoom lightbox, region badge, no sauce/side recommendations).
-  if (item && WINE_CATEGORIES.has(item.categoryId)) {
-    return <WineDetail item={item} onClose={onClose} />;
-  }
-
   // Recommended sauces for meat items (display-only)
   const recommendedSauces = useMemo(() => {
     if (!item) return [];
@@ -83,6 +77,13 @@ export default function MenuItemDetail({ item, onClose }: Props) {
     document.addEventListener('keydown', handleEsc);
     return () => document.removeEventListener('keydown', handleEsc);
   }, [item, onClose]);
+
+  // Wines get an immersive, editorial-style modal. The branch is AFTER the
+  // hook calls so we don't violate the rules of hooks (hooks must run in the
+  // same order every render).
+  if (item && WINE_CATEGORIES.has(item.categoryId)) {
+    return <WineDetail item={item} onClose={onClose} />;
+  }
 
   return (
     <AnimatePresence>
