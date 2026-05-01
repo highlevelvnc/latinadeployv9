@@ -22,6 +22,7 @@ const itemImageMap: Record<string, string> = {
 
   // Marisco
   'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
+  'lobster':                          '/menu/lagosta.webp',
 
   // Seleção Premium
   'picanha-250g':                     '/menu/picanha-250g-new.png',
