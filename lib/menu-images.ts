@@ -171,6 +171,9 @@ const itemImageMap: Record<string, string> = {
   'wine-white-castelo-rodrigo':       '/menu/wine-castelo-rodrigo.webp',
   'wine-white-joaquim-madeira':       '/menu/wine-joaquim-madeira.webp',
   'wine-white-pera-manca-white':      '/menu/wine-pera-manca-white.webp',  // ⭐
+  // Rosés (+2)
+  'wine-rose-redoma-niepoort':        '/menu/wine-rose-redoma-niepoort.webp',
+  'wine-rose-celeste-gaivosa':        '/menu/wine-rose-celeste-gaivosa.webp',
   // Madeira (+1)
   'wine-madeira-verdelho-5y-barbeito-2013': '/menu/wine-madeira-verdelho-5y-barbeito.webp',
   // +2 Madeiras
