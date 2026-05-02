@@ -35,6 +35,7 @@ export default function RestaurantExperience() {
         { value: '100+', label: 'Mesas & lugares exclusivos' },
       ],
       labels: ['Interior', 'Ambiente', 'Sala', 'Espaço', 'Atmosfera', 'Detalhes'],
+      aria: { close: 'Fechar', prev: 'Imagem anterior', next: 'Próxima imagem' },
     },
     en: {
       badge: 'The Space',
@@ -48,6 +49,7 @@ export default function RestaurantExperience() {
         { value: '100+', label: 'Tables & exclusive seats' },
       ],
       labels: ['Interior', 'Atmosphere', 'Dining Room', 'Space', 'Ambiance', 'Details'],
+      aria: { close: 'Close', prev: 'Previous image', next: 'Next image' },
     },
     fr: {
       badge: "L'Espace",
@@ -61,6 +63,7 @@ export default function RestaurantExperience() {
         { value: '100+', label: 'Tables & places exclusives' },
       ],
       labels: ['Intérieur', 'Ambiance', 'Salle', 'Espace', 'Atmosphère', 'Détails'],
+      aria: { close: 'Fermer', prev: 'Image précédente', next: 'Image suivante' },
     },
     ru: {
       badge: 'Пространство',
@@ -74,6 +77,7 @@ export default function RestaurantExperience() {
         { value: '100+', label: 'Столиков и эксклюзивных мест' },
       ],
       labels: ['Интерьер', 'Атмосфера', 'Зал', 'Пространство', 'Обстановка', 'Детали'],
+      aria: { close: 'Закрыть', prev: 'Предыдущее изображение', next: 'Следующее изображение' },
     },
     zh: {
       badge: '空间',
@@ -87,6 +91,7 @@ export default function RestaurantExperience() {
         { value: '100+', label: '餐桌与专属座位' },
       ],
       labels: ['内饰', '氛围', '餐厅', '空间', '环境', '细节'],
+      aria: { close: '关闭', prev: '上一张图片', next: '下一张图片' },
     },
   };
 
@@ -313,27 +318,27 @@ export default function RestaurantExperience() {
             <button
               onClick={closeLightbox}
               className="absolute top-5 right-5 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white"
-              aria-label="Fechar"
+              aria-label={t.aria.close}
             >
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {/* Prev */}
             <button
               onClick={(e) => { e.stopPropagation(); showPrev(); }}
               className="absolute left-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:left-8"
-              aria-label="Imagem anterior"
+              aria-label={t.aria.prev}
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-6 w-6" aria-hidden="true" />
             </button>
 
             {/* Next */}
             <button
               onClick={(e) => { e.stopPropagation(); showNext(); }}
               className="absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:right-8"
-              aria-label="Próxima imagem"
+              aria-label={t.aria.next}
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-6 w-6" aria-hidden="true" />
             </button>
 
             {/* Image with transition */}
