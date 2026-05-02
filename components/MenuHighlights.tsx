@@ -6,28 +6,19 @@ import Link from 'next/link';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useLocale } from 'next-intl';
 import { ArrowRight } from 'lucide-react';
+import {
+  getCuratedWineList,
+  type Locale,
+  type LS,
+  type Wine,
+  type WineCategory,
+} from '@/lib/featured-wines';
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  TYPES
 // ═══════════════════════════════════════════════════════════════════════════════
 
-type Locale = 'pt' | 'en' | 'fr';
-type WineCategory = 'tinto' | 'branco' | 'espumante' | 'rose';
 type TabId = 'carta' | 'harmonizacoes' | 'selecao';
-type LS = Record<Locale, string>; // LocalizedString shorthand
-
-type Wine = {
-  id: string;
-  name: string;
-  year: number;
-  region: string;
-  country: string;
-  category: WineCategory;
-  notes: LS;
-  pairing: LS;
-  image?: string; // Optional — provide when photo is available in /public
-  isHouseLabel?: boolean; // Featured wine — shown prominently in Selecção da Casa
-};
 
 type Pairing = {
   id: string;
@@ -41,174 +32,12 @@ type Pairing = {
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  WINE CATALOGUE
-//  → Add new wines here as photos become available in /public
-//  → Each Wine with an `image` field triggers a live preview on hover
+//  → House wine (Mythologyc) is hardcoded in lib/featured-wines.ts
+//  → Other featured wines come from data/menu.ts + lib/wine-info.ts
+//  → To add a new wine: edit lib/wine-info.ts (it's auto-picked-up here)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const WINES: Wine[] = [
-
-  // ── VINHO DA CASA — featured in Selecção da Casa ─────────────────────────
-
-  {
-    id: 'mythologyc-furya',
-    name: 'Mythologyc — Furya',
-    year: 2021,
-    region: 'Douro',
-    country: 'PT',
-    category: 'tinto',
-    isHouseLabel: true,
-    notes: {
-      pt: 'O vinho da casa do Latina Grill. Touriga Nacional e Tinta Roriz do coração do Douro. Fruta negra madura, violeta, especiaria e mineralidade xistosa. Corpo generoso com final longo e elegante — nascido para a grelha.',
-      en: 'The Latina Grill house wine. Touriga Nacional and Tinta Roriz from the heart of the Douro. Ripe dark fruit, violet, spice and schist minerality. Generous body with a long, elegant finish — born for the grill.',
-      fr: "Le vin maison du Latina Grill. Touriga Nacional et Tinta Roriz du cœur du Douro. Fruits noirs mûrs, violette, épices et minéralité schisteuse. Corps généreux, finale longue et élégante — né pour le grill.",
-    },
-    pairing: {
-      pt: 'Vinho da casa — harmoniza com toda a grelha: tomahawk, costela, picanha e cortes premium.',
-      en: 'House wine — pairs with the full grill: tomahawk, rib, picanha and premium cuts.',
-      fr: "Vin maison — s'accorde avec tout le grill: tomahawk, côte, picanha et coupes premium.",
-    },
-    image: '/mythologyc.webp',
-  },
-
-  // ── PORTUGAL ─────────────────────────────────────────────────────────────────
-
-  {
-    id: 'barca-velha-2015',
-    name: 'Barca Velha',
-    year: 2015,
-    region: 'Douro Superior',
-    country: 'PT',
-    category: 'tinto',
-    notes: {
-      pt: 'O vinho português mais icónico. Complexidade extraordinária: ameixa madura, especiaria, cedro, balsâmico e tabaco. Persistência legendária. Produzido apenas em anos excepcionais.',
-      en: "Portugal's most iconic wine. Extraordinary complexity: ripe plum, spice, cedar, balsamic and tobacco. Legendary finish. Produced only in exceptional vintages.",
-      fr: 'Le vin portugais le plus iconique. Complexité extraordinaire: prune mûre, épices, cèdre, balsamique et tabac. Persistance légendaire. Produit uniquement en années exceptionnelles.',
-    },
-    pairing: {
-      pt: 'Tomahawk na brasa, costela dry-aged e os grandes cortes da casa.',
-      en: 'Grilled Tomahawk, dry-aged rib and the great house cuts.',
-      fr: 'Tomahawk grillé, côte dry-aged et les grandes pièces de la maison.',
-    },
-    image: '/wine-barcavelha.webp',
-  },
-
-  {
-    id: 'crasto-old-vines-2019',
-    name: 'Crasto Reserva Old Vines',
-    year: 2019,
-    region: 'Douro',
-    country: 'PT',
-    category: 'tinto',
-    notes: {
-      pt: 'Vinhas velhas do Douro com intensidade controlada. Frutos negros maduros, violeta, mineral e terra. Estrutura firme com elegância natural e final extenso.',
-      en: 'Old Douro vines with controlled intensity. Ripe dark fruits, violet, mineral and earth. Firm structure with natural elegance and an extended finish.',
-      fr: 'Vieilles vignes du Douro avec une intensité maîtrisée. Fruits noirs mûrs, violette, minéral et terre. Structure ferme, élégance naturelle, longue finale.',
-    },
-    pairing: {
-      pt: 'Ribeye selection, cortes premium na grelha e carnes de carácter.',
-      en: 'Ribeye selection, premium grilled cuts and character-driven meats.',
-      fr: 'Ribeye selection, coupes premium au grill et viandes de caractère.',
-    },
-    image: '/wine-crasto.jpeg',
-  },
-
-  {
-    id: 'mouchao-2018',
-    name: 'Herdade do Mouchão',
-    year: 2018,
-    region: 'Alentejano',
-    country: 'PT',
-    category: 'tinto',
-    notes: {
-      pt: 'Elegância rústica do Alentejo. Alicante Bouschet e Trincadeira. Cereja, ervas, fruta seca e couro com mineralidade distinta. Autenticidade alentejana em cada gole.',
-      en: 'Rustic elegance from Alentejo. Alicante Bouschet and Trincadeira. Cherry, herbs, dried fruit and leather with distinct minerality. True Alentejo character in every sip.',
-      fr: "Élégance rustique de l'Alentejo. Alicante Bouschet et Trincadeira. Cerise, herbes, fruit sec et cuir avec une minéralité distincte. Authenticité alentejane en chaque gorgée.",
-    },
-    pairing: {
-      pt: 'Costela lenta, carnes de carácter e grelhados com marinadas aromáticas.',
-      en: 'Slow-cooked rib, character-driven cuts and aromatic marinated grills.',
-      fr: 'Côte mijotée, coupes de caractère et grillades aux marinades aromatiques.',
-    },
-    image: '/wine-mouchao.jpeg',
-  },
-
-  // ── FRANCE ──────────────────────────────────────────────────────────────────
-
-  {
-    id: 'leoville-barton-2018',
-    name: 'Ch. Léoville-Barton',
-    year: 2018,
-    region: 'Saint-Julien',
-    country: 'FR',
-    category: 'tinto',
-    notes: {
-      pt: 'Grand Cru Classé de grande elegância. Cassis, cedro, lápis e tabaco. Taninos firmes e bem integrados, persistência notável e potencial de guarda excecional.',
-      en: 'Grand Cru Classé of great elegance. Cassis, cedar, graphite and tobacco. Firm, well-integrated tannins with remarkable length and outstanding ageing potential.',
-      fr: "Grand Cru Classé d'une grande élégance. Cassis, cèdre, graphite et tabac. Tanins fermes et bien intégrés, finale remarquable, grand potentiel de garde.",
-    },
-    pairing: {
-      pt: 'Ribeye, Tomahawk Signature e cortes nobres com presença no prato.',
-      en: 'Ribeye, Tomahawk Signature and noble cuts with strong plate presence.',
-      fr: 'Ribeye, Tomahawk Signature et coupes nobles avec présence en assiette.',
-    },
-    image: '/wine-leovillon.webp',
-  },
-
-  {
-    id: 'pichon-baron-2018',
-    name: 'Ch. Pichon Baron',
-    year: 2018,
-    region: 'Pauillac',
-    country: 'FR',
-    category: 'tinto',
-    notes: {
-      pt: 'Pauillac de poder e precisão. Groselha negra, grafite, especiaria e tabaco. Estrutura clássica com taninos de longa vida. Uma das grandes referências do Médoc.',
-      en: 'Pauillac of power and precision. Blackcurrant, graphite, spice and tobacco leaf. Classic structure with long-lived tannins. One of the Médoc\'s great references.',
-      fr: 'Pauillac de puissance et de précision. Cassis, graphite, épices et feuille de tabac. Structure classique, tanins de grande garde. Une des grandes références du Médoc.',
-    },
-    pairing: {
-      pt: 'Tomahawk na brasa, carnes de maturação premium e costeletas de vaca velha.',
-      en: 'Grilled Tomahawk, premium aged meats and old-cow chops.',
-      fr: 'Tomahawk grillé, viandes de maturation premium et côtelettes de vieille vache.',
-    },
-    image: '/wine-pichon.jpeg',
-  },
-
-  // ── GRANDE RESERVA — referência mundial ─────────────────────────────────────
-
-  {
-    id: 'petrus-2021',
-    name: 'Château Petrus',
-    year: 2021,
-    region: 'Pomerol',
-    country: 'FR',
-    category: 'tinto',
-    notes: {
-      pt: 'Merlot puro de Pomerol. Textura de veludo, taninos sedosos. Ameixa negra, trufas, cacau e minerais de argila. Concentração excepcional com precisão mineral única.',
-      en: 'Pure Pomerol Merlot. Velvet texture, silky tannins. Black plum, truffle, cocoa and iron-rich clay minerals. Exceptional concentration with unrivalled mineral precision.',
-      fr: "Merlot pur de Pomerol. Texture veloutée, tanins soyeux. Prune noire, truffe, cacao et minéraux d'argile. Concentration exceptionnelle, précision minérale sans égale.",
-    },
-    pairing: {
-      pt: 'Tomahawk premium, Wagyu e cortes de maturação prolongada.',
-      en: 'Premium Tomahawk, Wagyu and long dry-aged cuts.',
-      fr: 'Tomahawk premium, Wagyu et pièces à maturation prolongée.',
-    },
-    image: '/vinhopetrvs.webp',
-  },
-
-  // ── Para adicionar novos vinhos: copie o bloco acima, preencha e descomente ──
-  // {
-  //   id: '',
-  //   name: '',
-  //   year: 0,
-  //   region: '',
-  //   country: '',
-  //   category: 'tinto',
-  //   notes: { pt: '', en: '', fr: '' },
-  //   pairing: { pt: '', en: '', fr: '' },
-  //   image: '', // coloque a foto em /public e referencie aqui
-  // },
-];
+const WINES: Wine[] = getCuratedWineList();
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  PAIRINGS  →  Edit/expand as wine list grows
