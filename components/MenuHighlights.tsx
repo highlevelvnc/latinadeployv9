@@ -323,6 +323,7 @@ function CartaTab({ locale, t }: { locale: Locale; t: UIStrings }) {
               src={activeImage}
               alt="Vinho selecionado"
               fill
+              sizes="(min-width: 768px) 44vw, 100vw"
               className="object-cover"
               style={{ filter: 'sepia(8%) brightness(0.86)' }}
             />
@@ -430,6 +431,7 @@ function HarmonizacoesTab({ locale, t }: { locale: Locale; t: UIStrings }) {
                   src={pair.meatImage}
                   alt={pair.meatTitle[locale]}
                   fill
+                  sizes="78px"
                   className="object-cover transition-all duration-500 group-hover:brightness-110"
                 />
               </div>
@@ -458,6 +460,7 @@ function HarmonizacoesTab({ locale, t }: { locale: Locale; t: UIStrings }) {
                   src={pair.wineImage}
                   alt={pair.wineNote[locale]}
                   fill
+                  sizes="78px"
                   className="object-cover transition-all duration-500 group-hover:brightness-105"
                 />
               </div>
@@ -505,6 +508,7 @@ function SelecaoTab({ locale, t }: { locale: Locale; t: UIStrings }) {
             src={featured.image}
             alt={featured.name}
             fill
+            sizes="(min-width: 768px) 52vw, 100vw"
             className="object-cover"
             style={{ filter: 'sepia(10%) brightness(0.80)' }}
           />

@@ -50,6 +50,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.webp" />
         <link rel="apple-touch-icon" href="/logo.webp" />
+        {/* Preload logo — used by Header (LCP candidate above the fold)
+            and Preloader on first paint. Avoids a render-blocking
+            request when the page hydrates. */}
+        <link rel="preload" as="image" href="/logo.webp" type="image/webp" />
         {gtmId && (
           <Script id="gtm-init" strategy="afterInteractive">
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

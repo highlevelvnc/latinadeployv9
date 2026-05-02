@@ -74,6 +74,7 @@ export default function LogoOverlap() {
                   src="/logo.webp"
                   alt="Latina Grill"
                   fill
+                  sizes="(min-width: 1024px) 160px, (min-width: 768px) 128px, (min-width: 640px) 112px, 96px"
                   className="object-contain p-4 sm:p-5 drop-shadow-[0_0_30px_rgba(220,38,38,0.45)]"
                   priority
                 />

@@ -63,6 +63,7 @@ export default function Footer() {
                   src="/logo.webp"
                   alt="Latina Grill"
                   fill
+                  sizes="40px"
                   className="object-contain"
                 />
               </div>

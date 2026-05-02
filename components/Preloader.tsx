@@ -56,6 +56,7 @@ export default function Preloader() {
               src="/logo.webp"
               alt="Latina Grill"
               fill
+              sizes="128px"
               className="object-contain"
               priority
             />

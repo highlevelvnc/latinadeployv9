@@ -89,7 +89,9 @@ export default function Header() {
                   src="/logo.webp"
                   alt="Latina Grill"
                   fill
+                  sizes="(min-width: 1024px) 56px, 48px"
                   className="object-contain drop-shadow-[0_0_20px_rgba(220,38,38,0.5)]"
+                  priority
                 />
               </motion.div>
               <span className="text-white text-xl lg:text-2xl font-serif font-bold tracking-tight">

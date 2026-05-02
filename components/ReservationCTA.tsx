@@ -32,6 +32,7 @@ export default function ReservationCTA() {
           src="/tomahawklinda.webp"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover object-center"
           style={{ opacity: 0.07 }}
           quality={60}
