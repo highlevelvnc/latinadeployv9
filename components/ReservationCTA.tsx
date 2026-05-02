@@ -93,7 +93,7 @@ export default function ReservationCTA() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15 }}
-                className="mx-auto max-w-4xl font-serif text-[1.75rem] font-bold leading-[1.14] text-white md:text-5xl md:leading-[1.05] lg:text-6xl"
+                className="mx-auto max-w-4xl font-serif text-[1.75rem] sm:text-[2.25rem] md:text-5xl md:leading-[1.05] lg:text-6xl font-bold leading-[1.14] text-white"
               >
                 {t('title')}
               </motion.h2>
@@ -113,7 +113,7 @@ export default function ReservationCTA() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.3 }}
-                className="mx-auto max-w-3xl text-base leading-relaxed text-white/65 md:text-xl"
+                className="mx-auto max-w-3xl text-[15px] sm:text-base md:text-xl leading-relaxed text-white/65"
               >
                 {t('subtitle')}
               </motion.p>
