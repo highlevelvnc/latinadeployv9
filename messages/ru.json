@@ -10,7 +10,12 @@
     "reviewIndex": "Отзыв {index}",
     "previousEvent": "Предыдущее событие",
     "nextEvent": "Следующее событие",
-    "eventIndex": "Событие {index}"
+    "eventIndex": "Событие {index}",
+    "musicEnable": "Включить фоновую музыку",
+    "musicMute": "Выключить фоновую музыку"
+  },
+  "music": {
+    "label": "Музыка"
   },
   "stickyBar": {
     "reserve": "Забронировать стол",

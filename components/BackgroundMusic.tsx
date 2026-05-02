@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { Volume2, VolumeX } from 'lucide-react';
 
 // ─── Config ───────────────────────────────────────────────────────────────────
@@ -12,6 +13,8 @@ const SHOW_DELAY_MS = 3500; // appear after page settles
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function BackgroundMusic() {
+  const a = useTranslations('a11y');
+  const m = useTranslations('music');
   const audioRef        = useRef<HTMLAudioElement | null>(null);
   const [muted, setMuted]     = useState(true);   // always start muted — autoplay policy
   const [canPlay, setCanPlay] = useState(false);
@@ -71,7 +74,7 @@ export default function BackgroundMusic() {
         loop
         preload="metadata"
         muted
-        aria-hidden
+        aria-hidden="true"
       />
 
       {/* Control pill — fixed bottom-left */}
@@ -86,7 +89,8 @@ export default function BackgroundMusic() {
           >
             <button
               onClick={toggle}
-              aria-label={muted ? 'Activar música ambiente' : 'Silenciar música ambiente'}
+              aria-label={muted ? a('musicEnable') : a('musicMute')}
+              aria-pressed={!muted}
               className={`group flex items-center gap-2.5 rounded-full border px-4 py-2.5 backdrop-blur-xl transition-all duration-400 ${
                 muted
                   ? 'border-white/8 bg-black/55 hover:border-white/15 hover:bg-black/70'
@@ -100,13 +104,13 @@ export default function BackgroundMusic() {
                 }`}
               >
                 {muted
-                  ? <VolumeX className="w-3.5 h-3.5" />
-                  : <Volume2 className="w-3.5 h-3.5" />
+                  ? <VolumeX className="w-3.5 h-3.5" aria-hidden="true" />
+                  : <Volume2 className="w-3.5 h-3.5" aria-hidden="true" />
                 }
               </span>
 
               {/* Animated EQ bars */}
-              <span className="flex items-end gap-[3px]" aria-hidden>
+              <span className="flex items-end gap-[3px]" aria-hidden="true">
                 {([0.9, 1.2, 0.75] as const).map((duration, i) => (
                   <motion.span
                     key={i}
@@ -131,10 +135,10 @@ export default function BackgroundMusic() {
               {/* Label */}
               <span
                 className={`text-[9px] uppercase tracking-[0.32em] font-medium transition-colors duration-300 ${
-                  muted ? 'text-white/20' : 'text-white/42'
+                  muted ? 'text-white/35' : 'text-white/55'
                 }`}
               >
-                Música
+                {m('label')}
               </span>
             </button>
           </motion.div>

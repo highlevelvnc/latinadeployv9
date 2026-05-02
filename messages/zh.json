@@ -10,7 +10,12 @@
     "reviewIndex": "评价 {index}",
     "previousEvent": "上一个活动",
     "nextEvent": "下一个活动",
-    "eventIndex": "活动 {index}"
+    "eventIndex": "活动 {index}",
+    "musicEnable": "开启背景音乐",
+    "musicMute": "关闭背景音乐"
+  },
+  "music": {
+    "label": "音乐"
   },
   "stickyBar": {
     "reserve": "预订餐桌",

@@ -10,7 +10,12 @@
     "reviewIndex": "Review {index}",
     "previousEvent": "Previous event",
     "nextEvent": "Next event",
-    "eventIndex": "Event {index}"
+    "eventIndex": "Event {index}",
+    "musicEnable": "Play ambient music",
+    "musicMute": "Mute ambient music"
+  },
+  "music": {
+    "label": "Music"
   },
   "stickyBar": {
     "reserve": "Book a Table",

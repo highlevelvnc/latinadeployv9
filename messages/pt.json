@@ -10,7 +10,12 @@
     "reviewIndex": "Avaliação {index}",
     "previousEvent": "Evento anterior",
     "nextEvent": "Próximo evento",
-    "eventIndex": "Evento {index}"
+    "eventIndex": "Evento {index}",
+    "musicEnable": "Activar música ambiente",
+    "musicMute": "Silenciar música ambiente"
+  },
+  "music": {
+    "label": "Música"
   },
   "stickyBar": {
     "reserve": "Reservar Mesa",

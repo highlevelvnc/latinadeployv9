@@ -10,7 +10,12 @@
     "reviewIndex": "Avis {index}",
     "previousEvent": "Événement précédent",
     "nextEvent": "Événement suivant",
-    "eventIndex": "Événement {index}"
+    "eventIndex": "Événement {index}",
+    "musicEnable": "Activer la musique d'ambiance",
+    "musicMute": "Couper la musique d'ambiance"
+  },
+  "music": {
+    "label": "Musique"
   },
   "stickyBar": {
     "reserve": "Réserver une table",
