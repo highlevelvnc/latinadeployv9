@@ -13,7 +13,8 @@
     "eventIndex": "Event {index}",
     "musicEnable": "Play ambient music",
     "musicMute": "Mute ambient music",
-    "languageSelector": "Select language"
+    "languageSelector": "Select language",
+    "skipToContent": "Skip to content"
   },
   "music": {
     "label": "Music"

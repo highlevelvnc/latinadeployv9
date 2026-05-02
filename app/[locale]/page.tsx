@@ -79,7 +79,7 @@ export default function HomePage({ params: { locale } }: Props) {
       <Preloader />
       <Header />
       
-      <main className="overflow-hidden">
+      <main id="main" className="overflow-hidden">
         {/* 1. Hero Vídeo LIMPO — NÃO ALTERAR */}
         <Hero />
 

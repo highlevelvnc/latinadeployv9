@@ -13,7 +13,8 @@
     "eventIndex": "Событие {index}",
     "musicEnable": "Включить фоновую музыку",
     "musicMute": "Выключить фоновую музыку",
-    "languageSelector": "Выбрать язык"
+    "languageSelector": "Выбрать язык",
+    "skipToContent": "Перейти к содержимому"
   },
   "music": {
     "label": "Музыка"

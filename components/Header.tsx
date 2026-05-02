@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Menu, X, Phone, FileText } from 'lucide-react';
 import LanguageSelector from './LanguageSelector';
 
@@ -38,6 +38,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const locale = useLocale();
+  const a = useTranslations('a11y');
   const { scrollY } = useScroll();
 
   const headerBg = useTransform(
@@ -57,6 +58,17 @@ export default function Header() {
   const ctaLabel = reserveLabel[locale as keyof typeof reserveLabel] || reserveLabel.pt;
 
   return (
+    <>
+      {/* Skip-to-content link — visible only when focused via Tab.
+          Lets keyboard/screen-reader users bypass the nav and jump straight
+          to the page main content. Pairs with id="main" on each <main>. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2.5 focus:bg-red-600 focus:text-white focus:rounded-full focus:font-semibold focus:text-sm focus:shadow-2xl"
+      >
+        {a('skipToContent')}
+      </a>
+
     <motion.header
       style={{ backgroundColor: headerBg }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -180,5 +192,6 @@ export default function Header() {
         </motion.div>
       )}
     </motion.header>
+    </>
   );
 }
