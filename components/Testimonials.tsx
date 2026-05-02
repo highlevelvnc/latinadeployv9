@@ -324,22 +324,23 @@ export default function Testimonials() {
           </div>
 
           {/* Navigation */}
-          <div className="mt-8 flex items-center justify-center gap-5">
+          <div className="mt-8 flex items-center justify-center gap-3 sm:gap-5">
             <button
               onClick={handlePrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
               aria-label="Avaliação anterior"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center">
               {reviews.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveSlide(index)}
-                  className="flex h-8 w-8 flex-shrink-0 items-center justify-center"
+                  className="flex h-11 w-11 flex-shrink-0 items-center justify-center"
                   aria-label={`Avaliação ${index + 1}`}
+                  aria-current={index === activeSlide ? 'true' : undefined}
                 >
                   <span
                     className={`block h-1.5 rounded-full transition-all duration-300 ${
@@ -354,7 +355,7 @@ export default function Testimonials() {
 
             <button
               onClick={handleNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
               aria-label="Próxima avaliação"
             >
               <ChevronRight className="h-5 w-5" />
