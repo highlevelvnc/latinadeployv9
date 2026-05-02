@@ -1,11 +1,26 @@
 import { Playfair_Display, Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 import './[locale]/globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://latinagrill.pt'),
 };
+
+const SUPPORTED_LOCALES = ['pt', 'en', 'fr', 'ru', 'zh'] as const;
+
+// Reads the `x-pathname` header injected by middleware.ts and extracts the
+// locale prefix (/pt/..., /en/..., etc). Falls back to 'pt' for non-i18n
+// routes like /admin and /reservation that the middleware doesn't touch.
+function resolveLang(): string {
+  const pathname = headers().get('x-pathname') ?? '';
+  const match = pathname.match(/^\/([a-z]{2})(?:\/|$)/);
+  const candidate = match?.[1];
+  return candidate && (SUPPORTED_LOCALES as readonly string[]).includes(candidate)
+    ? candidate
+    : 'pt';
+}
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -28,9 +43,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const lang = resolveLang();
 
   return (
-    <html lang="pt" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang={lang} className={`${playfair.variable} ${inter.variable}`}>
       <head>
         <link rel="icon" href="/logo.webp" />
         <link rel="apple-touch-icon" href="/logo.webp" />
