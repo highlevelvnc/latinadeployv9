@@ -44,33 +44,33 @@ function ReservationsPage({ params: { locale } }: Props) {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-32 pb-24 bg-anthracite">
+      <main className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
         <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
           {/* Header */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-ruby/10 border border-ruby/20 rounded-full px-4 py-2 mb-6">
-              <Calendar className="w-4 h-4 text-ruby" />
-              <span className="text-xs lg:text-sm text-ruby uppercase tracking-widest font-medium">
+          <div className="text-center mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 bg-red-600/10 border border-red-600/20 rounded-full px-4 py-2 mb-6">
+              <Calendar className="w-4 h-4 text-red-500" aria-hidden="true" />
+              <span className="text-xs lg:text-sm text-red-400 uppercase tracking-widest font-medium">
                 {t('badge')}
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-cream mb-4">
+            <h1 className="text-[2rem] sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-light mb-4 leading-tight">
               {t('title')}
             </h1>
 
-            <p className="text-base lg:text-lg text-cream/70 leading-relaxed">
+            <p className="text-base lg:text-lg text-light/75 leading-relaxed">
               {t('description')}
             </p>
           </div>
 
           {/* Form Card */}
-          <div className="bg-anthracite-light border border-cream/5 rounded-2xl p-8 lg:p-12">
+          <div className="bg-dark-light border border-light/5 rounded-2xl p-5 sm:p-8 lg:p-12">
             <ReservationForm />
           </div>
 
           {/* Additional Info */}
-          <div className="mt-12 text-center text-sm text-cream/60">
+          <div className="mt-10 sm:mt-12 text-center text-sm text-light/65">
             <p>
               {locale === 'pt'
                 ? 'Horário de funcionamento:'
@@ -82,7 +82,7 @@ function ReservationsPage({ params: { locale } }: Props) {
                       ? '营业时间：'
                       : 'Opening hours:'}
             </p>
-            <p className="font-medium text-cream/80 mt-1">
+            <p className="font-medium text-light/85 mt-1">
               {locale === 'pt'
                 ? 'Todos os dias: 12:30–15:30, 18:30–22:30'
                 : locale === 'fr'

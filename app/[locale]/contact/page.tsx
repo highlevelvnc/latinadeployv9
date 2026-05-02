@@ -48,26 +48,36 @@ async function ContactPage({ params: { locale } }: Props) {
   const phoneNumber = '+351 968 707 515';
   const phoneNumberClean = phoneNumber.replace(/\s/g, '');
 
+  const reserveLabel = locale === 'pt'
+    ? 'Reservar Mesa'
+    : locale === 'fr'
+      ? 'Réserver'
+      : locale === 'ru'
+        ? 'Забронировать стол'
+        : locale === 'zh'
+          ? '预订餐桌'
+          : 'Book a Table';
+
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-32 pb-24 bg-dark">
+      <main className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-light mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h1 className="text-[2rem] sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-light mb-4 leading-tight">
               {t('title')}
             </h1>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 mb-12 sm:mb-16">
             {/* Info Cards */}
-            <div className="space-y-6">
+            <div className="space-y-5 sm:space-y-6">
               {/* Address */}
-              <div className="bg-dark-light border border-light/5 rounded-2xl p-8 hover:border-accent-orange/20 transition-all duration-300">
+              <div className="bg-dark-light border border-light/5 rounded-2xl p-6 sm:p-8 hover:border-accent-orange/20 transition-colors duration-300">
                 <div className="flex items-start gap-4">
                   <div className="bg-accent-orange/10 p-3 rounded-full flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-accent-orange" />
+                    <MapPin className="w-6 h-6 text-accent-orange" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-light mb-3">
@@ -77,7 +87,7 @@ async function ContactPage({ params: { locale } }: Props) {
                       href={`https://www.google.com/maps/search/?api=1&query=${addressEncoded}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-light/70 hover:text-accent-orange transition-colors leading-relaxed block mb-3"
+                      className="text-light/75 hover:text-accent-orange transition-colors leading-relaxed block mb-3"
                     >
                       {t('address.street')}<br />
                       {t('address.city')}
@@ -87,18 +97,18 @@ async function ContactPage({ params: { locale } }: Props) {
                         href={`https://www.google.com/maps/search/?api=1&query=${addressEncoded}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-accent-orange hover:bg-accent-yellow text-dark px-4 py-2.5 rounded-full text-sm font-semibold transition-all"
+                        className="inline-flex items-center justify-center gap-2 bg-accent-orange hover:bg-accent-yellow text-dark px-4 py-2.5 rounded-full text-sm font-semibold transition-colors"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="w-4 h-4" aria-hidden="true" />
                         {t('address.openMaps')}
                       </a>
                       <a
                         href={`https://www.google.com/maps/dir//${addressEncoded}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-dark-lighter border border-light/10 hover:border-accent-orange text-light px-4 py-2.5 rounded-full text-sm font-semibold transition-all"
+                        className="inline-flex items-center justify-center gap-2 bg-dark-lighter border border-light/10 hover:border-accent-orange text-light px-4 py-2.5 rounded-full text-sm font-semibold transition-colors"
                       >
-                        <MapPin className="w-4 h-4" />
+                        <MapPin className="w-4 h-4" aria-hidden="true" />
                         {t('address.directions')}
                       </a>
                     </div>
@@ -107,27 +117,27 @@ async function ContactPage({ params: { locale } }: Props) {
               </div>
 
               {/* Phone */}
-              <div className="bg-dark-light border border-light/5 rounded-2xl p-8 hover:border-accent-orange/20 transition-all duration-300">
+              <div className="bg-dark-light border border-light/5 rounded-2xl p-6 sm:p-8 hover:border-accent-orange/20 transition-colors duration-300">
                 <div className="flex items-start gap-4">
                   <div className="bg-accent-orange/10 p-3 rounded-full flex-shrink-0">
-                    <Phone className="w-6 h-6 text-accent-orange" />
+                    <Phone className="w-6 h-6 text-accent-orange" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-light mb-3">
                       {t('phone.label')}
                     </h3>
-                    <a 
+                    <a
                       href={`tel:${phoneNumberClean}`}
-                      className="text-2xl font-bold text-light hover:text-accent-orange transition-colors block mb-2"
+                      className="text-xl sm:text-2xl font-bold text-light hover:text-accent-orange transition-colors block mb-2 break-all"
                     >
                       {phoneNumber}
                     </a>
-                    <p className="text-xs text-light/50 mb-4">{t('phone.networkInfo')}</p>
+                    <p className="text-xs text-light/65 mb-4">{t('phone.networkInfo')}</p>
                     <a
                       href={`tel:${phoneNumberClean}`}
-                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red to-red-dark hover:from-red-light hover:to-red text-light px-6 py-3 rounded-full text-sm font-semibold transition-all"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-dark hover:from-red-500 hover:to-red-600 text-light px-6 py-3 rounded-full text-sm font-semibold transition-colors"
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-4 h-4" aria-hidden="true" />
                       {t('phone.callText')}
                     </a>
                   </div>
@@ -135,22 +145,22 @@ async function ContactPage({ params: { locale } }: Props) {
               </div>
 
               {/* Social */}
-              <div className="bg-dark-light border border-light/5 rounded-2xl p-8 hover:border-accent-orange/20 transition-all duration-300">
+              <div className="bg-dark-light border border-light/5 rounded-2xl p-6 sm:p-8 hover:border-accent-orange/20 transition-colors duration-300">
                 <div className="flex items-start gap-4">
                   <div className="bg-accent-orange/10 p-3 rounded-full flex-shrink-0">
-                    <Instagram className="w-6 h-6 text-accent-orange" />
+                    <Instagram className="w-6 h-6 text-accent-orange" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-light mb-3">
                       {t('social.label')}
                     </h3>
-                    <a 
+                    <a
                       href="https://www.instagram.com/latina.grill/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-light/70 hover:text-accent-orange transition-colors"
+                      className="inline-flex items-center gap-2 text-light/75 hover:text-accent-orange transition-colors"
                     >
-                      <Instagram className="w-5 h-5" />
+                      <Instagram className="w-5 h-5" aria-hidden="true" />
                       @latina.grill
                     </a>
                   </div>
@@ -160,22 +170,14 @@ async function ContactPage({ params: { locale } }: Props) {
               {/* CTA */}
               <Link
                 href={`/${locale}/reservations`}
-                className="block text-center bg-gradient-to-r from-red to-red-dark hover:from-red-light hover:to-red text-light px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-red/40"
+                className="block text-center bg-gradient-to-r from-red-600 to-red-dark hover:from-red-500 hover:to-red-600 text-light px-8 py-4 rounded-full text-base font-semibold transition-colors duration-300 hover:shadow-xl hover:shadow-red-600/40"
               >
-                {locale === 'pt'
-                  ? 'Reservar Mesa'
-                  : locale === 'fr'
-                    ? 'Réserver'
-                    : locale === 'ru'
-                      ? 'Забронировать стол'
-                      : locale === 'zh'
-                        ? '预订餐桌'
-                        : 'Book a Table'}
+                {reserveLabel}
               </Link>
             </div>
 
             {/* Map */}
-            <div className="bg-dark-light border border-light/5 rounded-2xl overflow-hidden h-[600px]">
+            <div className="bg-dark-light border border-light/5 rounded-2xl overflow-hidden h-[360px] sm:h-[480px] lg:h-[600px]">
               <iframe
                 src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3111.234!2d-9.4425!3d38.7245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDQzJzI4LjIiTiA5wrAyNiczMy4wIlc!5e0!3m2!1spt-PT!2spt!4v1234567890`}
                 width="100%"
