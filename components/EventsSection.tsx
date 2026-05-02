@@ -175,7 +175,7 @@ export default function EventsSection() {
     setActive((prev) => (prev + 1) % events.length);
 
   return (
-    <section ref={ref} className="relative py-16 lg:py-32 bg-black overflow-hidden">
+    <section ref={ref} className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-black overflow-hidden">
       {/* Subtle ambient light */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-1/3 h-[400px] w-[400px] rounded-full bg-red-900/8 blur-[120px]" />
@@ -195,7 +195,7 @@ export default function EventsSection() {
         >
           <p className="mb-4 text-[10px] uppercase tracking-[0.52em] text-white/30">{t.badge}</p>
 
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+          <h2 className="font-serif text-[2.25rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
             {t.overallTitle}
           </h2>
         </motion.div>
@@ -293,7 +293,7 @@ export default function EventsSection() {
                 </div>
 
                 {/* Event title */}
-                <h3 className="font-serif text-3xl md:text-4xl font-bold text-white mb-5 leading-[1.15]">
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 leading-[1.15]">
                   {events[active].title}
                 </h3>
 

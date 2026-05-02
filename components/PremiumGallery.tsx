@@ -95,7 +95,7 @@ export default function PremiumGallery() {
             <Instagram className="w-4 h-4 text-black/50 group-hover:text-black/80 transition-colors" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.32em] text-black/60 group-hover:text-black/80 transition-colors">{t.badge}</span>
           </a>
-          <h2 className="text-5xl md:text-6xl font-serif font-bold text-black tracking-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-black tracking-tight">
             {t.title}
           </h2>
         </motion.div>
@@ -120,6 +120,7 @@ export default function PremiumGallery() {
                 src={image.src}
                 alt={image.alt}
                 fill
+                sizes="(min-width: 768px) 25vw, 50vw"
                 className="object-cover group-hover:scale-[1.08] transition-transform duration-[1200ms] ease-out md:grayscale md:group-hover:grayscale-0"
               />
               {/* Hover overlay — desktop only (touch never activates hover) */}
