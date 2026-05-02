@@ -27,11 +27,26 @@ import {
 
 const MotionLink = motion(Link);
 
+/**
+ * Broadcast visibility changes so other floating elements (PhoneFloat) can
+ * step out of the way when the sticky bar is on screen. We use a window
+ * CustomEvent instead of pulling in a state-management dependency — the
+ * payload is one boolean and there are at most two listeners.
+ */
+const STICKY_BAR_EVENT = 'sticky-bar-visibility';
+
 export default function StickyReservationBar() {
   const t = useTranslations('stickyBar');
   const locale = useLocale();
   const [visible, setVisible] = useState(false);
   const [bottomGap, setBottomGap] = useState(0);
+
+  // Broadcast visibility to other floats (PhoneFloat).
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent(STICKY_BAR_EVENT, { detail: visible }),
+    );
+  }, [visible]);
 
   useEffect(() => {
     const heroThreshold = window.innerHeight * 0.9;
