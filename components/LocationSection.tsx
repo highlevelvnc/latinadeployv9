@@ -36,9 +36,9 @@ export default function LocationSection() {
   ];
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-40 bg-white overflow-hidden">
+    <section ref={ref} className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-white overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
 
           {/* Content — slides in from left */}
           <motion.div
@@ -60,23 +60,23 @@ export default function LocationSection() {
 
             <motion.h2
               variants={fadeUp}
-              className="text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-black mb-6 leading-[0.95] tracking-tight"
+              className="text-[2.75rem] sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-black mb-6 leading-[0.95] tracking-tight"
             >
               {t('title')}
             </motion.h2>
 
-            <motion.div variants={fadeUp} className="w-20 h-px bg-red mb-8" />
+            <motion.div variants={fadeUp} className="w-20 h-px bg-red-600 mb-8" />
 
             <motion.h3
               variants={fadeUp}
-              className="text-2xl md:text-3xl font-serif text-black/70 mb-10 leading-tight"
+              className="text-xl sm:text-2xl md:text-3xl font-serif text-black/70 mb-8 sm:mb-10 leading-tight"
             >
               {t('subtitle')}
             </motion.h3>
 
             <motion.p
               variants={fadeUp}
-              className="text-lg text-black/60 leading-relaxed mb-12 font-light max-w-xl"
+              className="text-base sm:text-lg text-black/60 leading-relaxed mb-10 sm:mb-12 font-light max-w-xl"
             >
               {t('description')}
             </motion.p>
@@ -96,7 +96,7 @@ export default function LocationSection() {
                     whileTap={{ scale: 0.98, transition: { duration: 0.12 } }}
                     className="flex items-start gap-4 group cursor-default"
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-black flex items-center justify-center group-hover:bg-red transition-colors duration-500">
+                    <div className="flex-shrink-0 w-12 h-12 bg-black flex items-center justify-center group-hover:bg-red-600 transition-colors duration-500">
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -118,16 +118,17 @@ export default function LocationSection() {
           >
             {/* Parallax wrapper — GPU transform only */}
             <motion.div style={{ y: imageY }}>
-              <div className="relative h-[600px] lg:h-[700px] overflow-hidden group">
+              <div className="relative h-[420px] sm:h-[520px] md:h-[600px] lg:h-[700px] overflow-hidden group">
                 <Image
                   src="/restaurantelocal.webp"
                   alt="Latina Grill Cascais"
                   fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
                 />
                 {/* Frame decorativo */}
                 <div className="absolute -inset-4 border-2 border-black/10 pointer-events-none" />
-                <div className="absolute top-8 right-8 w-24 h-24 border-t-2 border-r-2 border-red" />
+                <div className="absolute top-8 right-8 w-24 h-24 border-t-2 border-r-2 border-red-600" />
               </div>
             </motion.div>
           </motion.div>
