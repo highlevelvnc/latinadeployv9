@@ -491,7 +491,7 @@ export default function PremiumMeatGallery() {
                       alt={img.title}
                       fill
                       className={`object-cover transition-all duration-500 ${
-                        isActive ? 'scale-[1.04]' : 'grayscale-[0.25] hover:grayscale-0'
+                        isActive ? 'scale-[1.04]' : 'md:grayscale-[0.25] md:hover:grayscale-0'
                       }`}
                       style={{ objectPosition: img.thumbPosition || 'center center' }}
                       sizes="(max-width: 768px) 33vw, 10vw"
@@ -499,7 +499,7 @@ export default function PremiumMeatGallery() {
 
                     <div
                       className={`absolute inset-0 transition-colors duration-300 ${
-                        isActive ? 'bg-transparent' : 'bg-black/28 hover:bg-black/10'
+                        isActive ? 'bg-transparent' : 'bg-black/15 md:bg-black/28 md:hover:bg-black/10'
                       }`}
                     />
 
