@@ -18,7 +18,7 @@ export default function MeatSection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 lg:py-32 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #0a0807 0%, #0d0b09 50%, #0a0807 100%)' }}
     >
       {/* ── Ambient warm glows ── */}
@@ -40,11 +40,12 @@ export default function MeatSection() {
             transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative h-[520px] lg:h-[720px] overflow-hidden rounded-3xl group">
+            <div className="relative h-[400px] sm:h-[480px] md:h-[560px] lg:h-[720px] overflow-hidden rounded-3xl group">
               <Image
                 src="/tomahawklatina.webp"
                 alt="Tomahawk Premium"
                 fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
                 priority
               />
@@ -90,12 +91,12 @@ export default function MeatSection() {
             </div>
 
             {/* Title */}
-            <h2 className="text-5xl md:text-6xl lg:text-[4.25rem] font-serif font-bold text-white mb-3 leading-[1.08] tracking-tight">
+            <h2 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-serif font-bold text-white mb-3 leading-[1.08] tracking-tight">
               {t('title')}
             </h2>
 
             {/* Subtitle */}
-            <p className="text-[12px] text-white/45 uppercase tracking-[0.14em] mb-9 font-light leading-loose whitespace-pre-line">
+            <p className="text-[12px] text-white/55 uppercase tracking-[0.14em] mb-9 font-light leading-loose whitespace-pre-line">
               {t('subtitle')}
             </p>
 
@@ -103,7 +104,7 @@ export default function MeatSection() {
             <div className="w-16 h-px bg-gradient-to-r from-red-500 via-red-500/40 to-transparent mb-10" />
 
             {/* Description */}
-            <p className="text-[17px] text-white/55 leading-[1.85] mb-12 font-light">
+            <p className="text-base sm:text-[17px] text-white/65 leading-[1.85] mb-12 font-light">
               {t('description')}
             </p>
 
@@ -120,10 +121,10 @@ export default function MeatSection() {
                   {/* Floating left rule */}
                   <span className="absolute left-0 top-5 bottom-5 w-px bg-red-500/30 group-hover:bg-red-500/70 transition-colors duration-500" />
 
-                  <p className="text-[13px] font-medium text-white/72 group-hover:text-white/92 transition-colors duration-400 leading-snug mb-[7px]">
+                  <p className="text-[13px] font-medium text-white/82 group-hover:text-white/95 transition-colors duration-400 leading-snug mb-[7px]">
                     {card.name}
                   </p>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/28 group-hover:text-white/48 transition-colors duration-400 leading-tight">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/45 group-hover:text-white/62 transition-colors duration-400 leading-tight">
                     {card.descriptor}
                   </p>
                 </motion.div>
