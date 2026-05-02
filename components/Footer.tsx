@@ -47,9 +47,17 @@ const headings = {
 
 export default function Footer() {
   const t = useTranslations('footer');
+  const tCookies = useTranslations('cookies');
   const locale = useLocale();
   const currentYear = new Date().getFullYear();
   const links = navLinks[locale as keyof typeof navLinks] || navLinks.pt;
+
+  // Re-opens the cookie consent banner. Required by RGPD: users must be
+  // able to revisit/withdraw their consent at any time without friction.
+  const openCookieSettings = () => {
+    if (typeof window === 'undefined') return;
+    window.dispatchEvent(new Event('cookie-consent-open'));
+  };
 
   return (
     <footer className="bg-dark-light border-t border-light/5 pt-16 pb-8">
@@ -166,10 +174,16 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-light/10 text-center md:text-left text-sm text-light/55">
+        <div className="pt-8 border-t border-light/10 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-light/55 text-center md:text-left">
           <p>
             © {currentYear} Latina Grill Cascais. {t('rights')}
           </p>
+          <button
+            onClick={openCookieSettings}
+            className="text-light/55 hover:text-light/85 transition-colors underline-offset-4 hover:underline"
+          >
+            {tCookies('manageSettings')}
+          </button>
         </div>
       </div>
     </footer>

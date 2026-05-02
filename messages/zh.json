@@ -1,4 +1,25 @@
 {
+  "cookies": {
+    "title": "Cookie 与隐私",
+    "description": "我们使用必要的 Cookie 以保证网站正常运行。分析类 Cookie 为可选项，有助于我们改善体验。",
+    "acceptAll": "全部接受",
+    "rejectAll": "仅必要",
+    "customize": "自定义",
+    "savePreferences": "保存偏好",
+    "close": "关闭",
+    "manageSettings": "Cookie 设置",
+    "categories": {
+      "essential": {
+        "title": "必要",
+        "description": "保证网站基本功能（语言选择、会话）。始终启用。",
+        "alwaysOn": "始终启用"
+      },
+      "analytics": {
+        "title": "分析",
+        "description": "Google Analytics — 帮助我们了解网站使用情况以进行改进。"
+      }
+    }
+  },
   "notFound": {
     "code": "404",
     "title": "页面未找到",

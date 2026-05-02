@@ -1,4 +1,25 @@
 {
+  "cookies": {
+    "title": "Cookies & Confidentialité",
+    "description": "Nous utilisons des cookies essentiels au fonctionnement du site. Les cookies analytiques sont optionnels et nous aident à améliorer l'expérience.",
+    "acceptAll": "Tout accepter",
+    "rejectAll": "Essentiels uniquement",
+    "customize": "Personnaliser",
+    "savePreferences": "Enregistrer",
+    "close": "Fermer",
+    "manageSettings": "Paramètres des cookies",
+    "categories": {
+      "essential": {
+        "title": "Essentiels",
+        "description": "Nécessaires au fonctionnement de base (langue choisie, session). Toujours actifs.",
+        "alwaysOn": "Toujours actifs"
+      },
+      "analytics": {
+        "title": "Analyses",
+        "description": "Google Analytics — nous aident à comprendre l'usage du site pour l'améliorer."
+      }
+    }
+  },
   "notFound": {
     "code": "404",
     "title": "Page introuvable",

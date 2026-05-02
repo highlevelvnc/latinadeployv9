@@ -1,4 +1,25 @@
 {
+  "cookies": {
+    "title": "Cookies & Privacy",
+    "description": "We use essential cookies for the site to work. Analytics cookies are optional and help us improve the experience.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Essential only",
+    "customize": "Customize",
+    "savePreferences": "Save preferences",
+    "close": "Close",
+    "manageSettings": "Cookie settings",
+    "categories": {
+      "essential": {
+        "title": "Essential",
+        "description": "Required for basic functionality (chosen language, session). Always on.",
+        "alwaysOn": "Always on"
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Google Analytics — helps us understand how the site is used so we can improve it."
+      }
+    }
+  },
   "notFound": {
     "code": "404",
     "title": "Page not found",

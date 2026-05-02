@@ -1,4 +1,25 @@
 {
+  "cookies": {
+    "title": "Cookies и конфиденциальность",
+    "description": "Мы используем необходимые cookies для работы сайта. Аналитические cookies опциональны и помогают улучшить опыт.",
+    "acceptAll": "Принять все",
+    "rejectAll": "Только необходимые",
+    "customize": "Настроить",
+    "savePreferences": "Сохранить",
+    "close": "Закрыть",
+    "manageSettings": "Настройки cookies",
+    "categories": {
+      "essential": {
+        "title": "Необходимые",
+        "description": "Требуются для базовой работы (выбранный язык, сессия). Всегда активны.",
+        "alwaysOn": "Всегда активны"
+      },
+      "analytics": {
+        "title": "Аналитика",
+        "description": "Google Analytics — помогает понять, как используется сайт, чтобы улучшить его."
+      }
+    }
+  },
   "notFound": {
     "code": "404",
     "title": "Страница не найдена",
