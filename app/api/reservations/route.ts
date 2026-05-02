@@ -21,6 +21,13 @@ interface ReservationData {
   observations?: string;
 }
 
+// ─── Anti-spam thresholds ────────────────────────────────────────────────────
+// Forms submitted in under 2s of mounting are bots (humans take longer to type
+// even a single field). 30 days catches stale tabs left open by humans without
+// flagging them as bots — very generous upper bound.
+const MIN_FORM_DURATION_MS = 2000;
+const MAX_FORM_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
+
 // ─── Rate limiting (in-memory, best-effort) ──────────────────────────────────
 // Limit: 3 reservations per IP per 10 minutes.
 // Caveat: per-instance only. On Vercel serverless, a determined attacker could
@@ -97,6 +104,42 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
+
+    // ─── Anti-spam: honeypot ─────────────────────────────────────────────
+    // The form has a hidden 'website' field that humans never see. Bots
+    // auto-fill it. We silently drop the submission with a 200 OK so the
+    // bot thinks it succeeded and doesn't iterate / try alternative paths.
+    if (typeof body._website === 'string' && body._website.trim() !== '') {
+      console.warn(`[Latina Grill] Honeypot triggered for IP: ${ip}`);
+      return NextResponse.json(
+        { success: true, message: 'Reservation pending owner approval' },
+        { status: 200 },
+      );
+    }
+
+    // ─── Anti-spam: time-trap ────────────────────────────────────────────
+    // Submissions in under 2s = bot. Submissions older than 30 days = stale
+    // form (browser autofill from a saved tab) — accept anyway to avoid
+    // false-positives on slow humans.
+    const formMountedAt = Number(body._t);
+    if (Number.isFinite(formMountedAt) && formMountedAt > 0) {
+      const elapsed = Date.now() - formMountedAt;
+      if (elapsed < MIN_FORM_DURATION_MS) {
+        console.warn(
+          `[Latina Grill] Time-trap triggered (${elapsed}ms) for IP: ${ip}`,
+        );
+        return NextResponse.json(
+          { success: true, message: 'Reservation pending owner approval' },
+          { status: 200 },
+        );
+      }
+      if (elapsed > MAX_FORM_DURATION_MS) {
+        // form is older than 30d — almost certainly stale tab, but log it
+        console.warn(
+          `[Latina Grill] Stale form (${elapsed}ms) for IP: ${ip}, accepting anyway`,
+        );
+      }
+    }
 
     const data: ReservationData = {
       name: trimToMax(body.name, 100),

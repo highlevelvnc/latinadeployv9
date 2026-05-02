@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import {
@@ -120,6 +120,16 @@ export default function ReservationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Anti-spam:
+  //   1. honeypot: hidden 'website' field. Bots auto-fill all inputs they
+  //      see in the DOM regardless of CSS visibility — humans never touch it.
+  //   2. time-trap: timestamp captured on first render. Forms submitted in
+  //      under 2 seconds are bots filling out via Puppeteer/Playwright.
+  // Both signals are sent to the API which silently drops the submission
+  // (returns 200 success) so bots can't iterate.
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const formMountedAt = useRef<number>(Date.now());
+
   // ─── Smart slot filtering — recomputes when date changes ─────────────────────
   const availableSlots = useMemo(() => {
     if (!formData.date || !isToday(formData.date)) {
@@ -205,6 +215,9 @@ export default function ReservationForm() {
         body: JSON.stringify({
           ...formData,
           phone: `${formData.countryCode} ${formData.phone}`,
+          // Anti-spam signals (server validates and silently drops if bot)
+          _website: honeypotRef.current?.value ?? '',
+          _t: formMountedAt.current,
         }),
       });
 
@@ -298,6 +311,33 @@ export default function ReservationForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+
+        {/* Honeypot — invisible field that bots auto-fill but humans never touch.
+            Positioned off-screen (not display:none, since some bots skip those).
+            tabIndex=-1 so keyboard users skip it; aria-hidden so SR ignores it. */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            top: 'auto',
+            width: '1px',
+            height: '1px',
+            overflow: 'hidden',
+          }}
+        >
+          <label htmlFor="website-hp">Website (do not fill)</label>
+          <input
+            ref={honeypotRef}
+            type="text"
+            id="website-hp"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            defaultValue=""
+          />
+        </div>
+
 
         {/* Name */}
         <div className="group">
