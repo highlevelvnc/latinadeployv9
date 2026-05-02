@@ -112,7 +112,7 @@ export default function OpeningHours() {
           className="mx-auto max-w-6xl"
         >
           <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] shadow-[0_20px_70px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-            <div className="grid gap-10 px-6 py-8 md:px-10 md:py-10 lg:grid-cols-[0.9fr_1.2fr] lg:gap-14 lg:px-14 lg:py-14">
+            <div className="grid gap-8 px-4 py-7 sm:gap-10 sm:px-6 sm:py-8 md:px-10 md:py-10 lg:grid-cols-[0.9fr_1.2fr] lg:gap-14 lg:px-14 lg:py-14">
               {/* Left — slides in from left */}
               <motion.div
                 variants={slideFromLeft}
@@ -128,7 +128,7 @@ export default function OpeningHours() {
                   </span>
                 </motion.div>
 
-                <h2 className="text-3xl leading-tight text-white md:text-4xl lg:text-5xl font-serif font-bold">
+                <h2 className="text-[1.75rem] sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold leading-tight text-white">
                   {t.title}
                   <span className="block text-red-500">{t.titleAccent}</span>
                 </h2>
