@@ -70,7 +70,7 @@ export default function Footer() {
                 <span className="text-2xl font-serif font-bold text-light tracking-tight group-hover:text-accent-orange transition-colors">
                   Latina Grill
                 </span>
-                <span className="text-xs text-red font-sans uppercase tracking-widest -mt-1">
+                <span className="text-xs text-red-600 font-sans uppercase tracking-widest -mt-1">
                   Cascais
                 </span>
               </div>
@@ -141,7 +141,7 @@ export default function Footer() {
                 href="https://www.instagram.com/latina.grill/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-red/20 hover:bg-red/30 text-light px-4 py-2.5 rounded-full text-sm transition-colors"
+                className="inline-flex items-center gap-2 bg-red-600/20 hover:bg-red-600/30 text-light px-4 py-2.5 rounded-full text-sm transition-colors"
               >
                 <Instagram className="w-4 h-4" />
                 @latina.grill
@@ -165,18 +165,10 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-light/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-light/40">
+        <div className="pt-8 border-t border-light/10 text-center md:text-left text-sm text-light/55">
           <p>
             © {currentYear} Latina Grill Cascais. {t('rights')}
           </p>
-          <div className="flex gap-6">
-            <Link href={`/${locale}/privacy`} className="hover:text-light/60 transition-colors">
-              {t('privacy')}
-            </Link>
-            <Link href={`/${locale}/terms`} className="hover:text-light/60 transition-colors">
-              {t('terms')}
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
