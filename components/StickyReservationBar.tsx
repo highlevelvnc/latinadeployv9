@@ -31,6 +31,7 @@ export default function StickyReservationBar() {
   const t = useTranslations('stickyBar');
   const locale = useLocale();
   const [visible, setVisible] = useState(false);
+  const [bottomGap, setBottomGap] = useState(0);
 
   useEffect(() => {
     const heroThreshold = window.innerHeight * 0.9;
@@ -60,9 +61,29 @@ export default function StickyReservationBar() {
 
     window.addEventListener('scroll', onScroll, { passive: true });
 
+    // visualViewport tracking — keeps the bar glued to the visible bottom of
+    // the screen, regardless of the mobile browser's address/toolbar showing
+    // or hiding. Without this the bar appears to "float" once Chrome hides
+    // its bottom UI on scroll-down.
+    const vv = window.visualViewport;
+    const updateGap = () => {
+      if (!vv) return;
+      const gap = window.innerHeight - vv.height - vv.offsetTop;
+      setBottomGap(Math.max(0, gap));
+    };
+    updateGap();
+    if (vv) {
+      vv.addEventListener('resize', updateGap);
+      vv.addEventListener('scroll', updateGap);
+    }
+
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', onScroll);
+      if (vv) {
+        vv.removeEventListener('resize', updateGap);
+        vv.removeEventListener('scroll', updateGap);
+      }
     };
   }, []);
 
@@ -75,11 +96,13 @@ export default function StickyReservationBar() {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed bottom-0 left-0 right-0 z-50 lg:hidden"
+          className="fixed left-0 right-0 z-50 lg:hidden"
+          style={{ bottom: `${bottomGap}px` }}
         >
-          {/* Frosted glass bar */}
-          <div className="flex items-center gap-2.5 border-t border-white/[0.07] bg-black/92 px-4 py-3 backdrop-blur-xl">
-
+          {/* Frosted-glass bar — anchored flush to the visual bottom */}
+          <div className="flex items-center gap-2 border-t border-white/[0.08] bg-neutral-950/90 px-3 pb-3 pt-3 shadow-[0_-8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
+               style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+          >
             {/* Primary CTA — Reserve */}
             <MotionLink
               href={`/${locale}/reservations`}
@@ -87,10 +110,10 @@ export default function StickyReservationBar() {
               initial="idle"
               whileHover="hover"
               whileTap="tap"
-              className="flex flex-1 items-center justify-center gap-2 rounded-full bg-red-600 px-4 py-3.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_6px_24px_rgba(180,20,20,0.38)]"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_4px_16px_rgba(220,38,38,0.35)] min-h-[48px]"
             >
-              <Calendar className="h-4 w-4 flex-shrink-0" />
-              <span>{t('reserve')}</span>
+              <Calendar className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+              <span className="whitespace-nowrap">{t('reserve')}</span>
             </MotionLink>
 
             {/* Secondary CTA — View Menu */}
@@ -100,15 +123,12 @@ export default function StickyReservationBar() {
               initial="idle"
               whileHover="hover"
               whileTap="tap"
-              className="flex flex-shrink-0 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-3.5 text-[12px] font-semibold uppercase tracking-[0.2em] text-white/80"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 min-h-[48px]"
             >
-              <FileText className="h-4 w-4 flex-shrink-0" />
-              <span>{t('menu')}</span>
+              <FileText className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+              <span className="whitespace-nowrap">{t('menu')}</span>
             </MotionLink>
           </div>
-
-          {/* Safe area spacer for iOS home indicator */}
-          <div className="bg-black/92" style={{ height: 'env(safe-area-inset-bottom)' }} />
         </motion.div>
       )}
     </AnimatePresence>
