@@ -10,14 +10,18 @@ export default function Preloader() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
+    const reduce = mediaQuery.matches;
+    setPrefersReducedMotion(reduce);
 
+    // Read mediaQuery directly so the timer reflects the real preference on
+    // first render — using state would re-schedule (stale closure) and
+    // briefly run the long timer even for users who opted out of motion.
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, prefersReducedMotion ? 800 : 1500);
+    }, reduce ? 600 : 1500);
 
     return () => clearTimeout(timer);
-  }, [prefersReducedMotion]);
+  }, []);
 
   return (
     <AnimatePresence>
