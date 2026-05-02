@@ -72,9 +72,9 @@ export default function DrinksSection() {
   const t = content[locale as keyof typeof content] || content.pt;
 
   return (
-    <section ref={ref} className="relative py-32 bg-white overflow-hidden">
+    <section ref={ref} className="relative py-20 sm:py-24 md:py-28 lg:py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-5 gap-10 sm:gap-12 lg:gap-20 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -89,7 +89,7 @@ export default function DrinksSection() {
               </span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-black mb-6 leading-[1.05] tracking-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-black mb-6 leading-[1.05] tracking-tight">
               {t.title}
             </h2>
 
@@ -128,35 +128,38 @@ export default function DrinksSection() {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
               {/* Tall Main Image */}
-              <div className="row-span-2 relative h-[600px] overflow-hidden group">
+              <div className="row-span-2 relative h-[420px] sm:h-[500px] lg:h-[600px] overflow-hidden group">
                 <Image
                   src="/drinkmartini.jpeg"
                   alt="Martini Premium"
                   fill
+                  sizes="(min-width: 1024px) 30vw, 50vw"
                   className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
 
               {/* Top Right */}
-              <div className="relative h-[290px] overflow-hidden group">
+              <div className="relative h-[200px] sm:h-[242px] lg:h-[290px] overflow-hidden group">
                 <Image
                   src="/moscowmule.jpeg"
                   alt="Moscow Mule"
                   fill
+                  sizes="(min-width: 1024px) 30vw, 50vw"
                   className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
 
               {/* Bottom Right */}
-              <div className="relative h-[290px] overflow-hidden group">
+              <div className="relative h-[200px] sm:h-[242px] lg:h-[290px] overflow-hidden group">
                 <Image
                   src="/drinkblackberry.jpeg"
                   alt="Blackberry"
                   fill
+                  sizes="(min-width: 1024px) 30vw, 50vw"
                   className="object-cover group-hover:scale-[1.04] transition-transform duration-[1400ms] ease-out grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
