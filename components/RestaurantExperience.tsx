@@ -176,7 +176,7 @@ export default function RestaurantExperience() {
             </div>
 
             {/* H2 */}
-            <h2 className="text-[2rem] md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-[1.08] md:leading-[1.05] tracking-tight">
+            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white mb-6 leading-[1.08] md:leading-[1.05] tracking-tight">
               {t.title}
             </h2>
 
