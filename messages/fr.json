@@ -1,4 +1,10 @@
 {
+  "errorState": {
+    "title": "Une erreur est survenue",
+    "description": "Une erreur inattendue s'est produite. Notre équipe a été informée. Vous pouvez réessayer ou revenir à l'accueil.",
+    "retry": "Réessayer",
+    "backHome": "Retour à l'accueil"
+  },
   "cookies": {
     "title": "Cookies & Confidentialité",
     "description": "Nous utilisons des cookies essentiels au fonctionnement du site. Les cookies analytiques sont optionnels et nous aident à améliorer l'expérience.",

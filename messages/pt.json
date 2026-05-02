@@ -1,4 +1,10 @@
 {
+  "errorState": {
+    "title": "Algo correu mal",
+    "description": "Ocorreu um erro inesperado. A nossa equipa foi notificada. Pode tentar de novo ou voltar à página inicial.",
+    "retry": "Tentar de novo",
+    "backHome": "Voltar à página inicial"
+  },
   "cookies": {
     "title": "Cookies & Privacidade",
     "description": "Usamos cookies essenciais ao funcionamento do site. Cookies de análise são opcionais e ajudam-nos a melhorar a experiência.",

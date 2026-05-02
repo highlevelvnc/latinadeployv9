@@ -1,4 +1,10 @@
 {
+  "errorState": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Our team has been notified. You can retry or head back to the home page.",
+    "retry": "Try again",
+    "backHome": "Back to home"
+  },
   "cookies": {
     "title": "Cookies & Privacy",
     "description": "We use essential cookies for the site to work. Analytics cookies are optional and help us improve the experience.",
