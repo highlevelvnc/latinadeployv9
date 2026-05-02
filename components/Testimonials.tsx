@@ -196,6 +196,7 @@ function ReviewCard({
 
 export default function Testimonials() {
   const t = useTranslations('testimonials');
+  const a = useTranslations('a11y');
   const locale = useLocale();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -328,9 +329,9 @@ export default function Testimonials() {
             <button
               onClick={handlePrev}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
-              aria-label="Avaliação anterior"
+              aria-label={a('previousReview')}
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>
 
             <div className="flex items-center">
@@ -339,7 +340,7 @@ export default function Testimonials() {
                   key={index}
                   onClick={() => setActiveSlide(index)}
                   className="flex h-11 w-11 flex-shrink-0 items-center justify-center"
-                  aria-label={`Avaliação ${index + 1}`}
+                  aria-label={a('reviewIndex', { index: index + 1 })}
                   aria-current={index === activeSlide ? 'true' : undefined}
                 >
                   <span
@@ -356,9 +357,9 @@ export default function Testimonials() {
             <button
               onClick={handleNext}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/60 transition-all duration-300 hover:border-red-500/50 hover:bg-red-600/10 hover:text-white active:scale-95"
-              aria-label="Próxima avaliação"
+              aria-label={a('nextReview')}
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
 

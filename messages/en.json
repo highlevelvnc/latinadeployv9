@@ -1,4 +1,17 @@
 {
+  "a11y": {
+    "previous": "Previous",
+    "next": "Next",
+    "close": "Close",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "previousReview": "Previous review",
+    "nextReview": "Next review",
+    "reviewIndex": "Review {index}",
+    "previousEvent": "Previous event",
+    "nextEvent": "Next event",
+    "eventIndex": "Event {index}"
+  },
   "stickyBar": {
     "reserve": "Book a Table",
     "menu": "View Menu"

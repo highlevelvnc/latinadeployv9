@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Instagram, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const content = {
   pt: {
@@ -39,6 +39,7 @@ export default function PremiumGallery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
   const locale = useLocale();
+  const a = useTranslations('a11y');
   const t = content[locale as keyof typeof content] || content.pt;
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -170,27 +171,27 @@ export default function PremiumGallery() {
             <button
               onClick={closeLightbox}
               className="absolute top-5 right-5 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white"
-              aria-label="Fechar"
+              aria-label={a('close')}
             >
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {/* Prev button */}
             <button
               onClick={(e) => { e.stopPropagation(); showPrev(); }}
               className="absolute left-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:left-8"
-              aria-label="Imagem anterior"
+              aria-label={a('previousImage')}
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-6 w-6" aria-hidden="true" />
             </button>
 
             {/* Next button */}
             <button
               onClick={(e) => { e.stopPropagation(); showNext(); }}
               className="absolute right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] text-white/80 transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:text-white md:right-8"
-              aria-label="Próxima imagem"
+              aria-label={a('nextImage')}
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-6 w-6" aria-hidden="true" />
             </button>
 
             {/* Image */}

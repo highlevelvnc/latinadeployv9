@@ -3,7 +3,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { buttonVariants, INVIEW_MARGIN } from '@/lib/animations';
@@ -26,6 +26,7 @@ export default function EventsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: INVIEW_MARGIN });
   const locale = useLocale();
+  const a = useTranslations('a11y');
   const [active, setActive] = useState(0);
 
   const content = {
@@ -314,19 +315,19 @@ export default function EventsSection() {
               <button
                 onClick={handlePrev}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white active:scale-95"
-                aria-label="Evento anterior"
+                aria-label={a('previousEvent')}
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
               </button>
 
-              <div className="flex items-center gap-1">
+              <div className="flex items-center">
                 {events.map((_, index) => (
-                  // h-8 w-8 = 32px hit area; visual dot stays 6px × 6px (or 28px active)
                   <button
                     key={index}
                     onClick={() => setActive(index)}
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center"
-                    aria-label={`Evento ${index + 1}`}
+                    className="flex h-11 w-11 flex-shrink-0 items-center justify-center"
+                    aria-label={a('eventIndex', { index: index + 1 })}
+                    aria-current={index === active ? 'true' : undefined}
                   >
                     <span className={`block h-1.5 rounded-full transition-all duration-300 ${
                       index === active
@@ -340,9 +341,9 @@ export default function EventsSection() {
               <button
                 onClick={handleNext}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/55 transition-all duration-300 hover:border-red-500/45 hover:bg-red-600/10 hover:text-white active:scale-95"
-                aria-label="Próximo evento"
+                aria-label={a('nextEvent')}
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-5 w-5" aria-hidden="true" />
               </button>
 
               <span className="text-[11px] text-white/28 tabular-nums tracking-wider ml-1">

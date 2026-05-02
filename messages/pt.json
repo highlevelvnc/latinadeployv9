@@ -1,4 +1,17 @@
 {
+  "a11y": {
+    "previous": "Anterior",
+    "next": "Próximo",
+    "close": "Fechar",
+    "previousImage": "Imagem anterior",
+    "nextImage": "Próxima imagem",
+    "previousReview": "Avaliação anterior",
+    "nextReview": "Próxima avaliação",
+    "reviewIndex": "Avaliação {index}",
+    "previousEvent": "Evento anterior",
+    "nextEvent": "Próximo evento",
+    "eventIndex": "Evento {index}"
+  },
   "stickyBar": {
     "reserve": "Reservar Mesa",
     "menu": "Ver Menu"

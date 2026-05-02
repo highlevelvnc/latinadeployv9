@@ -1,4 +1,17 @@
 {
+  "a11y": {
+    "previous": "Назад",
+    "next": "Вперёд",
+    "close": "Закрыть",
+    "previousImage": "Предыдущее изображение",
+    "nextImage": "Следующее изображение",
+    "previousReview": "Предыдущий отзыв",
+    "nextReview": "Следующий отзыв",
+    "reviewIndex": "Отзыв {index}",
+    "previousEvent": "Предыдущее событие",
+    "nextEvent": "Следующее событие",
+    "eventIndex": "Событие {index}"
+  },
   "stickyBar": {
     "reserve": "Забронировать стол",
     "menu": "Посмотреть меню"
