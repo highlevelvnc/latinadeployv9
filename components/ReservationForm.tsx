@@ -287,10 +287,10 @@ export default function ReservationForm() {
     <div className="relative">
 
       {/* Info bar */}
-      <div className="bg-red/10 border border-red/20 rounded-xl p-4 mb-6">
+      <div className="bg-red-600/10 border border-red-600/20 rounded-xl p-4 mb-6">
         <div className="flex items-start gap-3">
-          <Clock className="w-5 h-5 text-red mt-0.5 flex-shrink-0" />
-          <div className="text-sm text-light/80 space-y-1">
+          <Clock className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <div className="text-sm text-light/85 space-y-1">
             <p className="font-medium text-light">{t('info.schedule')}</p>
             <p>{t('info.minGuests')} · {t('info.allDays')}</p>
           </div>
@@ -302,7 +302,7 @@ export default function ReservationForm() {
         {/* Name */}
         <div className="group">
           <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-            <User className="w-4 h-4 text-accent-orange" />
+            <User className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.name')}
           </label>
           <input
@@ -312,20 +312,22 @@ export default function ReservationForm() {
             value={formData.name}
             onChange={handleChange}
             autoComplete="name"
-            className={`w-full bg-dark-lighter border ${errors.name ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+            aria-invalid={errors.name ? 'true' : undefined}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            className={`w-full bg-dark-lighter border ${errors.name ? 'border-red-500' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/45 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
             placeholder="João Silva"
           />
           {errors.name && (
-            <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />{errors.name}
+            <p id="name-error" role="alert" className="mt-1 text-sm text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" aria-hidden="true" />{errors.name}
             </p>
           )}
         </div>
 
         {/* Phone */}
         <div className="group">
-          <label className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-            <Phone className="w-4 h-4 text-accent-orange" />
+          <label htmlFor="phone" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
+            <Phone className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.phone')}
           </label>
           <div className="flex gap-2">
@@ -349,13 +351,15 @@ export default function ReservationForm() {
               value={formData.phone}
               onChange={handleChange}
               autoComplete="tel-national"
-              className={`flex-1 bg-dark-lighter border ${errors.phone ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+              aria-invalid={errors.phone ? 'true' : undefined}
+              aria-describedby={errors.phone ? 'phone-error' : undefined}
+              className={`flex-1 bg-dark-lighter border ${errors.phone ? 'border-red-500' : 'border-light/10'} rounded-xl px-4 py-3 text-light placeholder:text-light/45 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
               placeholder="968 707 515"
             />
           </div>
           {errors.phone && (
-            <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />{errors.phone}
+            <p id="phone-error" role="alert" className="mt-1 text-sm text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" aria-hidden="true" />{errors.phone}
             </p>
           )}
         </div>
@@ -363,7 +367,7 @@ export default function ReservationForm() {
         {/* Email — real-time valid indicator */}
         <div className="group">
           <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-            <Mail className="w-4 h-4 text-accent-orange" />
+            <Mail className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.email')}
           </label>
           <div className="relative">
@@ -375,9 +379,11 @@ export default function ReservationForm() {
               onChange={handleChange}
               autoComplete="email"
               inputMode="email"
-              className={`w-full bg-dark-lighter border rounded-xl px-4 py-3 pr-11 text-light placeholder:text-light/40 focus:outline-none focus:ring-2 transition-all
+              aria-invalid={errors.email ? 'true' : undefined}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+              className={`w-full bg-dark-lighter border rounded-xl px-4 py-3 pr-11 text-light placeholder:text-light/45 focus:outline-none focus:ring-2 transition-all
                 ${errors.email
-                  ? 'border-red focus:border-red focus:ring-red/20'
+                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
                   : showEmailValid
                     ? 'border-accent-green/60 focus:border-accent-green focus:ring-accent-green/20'
                     : 'border-light/10 focus:border-accent-orange focus:ring-accent-orange/20'
@@ -399,8 +405,8 @@ export default function ReservationForm() {
             </AnimatePresence>
           </div>
           {errors.email && (
-            <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />{errors.email}
+            <p id="email-error" role="alert" className="mt-1 text-sm text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" aria-hidden="true" />{errors.email}
             </p>
           )}
         </div>
@@ -409,7 +415,7 @@ export default function ReservationForm() {
         <div className="group">
           <label htmlFor="date" className="flex items-center justify-between gap-2 text-sm font-medium text-light mb-2">
             <span className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-accent-orange" />
+              <Calendar className="w-4 h-4 text-accent-orange" aria-hidden="true" />
               {t('form.date')}
             </span>
             <AnimatePresence mode="wait">
@@ -420,7 +426,7 @@ export default function ReservationForm() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -8 }}
                   transition={{ duration: 0.2 }}
-                  className="text-xs uppercase tracking-wider text-accent-orange/70 font-normal"
+                  className="text-xs uppercase tracking-wider text-accent-orange/85 font-normal"
                 >
                   {dayOfWeek}
                 </motion.span>
@@ -435,36 +441,38 @@ export default function ReservationForm() {
             onChange={handleChange}
             min={getMinDate()}
             max={getMaxDate()}
-            className={`w-full bg-dark-lighter border ${errors.date ? 'border-red' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
+            aria-invalid={errors.date ? 'true' : undefined}
+            aria-describedby={errors.date ? 'date-error' : undefined}
+            className={`w-full bg-dark-lighter border ${errors.date ? 'border-red-500' : 'border-light/10'} rounded-xl px-4 py-3 text-light focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all`}
           />
           {errors.date && (
-            <p className="mt-1 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />{errors.date}
+            <p id="date-error" role="alert" className="mt-1 text-sm text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" aria-hidden="true" />{errors.date}
             </p>
           )}
         </div>
 
         {/* Time — chip picker grouped by service */}
-        <div className="group">
-          <label className="flex items-center gap-2 text-sm font-medium text-light mb-3">
-            <Clock className="w-4 h-4 text-accent-orange" />
+        <div className="group" role="group" aria-labelledby="time-label">
+          <label id="time-label" className="flex items-center gap-2 text-sm font-medium text-light mb-3">
+            <Clock className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.time')}
           </label>
 
           {!formData.date ? (
             <div className="rounded-xl border border-light/10 bg-dark-lighter px-4 py-6 text-center">
-              <p className="text-sm text-light/50 italic">{t('form.selectDateFirst')}</p>
+              <p className="text-sm text-light/65 italic">{t('form.selectDateFirst')}</p>
             </div>
           ) : noSlotsAvailable ? (
             <div className="rounded-xl border border-accent-orange/30 bg-accent-orange/5 p-4 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-accent-orange flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-accent-orange flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div className="text-sm text-light/85 space-y-2">
                 <p>{t('info.noSlotsToday')}</p>
                 <a
                   href={`tel:${PHONE_HREF}`}
                   className="inline-flex items-center gap-1.5 text-accent-orange hover:text-accent-yellow font-semibold transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5" />
+                  <Phone className="w-3.5 h-3.5" aria-hidden="true" />
                   {PHONE_NUMBER}
                 </a>
               </div>
@@ -474,11 +482,11 @@ export default function ReservationForm() {
               {availableSlots.lunch.length > 0 && (
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <Sun className="w-3.5 h-3.5 text-accent-orange" />
-                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/55 font-medium">
+                    <Sun className="w-3.5 h-3.5 text-accent-orange" aria-hidden="true" />
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/65 font-medium">
                       {t('info.lunch')}
                     </span>
-                    <span className="text-[11px] text-light/30">12:30 – 15:00</span>
+                    <span className="text-[11px] text-light/45">12:30 – 15:00</span>
                   </div>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                     {availableSlots.lunch.map((slot) => (
@@ -491,11 +499,11 @@ export default function ReservationForm() {
               {availableSlots.dinner.length > 0 && (
                 <div>
                   <div className="flex items-center gap-2 mb-2.5">
-                    <Moon className="w-3.5 h-3.5 text-accent-orange" />
-                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/55 font-medium">
+                    <Moon className="w-3.5 h-3.5 text-accent-orange" aria-hidden="true" />
+                    <span className="text-[11px] uppercase tracking-[0.18em] text-light/65 font-medium">
                       {t('info.dinner')}
                     </span>
-                    <span className="text-[11px] text-light/30">19:00 – 22:00</span>
+                    <span className="text-[11px] text-light/45">19:00 – 22:00</span>
                   </div>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                     {availableSlots.dinner.map((slot) => (
@@ -508,29 +516,33 @@ export default function ReservationForm() {
           )}
 
           {errors.time && (
-            <p className="mt-2 text-sm text-red flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" />{errors.time}
+            <p role="alert" className="mt-2 text-sm text-red-400 flex items-center gap-1">
+              <AlertCircle className="w-3 h-3" aria-hidden="true" />{errors.time}
             </p>
           )}
         </div>
 
         {/* Guests */}
         <div className="group">
-          <label className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-            <Users className="w-4 h-4 text-accent-orange" />
+          <label id="guests-label" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
+            <Users className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.guests')}
           </label>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4" role="group" aria-labelledby="guests-label">
             <button
               type="button"
               onClick={() => handleGuestsChange(-1)}
               disabled={formData.guests <= 1}
-              aria-label="−"
-              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all disabled:opacity-50 disabled:hover:border-light/10 active:scale-95"
+              aria-label={t('form.decreaseGuests')}
+              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-colors disabled:opacity-50 disabled:hover:border-light/10 active:scale-95 min-h-[48px] min-w-[48px] flex items-center justify-center"
             >
-              <Minus className="w-5 h-5 text-light" />
+              <Minus className="w-5 h-5 text-light" aria-hidden="true" />
             </button>
-            <div className="flex-1 bg-dark-lighter border border-light/10 rounded-xl px-6 py-3 text-center overflow-hidden">
+            <div
+              className="flex-1 bg-dark-lighter border border-light/10 rounded-xl px-6 py-3 text-center overflow-hidden"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               <AnimatePresence mode="wait">
                 <motion.span
                   key={formData.guests}
@@ -543,7 +555,7 @@ export default function ReservationForm() {
                   {formData.guests}
                 </motion.span>
               </AnimatePresence>
-              <span className="text-sm text-light/60 ml-2">
+              <span className="text-sm text-light/70 ml-2">
                 {formData.guests === 1 ? t('form.guestSingular') : t('form.guestPlural')}
               </span>
             </div>
@@ -551,10 +563,10 @@ export default function ReservationForm() {
               type="button"
               onClick={() => handleGuestsChange(1)}
               disabled={formData.guests >= MAX_GUESTS}
-              aria-label="+"
-              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-all disabled:opacity-50 disabled:hover:border-light/10 active:scale-95"
+              aria-label={t('form.increaseGuests')}
+              className="bg-dark-lighter border border-light/10 hover:border-accent-orange rounded-lg p-3 transition-colors disabled:opacity-50 disabled:hover:border-light/10 active:scale-95 min-h-[48px] min-w-[48px] flex items-center justify-center"
             >
-              <Plus className="w-5 h-5 text-light" />
+              <Plus className="w-5 h-5 text-light" aria-hidden="true" />
             </button>
           </div>
 
@@ -568,8 +580,8 @@ export default function ReservationForm() {
                 transition={{ duration: 0.25 }}
                 className="overflow-hidden"
               >
-                <div className="rounded-xl border border-accent-orange/30 bg-accent-orange/5 p-3.5 flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-accent-orange mt-0.5 flex-shrink-0" />
+                <div role="alert" className="rounded-xl border border-accent-orange/30 bg-accent-orange/5 p-3.5 flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-accent-orange mt-0.5 flex-shrink-0" aria-hidden="true" />
                   <div className="text-sm text-light/85 leading-relaxed">
                     <p className="font-semibold text-light mb-0.5">{t('info.largeGroupTitle')}</p>
                     <p>
@@ -591,7 +603,7 @@ export default function ReservationForm() {
         {/* Observations */}
         <div className="group">
           <label htmlFor="observations" className="flex items-center gap-2 text-sm font-medium text-light mb-2">
-            <MessageSquare className="w-4 h-4 text-accent-orange" />
+            <MessageSquare className="w-4 h-4 text-accent-orange" aria-hidden="true" />
             {t('form.observations')}
           </label>
           <textarea
@@ -601,7 +613,7 @@ export default function ReservationForm() {
             onChange={handleChange}
             rows={3}
             maxLength={500}
-            className="w-full bg-dark-lighter border border-light/10 rounded-xl px-4 py-3 text-light placeholder:text-light/40 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all resize-none"
+            className="w-full bg-dark-lighter border border-light/10 rounded-xl px-4 py-3 text-light placeholder:text-light/45 focus:border-accent-orange focus:outline-none focus:ring-2 focus:ring-accent-orange/20 transition-all resize-none"
             placeholder="Algum pedido especial?"
           />
         </div>
@@ -610,29 +622,30 @@ export default function ReservationForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-gradient-to-r from-red to-red-dark hover:from-red-light hover:to-red text-light px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-red/40 disabled:opacity-50 flex items-center justify-center gap-2"
+          aria-busy={isSubmitting}
+          className="w-full bg-gradient-to-r from-red-600 to-red-dark hover:from-red-500 hover:to-red-600 text-light px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-red-600/40 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isSubmitting ? t('form.submitting') : t('form.submit')}
         </button>
 
         {/* Direct contact block */}
         <div className="rounded-xl border border-light/8 bg-light/[0.02] px-5 py-4">
-          <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-light/35">
+          <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-light/55">
             {t('form.directContact')}
           </p>
           <div className="flex flex-col sm:flex-row gap-2.5">
             <a
               href={`tel:${PHONE_HREF}`}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-all hover:border-accent-orange hover:text-accent-orange"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-colors hover:border-accent-orange hover:text-accent-orange"
             >
-              <Phone className="w-4 h-4 shrink-0" />
+              <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
               {PHONE_NUMBER}
             </a>
             <a
               href={`mailto:${EMAIL_ADDRESS}`}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-all hover:border-accent-orange hover:text-accent-orange"
+              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-light/10 bg-dark-lighter px-5 py-3 text-sm font-semibold text-light transition-colors hover:border-accent-orange hover:text-accent-orange"
             >
-              <Mail className="w-4 h-4 shrink-0" />
+              <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
               {EMAIL_ADDRESS}
             </a>
           </div>
@@ -647,6 +660,8 @@ export default function ReservationForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="status"
+            aria-live="polite"
             className="absolute inset-0 bg-dark/95 backdrop-blur-sm rounded-2xl flex items-center justify-center p-8"
           >
             <motion.div
@@ -655,12 +670,12 @@ export default function ReservationForm() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="text-center"
             >
-              <CheckCircle2 className="w-16 h-16 text-accent-orange mx-auto mb-4" />
+              <CheckCircle2 className="w-16 h-16 text-accent-orange mx-auto mb-4" aria-hidden="true" />
               <h3 className="text-2xl font-serif font-bold text-light mb-2">{t('success.title')}</h3>
-              <p className="text-light/70 mb-6">{t('success.message')}</p>
+              <p className="text-light/80 mb-6">{t('success.message')}</p>
               <button
                 onClick={() => setShowSuccess(false)}
-                className="text-accent-orange hover:text-accent-yellow transition-colors text-sm font-medium"
+                className="text-accent-orange hover:text-accent-yellow transition-colors text-sm font-medium px-4 py-2 rounded min-h-[44px]"
               >
                 {t('success.close')}
               </button>

@@ -147,7 +147,9 @@
       "submit": "确认预订",
       "submitting": "提交中...",
       "callNow": "立即致电",
-      "directContact": "希望直接联系我们？"
+      "directContact": "希望直接联系我们？",
+      "decreaseGuests": "减少人数",
+      "increaseGuests": "增加人数"
     },
     "validation": {
       "required": "必填项",

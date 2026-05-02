@@ -147,7 +147,9 @@
       "submit": "Confirmer la Réservation",
       "submitting": "Envoi en cours...",
       "callNow": "Appeler",
-      "directContact": "Vous préférez nous contacter directement ?"
+      "directContact": "Vous préférez nous contacter directement ?",
+      "decreaseGuests": "Diminuer le nombre de personnes",
+      "increaseGuests": "Augmenter le nombre de personnes"
     },
     "validation": {
       "required": "Champ obligatoire",

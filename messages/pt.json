@@ -147,7 +147,9 @@
       "submit": "Confirmar Reserva",
       "submitting": "A enviar...",
       "callNow": "Ligar agora",
-      "directContact": "Prefere contactar directamente?"
+      "directContact": "Prefere contactar directamente?",
+      "decreaseGuests": "Diminuir número de pessoas",
+      "increaseGuests": "Aumentar número de pessoas"
     },
     "validation": {
       "required": "Campo obrigatório",

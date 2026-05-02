@@ -147,7 +147,9 @@
       "submit": "Confirm Reservation",
       "submitting": "Submitting...",
       "callNow": "Call Now",
-      "directContact": "Prefer to contact us directly?"
+      "directContact": "Prefer to contact us directly?",
+      "decreaseGuests": "Decrease number of guests",
+      "increaseGuests": "Increase number of guests"
     },
     "validation": {
       "required": "Required field",
