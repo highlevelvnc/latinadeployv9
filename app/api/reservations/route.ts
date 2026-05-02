@@ -72,15 +72,60 @@ function getClientIp(req: NextRequest): string {
 
 // ─── Validation ──────────────────────────────────────────────────────────────
 
+// Escapes HTML special chars to neutralize XSS payloads in user-supplied
+// strings before they get embedded into HTML emails. Defense-in-depth: even
+// if the email template forgets to escape, this layer prevents stored XSS.
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function trimToMax(value: unknown, max: number): string {
   return String(value ?? '').trim().slice(0, max);
 }
 
+// Phone: digits with optional + prefix and common separators.
+// Strips anything weird (e.g. <script>) leaving just the dialable string.
+const PHONE_RE = /^[+]?[\d\s\-().]{6,30}$/;
+
+// Time slots accepted for online booking (matches client lunch/dinner lists)
+const ALLOWED_TIME_SLOTS = new Set([
+  '12:30', '13:00', '13:30', '14:00', '14:30', '15:00',
+  '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00',
+]);
+
+const MAX_DAYS_AHEAD = 90;
+
 function validate(data: ReservationData): string | null {
   if (!data.name || data.name.length < 2) return 'invalid_name';
-  if (!data.phone || data.phone.length < 6) return 'invalid_phone';
+
+  if (!data.phone || !PHONE_RE.test(data.phone)) return 'invalid_phone';
+
+  // Format check
   if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) return 'invalid_date';
-  if (!/^\d{1,2}:\d{2}/.test(data.time)) return 'invalid_time';
+  // Real date check (rejects 2026-13-40, 2026-02-31, etc — all valid format)
+  const [y, m, d] = data.date.split('-').map(Number);
+  const parsed = new Date(Date.UTC(y, m - 1, d));
+  if (
+    parsed.getUTCFullYear() !== y ||
+    parsed.getUTCMonth() !== m - 1 ||
+    parsed.getUTCDate() !== d
+  ) {
+    return 'invalid_date';
+  }
+  // Date window: today → +90d (matches MAX_DAYS_AHEAD on the client)
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const max = new Date(today);
+  max.setUTCDate(max.getUTCDate() + MAX_DAYS_AHEAD);
+  if (parsed < today || parsed > max) return 'invalid_date';
+
+  if (!ALLOWED_TIME_SLOTS.has(data.time)) return 'invalid_time';
+
   if (!Number.isInteger(data.guests) || data.guests < 1 || data.guests > 50) {
     return 'invalid_guests';
   }
@@ -142,13 +187,16 @@ export async function POST(request: NextRequest) {
     }
 
     const data: ReservationData = {
-      name: trimToMax(body.name, 100),
+      // HTML-escape free-text fields BEFORE they reach the email template.
+      // Defense-in-depth: prevents stored XSS even if the template forgets
+      // to escape.
+      name: escapeHtml(trimToMax(body.name, 100)),
       phone: trimToMax(body.phone, 30),
       email: trimToMax(body.email, 254).toLowerCase() || undefined,
       date: trimToMax(body.date, 20),
       time: trimToMax(body.time, 10),
       guests: Number.parseInt(String(body.guests), 10),
-      observations: trimToMax(body.observations, 500) || undefined,
+      observations: escapeHtml(trimToMax(body.observations, 500)) || undefined,
     };
 
     const validationError = validate(data);
