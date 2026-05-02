@@ -12,7 +12,8 @@
     "nextEvent": "Événement suivant",
     "eventIndex": "Événement {index}",
     "musicEnable": "Activer la musique d'ambiance",
-    "musicMute": "Couper la musique d'ambiance"
+    "musicMute": "Couper la musique d'ambiance",
+    "languageSelector": "Choisir la langue"
   },
   "music": {
     "label": "Musique"

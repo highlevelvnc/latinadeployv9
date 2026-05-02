@@ -12,7 +12,8 @@
     "nextEvent": "Próximo evento",
     "eventIndex": "Evento {index}",
     "musicEnable": "Activar música ambiente",
-    "musicMute": "Silenciar música ambiente"
+    "musicMute": "Silenciar música ambiente",
+    "languageSelector": "Selecionar idioma"
   },
   "music": {
     "label": "Música"

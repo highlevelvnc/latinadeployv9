@@ -12,7 +12,8 @@
     "nextEvent": "Next event",
     "eventIndex": "Event {index}",
     "musicEnable": "Play ambient music",
-    "musicMute": "Mute ambient music"
+    "musicMute": "Mute ambient music",
+    "languageSelector": "Select language"
   },
   "music": {
     "label": "Music"

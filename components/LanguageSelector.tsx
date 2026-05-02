@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { Globe, ChevronDown, Check } from 'lucide-react';
@@ -15,19 +15,33 @@ const locales = [
 
 export default function LanguageSelector() {
   const locale = useLocale();
+  const a = useTranslations('a11y');
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
+  // Close on outside click + Escape, return focus to trigger when closed
   useEffect(() => {
+    if (!open) return;
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    if (open) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        buttonRef.current?.focus();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKey);
+    };
   }, [open]);
 
   const switchLocale = (newLocale: string) => {
@@ -43,12 +57,14 @@ export default function LanguageSelector() {
   return (
     <div ref={ref} className="relative">
       <button
+        ref={buttonRef}
         onClick={() => setOpen(!open)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white hover:bg-white/10 hover:border-white/25 transition-colors duration-150"
+        aria-label={`${a('languageSelector')}: ${current.name}`}
+        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-white hover:bg-white/10 hover:border-white/25 transition-colors duration-150 min-h-[36px]"
       >
-        <Globe className="h-3.5 w-3.5" />
+        <Globe className="h-3.5 w-3.5" aria-hidden="true" />
         <span className="text-[11px] font-bold uppercase tracking-wider">
           {current.label}
         </span>
@@ -56,6 +72,7 @@ export default function LanguageSelector() {
           className={`h-3 w-3 transition-transform duration-200 ${
             open ? 'rotate-180' : ''
           }`}
+          aria-hidden="true"
         />
       </button>
 
@@ -72,10 +89,11 @@ export default function LanguageSelector() {
                   key={loc.code}
                   role="option"
                   aria-selected={isActive}
+                  lang={loc.code}
                   onClick={() => switchLocale(loc.code)}
                   className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors duration-100 ${
                     isActive
-                      ? 'bg-red/20 text-white'
+                      ? 'bg-red-600/20 text-white'
                       : 'text-white/85 hover:bg-white/10 hover:text-white'
                   }`}
                 >
@@ -86,7 +104,7 @@ export default function LanguageSelector() {
                     {loc.name}
                   </span>
                   {isActive && (
-                    <Check className="h-3.5 w-3.5 text-red-400 flex-shrink-0" />
+                    <Check className="h-3.5 w-3.5 text-red-400 flex-shrink-0" aria-hidden="true" />
                   )}
                 </button>
               );

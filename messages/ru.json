@@ -12,7 +12,8 @@
     "nextEvent": "Следующее событие",
     "eventIndex": "Событие {index}",
     "musicEnable": "Включить фоновую музыку",
-    "musicMute": "Выключить фоновую музыку"
+    "musicMute": "Выключить фоновую музыку",
+    "languageSelector": "Выбрать язык"
   },
   "music": {
     "label": "Музыка"

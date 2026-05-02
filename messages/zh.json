@@ -12,7 +12,8 @@
     "nextEvent": "下一个活动",
     "eventIndex": "活动 {index}",
     "musicEnable": "开启背景音乐",
-    "musicMute": "关闭背景音乐"
+    "musicMute": "关闭背景音乐",
+    "languageSelector": "选择语言"
   },
   "music": {
     "label": "音乐"
