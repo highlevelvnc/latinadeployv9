@@ -1,4 +1,12 @@
 {
+  "notFound": {
+    "code": "404",
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n'existe pas, a été déplacée ou n'est plus disponible. La table vous attend toujours.",
+    "backHome": "Retour à l'accueil",
+    "viewMenu": "Voir le Menu",
+    "contact": "Nous contacter"
+  },
   "a11y": {
     "previous": "Précédent",
     "next": "Suivant",

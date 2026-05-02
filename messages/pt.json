@@ -1,4 +1,12 @@
 {
+  "notFound": {
+    "code": "404",
+    "title": "Página não encontrada",
+    "description": "A página que procura não existe, foi movida ou já não está disponível. Mas a mesa continua à espera.",
+    "backHome": "Voltar à página inicial",
+    "viewMenu": "Ver Menu",
+    "contact": "Entrar em contacto"
+  },
   "a11y": {
     "previous": "Anterior",
     "next": "Próximo",

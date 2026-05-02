@@ -1,4 +1,12 @@
 {
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist, has been moved, or is no longer available. The table is still waiting.",
+    "backHome": "Back to home",
+    "viewMenu": "View Menu",
+    "contact": "Get in touch"
+  },
   "a11y": {
     "previous": "Previous",
     "next": "Next",

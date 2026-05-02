@@ -1,4 +1,12 @@
 {
+  "notFound": {
+    "code": "404",
+    "title": "页面未找到",
+    "description": "您查找的页面不存在、已被移动或不再提供。但您的餐桌依然在等候。",
+    "backHome": "返回首页",
+    "viewMenu": "查看菜单",
+    "contact": "联系我们"
+  },
   "a11y": {
     "previous": "上一个",
     "next": "下一个",
