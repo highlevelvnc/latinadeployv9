@@ -71,27 +71,9 @@ function ReservationsPage({ params: { locale } }: Props) {
 
           {/* Additional Info */}
           <div className="mt-10 sm:mt-12 text-center text-sm text-light/65">
-            <p>
-              {locale === 'pt'
-                ? 'Horário de funcionamento:'
-                : locale === 'fr'
-                  ? "Horaires d'ouverture :"
-                  : locale === 'ru'
-                    ? 'Часы работы:'
-                    : locale === 'zh'
-                      ? '营业时间：'
-                      : 'Opening hours:'}
-            </p>
+            <p>{t('form.openingHoursLabel')}</p>
             <p className="font-medium text-light/85 mt-1">
-              {locale === 'pt'
-                ? 'Todos os dias: 12:30–15:30, 18:30–22:30'
-                : locale === 'fr'
-                  ? 'Tous les jours : 12h30–15h30, 18h30–22h30'
-                  : locale === 'ru'
-                    ? 'Каждый день: 12:30–15:30, 18:30–22:30'
-                    : locale === 'zh'
-                      ? '每天：12:30–15:30, 18:30–22:30'
-                      : 'Every day: 12:30–3:30 PM, 6:30–10:30 PM'}
+              {t('form.openingHoursValue')}
             </p>
           </div>
         </div>

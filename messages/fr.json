@@ -149,7 +149,9 @@
       "callNow": "Appeler",
       "directContact": "Vous préférez nous contacter directement ?",
       "decreaseGuests": "Diminuer le nombre de personnes",
-      "increaseGuests": "Augmenter le nombre de personnes"
+      "increaseGuests": "Augmenter le nombre de personnes",
+      "openingHoursLabel": "Horaires d'ouverture :",
+      "openingHoursValue": "Tous les jours : 12h30–15h30, 18h30–22h30"
     },
     "validation": {
       "required": "Champ obligatoire",

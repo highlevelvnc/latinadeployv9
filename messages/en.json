@@ -149,7 +149,9 @@
       "callNow": "Call Now",
       "directContact": "Prefer to contact us directly?",
       "decreaseGuests": "Decrease number of guests",
-      "increaseGuests": "Increase number of guests"
+      "increaseGuests": "Increase number of guests",
+      "openingHoursLabel": "Opening hours:",
+      "openingHoursValue": "Every day: 12:30–3:30 PM, 6:30–10:30 PM"
     },
     "validation": {
       "required": "Required field",

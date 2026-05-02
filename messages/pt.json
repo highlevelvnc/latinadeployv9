@@ -149,7 +149,9 @@
       "callNow": "Ligar agora",
       "directContact": "Prefere contactar directamente?",
       "decreaseGuests": "Diminuir número de pessoas",
-      "increaseGuests": "Aumentar número de pessoas"
+      "increaseGuests": "Aumentar número de pessoas",
+      "openingHoursLabel": "Horário de funcionamento:",
+      "openingHoursValue": "Todos os dias: 12:30–15:30, 18:30–22:30"
     },
     "validation": {
       "required": "Campo obrigatório",

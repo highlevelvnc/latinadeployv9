@@ -149,7 +149,9 @@
       "callNow": "立即致电",
       "directContact": "希望直接联系我们？",
       "decreaseGuests": "减少人数",
-      "increaseGuests": "增加人数"
+      "increaseGuests": "增加人数",
+      "openingHoursLabel": "营业时间：",
+      "openingHoursValue": "每天：12:30–15:30, 18:30–22:30"
     },
     "validation": {
       "required": "必填项",

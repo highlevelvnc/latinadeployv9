@@ -149,7 +149,9 @@
       "callNow": "Позвонить сейчас",
       "directContact": "Предпочитаете связаться напрямую?",
       "decreaseGuests": "Уменьшить количество гостей",
-      "increaseGuests": "Увеличить количество гостей"
+      "increaseGuests": "Увеличить количество гостей",
+      "openingHoursLabel": "Часы работы:",
+      "openingHoursValue": "Каждый день: 12:30–15:30, 18:30–22:30"
     },
     "validation": {
       "required": "Обязательное поле",

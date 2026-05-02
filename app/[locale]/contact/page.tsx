@@ -42,21 +42,12 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 async function ContactPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'contact' });
+  const tNav = await getTranslations({ locale, namespace: 'nav' });
 
   const address = 'Estrada da Malveira da Serra, 261, 2750-787 Cascais, Portugal';
   const addressEncoded = encodeURIComponent(address);
   const phoneNumber = '+351 968 707 515';
   const phoneNumberClean = phoneNumber.replace(/\s/g, '');
-
-  const reserveLabel = locale === 'pt'
-    ? 'Reservar Mesa'
-    : locale === 'fr'
-      ? 'Réserver'
-      : locale === 'ru'
-        ? 'Забронировать стол'
-        : locale === 'zh'
-          ? '预订餐桌'
-          : 'Book a Table';
 
   return (
     <>
@@ -172,7 +163,7 @@ async function ContactPage({ params: { locale } }: Props) {
                 href={`/${locale}/reservations`}
                 className="block text-center bg-gradient-to-r from-red-600 to-red-dark hover:from-red-500 hover:to-red-600 text-light px-8 py-4 rounded-full text-base font-semibold transition-colors duration-300 hover:shadow-xl hover:shadow-red-600/40"
               >
-                {reserveLabel}
+                {tNav('reserve')}
               </Link>
             </div>
 
