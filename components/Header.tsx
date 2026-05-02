@@ -95,7 +95,7 @@ export default function Header() {
                 className="text-white/70 hover:text-white text-sm uppercase tracking-[0.2em] font-medium transition-colors relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-red group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-red-600 group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
 
@@ -117,9 +117,9 @@ export default function Header() {
             {/* CTA */}
             <a
               href="tel:+351968707515"
-              className="flex items-center gap-2 border border-red hover:bg-red text-white px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-all duration-300"
+              className="flex items-center gap-2 border border-red-600 hover:bg-red-600 text-white px-6 py-3 text-sm font-semibold uppercase tracking-wider transition-all duration-300"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden="true" />
               {ctaLabel}
             </a>
           </nav>
@@ -129,10 +129,11 @@ export default function Header() {
             <LanguageSelector />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-white p-2"
-              aria-label="Toggle menu"
+              className="text-white p-2.5 -mr-2.5"
+              aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {mobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -170,9 +171,9 @@ export default function Header() {
 
             <a
               href="tel:+351968707515"
-              className="flex items-center justify-center gap-2 border-2 border-red bg-red text-white px-8 py-4 text-sm font-semibold uppercase tracking-wider mt-2"
+              className="flex items-center justify-center gap-2 border-2 border-red-600 bg-red-600 hover:bg-red-500 text-white px-8 py-4 text-sm font-semibold uppercase tracking-wider mt-2 transition-colors duration-200"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4" aria-hidden="true" />
               {ctaLabel}
             </a>
           </nav>
