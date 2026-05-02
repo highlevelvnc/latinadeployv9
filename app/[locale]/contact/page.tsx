@@ -15,26 +15,43 @@ type Props = {
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'meta.contact' });
+  const url = `https://latinagrill.pt/${locale}/contact`;
 
   return {
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `https://latinagrill.pt/${locale}/contact`,
+      canonical: url,
       languages: {
         'pt-PT': 'https://latinagrill.pt/pt/contact',
-        'en': 'https://latinagrill.pt/en/contact',
-        'fr': 'https://latinagrill.pt/fr/contact',
+        'en':    'https://latinagrill.pt/en/contact',
+        'fr':    'https://latinagrill.pt/fr/contact',
+        'ru':    'https://latinagrill.pt/ru/contact',
+        'zh':    'https://latinagrill.pt/zh/contact',
         'x-default': 'https://latinagrill.pt/pt/contact',
       },
     },
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: `https://latinagrill.pt/${locale}/contact`,
+      url,
       siteName: 'Latina Grill Cascais',
       locale: locale === 'pt' ? 'pt_PT' : locale,
       type: 'website',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Latina Grill Cascais — Contacto',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/og-image.jpg'],
     },
   };
 }
@@ -49,10 +66,57 @@ async function ContactPage({ params: { locale } }: Props) {
   const phoneNumber = '+351 968 707 515';
   const phoneNumberClean = phoneNumber.replace(/\s/g, '');
 
+  // Schema.org — BreadcrumbList for SERPs path display, ContactPage signals
+  // Google this is the canonical contact page (helps Google Knowledge Panel).
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Latina Grill Cascais',
+        item: `https://latinagrill.pt/${locale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t('title'),
+        item: `https://latinagrill.pt/${locale}/contact`,
+      },
+    ],
+  };
+
+  const contactPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: t('title'),
+    url: `https://latinagrill.pt/${locale}/contact`,
+    inLanguage: locale,
+    mainEntity: {
+      '@type': 'Restaurant',
+      name: 'Latina Grill Cascais',
+      telephone: '+351968707515',
+      email: 'latinagrill@icloud.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Estrada da Malveira da Serra, 261',
+        addressLocality: 'Cascais',
+        postalCode: '2750-787',
+        addressCountry: 'PT',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 38.7245,
+        longitude: -9.4425,
+      },
+    },
+  };
+
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
+      <main id="main" className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16">
@@ -194,6 +258,16 @@ async function ContactPage({ params: { locale } }: Props) {
       </main>
       <Footer />
       <PhoneFloat />
+
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+      />
     </>
   );
 }

@@ -13,26 +13,43 @@ type Props = {
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'meta.reservations' });
+  const url = `https://latinagrill.pt/${locale}/reservations`;
 
   return {
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `https://latinagrill.pt/${locale}/reservations`,
+      canonical: url,
       languages: {
         'pt-PT': 'https://latinagrill.pt/pt/reservations',
-        'en': 'https://latinagrill.pt/en/reservations',
-        'fr': 'https://latinagrill.pt/fr/reservations',
+        'en':    'https://latinagrill.pt/en/reservations',
+        'fr':    'https://latinagrill.pt/fr/reservations',
+        'ru':    'https://latinagrill.pt/ru/reservations',
+        'zh':    'https://latinagrill.pt/zh/reservations',
         'x-default': 'https://latinagrill.pt/pt/reservations',
       },
     },
     openGraph: {
       title: t('title'),
       description: t('description'),
-      url: `https://latinagrill.pt/${locale}/reservations`,
+      url,
       siteName: 'Latina Grill Cascais',
       locale: locale === 'pt' ? 'pt_PT' : locale,
       type: 'website',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Latina Grill Cascais — Reservas',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/og-image.jpg'],
     },
   };
 }
@@ -41,10 +58,56 @@ function ReservationsPage({ params: { locale } }: Props) {
   unstable_setRequestLocale(locale);
   const t = useTranslations('reservation');
 
+  // Schema.org structured data — BreadcrumbList helps Google show the page
+  // path in SERPs; ReserveAction signals to Google "this is the booking
+  // page", which can surface a Reserve button directly in search results.
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Latina Grill Cascais',
+        item: `https://latinagrill.pt/${locale}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: t('title'),
+        item: `https://latinagrill.pt/${locale}/reservations`,
+      },
+    ],
+  };
+
+  const reserveActionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: 'Latina Grill Cascais',
+    url: 'https://latinagrill.pt',
+    telephone: '+351968707515',
+    potentialAction: {
+      '@type': 'ReserveAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `https://latinagrill.pt/${locale}/reservations`,
+        inLanguage: locale,
+        actionPlatform: [
+          'http://schema.org/DesktopWebPlatform',
+          'http://schema.org/MobileWebPlatform',
+        ],
+      },
+      result: {
+        '@type': 'FoodEstablishmentReservation',
+        name: 'Reserva no Latina Grill Cascais',
+      },
+    },
+  };
+
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
+      <main id="main" className="min-h-screen pt-28 sm:pt-32 pb-16 sm:pb-24 bg-dark">
         <div className="container mx-auto px-4 lg:px-8 max-w-2xl">
           {/* Header */}
           <div className="text-center mb-10 sm:mb-12">
@@ -80,6 +143,16 @@ function ReservationsPage({ params: { locale } }: Props) {
       </main>
       <Footer />
       <PhoneFloat />
+
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reserveActionJsonLd) }}
+      />
     </>
   );
 }
