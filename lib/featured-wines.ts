@@ -90,6 +90,38 @@ const CATEGORY_BY_MENU_ID: Record<string, WineCategory> = {
 
 const PLACEHOLDER_IMAGE = '/menu/placeholder-wine.jpg';
 
+/**
+ * Image overrides for featured wines.
+ *
+ * Many wines in `data/menu.ts` reference the placeholder image even though
+ * a real bottle photo exists in `/public/menu/`. Rather than editing the
+ * menu data (single source of truth for the /menu page), we override here
+ * for the home component only.
+ *
+ * Add an entry once a real photo is dropped into /public/menu/.
+ * Conservative match: only entries where the filename clearly matches the
+ * specific wine + vintage. Ambiguous matches (e.g. a generic "wine-crasto"
+ * for "Crasto Vinhas Velhas 2022") are intentionally left empty so we don't
+ * show a misleading bottle.
+ */
+const IMAGE_OVERRIDES: Record<string, string> = {
+  'wine-red-pera-manca-2018': '/menu/wine-pera-manca.webp',
+  'wine-red-mouchao-2016': '/menu/wine-mouchao.webp',
+  'wine-red-doga-2013': '/menu/wine-doga-2013.webp',
+  'wine-red-charme-niepoort-2022': '/menu/wine-charme-niepoort.webp',
+  'wine-red-vale-meao-2022': '/menu/wine-vale-meao.webp',
+  'wine-red-pintas-character-2022': '/menu/wine-pintas-character.webp',
+  'wine-red-pintia-ribera-duero-2019': '/menu/wine-pintia.webp',
+  'wine-red-vega-sicilia-unico-2014': '/menu/wine-vega-sicilia-unico-2014.webp',
+  'wine-red-brunello-montalcino-2016': '/menu/wine-brunello-montalcino-2016.webp',
+  'wine-red-valbuena-vega-sicilia-2019': '/menu/wine-valbuena-vega-sicilia.webp',
+  'wine-red-alion-vega-sicilia-2019': '/menu/wine-alion-vega-sicilia.webp',
+  'wine-red-chateau-margaux-2012': '/menu/wine-chateau-margaux-2012.webp',
+  'wine-red-chateau-pavie-2010': '/menu/wine-chateau-pavie-2010.webp',
+  'wine-red-sassicaia-2019': '/menu/wine-sassicaia-2019.webp',
+  'wine-red-cigare-volant-2021': '/menu/wine-bonny-doon-cigare.webp',
+};
+
 // Pulls a 4-digit year (1900–2099) from the wine name, e.g.
 // "Pêra Manca 2018" → 2018, "Vega Sicilia Único Ribera del Duero 2014" → 2014.
 const extractYear = (name: string): number => {
@@ -103,6 +135,14 @@ const extractYear = (name: string): number => {
 const stripYear = (name: string): string => {
   const stripped = name.replace(/\s+(?:19|20)\d{2}\b.*$/, '').trim();
   return stripped.length > 0 ? stripped : name;
+};
+
+// Picks the best image for a wine: explicit non-placeholder image from the
+// menu, then a curated override (see IMAGE_OVERRIDES), else undefined so the
+// component falls back to the wine card without a photo.
+const resolveImage = (id: string, menuImage: string | undefined): string | undefined => {
+  if (menuImage && menuImage !== PLACEHOLDER_IMAGE) return menuImage;
+  return IMAGE_OVERRIDES[id];
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -147,8 +187,7 @@ export function getFeaturedWines(): Wine[] {
         en: info.pairing.en,
         fr: info.pairing.fr,
       },
-      image:
-        item.image && item.image !== PLACEHOLDER_IMAGE ? item.image : undefined,
+      image: resolveImage(item.id, item.image),
     });
   }
 
