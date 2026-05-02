@@ -250,11 +250,11 @@ export default function PrivateExperiences() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden py-20 lg:py-36"
+      className="relative overflow-hidden py-16 sm:py-20 md:py-28 lg:py-36"
       style={{ background: 'linear-gradient(160deg, #09070a 0%, #0c0608 60%, #080506 100%)' }}
     >
       {/* Ambient glows */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute -left-40 top-1/3 h-[500px] w-[500px] rounded-full bg-amber-950/8 blur-[240px]" />
         <div className="absolute -right-40 bottom-1/4 h-[400px] w-[400px] rounded-full bg-red-950/10 blur-[200px]" />
       </div>
@@ -271,10 +271,10 @@ export default function PrivateExperiences() {
           <p className="mb-5 text-[10px] uppercase tracking-[0.52em] text-amber-400/40">
             {c.overline}
           </p>
-          <h2 className="whitespace-pre-line font-serif text-4xl font-bold leading-[1.06] text-white md:text-5xl lg:text-[3.5rem]">
+          <h2 className="whitespace-pre-line font-serif text-[2.25rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold leading-[1.06] text-white">
             {c.title}
           </h2>
-          <p className="mt-5 max-w-[400px] text-[13.5px] leading-relaxed text-white/38">
+          <p className="mt-5 max-w-[400px] text-sm sm:text-[13.5px] leading-relaxed text-white/45">
             {c.subtitle}
           </p>
         </motion.div>
@@ -294,6 +294,7 @@ export default function PrivateExperiences() {
               src={IMAGES.cigar}
               alt="Sala de Charutos — Latina Grill"
               fill
+              sizes="(min-width: 1024px) 33vw, 100vw"
               className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
               style={{ filter: 'brightness(0.55) sepia(20%)' }}
             />
@@ -353,8 +354,9 @@ export default function PrivateExperiences() {
                 {/* Background */}
                 <Image
                   src={imgSrc}
-                  alt={exp.title}
+                  alt=""
                   fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
                   style={{ filter: 'brightness(0.45) sepia(15%)' }}
                 />
@@ -368,10 +370,10 @@ export default function PrivateExperiences() {
                   <h3 className="mb-2.5 whitespace-pre-line font-serif text-xl font-bold leading-[1.15] text-white md:text-2xl">
                     {exp.title}
                   </h3>
-                  <p className="mb-4 text-[11.5px] leading-relaxed text-white/38 line-clamp-2 group-hover:line-clamp-none">
+                  <p className="mb-4 text-[12.5px] leading-relaxed text-white/48 line-clamp-2 group-hover:line-clamp-none">
                     {exp.desc}
                   </p>
-                  <span className="text-[9.5px] uppercase tracking-[0.32em] text-white/22">
+                  <span className="text-[10px] uppercase tracking-[0.32em] text-white/35">
                     {exp.detail}
                   </span>
                 </div>
@@ -399,7 +401,7 @@ export default function PrivateExperiences() {
           </a>
           <a
             href="tel:+351968707515"
-            className="text-[11px] font-medium text-white/30 transition-colors hover:text-white/60"
+            className="text-[11px] font-medium text-white/55 transition-colors hover:text-white/85"
           >
             +351 968 707 515
           </a>
