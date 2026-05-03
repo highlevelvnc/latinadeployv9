@@ -52,8 +52,9 @@ const itemImageMap: Record<string, string> = {
   'shrimp-flambe':                    '/menu/shrimp-flambe.webp',
   'kobe-tataki':                      '/menu/kobe-tataki.webp',
 
-  // Tábuas
-  // (latina-premium-board: foto removida, aguardando melhor)
+  // Tábuas (falta só a Surf and Turf)
+  'latina-premium-board':             '/menu/latina-premium-board.webp',
+  'dry-aged-board':                   '/menu/dry-aged-board.webp',
 
   // Guarnições
   'golden-potatoes-truffle':          '/menu/truffle-raw.jpeg',
