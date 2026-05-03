@@ -237,11 +237,10 @@ const itemImagePositionMap: Record<string, string> = {
   'rib-eye-usa-250g':                  '50% 75%',
   'golden-rib-eye-usa-500g':           '50% 75%',
   'golden-australian-wagyu-tomahawk':  '50% 75%',
-  // Foie Gras: a foto é portrait com o foie gras na parte SUPERIOR
-  // do quadro (mesa de madeira ocupa o topo, prato no meio, base
-  // vazia em baixo). Posição baixa cortava a comida — biased pro
-  // topo (30%) pra mostrar foie + flor + grãos.
-  'foie-gras-chef':                    '50% 30%',
+  // Foie Gras: foto portrait com o foie gras + flor ocupando ~30-55%
+  // da altura. Card 16:10 e modal ~3:1 têm slice diferentes; 35% é
+  // o sweet spot que mostra flor + foie em ambos sem cortar a comida.
+  'foie-gras-chef':                    '50% 35%',
 };
 
 /**
@@ -258,6 +257,9 @@ const itemImageScaleMap: Record<string, number> = {
   // Spaghetti Bolognese: o prato fica muito pequeno no quadro original
   // com muita mesa em volta — zoom forte pra preencher o card.
   'kids-spaghetti-bolognese':          1.5,
+  // Foie Gras: foto portrait com mesa de madeira ocupando topo + base
+  // do prato vazia em baixo. Zoom 1.3 faz a comida dominar o frame.
+  'foie-gras-chef':                    1.3,
 };
 
 /**
