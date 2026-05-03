@@ -11,6 +11,7 @@ import { useMenuStore } from '@/stores/useMenuStore';
 import CategoryNav from '@/components/menu/CategoryNav';
 import SearchBar from '@/components/menu/SearchBar';
 import FeaturedSection from '@/components/menu/FeaturedSection';
+import ShareSection from '@/components/menu/ShareSection';
 import MenuGrid from '@/components/menu/MenuGrid';
 import MenuItemDetail from '@/components/menu/MenuItemDetail';
 import ScrollToTop from '@/components/menu/ScrollToTop';
@@ -107,12 +108,10 @@ function MenuPageInner() {
           {showCuratedSections ? (
             <>
               <FeaturedSection onSelectItem={setSelectedItem} />
+              <ShareSection onSelectItem={setSelectedItem} />
 
-              {/* On the home view (no filter): show only the Entradas
-                  category beneath Featured. The full menu grid is reached
-                  via the top category tabs. ShareSection ("Ideal para
-                  Partilhar") removed temporariamente — sem fotos das
-                  tábuas ainda. */}
+              {/* Beneath ShareSection, na home view: só a categoria
+                  Entradas. O grid completo é alcançado via tabs do topo. */}
               <section className="mb-8">
                 <div className="mb-4 flex items-center gap-2">
                   <Salad className="h-5 w-5 text-accent-green" />
