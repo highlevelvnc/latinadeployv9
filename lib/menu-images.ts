@@ -17,12 +17,10 @@ const itemImageMap: Record<string, string> = {
   'rib-eye-usa-250g':                 '/menu/rib-eye-usa-250g.jpeg',
 
   // Wagyu
-  'wagyu-trio':                       '/menu/wagyu-trio.webp',
   'wagyu-rib-eye-japan-250g':         '/menu/wagyu-rib-eye-japan-250g.webp',
 
   // Marisco
   'tiger-prawn':                      '/menu/grilled-prawns.jpeg',
-  'lobster':                          '/menu/lagosta.webp',
   'blue-lobster':                     '/menu/blue-lobster.webp',
   'grilled-tuna-steak':               '/menu/grilled-tuna-steak.webp',
 
@@ -32,7 +30,6 @@ const itemImageMap: Record<string, string> = {
   'rib-eye-rubia-gallega-250g':       '/menu/rib-eye-rubia-gallega-250g.jpeg',
   'sirloin-australia-250g':           '/menu/sirloin-australia-250g.webp',
   'maminha-black-angus-250g':         '/menu/maminha-black-angus-250g.webp',
-  'farm-chicken-supremes':            '/menu/farm-chicken-supremes.webp',
   'latina-skewer':                    '/menu/beef-skewer.jpeg',
   'short-ribs-12h':                   '/menu/short-ribs-12h.webp',
 
@@ -44,13 +41,9 @@ const itemImageMap: Record<string, string> = {
   'tagliatelle-portobello-walnuts':   '/menu/tagliatelle-portobello-walnuts.webp',
 
   // Entradas (Starters)
-  'cheese-gratin':                    '/menu/cheese-gratin.webp',
   'foie-gras-chef':                   '/menu/foie-gras-chef.webp',
   'pata-negra':                       '/menu/pata-negra.webp',
   'tenderloin-tartare':               '/menu/tenderloin-tartare.jpeg',
-  'chef-caesar':                      '/menu/chef-caesar.webp',
-  'shrimp-flambe':                    '/menu/shrimp-flambe.webp',
-  'kobe-tataki':                      '/menu/kobe-tataki.webp',
 
   // Tábuas
   'latina-premium-board':             '/menu/latina-premium-board.webp',
@@ -62,19 +55,15 @@ const itemImageMap: Record<string, string> = {
   'grilled-vegetables':               '/menu/grilled-vegetables.webp',
   'truffled-mashed-potato':           '/menu/truffled-mashed-potato.webp',
   'sweet-potato-garlic-oregano':      '/menu/sweet-potato-garlic-oregano.webp',
-  'tomato-basil-duet':                '/menu/tomato-basil-duet.webp',
 
   // Golden Selection
   'golden-chateaubriand-500g':        '/menu/golden-chateaubriand-500g.webp',
   'golden-rib-eye-usa-500g':          '/menu/golden-usa-wagyu-rib-eye-500g.webp',
   'golden-rib-eye-500g':              '/menu/golden-rib-eye-500g.webp',
   'golden-japanese-wagyu-300g':       '/menu/golden-japanese-wagyu-300g.webp',
-  'golden-t-bone-800g':               '/menu/golden-t-bone-800g.webp',
-  'golden-iberian-chuleton-wagyu':    '/menu/golden-iberian-chuleton-wagyu.webp',
   'golden-australian-wagyu-tomahawk': '/menu/golden-australian-wagyu-tomahawk-new.webp',
 
   // Sugestão do Chef
-  'chef-kobe-a5-bife-150g':           '/menu/chef-kobe-a5-bife-150g.webp',
   'chef-chuleton-wagyu-premium':      '/menu/chuleton-wagyu.webp',
 
   // Sobremesas
